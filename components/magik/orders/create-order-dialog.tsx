@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { X } from "lucide-react";
+import { X, ChevronDown } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -19,12 +19,44 @@ import { Textarea } from "@/components/ui/textarea";
 import { ItemSelector } from "@/components/magik/documents/item-selector";
 import type { ServiceOrder, DocumentItem, CatalogRubro } from "@/lib/types";
 
+// ─── Schema ───────────────────────────────────────────────────────────────────
+
 const schema = z.object({
   title: z.string().min(1, "El título es requerido"),
   providerName: z.string().min(1, "El proveedor es requerido"),
+  // Proveedor
+  nitProveedor: z.string().optional(),
+  razonSocial: z.string().optional(),
+  contactoProveedor: z.string().optional(),
+  emailProveedor: z.string().optional(),
+  celularProveedor: z.string().optional(),
+  tipoServicio: z.string().optional(),
+  // Fechas
+  fechaMontaje: z.string().optional(),
+  horaMontaje: z.string().optional(),
+  fechaEvento: z.string().optional(),
+  horaEjecucion: z.string().optional(),
+  diaPrueba: z.string().optional(),
+  horaPrueba: z.string().optional(),
+  // Forma de pago
+  anticipo: z.boolean().optional(),
+  anticipoValor: z.string().optional(),
+  anticipoFecha: z.string().optional(),
+  credito: z.boolean().optional(),
+  creditoValor: z.string().optional(),
+  fechaPago: z.string().optional(),
+  abono2: z.string().optional(),
+  fechaAbono2: z.string().optional(),
+  saldo: z.string().optional(),
+  fechaSaldo: z.string().optional(),
+  // Observaciones
+  observations: z.string().optional(),
   notes: z.string().optional(),
 });
+
 type FormData = z.infer<typeof schema>;
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function money(n: number) {
   return new Intl.NumberFormat("es-CO", {
@@ -33,6 +65,59 @@ function money(n: number) {
     maximumFractionDigits: 0,
   }).format(n);
 }
+
+function optNum(val: string | undefined): number | undefined {
+  if (!val || val.trim() === "") return undefined;
+  const n = Number(val);
+  return isNaN(n) ? undefined : n;
+}
+
+// ─── FormSection ─────────────────────────────────────────────────────────────
+
+function FormSection({
+  title,
+  defaultOpen = true,
+  children,
+}: {
+  title: string;
+  defaultOpen?: boolean;
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div
+      className="overflow-hidden rounded-lg border"
+      style={{ borderColor: "var(--border)" }}
+    >
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-between px-3 py-2.5 text-left"
+        style={{ background: "var(--muted)" }}
+      >
+        <span className="section-label">{title}</span>
+        <ChevronDown
+          size={13}
+          style={{
+            color: "var(--color-text-muted)",
+            transform: open ? undefined : "rotate(-90deg)",
+            transition: "transform 150ms",
+          }}
+        />
+      </button>
+      {open && (
+        <div
+          className="space-y-3 px-3 py-3"
+          style={{ borderTop: "1px solid var(--border)" }}
+        >
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Component ───────────────────────────────────────────────────────────────
 
 interface Props {
   eventId: string;
@@ -51,8 +136,15 @@ export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Pr
     control,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues: { anticipo: false, credito: false },
+  });
+
+  const watchAnticipo = watch("anticipo");
+  const watchCredito = watch("credito");
 
   useEffect(() => {
     if (open) {
@@ -63,7 +155,7 @@ export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Pr
   }, [open]);
 
   function handleClose() {
-    reset();
+    reset({ anticipo: false, credito: false });
     setItems([]);
     setServerError(null);
     onOpenChange(false);
@@ -74,29 +166,28 @@ export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Pr
     productId: string; productName: string;
     unit: string; unitPrice: number;
   }) {
-    const existing = items.findIndex((i) => i.productId === product.productId);
-    if (existing >= 0) {
-      setItems((prev) =>
-        prev.map((item, idx) =>
+    setItems((prev) => {
+      const existing = prev.findIndex((i) => i.productId === product.productId);
+      if (existing >= 0) {
+        return prev.map((item, idx) =>
           idx === existing
             ? { ...item, quantity: item.quantity + 1, total: (item.quantity + 1) * item.unitPrice }
             : item
-        )
-      );
-      return;
-    }
-    setItems((prev) => [
-      ...prev,
-      {
-        rubroId: product.rubroId, rubroName: product.rubroName,
-        productId: product.productId, productName: product.productName,
-        unit: product.unit, quantity: 1, unitPrice: product.unitPrice,
-        total: product.unitPrice,
-      },
-    ]);
+        );
+      }
+      return [
+        ...prev,
+        {
+          rubroId: product.rubroId, rubroName: product.rubroName,
+          productId: product.productId, productName: product.productName,
+          unit: product.unit, quantity: 1, unitPrice: product.unitPrice,
+          total: product.unitPrice,
+        },
+      ];
+    });
   }
 
-  function updateItemField(idx: number, field: "quantity" | "unitPrice", raw: string) {
+  function updateItem(idx: number, field: "quantity" | "unitPrice", raw: string) {
     const val = parseFloat(raw) || 0;
     setItems((prev) =>
       prev.map((item, i) => {
@@ -106,10 +197,6 @@ export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Pr
         return { ...item, quantity, unitPrice, total: quantity * unitPrice };
       })
     );
-  }
-
-  function removeItem(idx: number) {
-    setItems((prev) => prev.filter((_, i) => i !== idx));
   }
 
   const total = items.reduce((s, i) => s + i.total, 0);
@@ -123,8 +210,31 @@ export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Pr
         title: data.title,
         providerId: "",
         providerName: data.providerName,
-        items,
+        nitProveedor: data.nitProveedor || undefined,
+        razonSocial: data.razonSocial || undefined,
+        contactoProveedor: data.contactoProveedor || undefined,
+        emailProveedor: data.emailProveedor || undefined,
+        celularProveedor: data.celularProveedor || undefined,
+        tipoServicio: data.tipoServicio || undefined,
+        fechaMontaje: data.fechaMontaje || undefined,
+        horaMontaje: data.horaMontaje || undefined,
+        fechaEvento: data.fechaEvento || undefined,
+        horaEjecucion: data.horaEjecucion || undefined,
+        diaPrueba: data.diaPrueba || undefined,
+        horaPrueba: data.horaPrueba || undefined,
+        anticipo: data.anticipo ?? false,
+        anticipoValor: optNum(data.anticipoValor),
+        anticipoFecha: data.anticipoFecha || undefined,
+        credito: data.credito ?? false,
+        creditoValor: optNum(data.creditoValor),
+        fechaPago: data.fechaPago || undefined,
+        abono2: optNum(data.abono2),
+        fechaAbono2: data.fechaAbono2 || undefined,
+        saldo: optNum(data.saldo),
+        fechaSaldo: data.fechaSaldo || undefined,
+        observations: data.observations || undefined,
         notes: data.notes || undefined,
+        items,
       }),
     });
     const body = (await res.json()) as { order?: ServiceOrder; error?: string };
@@ -143,8 +253,10 @@ export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Pr
           <DialogTitle>Nueva orden de servicio</DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4 py-2">
-          <div className="grid grid-cols-2 gap-3">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <div className="max-h-[70vh] space-y-3 overflow-y-auto py-2 pr-1">
+
+            {/* Título */}
             <div className="space-y-1.5">
               <Label htmlFor="o-title">Título</Label>
               <Controller
@@ -158,112 +270,370 @@ export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Pr
                 <p className="text-xs" style={{ color: "#E53935" }}>{errors.title.message}</p>
               )}
             </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="o-provider">Proveedor</Label>
-              <Controller
-                name="providerName"
-                control={control}
-                render={({ field }) => (
-                  <Input id="o-provider" placeholder="Nombre del proveedor" {...field} />
-                )}
-              />
-              {errors.providerName && (
-                <p className="text-xs" style={{ color: "#E53935" }}>{errors.providerName.message}</p>
-              )}
-            </div>
-          </div>
 
-          {/* Items */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <Label>Ítems</Label>
-              <ItemSelector rubros={rubros} onSelect={addItem} />
-            </div>
-
-            {items.length > 0 && (
-              <div className="overflow-hidden rounded-lg border" style={{ borderColor: "var(--border)" }}>
-                <table className="w-full text-xs">
-                  <thead>
-                    <tr style={{ borderBottom: "1px solid var(--border)", background: "var(--muted)" }}>
-                      <th className="px-3 py-2 text-left" style={{ color: "var(--color-text-muted)" }}>Producto</th>
-                      <th className="px-3 py-2 text-left" style={{ color: "var(--color-text-muted)" }}>Und</th>
-                      <th className="px-3 py-2 text-right" style={{ color: "var(--color-text-muted)" }}>Cant.</th>
-                      <th className="px-3 py-2 text-right" style={{ color: "var(--color-text-muted)" }}>P. Unit.</th>
-                      <th className="px-3 py-2 text-right" style={{ color: "var(--color-text-muted)" }}>Total</th>
-                      <th className="px-2 py-2" />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {items.map((item, idx) => (
-                      <tr
-                        key={`${item.productId}-${idx}`}
-                        style={{ borderTop: idx === 0 ? undefined : "1px solid var(--border)" }}
-                      >
-                        <td className="px-3 py-2" style={{ color: "var(--color-text-primary)" }}>
-                          <div>{item.productName}</div>
-                          <div className="text-xs" style={{ color: "var(--color-text-muted)" }}>{item.rubroName}</div>
-                        </td>
-                        <td className="px-3 py-2" style={{ color: "var(--color-text-secondary)" }}>{item.unit}</td>
-                        <td className="px-3 py-2">
-                          <input
-                            type="number" min={1} value={item.quantity}
-                            onChange={(e) => updateItemField(idx, "quantity", e.target.value)}
-                            className="w-16 rounded border px-1.5 py-1 text-right text-xs outline-none"
-                            style={{ background: "var(--background)", borderColor: "var(--border)", color: "var(--color-text-primary)" }}
-                          />
-                        </td>
-                        <td className="px-3 py-2">
-                          <input
-                            type="number" min={0} value={item.unitPrice}
-                            onChange={(e) => updateItemField(idx, "unitPrice", e.target.value)}
-                            className="w-24 rounded border px-1.5 py-1 text-right text-xs outline-none"
-                            style={{ background: "var(--background)", borderColor: "var(--border)", color: "var(--color-text-primary)" }}
-                          />
-                        </td>
-                        <td className="px-3 py-2 text-right" style={{ color: "var(--color-text-secondary)" }}>
-                          {money(item.total)}
-                        </td>
-                        <td className="px-2 py-2">
-                          <button type="button" onClick={() => removeItem(idx)} className="rounded p-0.5" style={{ color: "var(--color-text-muted)" }}>
-                            <X size={13} />
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <div className="flex items-center justify-between px-3 py-2" style={{ borderTop: "1px solid var(--border)", background: "var(--muted)" }}>
-                  <span className="text-xs font-medium" style={{ color: "var(--color-text-secondary)" }}>Total</span>
-                  <span className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>{money(total)}</span>
+            {/* Proveedor */}
+            <FormSection title="Proveedor">
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-providerName">Nombre del proveedor</Label>
+                  <Controller
+                    name="providerName"
+                    control={control}
+                    render={({ field }) => (
+                      <Input id="o-providerName" placeholder="Nombre comercial" {...field} />
+                    )}
+                  />
+                  {errors.providerName && (
+                    <p className="text-xs" style={{ color: "#E53935" }}>{errors.providerName.message}</p>
+                  )}
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-razonSocial">Razón social</Label>
+                  <Controller
+                    name="razonSocial"
+                    control={control}
+                    render={({ field }) => (
+                      <Input id="o-razonSocial" placeholder="Razón social" {...field} />
+                    )}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-nit">NIT</Label>
+                  <Controller
+                    name="nitProveedor"
+                    control={control}
+                    render={({ field }) => (
+                      <Input id="o-nit" placeholder="000.000.000-0" {...field} />
+                    )}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-contacto">Contacto</Label>
+                  <Controller
+                    name="contactoProveedor"
+                    control={control}
+                    render={({ field }) => (
+                      <Input id="o-contacto" placeholder="Nombre del contacto" {...field} />
+                    )}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-email">Email</Label>
+                  <Controller
+                    name="emailProveedor"
+                    control={control}
+                    render={({ field }) => (
+                      <Input id="o-email" type="email" placeholder="correo@proveedor.com" {...field} />
+                    )}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-celular">Celular</Label>
+                  <Controller
+                    name="celularProveedor"
+                    control={control}
+                    render={({ field }) => (
+                      <Input id="o-celular" placeholder="300 000 0000" {...field} />
+                    )}
+                  />
                 </div>
               </div>
-            )}
+              <div className="space-y-1.5">
+                <Label htmlFor="o-tipoServicio">Tipo de servicio</Label>
+                <Controller
+                  name="tipoServicio"
+                  control={control}
+                  render={({ field }) => (
+                    <Input id="o-tipoServicio" placeholder="Audio, iluminación, tarimas..." {...field} />
+                  )}
+                />
+              </div>
+            </FormSection>
 
-            {items.length === 0 && (
-              <p className="text-xs" style={{ color: "var(--color-text-muted)" }}>
-                Usa el botón para agregar ítems del catálogo
-              </p>
-            )}
-          </div>
+            {/* Fechas y Horas */}
+            <FormSection title="Fechas y Horas" defaultOpen={false}>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-fechaMontaje">Fecha de montaje</Label>
+                  <Controller
+                    name="fechaMontaje"
+                    control={control}
+                    render={({ field }) => <Input id="o-fechaMontaje" type="date" {...field} />}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-horaMontaje">Hora de montaje</Label>
+                  <Controller
+                    name="horaMontaje"
+                    control={control}
+                    render={({ field }) => <Input id="o-horaMontaje" type="time" {...field} />}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-fechaEvento">Fecha del evento</Label>
+                  <Controller
+                    name="fechaEvento"
+                    control={control}
+                    render={({ field }) => <Input id="o-fechaEvento" type="date" {...field} />}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-horaEjecucion">Hora de ejecución</Label>
+                  <Controller
+                    name="horaEjecucion"
+                    control={control}
+                    render={({ field }) => <Input id="o-horaEjecucion" type="time" {...field} />}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-diaPrueba">Día de prueba</Label>
+                  <Controller
+                    name="diaPrueba"
+                    control={control}
+                    render={({ field }) => <Input id="o-diaPrueba" type="date" {...field} />}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-horaPrueba">Hora de prueba</Label>
+                  <Controller
+                    name="horaPrueba"
+                    control={control}
+                    render={({ field }) => <Input id="o-horaPrueba" type="time" {...field} />}
+                  />
+                </div>
+              </div>
+            </FormSection>
 
-          <div className="space-y-1.5">
-            <Label htmlFor="o-notes">Notas (opcional)</Label>
-            <Controller
-              name="notes"
-              control={control}
-              render={({ field }) => (
-                <Textarea id="o-notes" placeholder="Observaciones, condiciones de entrega..." {...field} />
+            {/* Ítems */}
+            <FormSection title="Ítems">
+              <div className="flex items-center justify-between">
+                <Label>Productos</Label>
+                <ItemSelector rubros={rubros} onSelect={addItem} />
+              </div>
+
+              {items.length > 0 ? (
+                <div className="overflow-hidden rounded-lg border" style={{ borderColor: "var(--border)" }}>
+                  <table className="w-full text-xs">
+                    <thead>
+                      <tr style={{ borderBottom: "1px solid var(--border)", background: "var(--muted)" }}>
+                        {["Producto", "Und", "Cant.", "P. Unit.", "Total", ""].map((h) => (
+                          <th
+                            key={h}
+                            className={`px-3 py-2 ${["Cant.", "P. Unit.", "Total"].includes(h) ? "text-right" : "text-left"}`}
+                            style={{ color: "var(--color-text-muted)" }}
+                          >
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {items.map((item, idx) => (
+                        <tr
+                          key={`${item.productId}-${idx}`}
+                          style={{ borderTop: idx === 0 ? undefined : "1px solid var(--border)" }}
+                        >
+                          <td className="px-3 py-2" style={{ color: "var(--color-text-primary)" }}>
+                            <div>{item.productName}</div>
+                            <div style={{ color: "var(--color-text-muted)" }}>{item.rubroName}</div>
+                          </td>
+                          <td className="px-3 py-2" style={{ color: "var(--color-text-secondary)" }}>{item.unit}</td>
+                          <td className="px-3 py-2">
+                            <input
+                              type="number" min={1} value={item.quantity}
+                              onChange={(e) => updateItem(idx, "quantity", e.target.value)}
+                              className="w-14 rounded border px-1.5 py-1 text-right text-xs outline-none"
+                              style={{ background: "var(--background)", borderColor: "var(--border)", color: "var(--color-text-primary)" }}
+                            />
+                          </td>
+                          <td className="px-3 py-2">
+                            <input
+                              type="number" min={0} value={item.unitPrice}
+                              onChange={(e) => updateItem(idx, "unitPrice", e.target.value)}
+                              className="w-22 rounded border px-1.5 py-1 text-right text-xs outline-none"
+                              style={{ background: "var(--background)", borderColor: "var(--border)", color: "var(--color-text-primary)" }}
+                            />
+                          </td>
+                          <td className="px-3 py-2 text-right" style={{ color: "var(--color-text-secondary)" }}>
+                            {money(item.total)}
+                          </td>
+                          <td className="px-2 py-2">
+                            <button
+                              type="button"
+                              onClick={() => setItems((prev) => prev.filter((_, i) => i !== idx))}
+                              style={{ color: "var(--color-text-muted)" }}
+                            >
+                              <X size={13} />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <div
+                    className="flex items-center justify-between px-3 py-2"
+                    style={{ borderTop: "1px solid var(--border)", background: "var(--muted)" }}
+                  >
+                    <span className="text-xs font-medium" style={{ color: "var(--color-text-secondary)" }}>Total</span>
+                    <span className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>{money(total)}</span>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-xs" style={{ color: "var(--color-text-muted)" }}>
+                  Usa el botón para agregar ítems del catálogo
+                </p>
               )}
-            />
+            </FormSection>
+
+            {/* Forma de Pago */}
+            <FormSection title="Forma de Pago" defaultOpen={false}>
+              {/* Anticipo */}
+              <Controller
+                name="anticipo"
+                control={control}
+                render={({ field }) => (
+                  <label className="flex cursor-pointer items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={field.value ?? false}
+                      onChange={(e) => field.onChange(e.target.checked)}
+                    />
+                    <span className="text-sm font-medium" style={{ color: "var(--color-text-secondary)" }}>
+                      Anticipo
+                    </span>
+                  </label>
+                )}
+              />
+              {watchAnticipo && (
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="o-anticipoValor">Valor anticipo</Label>
+                    <Controller
+                      name="anticipoValor"
+                      control={control}
+                      render={({ field }) => (
+                        <Input id="o-anticipoValor" type="number" min={0} placeholder="0" {...field} />
+                      )}
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="o-anticipoFecha">Fecha anticipo</Label>
+                    <Controller
+                      name="anticipoFecha"
+                      control={control}
+                      render={({ field }) => <Input id="o-anticipoFecha" type="date" {...field} />}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Crédito */}
+              <Controller
+                name="credito"
+                control={control}
+                render={({ field }) => (
+                  <label className="flex cursor-pointer items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={field.value ?? false}
+                      onChange={(e) => field.onChange(e.target.checked)}
+                    />
+                    <span className="text-sm font-medium" style={{ color: "var(--color-text-secondary)" }}>
+                      Crédito
+                    </span>
+                  </label>
+                )}
+              />
+              {watchCredito && (
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="o-creditoValor">Valor crédito</Label>
+                    <Controller
+                      name="creditoValor"
+                      control={control}
+                      render={({ field }) => (
+                        <Input id="o-creditoValor" type="number" min={0} placeholder="0" {...field} />
+                      )}
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="o-fechaPago">Fecha de pago</Label>
+                    <Controller
+                      name="fechaPago"
+                      control={control}
+                      render={({ field }) => <Input id="o-fechaPago" type="date" {...field} />}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Abono 2 */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-abono2">Abono 2</Label>
+                  <Controller
+                    name="abono2"
+                    control={control}
+                    render={({ field }) => (
+                      <Input id="o-abono2" type="number" min={0} placeholder="0" {...field} />
+                    )}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-fechaAbono2">Fecha abono 2</Label>
+                  <Controller
+                    name="fechaAbono2"
+                    control={control}
+                    render={({ field }) => <Input id="o-fechaAbono2" type="date" {...field} />}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-saldo">Saldo</Label>
+                  <Controller
+                    name="saldo"
+                    control={control}
+                    render={({ field }) => (
+                      <Input id="o-saldo" type="number" min={0} placeholder="0" {...field} />
+                    )}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="o-fechaSaldo">Fecha saldo</Label>
+                  <Controller
+                    name="fechaSaldo"
+                    control={control}
+                    render={({ field }) => <Input id="o-fechaSaldo" type="date" {...field} />}
+                  />
+                </div>
+              </div>
+            </FormSection>
+
+            {/* Observaciones */}
+            <FormSection title="Observaciones" defaultOpen={false}>
+              <div className="space-y-1.5">
+                <Label htmlFor="o-observations">Observaciones</Label>
+                <Controller
+                  name="observations"
+                  control={control}
+                  render={({ field }) => (
+                    <Textarea id="o-observations" placeholder="Observaciones para el proveedor..." {...field} />
+                  )}
+                />
+              </div>
+            </FormSection>
+
           </div>
 
           {serverError && (
-            <p className="rounded-md border px-3 py-2 text-xs" style={{ background: "rgba(229,57,53,0.08)", borderColor: "rgba(229,57,53,0.3)", color: "#E53935" }}>
+            <p
+              className="mt-3 rounded-md border px-3 py-2 text-xs"
+              style={{ background: "rgba(229,57,53,0.08)", borderColor: "rgba(229,57,53,0.3)", color: "#E53935" }}
+            >
               {serverError}
             </p>
           )}
 
-          <DialogFooter>
+          <DialogFooter className="mt-4">
             <Button variant="outline" type="button" onClick={handleClose}>Cancelar</Button>
             <Button type="submit" disabled={isSubmitting} className="text-white" style={{ background: "var(--color-crimson)" }}>
               {isSubmitting ? "Creando..." : "Crear orden"}

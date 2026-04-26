@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { adminAuth } from "@/lib/firebase-admin";
+import { verifyTokenSafe } from "@/lib/firebase-admin";
 import { getEvents, createEvent } from "@/lib/firestore";
 import type { EventFilters } from "@/lib/firestore";
 import type { MagikEvent } from "@/lib/types";
@@ -43,13 +43,19 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const decoded = await adminAuth.verifyIdToken(token);
+  const tokenResult = await verifyTokenSafe(token);
+  if (!tokenResult.ok) {
+    return NextResponse.json(
+      { error: tokenResult.expired ? "session_expired" : "Unauthorized" },
+      { status: 401 }
+    );
+  }
   const body = (await request.json()) as Omit<
     MagikEvent,
     "id" | "consecutive" | "createdBy" | "createdAt" | "updatedAt"
   >;
 
-  const result = await createEvent({ ...body, createdBy: decoded.uid });
+  const result = await createEvent({ ...body, createdBy: tokenResult.decoded.uid });
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 500 });
   }

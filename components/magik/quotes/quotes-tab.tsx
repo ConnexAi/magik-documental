@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Download, Copy, Pencil, Trash2 } from "lucide-react";
+import { Plus, Download, Copy, Pencil, Trash2, FileSpreadsheet } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -10,6 +10,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { fetchWithAuth } from "@/lib/auth";
 import { CreateQuoteDialog } from "./create-quote-dialog";
 import { EditQuoteDialog } from "./edit-quote-dialog";
 import type { Quote } from "@/lib/types";
@@ -86,14 +87,14 @@ export function QuotesTab({ eventId, eventConsecutive }: Props) {
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/events/${eventId}/quotes`)
+    fetchWithAuth(`/api/events/${eventId}/quotes`)
       .then((r) => r.json())
       .then((b) => setQuotes(b.quotes ?? []))
       .finally(() => setLoading(false));
   }, [eventId]);
 
   async function handleDuplicate(quote: Quote) {
-    const res = await fetch(
+    const res = await fetchWithAuth(
       `/api/events/${eventId}/quotes/${quote.id}/duplicate`,
       { method: "POST" }
     );
@@ -106,7 +107,7 @@ export function QuotesTab({ eventId, eventConsecutive }: Props) {
   async function handleDelete() {
     if (!deleteTarget) return;
     setDeleting(true);
-    const res = await fetch(
+    const res = await fetchWithAuth(
       `/api/events/${eventId}/quotes/${deleteTarget.id}`,
       { method: "DELETE" }
     );
@@ -195,6 +196,14 @@ export function QuotesTab({ eventId, eventConsecutive }: Props) {
                         style={{ color: "var(--color-text-muted)" }}
                       >
                         <Download size={14} />
+                      </a>
+                      <a
+                        href={`/api/events/${eventId}/quotes/${q.id}/xlsx`}
+                        title="Descargar XLSX"
+                        className="rounded p-1 transition-colors"
+                        style={{ color: "var(--color-text-muted)" }}
+                      >
+                        <FileSpreadsheet size={14} />
                       </a>
                       <button
                         onClick={() => handleDuplicate(q)}

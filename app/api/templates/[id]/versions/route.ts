@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyTokenSafe } from "@/lib/firebase-admin";
-import { getServiceOrders, createServiceOrder } from "@/lib/firestore";
-import type { ServiceOrder } from "@/lib/types";
+import { getTemplateVersions, publishTemplateVersion } from "@/lib/firestore";
+import type { TemplateVersion } from "@/lib/types";
 
 function getRole(r: NextRequest) {
   return r.cookies.get("magik_role")?.value;
@@ -15,9 +15,11 @@ export async function GET(
   if (role !== "admin" && role !== "collaborator") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const result = await getServiceOrders(params.id);
-  if (!result.success) return NextResponse.json({ error: result.error }, { status: 500 });
-  return NextResponse.json({ orders: result.data });
+  const result = await getTemplateVersions(params.id);
+  if (!result.success) {
+    return NextResponse.json({ error: result.error }, { status: 500 });
+  }
+  return NextResponse.json({ versions: result.data });
 }
 
 export async function POST(
@@ -25,7 +27,7 @@ export async function POST(
   { params }: { params: { id: string } }
 ) {
   const role = getRole(request);
-  if (role !== "admin" && role !== "collaborator") {
+  if (role !== "admin") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const token = request.cookies.get("magik_token")?.value;
@@ -38,13 +40,15 @@ export async function POST(
       { status: 401 }
     );
   }
-  const body = (await request.json()) as Omit<ServiceOrder, "id" | "orderConsecutive" | "eventId" | "createdBy" | "createdAt" | "updatedAt">;
 
-  const result = await createServiceOrder(params.id, {
+  const body = (await request.json()) as Omit<TemplateVersion, "id" | "publishedAt" | "publishedBy">;
+  const result = await publishTemplateVersion(params.id, {
     ...body,
-    eventId: params.id,
-    createdBy: tokenResult.decoded.uid,
+    templateId: params.id,
+    publishedBy: tokenResult.decoded.uid,
   });
-  if (!result.success) return NextResponse.json({ error: result.error }, { status: 500 });
-  return NextResponse.json({ order: result.data }, { status: 201 });
+  if (!result.success) {
+    return NextResponse.json({ error: result.error }, { status: 500 });
+  }
+  return NextResponse.json({ version: result.data }, { status: 201 });
 }

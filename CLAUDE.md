@@ -55,15 +55,18 @@ Prototipo web de gestión documental y presentación corporativa para MAGIK Prod
 - Commits en inglés: feat: / fix: / chore:
 
 ## Estado actual del proyecto
-- Sprint 0 completado: tipos, Firebase, middleware, Tailwind, globals.css, layout raíz
+- Sprint 0 completado: tipos, Firebase, middleware, Tailwind, globals.css, layout raiz
 - Sprint 1 completado: login, JWT con custom claims, dos roles (admin/collaborator),
   guards de rutas, dashboard skeleton, sidebar con nav por rol, toggle tema,
-  panel de gestión de usuarios (listar, crear, cambiar rol, activar/desactivar, eliminar),
-  hydration fixes aplicados
-- Sprint 2 completado: CRUD de eventos, consecutivo automático EVT-0001,
-  búsqueda por cliente/año/tipo/lugar, detalle de evento con tab bar minimalista,
-  fix de query Firestore para filtro por eventType sin índice compuesto
-- Sprint actual: Sprint 3 — Catálogo, generación de documentos y plantillas
+  panel de gestion de usuarios completo, hydration fixes
+- Sprint 2 completado: CRUD de eventos, consecutivo automatico EVT-0001,
+  busqueda por cliente/año/tipo/lugar, detalle de evento con tab bar minimalista
+- Sprint 3 completado: catalogo de rubros y productos, cotizaciones con PDF y XLSX,
+  ordenes de servicio con PDF y XLSX, consecutivos automaticos COT y OS,
+  duplicar cotizacion, sistema de plantillas con Firebase Storage y control de
+  versiones, drag and drop para subir plantillas, fix rowSpan PDF, fix firma SVG,
+  sharp para conversion SVG a PNG en pdfmake
+- Sprint actual: Sprint 4 — Archivos, portal publico y directorio de proveedores
 
 ## Documentos corporativos
 - Cotización: desglose de servicios y precios por rubros para clientes
@@ -99,3 +102,8 @@ Prototipo web de gestión documental y presentación corporativa para MAGIK Prod
   compuesto. Solución: aplicar el orderBy en memoria con sort() cuando hay
   filtros activos.
 - Nunca usar emojis en la UI, solo iconos de lucide-react.
+- pdfmake no soporta SVG directamente — usar sharp para convertir SVG a PNG
+  antes de pasar a pdfmake: sharp(svgBuffer).png().toBuffer()
+- Firebase Storage requiere plan Blaze para funcionar. Las reglas deben
+  permitir read/write a usuarios autenticados en match /{allPaths=**}
+- ExcelJS para generacion de XLSX con estilos, proteccion de hojas e imagenes

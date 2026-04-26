@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { adminAuth } from "@/lib/firebase-admin";
-import { setUserRole } from "@/lib/firebase-admin";
+import { adminAuth, setUserRole, verifyTokenSafe } from "@/lib/firebase-admin";
 import { updateUser, deleteUser } from "@/lib/firestore";
 import type { UserRole } from "@/lib/types";
 
@@ -46,16 +45,18 @@ export async function DELETE(
   // Prevent self-deletion
   const token = request.cookies.get("magik_token")?.value;
   if (token) {
-    try {
-      const decoded = await adminAuth.verifyIdToken(token);
-      if (decoded.uid === uid) {
-        return NextResponse.json(
-          { error: "No puedes eliminar tu propia cuenta" },
-          { status: 400 }
-        );
-      }
-    } catch {
-      return NextResponse.json({ error: "Token inválido" }, { status: 401 });
+    const tokenResult = await verifyTokenSafe(token);
+    if (!tokenResult.ok) {
+      return NextResponse.json(
+        { error: tokenResult.expired ? "session_expired" : "Unauthorized" },
+        { status: 401 }
+      );
+    }
+    if (tokenResult.decoded.uid === uid) {
+      return NextResponse.json(
+        { error: "No puedes eliminar tu propia cuenta" },
+        { status: 400 }
+      );
     }
   }
 

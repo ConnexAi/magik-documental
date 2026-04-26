@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyTokenSafe } from "@/lib/firebase-admin";
-import { getQuotes, createQuote } from "@/lib/firestore";
-import type { Quote } from "@/lib/types";
+import { getTemplate, updateTemplate, deleteTemplate } from "@/lib/firestore";
+import type { Template } from "@/lib/types";
 
 function getRole(r: NextRequest) {
   return r.cookies.get("magik_role")?.value;
@@ -15,19 +15,22 @@ export async function GET(
   if (role !== "admin" && role !== "collaborator") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const result = await getQuotes(params.id);
+  const result = await getTemplate(params.id);
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 500 });
   }
-  return NextResponse.json({ quotes: result.data });
+  if (!result.data) {
+    return NextResponse.json({ error: "Plantilla no encontrada" }, { status: 404 });
+  }
+  return NextResponse.json({ template: result.data });
 }
 
-export async function POST(
+export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   const role = getRole(request);
-  if (role !== "admin" && role !== "collaborator") {
+  if (role !== "admin") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const token = request.cookies.get("magik_token")?.value;
@@ -40,17 +43,26 @@ export async function POST(
       { status: 401 }
     );
   }
-  const body = (await request.json()) as Omit<Quote, "id" | "consecutive" | "eventId" | "version" | "status" | "createdBy" | "createdAt" | "updatedAt">;
 
-  const result = await createQuote(params.id, {
-    ...body,
-    eventId: params.id,
-    version: 1,
-    status: "draft",
-    createdBy: tokenResult.decoded.uid,
-  });
+  const body = (await request.json()) as Partial<Omit<Template, "id" | "createdAt">>;
+  const result = await updateTemplate(params.id, body);
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 500 });
   }
-  return NextResponse.json({ quote: result.data }, { status: 201 });
+  return NextResponse.json({ template: result.data });
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const role = getRole(request);
+  if (role !== "admin") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  const result = await deleteTemplate(params.id);
+  if (!result.success) {
+    return NextResponse.json({ error: result.error }, { status: 500 });
+  }
+  return NextResponse.json({ ok: true });
 }

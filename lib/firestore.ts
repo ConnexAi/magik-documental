@@ -210,14 +210,24 @@ export async function getQuote(
   }
 }
 
+async function generateQuoteConsecutive(): Promise<string> {
+  const counterRef = adminDb.collection("counters").doc("quotes");
+  const snap = await counterRef.get();
+  const next = snap.exists ? ((snap.data() as { count: number }).count) + 1 : 1;
+  await counterRef.set({ count: next });
+  const year = new Date().getFullYear();
+  return `COT-${String(next).padStart(3, "0")}-${year}`;
+}
+
 export async function createQuote(
   eventId: string,
-  data: Omit<Quote, "id" | "createdAt" | "updatedAt">
+  data: Omit<Quote, "id" | "consecutive" | "createdAt" | "updatedAt">
 ): Promise<FirestoreResult<Quote>> {
   try {
+    const consecutive = await generateQuoteConsecutive();
     const ref = quotesCol(eventId).doc();
     const now = new Date().toISOString();
-    const quote: Quote = { ...data, id: ref.id, createdAt: now, updatedAt: now };
+    const quote: Quote = { ...data, id: ref.id, consecutive, createdAt: now, updatedAt: now };
     await ref.set(quote);
     return { success: true, data: quote };
   } catch (e) {
@@ -261,16 +271,15 @@ export async function duplicateQuote(
     if (!result.success || !result.data) {
       return { success: false, error: "Cotización no encontrada" };
     }
-    const original = result.data;
+    const { pdfUrl: _pdfUrl, ...rest } = result.data;
     const ref = quotesCol(eventId).doc();
     const now = new Date().toISOString();
     const copy: Quote = {
-      ...original,
+      ...rest,
       id: ref.id,
-      title: `${original.title} (copia)`,
+      title: `${rest.title} (copia)`,
       version: 1,
       status: "draft",
-      pdfUrl: undefined,
       createdAt: now,
       updatedAt: now,
     };
@@ -310,14 +319,23 @@ export async function getServiceOrder(
   }
 }
 
+async function generateOrderConsecutive(): Promise<string> {
+  const counterRef = adminDb.collection("counters").doc("serviceOrders");
+  const snap = await counterRef.get();
+  const next = snap.exists ? ((snap.data() as { count: number }).count) + 1 : 1;
+  await counterRef.set({ count: next });
+  return `OS-${String(next).padStart(4, "0")}`;
+}
+
 export async function createServiceOrder(
   eventId: string,
-  data: Omit<ServiceOrder, "id" | "createdAt" | "updatedAt">
+  data: Omit<ServiceOrder, "id" | "orderConsecutive" | "createdAt" | "updatedAt">
 ): Promise<FirestoreResult<ServiceOrder>> {
   try {
+    const orderConsecutive = await generateOrderConsecutive();
     const ref = ordersCol(eventId).doc();
     const now = new Date().toISOString();
-    const order: ServiceOrder = { ...data, id: ref.id, createdAt: now, updatedAt: now };
+    const order: ServiceOrder = { ...data, id: ref.id, orderConsecutive, createdAt: now, updatedAt: now };
     await ref.set(order);
     return { success: true, data: order };
   } catch (e) {
@@ -491,13 +509,100 @@ export async function deleteProduct(
 // ─── Templates ───────────────────────────────────────────────────────────────
 
 export async function getTemplates(): Promise<FirestoreResult<Template[]>> {
-  throw new Error("Not implemented");
+  try {
+    const snap = await adminDb.collection("templates").orderBy("createdAt", "desc").get();
+    return { success: true, data: snap.docs.map((d) => d.data() as Template) };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function getTemplate(
+  id: string
+): Promise<FirestoreResult<Template | null>> {
+  try {
+    const doc = await adminDb.collection("templates").doc(id).get();
+    return { success: true, data: doc.exists ? (doc.data() as Template) : null };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
 }
 
 export async function getTemplateVersions(
-  _templateId: string
+  templateId: string
 ): Promise<FirestoreResult<TemplateVersion[]>> {
-  throw new Error("Not implemented");
+  try {
+    const snap = await adminDb
+      .collection("templates")
+      .doc(templateId)
+      .collection("versions")
+      .orderBy("version", "desc")
+      .get();
+    return { success: true, data: snap.docs.map((d) => d.data() as TemplateVersion) };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function createTemplate(
+  data: Omit<Template, "id" | "createdAt" | "updatedAt">
+): Promise<FirestoreResult<Template>> {
+  try {
+    const ref = adminDb.collection("templates").doc();
+    const now = new Date().toISOString();
+    const template: Template = { ...data, id: ref.id, createdAt: now, updatedAt: now };
+    await ref.set(template);
+    return { success: true, data: template };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function updateTemplate(
+  id: string,
+  data: Partial<Omit<Template, "id" | "createdAt">>
+): Promise<FirestoreResult<Template>> {
+  try {
+    const now = new Date().toISOString();
+    await adminDb.collection("templates").doc(id).update({ ...data, updatedAt: now });
+    const updated = await adminDb.collection("templates").doc(id).get();
+    return { success: true, data: updated.data() as Template };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function deleteTemplate(id: string): Promise<FirestoreResult<void>> {
+  try {
+    await adminDb.collection("templates").doc(id).delete();
+    return { success: true, data: undefined };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function publishTemplateVersion(
+  templateId: string,
+  data: Omit<TemplateVersion, "id" | "publishedAt">
+): Promise<FirestoreResult<TemplateVersion>> {
+  try {
+    const ref = adminDb
+      .collection("templates")
+      .doc(templateId)
+      .collection("versions")
+      .doc();
+    const now = new Date().toISOString();
+    const version: TemplateVersion = { ...data, id: ref.id, publishedAt: now };
+    await ref.set(version);
+    await adminDb.collection("templates").doc(templateId).update({
+      activeVersion: data.version,
+      storageUrl: data.storageUrl,
+      updatedAt: now,
+    });
+    return { success: true, data: version };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
 }
 
 // ─── Providers ───────────────────────────────────────────────────────────────

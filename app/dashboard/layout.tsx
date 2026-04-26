@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { logout } from "@/lib/auth";
@@ -89,12 +90,14 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
           className="flex items-center justify-between border-b px-5 py-4"
           style={{ borderColor: "var(--sidebar-border)" }}
         >
-          <span
-            className="text-xl font-semibold tracking-tight"
-            style={{ color: "var(--color-crimson)" }}
-          >
-            MAGIK
-          </span>
+          <Link href="/dashboard/events">
+            <img
+              src="/assets/logo_magik.svg"
+              alt="MAGIK"
+              height={40}
+              style={{ objectFit: "contain", cursor: "pointer" }}
+            />
+          </Link>
           <div className="flex items-center gap-1">
             <ThemeToggle />
             <button
@@ -175,12 +178,14 @@ export default function DashboardLayout({
           <button onClick={() => setSidebarOpen(true)}>
             <Menu size={20} style={{ color: "var(--color-text-secondary)" }} />
           </button>
-          <span
-            className="text-base font-semibold"
-            style={{ color: "var(--color-crimson)" }}
-          >
-            MAGIK
-          </span>
+          <Link href="/dashboard/events">
+            <img
+              src="/assets/logo_magik.svg"
+              alt="MAGIK"
+              height={40}
+              style={{ objectFit: "contain", cursor: "pointer" }}
+            />
+          </Link>
         </div>
 
         <div className="p-6 md:p-8">{children}</div>

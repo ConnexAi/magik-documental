@@ -69,13 +69,33 @@ export type QuoteStatus = "draft" | "published";
 export interface Quote {
   id: string;
   eventId: string;
+  consecutive?: string;
   title: string;
   version: number;
   status: QuoteStatus;
-  items: DocumentItem[];
-  subtotal: number;
+  // Destinatario
+  attention: string;
+  attentionRole: string;
+  subject: string;
+  // Fechas
+  assemblyDate?: string;
+  assemblyTime?: string;
+  testDate?: string;
+  testTime?: string;
+  // Condiciones
+  paymentTerms?: string;
+  hasIva?: boolean;
   discount?: number;
+  // Items
+  items: DocumentItem[];
+  hasAddition?: boolean;
+  additionItems?: DocumentItem[];
+  // Totales
+  subtotal: number;
   total: number;
+  // Notas
+  additionalNotes?: string;
+  observations?: string;
   notes?: string;
   pdfUrl?: string;
   createdBy: string;
@@ -86,10 +106,40 @@ export interface Quote {
 export interface ServiceOrder {
   id: string;
   eventId: string;
+  orderConsecutive?: string;
+  // Proveedor
   providerId: string;
   providerName: string;
+  nitProveedor?: string;
+  razonSocial?: string;
+  contactoProveedor?: string;
+  emailProveedor?: string;
+  celularProveedor?: string;
+  tipoServicio?: string;
+  // Título / descripción
   title: string;
+  // Fechas
+  fechaMontaje?: string;
+  horaMontaje?: string;
+  fechaEvento?: string;
+  horaEjecucion?: string;
+  diaPrueba?: string;
+  horaPrueba?: string;
+  // Items
   items: DocumentItem[];
+  // Forma de pago
+  anticipo?: boolean;
+  anticipoValor?: number;
+  anticipoFecha?: string;
+  credito?: boolean;
+  creditoValor?: number;
+  fechaPago?: string;
+  abono2?: number;
+  fechaAbono2?: string;
+  saldo?: number;
+  fechaSaldo?: string;
+  // Notas
+  observations?: string;
   notes?: string;
   pdfUrl?: string;
   createdBy: string;

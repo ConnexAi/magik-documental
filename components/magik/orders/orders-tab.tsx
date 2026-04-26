@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Download, Pencil, Trash2 } from "lucide-react";
+import { Plus, Download, Pencil, Trash2, FileSpreadsheet } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -10,6 +10,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { fetchWithAuth } from "@/lib/auth";
 import { CreateOrderDialog } from "./create-order-dialog";
 import { EditOrderDialog } from "./edit-order-dialog";
 import type { ServiceOrder } from "@/lib/types";
@@ -65,7 +66,7 @@ export function OrdersTab({ eventId, eventConsecutive }: Props) {
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/events/${eventId}/orders`)
+    fetchWithAuth(`/api/events/${eventId}/orders`)
       .then((r) => r.json())
       .then((b) => setOrders(b.orders ?? []))
       .finally(() => setLoading(false));
@@ -74,7 +75,7 @@ export function OrdersTab({ eventId, eventConsecutive }: Props) {
   async function handleDelete() {
     if (!deleteTarget) return;
     setDeleting(true);
-    const res = await fetch(`/api/events/${eventId}/orders/${deleteTarget.id}`, { method: "DELETE" });
+    const res = await fetchWithAuth(`/api/events/${eventId}/orders/${deleteTarget.id}`, { method: "DELETE" });
     setDeleting(false);
     if (res.ok) {
       setOrders((prev) => prev.filter((o) => o.id !== deleteTarget.id));
@@ -140,6 +141,14 @@ export function OrdersTab({ eventId, eventConsecutive }: Props) {
                         style={{ color: "var(--color-text-muted)" }}
                       >
                         <Download size={14} />
+                      </a>
+                      <a
+                        href={`/api/events/${eventId}/orders/${o.id}/xlsx`}
+                        title="Descargar XLSX"
+                        className="rounded p-1 transition-colors"
+                        style={{ color: "var(--color-text-muted)" }}
+                      >
+                        <FileSpreadsheet size={14} />
                       </a>
                       <button
                         onClick={() => setEditOrder(o)}
