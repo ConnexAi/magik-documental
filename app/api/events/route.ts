@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyTokenSafe } from "@/lib/firebase-admin";
-import { getEvents, createEvent } from "@/lib/firestore";
+import { getEvents, createEvent, addEventToClient } from "@/lib/firestore";
 import type { EventFilters } from "@/lib/firestore";
 import type { MagikEvent } from "@/lib/types";
 
@@ -53,11 +53,15 @@ export async function POST(request: NextRequest) {
   const body = (await request.json()) as Omit<
     MagikEvent,
     "id" | "consecutive" | "createdBy" | "createdAt" | "updatedAt"
-  >;
+  > & { clientId?: string };
 
-  const result = await createEvent({ ...body, createdBy: tokenResult.decoded.uid });
+  const { clientId, ...eventData } = body;
+  const result = await createEvent({ ...eventData, createdBy: tokenResult.decoded.uid });
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 500 });
+  }
+  if (clientId && result.data) {
+    await addEventToClient(clientId, result.data.id);
   }
   return NextResponse.json({ event: result.data }, { status: 201 });
 }

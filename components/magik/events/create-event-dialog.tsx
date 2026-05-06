@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -9,7 +9,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -23,7 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { MagikEvent } from "@/lib/types";
+import type { MagikEvent, Client } from "@/lib/types";
 
 const schema = z.object({
   clientName: z.string().min(1, "El cliente es requerido"),
@@ -42,17 +41,47 @@ const EVENT_TYPE_LABELS = {
 };
 
 interface Props {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   onCreated: (event: MagikEvent) => void;
 }
 
-export function CreateEventDialog({ onCreated }: Props) {
-  const [open, setOpen] = useState(false);
+export function CreateEventDialog({ open: controlledOpen, onOpenChange, onCreated }: Props) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen !== undefined ? controlledOpen : internalOpen;
+  const setOpen = (v: boolean) => {
+    setInternalOpen(v);
+    onOpenChange?.(v);
+  };
   const [serverError, setServerError] = useState<string | null>(null);
+
+  // Client autocomplete
+  const [allClients, setAllClients] = useState<Client[]>([]);
+  const [clientSearch, setClientSearch] = useState("");
+  const [selectedClientId, setSelectedClientId] = useState<string | null>(null);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const mouseOverSuggestions = useRef(false);
+
+  const suggestions = clientSearch.trim().length > 0
+    ? allClients.filter((c) =>
+        c.name.toLowerCase().includes(clientSearch.trim().toLowerCase()) ||
+        (c.company ?? "").toLowerCase().includes(clientSearch.trim().toLowerCase())
+      ).slice(0, 6)
+    : [];
+
+  useEffect(() => {
+    if (open && allClients.length === 0) {
+      fetch("/api/clients")
+        .then((r) => r.json())
+        .then((b: { clients?: Client[] }) => setAllClients(b.clients ?? []));
+    }
+  }, [open, allClients.length]);
 
   const {
     control,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -65,12 +94,23 @@ export function CreateEventDialog({ onCreated }: Props) {
     },
   });
 
+  function handleSelectClient(c: Client) {
+    setClientSearch(c.name);
+    setValue("clientName", c.name, { shouldDirty: true });
+    setSelectedClientId(c.id);
+    setShowSuggestions(false);
+    mouseOverSuggestions.current = false;
+  }
+
   async function onSubmit(data: FormData) {
     setServerError(null);
     const res = await fetch("/api/events", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...data,
+        ...(selectedClientId ? { clientId: selectedClientId } : {}),
+      }),
     });
     const body = (await res.json()) as { event?: MagikEvent; error?: string };
     if (!res.ok) {
@@ -79,33 +119,109 @@ export function CreateEventDialog({ onCreated }: Props) {
     }
     if (body.event) onCreated(body.event);
     reset();
+    setClientSearch("");
+    setSelectedClientId(null);
     setOpen(false);
   }
 
   return (
     <Dialog open={open} onOpenChange={setOpen} modal={false}>
-      <DialogTrigger
-        render={
-          <Button className="text-white" style={{ background: "var(--color-crimson)" }}>
-            Nuevo evento
-          </Button>
-        }
-      />
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Crear evento</DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4 py-2">
+
+          {/* Client with autocomplete */}
           <div className="space-y-1.5">
-            <Label htmlFor="clientName">Cliente</Label>
-            <Controller
-              name="clientName"
-              control={control}
-              render={({ field }) => (
-                <Input id="clientName" placeholder="Nombre del cliente" {...field} />
+            <Label htmlFor="ev-clientName">Cliente</Label>
+            <div style={{ position: "relative" }}>
+              <Controller
+                name="clientName"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    id="ev-clientName"
+                    placeholder="Nombre del cliente o buscar en directorio..."
+                    value={clientSearch || field.value}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setClientSearch(val);
+                      field.onChange(val);
+                      setSelectedClientId(null);
+                      setShowSuggestions(true);
+                    }}
+                    onFocus={() => { if (clientSearch) setShowSuggestions(true); }}
+                    onBlur={() => {
+                      setTimeout(() => {
+                        if (!mouseOverSuggestions.current) setShowSuggestions(false);
+                      }, 150);
+                    }}
+                    autoComplete="off"
+                  />
+                )}
+              />
+              {showSuggestions && suggestions.length > 0 && (
+                <div
+                  onMouseEnter={() => { mouseOverSuggestions.current = true; }}
+                  onMouseLeave={() => { mouseOverSuggestions.current = false; }}
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: 0,
+                    right: 0,
+                    marginTop: 4,
+                    zIndex: 99999,
+                    background: "var(--card)",
+                    border: "1px solid var(--border)",
+                    borderRadius: 8,
+                    boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
+                    overflow: "hidden",
+                  }}
+                >
+                  {suggestions.map((c) => (
+                    <div
+                      key={c.id}
+                      onClick={() => handleSelectClient(c)}
+                      style={{
+                        padding: "8px 12px",
+                        cursor: "pointer",
+                        borderBottom: "1px solid var(--border)",
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLDivElement).style.background = "var(--muted)";
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLDivElement).style.background = "transparent";
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontSize: 13,
+                          fontWeight: 500,
+                          color: "var(--color-text-primary)",
+                          margin: 0,
+                        }}
+                      >
+                        {c.name}
+                      </p>
+                      {c.company && (
+                        <p
+                          style={{
+                            fontSize: 11,
+                            color: "var(--color-text-muted)",
+                            margin: "1px 0 0",
+                          }}
+                        >
+                          {c.company}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               )}
-            />
+            </div>
             {errors.clientName && (
               <p className="text-xs" style={{ color: "#E53935" }}>{errors.clientName.message}</p>
             )}
@@ -133,12 +249,12 @@ export function CreateEventDialog({ onCreated }: Props) {
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="date">Fecha</Label>
+              <Label htmlFor="ev-date">Fecha</Label>
               <Controller
                 name="date"
                 control={control}
                 render={({ field }) => (
-                  <Input id="date" type="date" {...field} />
+                  <Input id="ev-date" type="date" {...field} />
                 )}
               />
               {errors.date && (
@@ -148,12 +264,12 @@ export function CreateEventDialog({ onCreated }: Props) {
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="place">Lugar</Label>
+            <Label htmlFor="ev-place">Lugar</Label>
             <Controller
               name="place"
               control={control}
               render={({ field }) => (
-                <Input id="place" placeholder="Ciudad, venue..." {...field} />
+                <Input id="ev-place" placeholder="Ciudad, venue..." {...field} />
               )}
             />
             {errors.place && (
@@ -162,12 +278,12 @@ export function CreateEventDialog({ onCreated }: Props) {
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="description">Descripción (opcional)</Label>
+            <Label htmlFor="ev-description">Descripción (opcional)</Label>
             <Controller
               name="description"
               control={control}
               render={({ field }) => (
-                <Textarea id="description" placeholder="Notas adicionales..." {...field} />
+                <Textarea id="ev-description" placeholder="Notas adicionales..." {...field} />
               )}
             />
           </div>

@@ -726,7 +726,100 @@ export async function deleteProvider(id: string): Promise<FirestoreResult<void>>
 // ─── Clients ─────────────────────────────────────────────────────────────────
 
 export async function getClients(): Promise<FirestoreResult<Client[]>> {
-  throw new Error("Not implemented");
+  try {
+    const snap = await adminDb.collection("clients").orderBy("name", "asc").get();
+    return { success: true, data: snap.docs.map((d) => d.data() as Client) };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function getClient(
+  id: string
+): Promise<FirestoreResult<Client | null>> {
+  try {
+    const doc = await adminDb.collection("clients").doc(id).get();
+    return { success: true, data: doc.exists ? (doc.data() as Client) : null };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function createClient(
+  data: Omit<Client, "id" | "createdAt" | "updatedAt">
+): Promise<FirestoreResult<Client>> {
+  try {
+    const ref = adminDb.collection("clients").doc();
+    const now = new Date().toISOString();
+    const client: Client = { ...data, id: ref.id, createdAt: now, updatedAt: now };
+    await ref.set(client);
+    return { success: true, data: client };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function updateClient(
+  id: string,
+  data: Partial<Omit<Client, "id" | "createdAt">>
+): Promise<FirestoreResult<Client>> {
+  try {
+    const now = new Date().toISOString();
+    await adminDb.collection("clients").doc(id).update({ ...data, updatedAt: now });
+    const updated = await adminDb.collection("clients").doc(id).get();
+    return { success: true, data: updated.data() as Client };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function deleteClient(id: string): Promise<FirestoreResult<void>> {
+  try {
+    await adminDb.collection("clients").doc(id).delete();
+    return { success: true, data: undefined };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function addEventToClient(
+  clientId: string,
+  eventId: string
+): Promise<FirestoreResult<void>> {
+  try {
+    const doc = await adminDb.collection("clients").doc(clientId).get();
+    if (!doc.exists) return { success: false, error: "Cliente no encontrado" };
+    const client = doc.data() as Client;
+    if (client.eventIds.includes(eventId)) return { success: true, data: undefined };
+    await adminDb
+      .collection("clients")
+      .doc(clientId)
+      .update({ eventIds: [...client.eventIds, eventId], updatedAt: new Date().toISOString() });
+    return { success: true, data: undefined };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function getClientWithHistory(
+  id: string
+): Promise<FirestoreResult<{ client: Client; events: MagikEvent[] }>> {
+  try {
+    const doc = await adminDb.collection("clients").doc(id).get();
+    if (!doc.exists) return { success: false, error: "Cliente no encontrado" };
+    const client = doc.data() as Client;
+    const events: MagikEvent[] = [];
+    if (client.eventIds.length > 0) {
+      const snap = await adminDb
+        .collection("events")
+        .where("id", "in", client.eventIds.slice(0, 10))
+        .get();
+      events.push(...snap.docs.map((d) => d.data() as MagikEvent));
+    }
+    return { success: true, data: { client, events } };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
 }
 
 // ─── Portfolio ────────────────────────────────────────────────────────────────

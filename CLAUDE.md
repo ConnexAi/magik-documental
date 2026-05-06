@@ -116,3 +116,11 @@ Prototipo web de gestión documental y presentación corporativa para MAGIK Prod
   Solucion: filtrar en memoria despues del orderBy.
 - NativeSelect con color-scheme: dark resuelve el problema de contraste del
   dropdown nativo en modo oscuro.
+
+## Verificacion RNF-01 — Acciones frecuentes
+- Crear evento: 2 clics (boton nuevo + guardar)
+- Buscar evento: 1 clic (campo busqueda siempre visible)
+- Ver detalle evento: 1 clic (fila de la tabla)
+- Generar PDF: 3 clics (evento → tab → descargar)
+- Crear cotizacion: 3 clics (evento → tab → nueva cotizacion)
+RNF-01 cumplido: todas las acciones frecuentes en maximo 3 clics.

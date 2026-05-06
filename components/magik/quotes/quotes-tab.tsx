@@ -146,7 +146,7 @@ export function QuotesTab({ eventId, eventConsecutive }: Props) {
 
         {!loading && quotes.length === 0 && (
           <p className="px-4 py-8 text-center text-sm" style={{ color: "var(--color-text-muted)" }}>
-            No hay cotizaciones para este evento
+            Sin cotizaciones. Crea la primera.
           </p>
         )}
 

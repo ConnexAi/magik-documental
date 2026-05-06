@@ -108,7 +108,7 @@ export function OrdersTab({ eventId, eventConsecutive }: Props) {
         )}
         {!loading && orders.length === 0 && (
           <p className="px-4 py-8 text-center text-sm" style={{ color: "var(--color-text-muted)" }}>
-            No hay órdenes de servicio para este evento
+            Sin ordenes de servicio.
           </p>
         )}
         {!loading && orders.length > 0 && (

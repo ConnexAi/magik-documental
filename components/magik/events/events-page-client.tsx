@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { CreateEventDialog } from "./create-event-dialog";
 import type { MagikEvent } from "@/lib/types";
 
@@ -61,6 +63,7 @@ export function EventsPageClient({ initialEvents }: Props) {
   const [events, setEvents] = useState<MagikEvent[]>(initialEvents);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
+  const [createOpen, setCreateOpen] = useState(false);
 
   const [search, setSearch] = useState<SearchState>({
     clientName: "",
@@ -133,7 +136,14 @@ export function EventsPageClient({ initialEvents }: Props) {
             {events.length} {events.length === 1 ? "evento" : "eventos"}
           </p>
         </div>
-        <CreateEventDialog onCreated={handleEventCreated} />
+        <Button
+          onClick={() => setCreateOpen(true)}
+          className="text-white"
+          style={{ background: "var(--color-crimson)" }}
+        >
+          <Plus size={14} className="mr-1.5" />
+          Nuevo evento
+        </Button>
       </div>
 
       {/* Search bar */}
@@ -223,8 +233,18 @@ export function EventsPageClient({ initialEvents }: Props) {
             )}
             {!loading && pageEvents.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-sm" style={{ color: "var(--color-text-muted)" }}>
-                  No hay eventos registrados
+                <td colSpan={6} className="px-4 py-12 text-center">
+                  <p className="text-sm mb-3" style={{ color: "var(--color-text-muted)" }}>
+                    No hay eventos registrados. Crea el primero.
+                  </p>
+                  <Button
+                    onClick={() => setCreateOpen(true)}
+                    className="text-white"
+                    style={{ background: "var(--color-crimson)" }}
+                  >
+                    <Plus size={14} className="mr-1.5" />
+                    Nuevo evento
+                  </Button>
                 </td>
               </tr>
             )}
@@ -304,6 +324,12 @@ export function EventsPageClient({ initialEvents }: Props) {
           </div>
         )}
       </div>
+
+      <CreateEventDialog
+        open={createOpen}
+        onOpenChange={setCreateOpen}
+        onCreated={handleEventCreated}
+      />
     </div>
   );
 }
