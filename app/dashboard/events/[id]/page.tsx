@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getEvent } from "@/lib/firestore";
+import { getEvent, getEventFiles } from "@/lib/firestore";
 import { EventDetailClient } from "@/components/magik/events/event-detail-client";
 
 export default async function EventDetailPage({
@@ -7,11 +7,19 @@ export default async function EventDetailPage({
 }: {
   params: { id: string };
 }) {
-  const result = await getEvent(params.id);
+  const [eventResult, filesResult] = await Promise.all([
+    getEvent(params.id),
+    getEventFiles(params.id),
+  ]);
 
-  if (!result.success || !result.data) {
+  if (!eventResult.success || !eventResult.data) {
     notFound();
   }
 
-  return <EventDetailClient event={result.data} />;
+  return (
+    <EventDetailClient
+      event={eventResult.data}
+      initialFiles={filesResult.success ? filesResult.data : []}
+    />
+  );
 }

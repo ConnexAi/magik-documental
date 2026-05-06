@@ -83,7 +83,7 @@ export function CreateEventDialog({ onCreated }: Props) {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen} modal={false}>
       <DialogTrigger
         render={
           <Button className="text-white" style={{ background: "var(--color-crimson)" }}>

@@ -146,7 +146,7 @@ export function EditQuoteDialog({ eventId, quote, open, onOpenChange, onUpdated 
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={onOpenChange} modal={false}>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle>Editar cotización · v{quote.version}</DialogTitle>

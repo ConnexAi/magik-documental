@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -17,11 +17,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ItemSelector } from "@/components/magik/documents/item-selector";
-import type { ServiceOrder, DocumentItem, CatalogRubro } from "@/lib/types";
+import { fetchWithAuth } from "@/lib/auth";
+import type { ServiceOrder, DocumentItem, CatalogRubro, Provider } from "@/lib/types";
 
 const schema = z.object({
   title: z.string().min(1, "El título es requerido"),
   providerName: z.string().min(1, "El proveedor es requerido"),
+  nitProveedor: z.string().optional(),
+  razonSocial: z.string().optional(),
+  contactoProveedor: z.string().optional(),
+  emailProveedor: z.string().optional(),
+  celularProveedor: z.string().optional(),
   notes: z.string().optional(),
 });
 type FormData = z.infer<typeof schema>;
@@ -45,21 +51,70 @@ interface Props {
 export function EditOrderDialog({ eventId, order, open, onOpenChange, onUpdated }: Props) {
   const [items, setItems] = useState<DocumentItem[]>(order.items);
   const [rubros, setRubros] = useState<CatalogRubro[]>([]);
+  const [providers, setProviders] = useState<Provider[]>([]);
+  const [selectedProviderId, setSelectedProviderId] = useState(order.providerId);
+  const [providerSearch, setProviderSearch] = useState(order.providerName);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const mouseOverSuggestions = useRef(false);
 
   const {
     control,
     handleSubmit,
     reset,
+    setValue,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { title: order.title, providerName: order.providerName, notes: order.notes ?? "" },
+    defaultValues: {
+      title: order.title,
+      providerName: order.providerName,
+      nitProveedor: "",
+      razonSocial: order.providerName,
+      contactoProveedor: "",
+      emailProveedor: "",
+      celularProveedor: "",
+      notes: order.notes ?? "",
+    },
   });
 
+  const suggestions = providerSearch.trim()
+    ? providers.filter((p) => p.name.toLowerCase().includes(providerSearch.trim().toLowerCase()))
+    : providers;
+
+  function handleSelectProvider(p: Provider) {
+    console.log("Provider seleccionado:", JSON.stringify(p, null, 2));
+    setValue("providerName", p.name, { shouldDirty: true });
+    setValue("nitProveedor", "", { shouldDirty: true });
+    setValue("razonSocial", p.name, { shouldDirty: true });
+    console.log("setValue contactoProveedor:", p.contact);
+    setValue("contactoProveedor", p.contact ?? "", { shouldDirty: true });
+    console.log("setValue emailProveedor:", p.email);
+    setValue("emailProveedor", p.email ?? "", { shouldDirty: true });
+    console.log("setValue celularProveedor:", p.phone);
+    setValue("celularProveedor", p.phone ?? "", { shouldDirty: true });
+    setSelectedProviderId(p.id);
+    setProviderSearch(p.name);
+    setShowSuggestions(false);
+    mouseOverSuggestions.current = false;
+    console.log("form values after:", getValues());
+  }
+
   useEffect(() => {
-    reset({ title: order.title, providerName: order.providerName, notes: order.notes ?? "" });
+    reset({
+      title: order.title,
+      providerName: order.providerName,
+      nitProveedor: "",
+      razonSocial: order.providerName,
+      contactoProveedor: "",
+      emailProveedor: "",
+      celularProveedor: "",
+      notes: order.notes ?? "",
+    });
     setItems(order.items);
+    setSelectedProviderId(order.providerId);
+    setProviderSearch(order.providerName);
   }, [order, reset]);
 
   useEffect(() => {
@@ -67,6 +122,9 @@ export function EditOrderDialog({ eventId, order, open, onOpenChange, onUpdated 
       fetch("/api/catalog")
         .then((r) => r.json())
         .then((b) => setRubros(b.rubros ?? []));
+      fetchWithAuth("/api/providers")
+        .then((r) => r.json())
+        .then((b: { providers?: Provider[] }) => setProviders(b.providers ?? []));
     }
   }, [open]);
 
@@ -122,6 +180,7 @@ export function EditOrderDialog({ eventId, order, open, onOpenChange, onUpdated 
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title: data.title,
+        providerId: selectedProviderId,
         providerName: data.providerName,
         items,
         notes: data.notes || undefined,
@@ -137,7 +196,7 @@ export function EditOrderDialog({ eventId, order, open, onOpenChange, onUpdated 
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={onOpenChange} modal={false}>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle>Editar orden de servicio</DialogTitle>
@@ -158,11 +217,78 @@ export function EditOrderDialog({ eventId, order, open, onOpenChange, onUpdated 
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="eo-provider">Proveedor</Label>
-              <Controller
-                name="providerName"
-                control={control}
-                render={({ field }) => <Input id="eo-provider" {...field} />}
-              />
+              <div style={{ position: "relative" }}>
+                <input
+                  id="eo-provider"
+                  value={providerSearch}
+                  placeholder="Buscar proveedor..."
+                  autoComplete="off"
+                  onChange={(e) => {
+                    setProviderSearch(e.target.value);
+                    setValue("providerName", e.target.value, { shouldDirty: true });
+                    setShowSuggestions(true);
+                  }}
+                  onFocus={() => setShowSuggestions(true)}
+                  onBlur={() => {
+                    setTimeout(() => {
+                      if (!mouseOverSuggestions.current) setShowSuggestions(false);
+                    }, 150);
+                  }}
+                  style={{
+                    width: "100%",
+                    background: "var(--input)",
+                    color: "var(--color-text-primary)",
+                    border: "1px solid var(--border)",
+                    borderRadius: 6,
+                    padding: "8px 12px",
+                    fontSize: 13,
+                    outline: "none",
+                  }}
+                />
+                {showSuggestions && suggestions.length > 0 && (
+                  <div
+                    onMouseEnter={() => { mouseOverSuggestions.current = true; }}
+                    onMouseLeave={() => { mouseOverSuggestions.current = false; }}
+                    style={{
+                      position: "absolute",
+                      top: "100%",
+                      left: 0,
+                      right: 0,
+                      marginTop: 4,
+                      zIndex: 99999,
+                      background: "#1E1E21",
+                      border: "0.5px solid rgba(255,255,255,0.10)",
+                      borderRadius: 7,
+                      maxHeight: 200,
+                      overflowY: "auto",
+                      boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
+                    }}
+                  >
+                    {suggestions.map((p) => (
+                      <div
+                        key={p.id}
+                        onClick={() => handleSelectProvider(p)}
+                        style={{
+                          padding: "8px 12px",
+                          fontSize: 13,
+                          cursor: "pointer",
+                          color: "#F0EFF2",
+                          borderBottom: "0.5px solid rgba(255,255,255,0.06)",
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.background = "#252528"; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+                      >
+                        <span style={{ fontWeight: 500 }}>{p.name}</span>
+                        {p.contact && (
+                          <span style={{ color: "#5A5860", marginLeft: 8, fontSize: 11 }}>
+                            {p.contact}
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
               {errors.providerName && (
                 <p className="text-xs" style={{ color: "#E53935" }}>{errors.providerName.message}</p>
               )}

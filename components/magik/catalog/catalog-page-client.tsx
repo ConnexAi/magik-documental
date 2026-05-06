@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ChevronDown, ChevronRight, Plus, Pencil, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronRight, Pencil, Trash2 } from "lucide-react";
 import { CreateRubroDialog } from "./create-rubro-dialog";
 import { CreateProductDialog } from "./create-product-dialog";
 import type { CatalogRubro, CatalogProduct } from "@/lib/types";
@@ -34,7 +34,7 @@ export function CatalogPageClient({ initialRubros }: Props) {
   function toggleExpand(id: string) {
     setExpanded((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      if (next.has(id)) { next.delete(id); } else { next.add(id); }
       return next;
     });
   }

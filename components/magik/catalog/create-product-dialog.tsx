@@ -90,7 +90,7 @@ export function CreateProductDialog({ rubroId, onCreated }: Props) {
         Agregar producto
       </button>
 
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={open} onOpenChange={setOpen} modal={false}>
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
             <DialogTitle>Agregar producto</DialogTitle>

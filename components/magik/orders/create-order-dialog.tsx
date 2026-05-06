@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -17,7 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ItemSelector } from "@/components/magik/documents/item-selector";
-import type { ServiceOrder, DocumentItem, CatalogRubro } from "@/lib/types";
+import { fetchWithAuth } from "@/lib/auth";
+import type { ServiceOrder, DocumentItem, CatalogRubro, Provider } from "@/lib/types";
 
 // ─── Schema ───────────────────────────────────────────────────────────────────
 
@@ -130,33 +131,124 @@ interface Props {
 export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Props) {
   const [items, setItems] = useState<DocumentItem[]>([]);
   const [rubros, setRubros] = useState<CatalogRubro[]>([]);
+  const [providers, setProviders] = useState<Provider[]>([]);
+  const [selectedProviderId, setSelectedProviderId] = useState("");
+  const [providerSearch, setProviderSearch] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const mouseOverSuggestions = useRef(false);
 
   const {
     control,
     handleSubmit,
     reset,
     watch,
+    setValue,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { anticipo: false, credito: false },
+    defaultValues: {
+      title: "",
+      providerName: "",
+      nitProveedor: "",
+      razonSocial: "",
+      contactoProveedor: "",
+      emailProveedor: "",
+      celularProveedor: "",
+      tipoServicio: "",
+      fechaMontaje: "",
+      horaMontaje: "",
+      fechaEvento: "",
+      horaEjecucion: "",
+      diaPrueba: "",
+      horaPrueba: "",
+      anticipo: false,
+      anticipoValor: "",
+      anticipoFecha: "",
+      credito: false,
+      creditoValor: "",
+      fechaPago: "",
+      abono2: "",
+      fechaAbono2: "",
+      saldo: "",
+      fechaSaldo: "",
+      observations: "",
+      notes: "",
+    },
   });
 
   const watchAnticipo = watch("anticipo");
   const watchCredito = watch("credito");
+
+  const suggestions = providerSearch.trim()
+    ? providers.filter((p) => p.name.toLowerCase().includes(providerSearch.trim().toLowerCase()))
+    : providers;
+
+  // Provider type: { id, name, contact?, phone?, email?, categories, notes?, createdAt, updatedAt }
+  // nitProveedor y razonSocial NO existen en Provider — se usan "" y p.name respectivamente
+  function handleSelectProvider(p: Provider) {
+    console.log("Provider seleccionado:", JSON.stringify(p, null, 2));
+    setValue("providerName", p.name, { shouldDirty: true });
+    setValue("nitProveedor", "", { shouldDirty: true });
+    setValue("razonSocial", p.name, { shouldDirty: true });
+    console.log("setValue contactoProveedor:", p.contact);
+    setValue("contactoProveedor", p.contact ?? "", { shouldDirty: true });
+    console.log("setValue emailProveedor:", p.email);
+    setValue("emailProveedor", p.email ?? "", { shouldDirty: true });
+    console.log("setValue celularProveedor:", p.phone);
+    setValue("celularProveedor", p.phone ?? "", { shouldDirty: true });
+    setSelectedProviderId(p.id);
+    setProviderSearch(p.name);
+    setShowSuggestions(false);
+    mouseOverSuggestions.current = false;
+    console.log("form values after:", getValues());
+  }
 
   useEffect(() => {
     if (open) {
       fetch("/api/catalog")
         .then((r) => r.json())
         .then((b) => setRubros(b.rubros ?? []));
+      fetchWithAuth("/api/providers")
+        .then((r) => r.json())
+        .then((b: { providers?: Provider[] }) => setProviders(b.providers ?? []));
     }
   }, [open]);
 
   function handleClose() {
-    reset({ anticipo: false, credito: false });
+    reset({
+      title: "",
+      providerName: "",
+      nitProveedor: "",
+      razonSocial: "",
+      contactoProveedor: "",
+      emailProveedor: "",
+      celularProveedor: "",
+      tipoServicio: "",
+      fechaMontaje: "",
+      horaMontaje: "",
+      fechaEvento: "",
+      horaEjecucion: "",
+      diaPrueba: "",
+      horaPrueba: "",
+      anticipo: false,
+      anticipoValor: "",
+      anticipoFecha: "",
+      credito: false,
+      creditoValor: "",
+      fechaPago: "",
+      abono2: "",
+      fechaAbono2: "",
+      saldo: "",
+      fechaSaldo: "",
+      observations: "",
+      notes: "",
+    });
     setItems([]);
+    setSelectedProviderId("");
+    setProviderSearch("");
+    setShowSuggestions(false);
     setServerError(null);
     onOpenChange(false);
   }
@@ -208,7 +300,7 @@ export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Pr
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title: data.title,
-        providerId: "",
+        providerId: selectedProviderId,
         providerName: data.providerName,
         nitProveedor: data.nitProveedor || undefined,
         razonSocial: data.razonSocial || undefined,
@@ -247,7 +339,7 @@ export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Pr
   }
 
   return (
-    <Dialog open={open} onOpenChange={(v) => { if (!v) handleClose(); }}>
+    <Dialog open={open} onOpenChange={(v) => { if (!v) handleClose(); }} modal={false}>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle>Nueva orden de servicio</DialogTitle>
@@ -276,13 +368,78 @@ export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Pr
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <Label htmlFor="o-providerName">Nombre del proveedor</Label>
-                  <Controller
-                    name="providerName"
-                    control={control}
-                    render={({ field }) => (
-                      <Input id="o-providerName" placeholder="Nombre comercial" {...field} />
+                  <div style={{ position: "relative" }}>
+                    <input
+                      id="o-providerName"
+                      value={providerSearch}
+                      placeholder="Buscar proveedor..."
+                      autoComplete="off"
+                      onChange={(e) => {
+                        setProviderSearch(e.target.value);
+                        setValue("providerName", e.target.value, { shouldDirty: true });
+                        setShowSuggestions(true);
+                      }}
+                      onFocus={() => setShowSuggestions(true)}
+                      onBlur={() => {
+                        setTimeout(() => {
+                          if (!mouseOverSuggestions.current) setShowSuggestions(false);
+                        }, 150);
+                      }}
+                      style={{
+                        width: "100%",
+                        background: "var(--input)",
+                        color: "var(--color-text-primary)",
+                        border: "1px solid var(--border)",
+                        borderRadius: 6,
+                        padding: "8px 12px",
+                        fontSize: 13,
+                        outline: "none",
+                      }}
+                    />
+                    {showSuggestions && suggestions.length > 0 && (
+                      <div
+                        onMouseEnter={() => { mouseOverSuggestions.current = true; }}
+                        onMouseLeave={() => { mouseOverSuggestions.current = false; }}
+                        style={{
+                          position: "absolute",
+                          top: "100%",
+                          left: 0,
+                          right: 0,
+                          marginTop: 4,
+                          zIndex: 99999,
+                          background: "#1E1E21",
+                          border: "0.5px solid rgba(255,255,255,0.10)",
+                          borderRadius: 7,
+                          maxHeight: 200,
+                          overflowY: "auto",
+                          boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
+                        }}
+                      >
+                        {suggestions.map((p) => (
+                          <div
+                            key={p.id}
+                            onClick={() => handleSelectProvider(p)}
+                            style={{
+                              padding: "8px 12px",
+                              fontSize: 13,
+                              cursor: "pointer",
+                              color: "#F0EFF2",
+                              borderBottom: "0.5px solid rgba(255,255,255,0.06)",
+                            }}
+                            onMouseEnter={(e) => { e.currentTarget.style.background = "#252528"; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+                          >
+                            <span style={{ fontWeight: 500 }}>{p.name}</span>
+                            {p.contact && (
+                              <span style={{ color: "#5A5860", marginLeft: 8, fontSize: 11 }}>
+                                {p.contact}
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     )}
-                  />
+                  </div>
                   {errors.providerName && (
                     <p className="text-xs" style={{ color: "#E53935" }}>{errors.providerName.message}</p>
                   )}

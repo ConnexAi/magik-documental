@@ -8,6 +8,7 @@ import type {
   CatalogProduct,
   Template,
   TemplateVersion,
+  EventFile,
   Provider,
   Client,
   PortfolioItem,
@@ -79,7 +80,7 @@ export async function getEvents(
   try {
     // Combining where() + orderBy() on different fields requires a composite
     // index. To avoid that, when filtering by eventType we sort in memory.
-    let query: FirebaseFirestore.Query = filters?.eventType
+    const query: FirebaseFirestore.Query = filters?.eventType
       ? adminDb.collection("events").where("eventType", "==", filters.eventType)
       : adminDb.collection("events").orderBy("date", "desc");
 
@@ -605,10 +606,121 @@ export async function publishTemplateVersion(
   }
 }
 
+// ─── Event Files ─────────────────────────────────────────────────────────────
+
+function filesCol(eventId: string) {
+  return adminDb.collection("events").doc(eventId).collection("files");
+}
+
+export async function getEventFiles(
+  eventId: string
+): Promise<FirestoreResult<EventFile[]>> {
+  try {
+    const snap = await filesCol(eventId).orderBy("createdAt", "desc").get();
+    return { success: true, data: snap.docs.map((d) => d.data() as EventFile) };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function createEventFile(
+  eventId: string,
+  data: Omit<EventFile, "id" | "createdAt">
+): Promise<FirestoreResult<EventFile>> {
+  try {
+    const ref = filesCol(eventId).doc();
+    const now = new Date().toISOString();
+    const file: EventFile = { ...data, id: ref.id, createdAt: now };
+    await ref.set(file);
+    return { success: true, data: file };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function updateEventFile(
+  eventId: string,
+  fileId: string,
+  data: Partial<Pick<EventFile, "name" | "category">>
+): Promise<FirestoreResult<EventFile>> {
+  try {
+    await filesCol(eventId).doc(fileId).update(data);
+    const updated = await filesCol(eventId).doc(fileId).get();
+    return { success: true, data: updated.data() as EventFile };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function deleteEventFile(
+  eventId: string,
+  fileId: string
+): Promise<FirestoreResult<void>> {
+  try {
+    await filesCol(eventId).doc(fileId).delete();
+    return { success: true, data: undefined };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
 // ─── Providers ───────────────────────────────────────────────────────────────
 
 export async function getProviders(): Promise<FirestoreResult<Provider[]>> {
-  throw new Error("Not implemented");
+  try {
+    const snap = await adminDb.collection("providers").orderBy("name", "asc").get();
+    return { success: true, data: snap.docs.map((d) => d.data() as Provider) };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function getProvider(
+  id: string
+): Promise<FirestoreResult<Provider | null>> {
+  try {
+    const doc = await adminDb.collection("providers").doc(id).get();
+    return { success: true, data: doc.exists ? (doc.data() as Provider) : null };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function createProvider(
+  data: Omit<Provider, "id" | "createdAt" | "updatedAt">
+): Promise<FirestoreResult<Provider>> {
+  try {
+    const ref = adminDb.collection("providers").doc();
+    const now = new Date().toISOString();
+    const provider: Provider = { ...data, id: ref.id, createdAt: now, updatedAt: now };
+    await ref.set(provider);
+    return { success: true, data: provider };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function updateProvider(
+  id: string,
+  data: Partial<Omit<Provider, "id" | "createdAt">>
+): Promise<FirestoreResult<Provider>> {
+  try {
+    const now = new Date().toISOString();
+    await adminDb.collection("providers").doc(id).update({ ...data, updatedAt: now });
+    const updated = await adminDb.collection("providers").doc(id).get();
+    return { success: true, data: updated.data() as Provider };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function deleteProvider(id: string): Promise<FirestoreResult<void>> {
+  try {
+    await adminDb.collection("providers").doc(id).delete();
+    return { success: true, data: undefined };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
 }
 
 // ─── Clients ─────────────────────────────────────────────────────────────────

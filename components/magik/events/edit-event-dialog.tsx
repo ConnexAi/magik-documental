@@ -94,7 +94,7 @@ export function EditEventDialog({ event, open, onOpenChange, onUpdated }: Props)
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={onOpenChange} modal={false}>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Editar evento · {event.consecutive}</DialogTitle>

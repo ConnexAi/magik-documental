@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { X, ChevronDown, Plus } from "lucide-react";
+import { X, ChevronDown } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -328,7 +328,7 @@ export function CreateQuoteDialog({ eventId, open, onOpenChange, onCreated }: Pr
   }
 
   return (
-    <Dialog open={open} onOpenChange={(v) => { if (!v) handleClose(); }}>
+    <Dialog open={open} onOpenChange={(v) => { if (!v) handleClose(); }} modal={false}>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle>Nueva cotización</DialogTitle>

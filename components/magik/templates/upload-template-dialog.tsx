@@ -12,13 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { NativeSelect } from "@/components/magik/ui/native-select";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage, auth } from "@/lib/firebase";
 import { fetchWithAuth } from "@/lib/auth";
@@ -47,7 +41,7 @@ export function UploadTemplateDialog({ open, onOpenChange, onCreated, initialFil
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormValues>({ defaultValues: { name: "", type: "" } });
+  } = useForm<FormValues>({ defaultValues: { name: "", type: "quote" } });
 
   useEffect(() => {
     if (initialFile) setFile(initialFile);
@@ -146,15 +140,14 @@ export function UploadTemplateDialog({ open, onOpenChange, onCreated, initialFil
               control={control}
               name="type"
               render={({ field }) => (
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Seleccionar tipo (opcional)" />
-                  </SelectTrigger>
-                  <SelectContent style={{ zIndex: 9999 }}>
-                    <SelectItem value="quote">Cotizacion</SelectItem>
-                    <SelectItem value="serviceOrder">Orden de servicio</SelectItem>
-                  </SelectContent>
-                </Select>
+                <NativeSelect
+                  {...field}
+                  placeholder="Seleccionar tipo (opcional)"
+                  options={[
+                    { value: "quote", label: "Cotización" },
+                    { value: "serviceOrder", label: "Orden de servicio" },
+                  ]}
+                />
               )}
             />
           </div>

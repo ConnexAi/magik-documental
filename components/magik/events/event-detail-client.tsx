@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { MapPin, Calendar, Folder, File } from "lucide-react";
+import { MapPin, Calendar } from "lucide-react";
 import { EditEventDialog } from "./edit-event-dialog";
 import { QuotesTab } from "@/components/magik/quotes/quotes-tab";
 import { OrdersTab } from "@/components/magik/orders/orders-tab";
-import type { MagikEvent } from "@/lib/types";
+import { FilesTab } from "@/components/magik/files/files-tab";
+import type { MagikEvent, EventFile } from "@/lib/types";
 
 const EVENT_TYPE_STYLES: Record<
   MagikEvent["eventType"],
@@ -31,36 +32,12 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "other", label: "Otros documentos" },
 ];
 
-interface PlaceholderProps {
-  icon: React.ReactNode;
-  label: string;
-  sprint: string;
-}
-
-function TabPlaceholder({ icon, label, sprint }: PlaceholderProps) {
-  return (
-    <div
-      className="rounded-lg border px-5 py-10 flex flex-col items-center gap-3"
-      style={{ background: "var(--card)", borderColor: "var(--border)" }}
-    >
-      <span style={{ color: "var(--color-text-muted)" }}>{icon}</span>
-      <div className="text-center">
-        <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
-          {label}
-        </p>
-        <p className="mt-1 text-xs" style={{ color: "var(--color-text-muted)" }}>
-          {sprint} — próximamente
-        </p>
-      </div>
-    </div>
-  );
-}
-
 interface Props {
   event: MagikEvent;
+  initialFiles: EventFile[];
 }
 
-export function EventDetailClient({ event: initialEvent }: Props) {
+export function EventDetailClient({ event: initialEvent, initialFiles }: Props) {
   const router = useRouter();
   const [event, setEvent] = useState<MagikEvent>(initialEvent);
   const [editOpen, setEditOpen] = useState(false);
@@ -175,18 +152,12 @@ export function EventDetailClient({ event: initialEvent }: Props) {
           <OrdersTab eventId={event.id} eventConsecutive={event.consecutive} />
         )}
         {activeTab === "files" && (
-          <TabPlaceholder
-            icon={<Folder size={32} />}
-            label="Archivos"
-            sprint="Sprint 4"
-          />
+          <FilesTab eventId={event.id} initialFiles={initialFiles} />
         )}
         {activeTab === "other" && (
-          <TabPlaceholder
-            icon={<File size={32} />}
-            label="Otros documentos"
-            sprint="Sprint 4"
-          />
+          <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
+            Sin contenido adicional.
+          </p>
         )}
       </div>
 
