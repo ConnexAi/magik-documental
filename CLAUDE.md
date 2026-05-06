@@ -66,7 +66,12 @@ Prototipo web de gestión documental y presentación corporativa para MAGIK Prod
   duplicar cotizacion, sistema de plantillas con Firebase Storage y control de
   versiones, drag and drop para subir plantillas, fix rowSpan PDF, fix firma SVG,
   sharp para conversion SVG a PNG en pdfmake
-- Sprint actual: Sprint 4 — Archivos, portal publico y directorio de proveedores
+- Sprint 4 completado: gestion de archivos por evento con Firebase Storage,
+  categorias predefinidas y custom, renombrado de archivos, directorio de
+  proveedores con autocompletado en ordenes, portal publico con landing page,
+  slider de portafolio con autoplay, animaciones de scroll, panel admin de
+  portafolio con selector de fotos desde archivos del evento
+- Sprint actual: Sprint 5 — Directorio de clientes, pruebas y entrega final
 
 ## Documentos corporativos
 - Cotización: desglose de servicios y precios por rubros para clientes
@@ -107,3 +112,7 @@ Prototipo web de gestión documental y presentación corporativa para MAGIK Prod
 - Firebase Storage requiere plan Blaze para funcionar. Las reglas deben
   permitir read/write a usuarios autenticados en match /{allPaths=**}
 - ExcelJS para generacion de XLSX con estilos, proteccion de hojas e imagenes
+- Firestore where() + orderBy() en campos distintos requiere indice compuesto.
+  Solucion: filtrar en memoria despues del orderBy.
+- NativeSelect con color-scheme: dark resuelve el problema de contraste del
+  dropdown nativo en modo oscuro.

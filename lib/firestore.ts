@@ -732,5 +732,59 @@ export async function getClients(): Promise<FirestoreResult<Client[]>> {
 // ─── Portfolio ────────────────────────────────────────────────────────────────
 
 export async function getPortfolioItems(): Promise<FirestoreResult<PortfolioItem[]>> {
-  throw new Error("Not implemented");
+  try {
+    const snap = await adminDb.collection("portfolio").orderBy("order", "asc").get();
+    const items = snap.docs
+      .map((d) => d.data() as PortfolioItem)
+      .filter((item) => item.visible === true);
+    console.log("Portfolio items:", items.length, items);
+    return { success: true, data: items };
+  } catch (e) {
+    console.log("Portfolio error:", String(e));
+    return { success: true, data: [] };
+  }
+}
+
+export async function getAllPortfolioItems(): Promise<FirestoreResult<PortfolioItem[]>> {
+  try {
+    const snap = await adminDb.collection("portfolio").orderBy("order", "asc").get();
+    return { success: true, data: snap.docs.map((d) => d.data() as PortfolioItem) };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function createPortfolioItem(
+  data: Omit<PortfolioItem, "id" | "publishedAt">
+): Promise<FirestoreResult<PortfolioItem>> {
+  try {
+    const ref = adminDb.collection("portfolio").doc();
+    const item: PortfolioItem = { ...data, id: ref.id, publishedAt: new Date().toISOString() };
+    await ref.set(item);
+    return { success: true, data: item };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function updatePortfolioItem(
+  id: string,
+  data: Partial<Omit<PortfolioItem, "id" | "publishedAt">>
+): Promise<FirestoreResult<PortfolioItem>> {
+  try {
+    await adminDb.collection("portfolio").doc(id).update(data);
+    const updated = await adminDb.collection("portfolio").doc(id).get();
+    return { success: true, data: updated.data() as PortfolioItem };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
+}
+
+export async function deletePortfolioItem(id: string): Promise<FirestoreResult<void>> {
+  try {
+    await adminDb.collection("portfolio").doc(id).delete();
+    return { success: true, data: undefined };
+  } catch (e) {
+    return { success: false, error: String(e) };
+  }
 }

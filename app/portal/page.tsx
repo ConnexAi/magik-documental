@@ -1,20 +1,8 @@
-export default function PortalPage() {
-  return (
-    <div className="flex min-h-screen items-center justify-center" style={{ background: "var(--background)" }}>
-      <div className="text-center">
-        <h1
-          className="text-[22px] font-medium"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          Portal MAGIK Producciones
-        </h1>
-        <p
-          className="mt-2 text-sm"
-          style={{ color: "var(--color-text-secondary)" }}
-        >
-          Portal público de MAGIK Producciones
-        </p>
-      </div>
-    </div>
-  );
+import { getPortfolioItems } from "@/lib/firestore";
+import { PortalLanding } from "@/components/magik/portal/portal-landing";
+
+export default async function PortalPage() {
+  const result = await getPortfolioItems();
+  const items = result.success ? result.data : [];
+  return <PortalLanding items={items} />;
 }

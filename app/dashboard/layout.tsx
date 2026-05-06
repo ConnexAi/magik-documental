@@ -18,6 +18,7 @@ import {
   X,
   LogOut,
   Truck,
+  Globe,
 } from "lucide-react";
 
 interface NavItem {
@@ -32,6 +33,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Plantillas", href: "/dashboard/templates", icon: <FileText size={16} /> },
   { label: "Catálogo", href: "/dashboard/catalog", icon: <Package size={16} /> },
   { label: "Proveedores", href: "/dashboard/providers", icon: <Truck size={16} /> },
+  { label: "Portafolio", href: "/dashboard/admin/portfolio", icon: <Globe size={16} />, adminOnly: true },
   { label: "Clientes", href: "/dashboard/admin/clients", icon: <Users size={16} />, adminOnly: true },
   { label: "Usuarios", href: "/dashboard/admin/users", icon: <UserCog size={16} />, adminOnly: true },
 ];
