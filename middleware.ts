@@ -18,10 +18,7 @@ export function middleware(request: NextRequest) {
 
   // ── / root ────────────────────────────────────────────────────────────────
   if (pathname === "/") {
-    if (hasSession && role) {
-      return NextResponse.redirect(new URL(getHomeForRole(role), request.url));
-    }
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/portal", request.url));
   }
 
   // ── /login ────────────────────────────────────────────────────────────────
