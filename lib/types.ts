@@ -26,6 +26,7 @@ export type EventType = "corporativo" | "entretenimiento" | "especial";
 export interface MagikEvent {
   id: string;
   consecutive: string; // e.g. EVT-0001
+  eventName?: string;
   clientName: string;
   eventType: EventType;
   place: string;

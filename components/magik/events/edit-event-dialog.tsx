@@ -25,6 +25,7 @@ import {
 import type { MagikEvent } from "@/lib/types";
 
 const schema = z.object({
+  eventName: z.string().optional(),
   clientName: z.string().min(1, "El cliente es requerido"),
   eventType: z.enum(["corporativo", "entretenimiento", "especial"]),
   place: z.string().min(1, "El lugar es requerido"),
@@ -58,6 +59,7 @@ export function EditEventDialog({ event, open, onOpenChange, onUpdated }: Props)
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
+      eventName: event.eventName ?? "",
       clientName: event.clientName,
       eventType: event.eventType,
       place: event.place,
@@ -69,6 +71,7 @@ export function EditEventDialog({ event, open, onOpenChange, onUpdated }: Props)
   // Re-populate when event changes
   useEffect(() => {
     reset({
+      eventName: event.eventName ?? "",
       clientName: event.clientName,
       eventType: event.eventType,
       place: event.place,
@@ -101,6 +104,17 @@ export function EditEventDialog({ event, open, onOpenChange, onUpdated }: Props)
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4 py-2">
+          <div className="space-y-1.5">
+            <Label htmlFor="edit-eventName">Nombre del evento <span style={{ color: "var(--color-text-muted)", fontWeight: 400 }}>(opcional)</span></Label>
+            <Controller
+              name="eventName"
+              control={control}
+              render={({ field }) => (
+                <Input id="edit-eventName" placeholder="Ej: Lanzamiento Samsung 2026" {...field} />
+              )}
+            />
+          </div>
+
           <div className="space-y-1.5">
             <Label htmlFor="edit-clientName">Cliente</Label>
             <Controller

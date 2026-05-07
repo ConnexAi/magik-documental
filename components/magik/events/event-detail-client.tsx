@@ -73,8 +73,13 @@ export function EventDetailClient({ event: initialEvent, initialFiles }: Props) 
               className="text-[22px] font-medium leading-tight"
               style={{ color: "var(--color-text-primary)" }}
             >
-              {event.clientName}
+              {event.eventName || event.clientName}
             </h1>
+            {event.eventName && (
+              <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
+                {event.clientName}
+              </p>
+            )}
 
             <div
               className="flex flex-wrap items-center gap-3 text-sm"

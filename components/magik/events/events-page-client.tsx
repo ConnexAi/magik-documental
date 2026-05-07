@@ -212,7 +212,7 @@ export function EventsPageClient({ initialEvents }: Props) {
         <table className="w-full text-sm">
           <thead>
             <tr style={{ borderBottom: "1px solid var(--border)" }}>
-              {["#", "Cliente", "Tipo", "Lugar", "Fecha", ""].map((h) => (
+              {["#", "Nombre", "Cliente", "Tipo", "Lugar", "Fecha", ""].map((h) => (
                 <th
                   key={h}
                   className="px-4 py-3 text-left"
@@ -226,14 +226,14 @@ export function EventsPageClient({ initialEvents }: Props) {
           <tbody>
             {loading && (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-xs" style={{ color: "var(--color-text-muted)" }}>
+                <td colSpan={7} className="px-4 py-8 text-center text-xs" style={{ color: "var(--color-text-muted)" }}>
                   Buscando...
                 </td>
               </tr>
             )}
             {!loading && pageEvents.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-12 text-center">
+                <td colSpan={7} className="px-4 py-12 text-center">
                   <p className="text-sm mb-3" style={{ color: "var(--color-text-muted)" }}>
                     No hay eventos registrados. Crea el primero.
                   </p>
@@ -271,7 +271,12 @@ export function EventsPageClient({ initialEvents }: Props) {
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <span style={{ color: "var(--color-text-primary)" }}>{event.clientName}</span>
+                    <span style={{ color: "var(--color-text-primary)" }}>
+                      {event.eventName || event.clientName}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3">
+                    <span style={{ color: "var(--color-text-secondary)" }}>{event.clientName}</span>
                   </td>
                   <td className="px-4 py-3">
                     <EventTypeBadge type={event.eventType} />

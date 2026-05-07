@@ -25,6 +25,7 @@ import {
 import type { MagikEvent, Client } from "@/lib/types";
 
 const schema = z.object({
+  eventName: z.string().optional(),
   clientName: z.string().min(1, "El cliente es requerido"),
   eventType: z.enum(["corporativo", "entretenimiento", "especial"]),
   place: z.string().min(1, "El lugar es requerido"),
@@ -86,6 +87,7 @@ export function CreateEventDialog({ open: controlledOpen, onOpenChange, onCreate
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
+      eventName: "",
       clientName: "",
       eventType: "corporativo",
       place: "",
@@ -118,7 +120,7 @@ export function CreateEventDialog({ open: controlledOpen, onOpenChange, onCreate
       return;
     }
     if (body.event) onCreated(body.event);
-    reset();
+    reset({ eventName: "", clientName: "", eventType: "corporativo", place: "", date: "", description: "" });
     setClientSearch("");
     setSelectedClientId(null);
     setOpen(false);
@@ -132,6 +134,18 @@ export function CreateEventDialog({ open: controlledOpen, onOpenChange, onCreate
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4 py-2">
+
+          {/* Event name */}
+          <div className="space-y-1.5">
+            <Label htmlFor="ev-eventName">Nombre del evento <span style={{ color: "var(--color-text-muted)", fontWeight: 400 }}>(opcional)</span></Label>
+            <Controller
+              name="eventName"
+              control={control}
+              render={({ field }) => (
+                <Input id="ev-eventName" placeholder="Ej: Lanzamiento Samsung 2026" {...field} />
+              )}
+            />
+          </div>
 
           {/* Client with autocomplete */}
           <div className="space-y-1.5">
