@@ -5,10 +5,7 @@ import type { TDocumentDefinitions, Content, TableCell } from "pdfmake/interface
 import type { MagikEvent, Quote, ServiceOrder, DocumentItem } from "@/lib/types";
 
 function getFonts() {
-  const fontBase = path.join(
-    process.cwd(),
-    "node_modules/pdfmake/build/fonts/Roboto"
-  );
+  const fontBase = path.join(process.cwd(), "public/fonts");
   return {
     Roboto: {
       normal: fs.readFileSync(path.join(fontBase, "Roboto-Regular.ttf")),
