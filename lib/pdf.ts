@@ -4,9 +4,6 @@ import sharp from "sharp";
 import type { TDocumentDefinitions, Content, TableCell } from "pdfmake/interfaces";
 import type { MagikEvent, Quote, ServiceOrder, DocumentItem } from "@/lib/types";
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const PdfPrinter = require("pdfmake");
-
 function getFonts() {
   const fontBase = path.join(
     process.cwd(),
@@ -22,9 +19,11 @@ function getFonts() {
   };
 }
 
-const printer = new PdfPrinter(getFonts());
+interface PrinterLike {
+  createPdfKitDocument(docDef: TDocumentDefinitions): NodeJS.EventEmitter & { end(): void };
+}
 
-function getBuffer(docDef: TDocumentDefinitions): Promise<Buffer> {
+function getBuffer(printer: PrinterLike, docDef: TDocumentDefinitions): Promise<Buffer> {
   const doc = printer.createPdfKitDocument(docDef);
   return new Promise<Buffer>((resolve, reject) => {
     const chunks: Buffer[] = [];
@@ -176,6 +175,10 @@ function buildOrderTableRows(items: DocumentItem[]): TableCell[][] {
 }
 
 export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Buffer> {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const PdfPrinter = require("pdfmake/build/pdfmake");
+  const printer = new PdfPrinter(getFonts()) as PrinterLike;
+
   const [logoDataUrl, firmaDataUrl] = await Promise.all([
     svgToPngDataUrl(LOGO_PATH, 300),
     svgToPngDataUrl(FIRMA_PATH, 200),
@@ -372,10 +375,14 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
     content,
   };
 
-  return getBuffer(docDef);
+  return getBuffer(printer, docDef);
 }
 
 export async function buildOrderPdf(order: ServiceOrder, event: MagikEvent): Promise<Buffer> {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const PdfPrinter = require("pdfmake/build/pdfmake");
+  const printer = new PdfPrinter(getFonts()) as PrinterLike;
+
   const [logoDataUrl, firmaDataUrl] = await Promise.all([
     svgToPngDataUrl(LOGO_PATH, 300),
     svgToPngDataUrl(FIRMA_PATH, 200),
@@ -670,5 +677,5 @@ export async function buildOrderPdf(order: ServiceOrder, event: MagikEvent): Pro
     content,
   };
 
-  return getBuffer(docDef);
+  return getBuffer(printer, docDef);
 }
