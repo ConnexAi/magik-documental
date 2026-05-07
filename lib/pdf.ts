@@ -5,17 +5,35 @@ import type { TDocumentDefinitions, Content, TableCell } from "pdfmake/interface
 import type { MagikEvent, Quote, ServiceOrder, DocumentItem } from "@/lib/types";
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const pdfmake = require("pdfmake");
+const PdfPrinter = require("pdfmake");
 
-const FONTS = path.join(process.cwd(), "node_modules/pdfmake/build/fonts/Roboto");
-pdfmake.fonts = {
-  Roboto: {
-    normal: path.join(FONTS, "Roboto-Regular.ttf"),
-    bold: path.join(FONTS, "Roboto-Medium.ttf"),
-    italics: path.join(FONTS, "Roboto-Italic.ttf"),
-    bolditalics: path.join(FONTS, "Roboto-MediumItalic.ttf"),
-  },
-};
+function getFonts() {
+  const fontBase = path.join(
+    process.cwd(),
+    "node_modules/pdfmake/build/fonts/Roboto"
+  );
+  return {
+    Roboto: {
+      normal: fs.readFileSync(path.join(fontBase, "Roboto-Regular.ttf")),
+      bold: fs.readFileSync(path.join(fontBase, "Roboto-Medium.ttf")),
+      italics: fs.readFileSync(path.join(fontBase, "Roboto-Italic.ttf")),
+      bolditalics: fs.readFileSync(path.join(fontBase, "Roboto-MediumItalic.ttf")),
+    },
+  };
+}
+
+const printer = new PdfPrinter(getFonts());
+
+function getBuffer(docDef: TDocumentDefinitions): Promise<Buffer> {
+  const doc = printer.createPdfKitDocument(docDef);
+  return new Promise<Buffer>((resolve, reject) => {
+    const chunks: Buffer[] = [];
+    doc.on("data", (chunk: Buffer) => chunks.push(chunk));
+    doc.on("end", () => resolve(Buffer.concat(chunks)));
+    doc.on("error", reject);
+    doc.end();
+  });
+}
 
 const ASSETS = path.join(process.cwd(), "public/assets");
 const LOGO_PATH = path.join(ASSETS, "logo_magik.svg");
@@ -354,8 +372,7 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
     content,
   };
 
-  const doc = pdfmake.createPdf(docDef);
-  return doc.getBuffer() as Promise<Buffer>;
+  return getBuffer(docDef);
 }
 
 export async function buildOrderPdf(order: ServiceOrder, event: MagikEvent): Promise<Buffer> {
@@ -653,6 +670,5 @@ export async function buildOrderPdf(order: ServiceOrder, event: MagikEvent): Pro
     content,
   };
 
-  const doc = pdfmake.createPdf(docDef);
-  return doc.getBuffer() as Promise<Buffer>;
+  return getBuffer(docDef);
 }
