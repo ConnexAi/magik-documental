@@ -1,13 +1,10 @@
-import fs from "fs";
-import path from "path";
 import sharp from "sharp";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const PDFDocument = require("pdfkit");
-import { ROBOTO_FONTS } from "./pdf-fonts";
+import { ROBOTO_FONTS, MAGIK_LOGO_SVG_BASE64, MAGIK_FIRMA_SVG_BASE64 } from "./pdf-fonts";
 import type { Quote, ServiceOrder, MagikEvent, DocumentItem } from "./types";
 
 const CRIMSON = "#D4004E";
-const ASSETS = path.join(process.cwd(), "public/assets");
 const PAGE_WIDTH = 515; // A4 width minus 40px margins each side
 
 function formatCOP(value: number): string {
@@ -20,9 +17,9 @@ function formatDate(dateStr: string): string {
   return `${d}/${m}/${y}`;
 }
 
-async function svgToPng(svgPath: string, width: number): Promise<Buffer> {
-  const svg = fs.readFileSync(svgPath);
-  return sharp(svg).resize({ width }).png().toBuffer();
+async function svgToPng(svgBase64: string, width: number): Promise<Buffer> {
+  const svgBuffer = Buffer.from(svgBase64, "base64");
+  return sharp(svgBuffer).resize({ width }).png().toBuffer();
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -73,8 +70,8 @@ function drawFooter(doc: any) {
 }
 
 export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Buffer> {
-  const logoPng = await svgToPng(path.join(ASSETS, "logo_magik.svg"), 300);
-  const firmaPng = await svgToPng(path.join(ASSETS, "firma_londoño.svg"), 200);
+  const logoPng = await svgToPng(MAGIK_LOGO_SVG_BASE64, 300);
+  const firmaPng = await svgToPng(MAGIK_FIRMA_SVG_BASE64, 200);
 
   const doc = makePrinter();
   const bufferReady = collectBuffer(doc);
@@ -293,8 +290,8 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
 }
 
 export async function buildOrderPdf(order: ServiceOrder, event: MagikEvent): Promise<Buffer> {
-  const logoPng = await svgToPng(path.join(ASSETS, "logo_magik.svg"), 300);
-  const firmaPng = await svgToPng(path.join(ASSETS, "firma_londoño.svg"), 200);
+  const logoPng = await svgToPng(MAGIK_LOGO_SVG_BASE64, 300);
+  const firmaPng = await svgToPng(MAGIK_FIRMA_SVG_BASE64, 200);
 
   const doc = makePrinter();
   const bufferReady = collectBuffer(doc);
