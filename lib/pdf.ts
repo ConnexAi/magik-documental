@@ -5,6 +5,9 @@ import type { TDocumentDefinitions, Content, TableCell } from "pdfmake/interface
 import type { MagikEvent, Quote, ServiceOrder, DocumentItem } from "@/lib/types";
 import { ROBOTO_FONTS } from "./pdf-fonts";
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const PdfPrinter = require("pdfmake/build/pdfmake");
+
 function getFonts() {
   return {
     Roboto: {
@@ -172,8 +175,6 @@ function buildOrderTableRows(items: DocumentItem[]): TableCell[][] {
 }
 
 export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Buffer> {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const PdfPrinter = require("pdfmake/build/pdfmake");
   const printer = new PdfPrinter(getFonts()) as PrinterLike;
 
   const [logoDataUrl, firmaDataUrl] = await Promise.all([
@@ -376,8 +377,6 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
 }
 
 export async function buildOrderPdf(order: ServiceOrder, event: MagikEvent): Promise<Buffer> {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const PdfPrinter = require("pdfmake/build/pdfmake");
   const printer = new PdfPrinter(getFonts()) as PrinterLike;
 
   const [logoDataUrl, firmaDataUrl] = await Promise.all([
