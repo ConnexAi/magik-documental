@@ -3,15 +3,15 @@ import path from "path";
 import sharp from "sharp";
 import type { TDocumentDefinitions, Content, TableCell } from "pdfmake/interfaces";
 import type { MagikEvent, Quote, ServiceOrder, DocumentItem } from "@/lib/types";
+import { ROBOTO_FONTS } from "./pdf-fonts";
 
 function getFonts() {
-  const fontBase = path.join(process.cwd(), "public/fonts");
   return {
     Roboto: {
-      normal: fs.readFileSync(path.join(fontBase, "Roboto-Regular.ttf")),
-      bold: fs.readFileSync(path.join(fontBase, "Roboto-Medium.ttf")),
-      italics: fs.readFileSync(path.join(fontBase, "Roboto-Italic.ttf")),
-      bolditalics: fs.readFileSync(path.join(fontBase, "Roboto-MediumItalic.ttf")),
+      normal: Buffer.from(ROBOTO_FONTS.regular, "base64"),
+      bold: Buffer.from(ROBOTO_FONTS.medium, "base64"),
+      italics: Buffer.from(ROBOTO_FONTS.italic, "base64"),
+      bolditalics: Buffer.from(ROBOTO_FONTS.mediumItalic, "base64"),
     },
   };
 }
