@@ -6,7 +6,7 @@ import type { MagikEvent, Quote, ServiceOrder, DocumentItem } from "@/lib/types"
 import { ROBOTO_FONTS } from "./pdf-fonts";
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const PdfPrinter = require("pdfmake/build/pdfmake");
+const PdfPrinter = require("pdfmake/build/pdfmake.js");
 
 function getFonts() {
   return {

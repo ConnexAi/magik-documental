@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getQuote, getEvent } from "@/lib/firestore";
-import { buildQuotePdf } from "@/lib/pdf";
 
 function getRole(r: NextRequest) {
   return r.cookies.get("magik_role")?.value;
@@ -27,6 +26,7 @@ export async function GET(
     return NextResponse.json({ error: "Cotización no encontrada" }, { status: 404 });
   }
 
+  const { buildQuotePdf } = await import("../../../../../../../lib/pdf");
   const buffer = await buildQuotePdf(quoteResult.data, eventResult.data);
   const filename = `cotizacion-${eventResult.data.consecutive}.pdf`;
 

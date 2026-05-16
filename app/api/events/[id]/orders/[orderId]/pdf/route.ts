@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServiceOrder, getEvent } from "@/lib/firestore";
-import { buildOrderPdf } from "@/lib/pdf";
 
 function getRole(r: NextRequest) {
   return r.cookies.get("magik_role")?.value;
@@ -27,6 +26,7 @@ export async function GET(
     return NextResponse.json({ error: "Orden no encontrada" }, { status: 404 });
   }
 
+  const { buildOrderPdf } = await import("../../../../../../../lib/pdf");
   const buffer = await buildOrderPdf(orderResult.data, eventResult.data);
   const filename = `orden-servicio-${eventResult.data.consecutive}.pdf`;
 
