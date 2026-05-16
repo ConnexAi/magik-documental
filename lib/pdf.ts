@@ -1,6 +1,3 @@
-import sharp from "sharp";
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const PDFDocument = require("pdfkit");
 import { ROBOTO_FONTS, MAGIK_LOGO_SVG_BASE64, MAGIK_FIRMA_SVG_BASE64 } from "./pdf-fonts";
 import type { Quote, ServiceOrder, MagikEvent, DocumentItem } from "./types";
 
@@ -18,12 +15,16 @@ function formatDate(dateStr: string): string {
 }
 
 async function svgToPng(svgBase64: string, width: number): Promise<Buffer> {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-explicit-any
+  const sharp = require("sharp") as any;
   const svgBuffer = Buffer.from(svgBase64, "base64");
-  return sharp(svgBuffer).resize({ width }).png().toBuffer();
+  return sharp(svgBuffer).resize({ width }).png().toBuffer() as Promise<Buffer>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function makePrinter(): any {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const PDFDocument = require("pdfkit") as typeof import("pdfkit");
   return new PDFDocument({
     size: "A4",
     margins: { top: 40, bottom: 60, left: 40, right: 40 },
