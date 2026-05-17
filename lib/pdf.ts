@@ -26,7 +26,6 @@ function makePrinter(): any {
   return new PDFDocument({
     size: "A4",
     margins: { top: 40, bottom: 100, left: 40, right: 40 },
-    bufferPages: true,
   });
 }
 
@@ -199,53 +198,63 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
   const iva = quote.hasIva ? Math.round(subtotalDesc * 0.19) : 0;
   const total = subtotalDesc + iva;
 
-  const propX = 300;
-  const propLabelW = 130;
-  const propValW = 85;
+  const labelX = 295;
+  const valueX = 430;
+  const rowH = 16;
+  let propY = doc.y + 8;
 
   doc.font("Roboto-Bold").fontSize(9).fillColor("#000000")
-    .text("Sub-Total", propX, doc.y, { width: propLabelW });
-  doc.text(formatCOP(subtotal), propX + propLabelW, doc.y - doc.currentLineHeight(), { width: propValW, align: "right" });
+    .text("Sub-Total", labelX, propY, { width: 130 });
+  doc.text(formatCOP(subtotal), valueX, propY, { width: 85, align: "right" });
+  propY += rowH;
 
   if (descuento > 0) {
     doc.font("Roboto").fillColor(CRIMSON)
-      .text("Descuento Comercial", propX, doc.y, { width: propLabelW });
-    doc.text(`- ${formatCOP(descuento)}`, propX + propLabelW, doc.y - doc.currentLineHeight(), { width: propValW, align: "right" });
+      .text("Descuento Comercial", labelX, propY, { width: 130 });
+    doc.text(`- ${formatCOP(descuento)}`, valueX, propY, { width: 85, align: "right" });
+    propY += rowH;
     doc.font("Roboto-Bold").fillColor("#000000")
-      .text("Sub-Total c/Descuento", propX, doc.y, { width: propLabelW });
-    doc.text(formatCOP(subtotalDesc), propX + propLabelW, doc.y - doc.currentLineHeight(), { width: propValW, align: "right" });
+      .text("Sub-Total c/Descuento", labelX, propY, { width: 130 });
+    doc.text(formatCOP(subtotalDesc), valueX, propY, { width: 85, align: "right" });
+    propY += rowH;
   }
 
   if (quote.hasIva) {
     doc.font("Roboto").fillColor(CRIMSON)
-      .text("IVA (19%)", propX, doc.y, { width: propLabelW });
-    doc.text(formatCOP(iva), propX + propLabelW, doc.y - doc.currentLineHeight(), { width: propValW, align: "right" });
+      .text("IVA (19%)", labelX, propY, { width: 130 });
+    doc.text(formatCOP(iva), valueX, propY, { width: 85, align: "right" });
+    propY += rowH;
   }
 
-  doc.moveTo(propX, doc.y).lineTo(propX + propLabelW + propValW, doc.y).stroke("#cccccc");
-  doc.font("Roboto-Bold").fontSize(13).fillColor(CRIMSON)
-    .text("TOTAL", propX, doc.y + 2, { width: propLabelW });
-  doc.text(formatCOP(total), propX + propLabelW, doc.y - doc.currentLineHeight(), { width: propValW, align: "right" });
+  doc.moveTo(labelX, propY).lineTo(labelX + 220, propY).stroke("#cccccc");
+  propY += 4;
+  doc.font("Roboto-Bold").fontSize(12).fillColor(CRIMSON)
+    .text("TOTAL", labelX, propY, { width: 130 });
+  doc.text(formatCOP(total), valueX, propY, { width: 85, align: "right" });
+  propY += rowH + 8;
+  doc.y = propY;
 
-  doc.moveDown(1.5);
-  doc.fillColor("#000000");
-
-  // Notas opcionales (alineadas a la derecha, X=300)
+  // Indicaciones (alineadas a la derecha, X=labelX)
+  let indY = doc.y + 4;
   if (quote.paymentTerms) {
-    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("i. FORMA DE PAGO", 300, doc.y, { width: 215 });
-    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.paymentTerms}`, 300, doc.y, { width: 215 });
-    doc.moveDown(0.5);
+    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("i. FORMA DE PAGO", labelX, indY, { width: 215 });
+    indY += 14;
+    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.paymentTerms}`, labelX, indY, { width: 215 });
+    indY += 14;
   }
   if (quote.additionalNotes) {
-    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("ii. NOTAS ADICIONALES", 300, doc.y, { width: 215 });
-    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.additionalNotes}`, 300, doc.y, { width: 215 });
-    doc.moveDown(0.5);
+    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("ii. NOTAS ADICIONALES", labelX, indY, { width: 215 });
+    indY += 14;
+    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.additionalNotes}`, labelX, indY, { width: 215 });
+    indY += 14;
   }
   if (quote.observations) {
-    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("iii. OBSERVACIONES", 300, doc.y, { width: 215 });
-    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.observations}`, 300, doc.y, { width: 215 });
-    doc.moveDown(0.5);
+    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("iii. OBSERVACIONES", labelX, indY, { width: 215 });
+    indY += 14;
+    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.observations}`, labelX, indY, { width: 215 });
+    indY += 14;
   }
+  doc.y = indY + 8;
 
   // ── 6. CIERRE ─────────────────────────────────────────────────────────────
   doc.moveDown(1);
@@ -265,23 +274,19 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
     .text("M: +57 317 595 8405", 40, doc.y, { width: 300 })
     .text("E: gerencia@magikenter.com", 40, doc.y, { width: 300 });
 
-  console.log("doc.y antes del footer:", doc.y);
-  console.log("doc.page.height:", doc.page.height);
-
-  const footerY = doc.page.height - 60;
-  if (doc.y < footerY - 20) {
-    doc.font("Roboto-Bold")
-      .fontSize(12)
-      .fillColor(CRIMSON)
-      .text("WWW.MAGIKENTER.COM", 40, footerY - 20, { width: doc.page.width - 80, align: "center" });
-    doc.font("Roboto")
-      .fontSize(7)
-      .fillColor("#888888")
-      .text(
-        "Calle 8 A No. 23-22 B. Alameda - Cali, Colombia | PBX: +57 524 5813 +57 488 5251",
-        40, footerY, { width: doc.page.width - 80, align: "center" }
-      );
+  const spaceLeft = doc.page.height - doc.page.margins.bottom - doc.y;
+  const footerHeight = 35;
+  if (spaceLeft > footerHeight) {
+    doc.moveDown((spaceLeft - footerHeight) / 14);
   }
+  doc.font("Roboto-Bold").fontSize(11).fillColor(CRIMSON)
+    .text("WWW.MAGIKENTER.COM", 40, doc.y, { width: doc.page.width - 80, align: "center" });
+  doc.moveDown(0.4);
+  doc.font("Roboto").fontSize(7).fillColor("#888888")
+    .text(
+      "Calle 8 A No. 23-22 B. Alameda - Cali, Colombia | PBX: +57 524 5813 +57 488 5251",
+      40, doc.y, { width: doc.page.width - 80, align: "center" }
+    );
 
   doc.end();
   return bufferReady;
@@ -490,20 +495,19 @@ export async function buildOrderPdf(order: ServiceOrder, event: MagikEvent): Pro
   doc.font("Roboto").fontSize(9).fillColor("#888888")
     .text("FIRMA PROVEEDOR", 300, gy + 72, { width: 160 });
 
-  const orderFooterY = doc.page.height - 60;
-  if (doc.y < orderFooterY - 20) {
-    doc.font("Roboto-Bold")
-      .fontSize(12)
-      .fillColor(CRIMSON)
-      .text("WWW.MAGIKENTER.COM", 40, orderFooterY - 20, { width: doc.page.width - 80, align: "center" });
-    doc.font("Roboto")
-      .fontSize(7)
-      .fillColor("#888888")
-      .text(
-        "Calle 8 A No. 23-22 B. Alameda - Cali, Colombia | PBX: +57 524 5813 +57 488 5251",
-        40, orderFooterY, { width: doc.page.width - 80, align: "center" }
-      );
+  const orderSpaceLeft = doc.page.height - doc.page.margins.bottom - doc.y;
+  const orderFooterHeight = 35;
+  if (orderSpaceLeft > orderFooterHeight) {
+    doc.moveDown((orderSpaceLeft - orderFooterHeight) / 14);
   }
+  doc.font("Roboto-Bold").fontSize(11).fillColor(CRIMSON)
+    .text("WWW.MAGIKENTER.COM", 40, doc.y, { width: doc.page.width - 80, align: "center" });
+  doc.moveDown(0.4);
+  doc.font("Roboto").fontSize(7).fillColor("#888888")
+    .text(
+      "Calle 8 A No. 23-22 B. Alameda - Cali, Colombia | PBX: +57 524 5813 +57 488 5251",
+      40, doc.y, { width: doc.page.width - 80, align: "center" }
+    );
 
   doc.end();
   return bufferReady;
