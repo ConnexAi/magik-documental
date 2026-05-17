@@ -25,7 +25,7 @@ async function svgToPng(svgBase64: string, width: number): Promise<Buffer> {
 function makePrinter(): any {
   return new PDFDocument({
     size: "A4",
-    margins: { top: 40, bottom: 60, left: 40, right: 40 },
+    margins: { top: 40, bottom: 80, left: 40, right: 40 },
     bufferPages: true,
   });
 }
@@ -56,14 +56,14 @@ function drawFooter(doc: any) {
       .font("Roboto-Bold")
       .fontSize(14)
       .fillColor(CRIMSON)
-      .text("WWW.MAGIKENTER.COM", 40, 780, { width: PAGE_WIDTH, align: "center" });
+      .text("WWW.MAGIKENTER.COM", 40, 755, { width: PAGE_WIDTH, align: "center" });
     doc
       .font("Roboto")
       .fontSize(8)
       .fillColor("#888888")
       .text(
         "Calle 8 A No. 23-22 B. Alameda - Cali, Colombia | PBX: +57 524 5813 +57 488 5251",
-        40, 800, { width: PAGE_WIDTH, align: "center" }
+        40, 772, { width: PAGE_WIDTH, align: "center" }
       );
   }
 }
@@ -268,20 +268,21 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
 
   // ── 6. CIERRE ─────────────────────────────────────────────────────────────
   doc.moveDown(1);
-  doc.font("Roboto").fontSize(10).text("Esperando su pronta respuesta,");
+  doc.font("Roboto").fontSize(9).fillColor("#000000")
+    .text("Esperando su pronta respuesta,", 40);
   doc.moveDown(1);
-  const firmaY = doc.y;
-  doc.image(firmaPng, 40, firmaY, { width: 100 });
-  doc.y = firmaY + 55;
-  doc.moveTo(40, doc.y).lineTo(240, doc.y).stroke("#888888");
-  doc.moveDown(0.3);
-  doc.font("Roboto-Bold").fontSize(10).fillColor("#000000").text("JUAN CARLOS LONDOÑO H.");
+  doc.image(firmaPng, 40, doc.y, { width: 100 });
+  doc.moveDown(3.5);
+  doc.moveTo(40, doc.y).lineTo(240, doc.y).stroke("#333333");
+  doc.moveDown(0.4);
+  doc.font("Roboto-Bold").fontSize(9).fillColor("#000000")
+    .text("JUAN CARLOS LONDOÑO H.", 40, doc.y, { width: 300 });
   doc.font("Roboto").fontSize(9).fillColor("#555555")
-    .text("CEO & Founder")
-    .text("TTS GROUP S.A.S")
-    .text("NIT: 901.768.072")
-    .text("M: +57 317 595 8405")
-    .text("E: gerencia@magikenter.com");
+    .text("CEO & Founder", 40, doc.y, { width: 300 })
+    .text("TTS GROUP S.A.S", 40, doc.y, { width: 300 })
+    .text("NIT: 901.768.072", 40, doc.y, { width: 300 })
+    .text("M: +57 317 595 8405", 40, doc.y, { width: 300 })
+    .text("E: gerencia@magikenter.com", 40, doc.y, { width: 300 });
 
   drawFooter(doc);
   doc.end();
@@ -481,13 +482,15 @@ export async function buildOrderPdf(order: ServiceOrder, event: MagikEvent): Pro
 
   // ── 7. CIERRE ─────────────────────────────────────────────────────────────
   doc.image(firmaPng, 40, gy, { width: 100 });
-  doc.moveTo(40, gy + 68).lineTo(200, gy + 68).stroke("#888888");
-  doc.moveTo(300, gy + 68).lineTo(460, gy + 68).stroke("#888888");
+  doc.moveTo(40, gy + 68).lineTo(200, gy + 68).stroke("#333333");
+  doc.moveTo(300, gy + 68).lineTo(460, gy + 68).stroke("#333333");
   doc.font("Roboto-Bold").fontSize(9).fillColor("#000000")
-    .text("JUAN CARLOS LONDOÑO HURTADO", 40, gy + 72);
-  doc.font("Roboto").text("CEO & Founder").text("TTS GROUP S.A.S");
+    .text("JUAN CARLOS LONDOÑO HURTADO", 40, gy + 72, { width: 250 });
+  doc.font("Roboto").fontSize(9).fillColor("#555555")
+    .text("CEO & Founder", 40, doc.y, { width: 250 })
+    .text("TTS GROUP S.A.S", 40, doc.y, { width: 250 });
   doc.font("Roboto").fontSize(9).fillColor("#888888")
-    .text("FIRMA PROVEEDOR", 300, gy + 72);
+    .text("FIRMA PROVEEDOR", 300, gy + 72, { width: 160 });
 
   drawFooter(doc);
   doc.end();
