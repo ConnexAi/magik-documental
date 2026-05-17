@@ -1,3 +1,6 @@
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 import { NextRequest, NextResponse } from "next/server";
 import { getQuote, getEvent } from "@/lib/firestore";
 import { buildQuoteXlsx } from "@/lib/xlsx";
