@@ -25,7 +25,7 @@ async function svgToPng(svgBase64: string, width: number): Promise<Buffer> {
 function makePrinter(): any {
   return new PDFDocument({
     size: "A4",
-    margins: { top: 40, bottom: 80, left: 40, right: 40 },
+    margins: { top: 40, bottom: 70, left: 40, right: 40 },
     bufferPages: true,
   });
 }
@@ -48,22 +48,30 @@ function registerFonts(doc: any) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function drawFooter(doc: any) {
   const range = doc.bufferedPageRange();
   for (let i = 0; i < range.count; i++) {
     doc.switchToPage(range.start + i);
     doc
       .font("Roboto-Bold")
-      .fontSize(14)
+      .fontSize(12)
       .fillColor(CRIMSON)
-      .text("WWW.MAGIKENTER.COM", 40, 755, { width: PAGE_WIDTH, align: "center" });
+      .text(
+        "WWW.MAGIKENTER.COM",
+        40,
+        doc.page.height - 60,
+        { width: doc.page.width - 80, align: "center" }
+      );
     doc
       .font("Roboto")
-      .fontSize(8)
+      .fontSize(7)
       .fillColor("#888888")
       .text(
         "Calle 8 A No. 23-22 B. Alameda - Cali, Colombia | PBX: +57 524 5813 +57 488 5251",
-        40, 772, { width: PAGE_WIDTH, align: "center" }
+        40,
+        doc.page.height - 44,
+        { width: doc.page.width - 80, align: "center" }
       );
   }
 }
