@@ -48,33 +48,6 @@ function registerFonts(doc: any) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function drawFooter(doc: any) {
-  const range = doc.bufferedPageRange();
-  for (let i = 0; i < range.count; i++) {
-    doc.switchToPage(range.start + i);
-    doc
-      .font("Roboto-Bold")
-      .fontSize(12)
-      .fillColor(CRIMSON)
-      .text(
-        "WWW.MAGIKENTER.COM",
-        40,
-        doc.page.height - 60,
-        { width: doc.page.width - 80, align: "center" }
-      );
-    doc
-      .font("Roboto")
-      .fontSize(7)
-      .fillColor("#888888")
-      .text(
-        "Calle 8 A No. 23-22 B. Alameda - Cali, Colombia | PBX: +57 524 5813 +57 488 5251",
-        40,
-        doc.page.height - 44,
-        { width: doc.page.width - 80, align: "center" }
-      );
-  }
-}
 
 export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Buffer> {
   const logoPng = await svgToPng(MAGIK_LOGO_SVG_BASE64, 300);
@@ -257,20 +230,20 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
   doc.moveDown(1.5);
   doc.fillColor("#000000");
 
-  // Notas opcionales
+  // Notas opcionales (alineadas a la derecha, X=300)
   if (quote.paymentTerms) {
-    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("i. FORMA DE PAGO");
-    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.paymentTerms}`);
+    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("i. FORMA DE PAGO", 300, doc.y, { width: 215 });
+    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.paymentTerms}`, 300, doc.y, { width: 215 });
     doc.moveDown(0.5);
   }
   if (quote.additionalNotes) {
-    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("ii. NOTAS ADICIONALES");
-    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.additionalNotes}`);
+    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("ii. NOTAS ADICIONALES", 300, doc.y, { width: 215 });
+    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.additionalNotes}`, 300, doc.y, { width: 215 });
     doc.moveDown(0.5);
   }
   if (quote.observations) {
-    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("iii. OBSERVACIONES");
-    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.observations}`);
+    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("iii. OBSERVACIONES", 300, doc.y, { width: 215 });
+    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.observations}`, 300, doc.y, { width: 215 });
     doc.moveDown(0.5);
   }
 
@@ -294,9 +267,22 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
 
   console.log("doc.y antes del footer:", doc.y);
   console.log("doc.page.height:", doc.page.height);
-  console.log("paginas totales:", doc.bufferedPageRange().count);
 
-  drawFooter(doc);
+  const footerY = doc.page.height - 60;
+  if (doc.y < footerY - 20) {
+    doc.font("Roboto-Bold")
+      .fontSize(12)
+      .fillColor(CRIMSON)
+      .text("WWW.MAGIKENTER.COM", 40, footerY - 20, { width: doc.page.width - 80, align: "center" });
+    doc.font("Roboto")
+      .fontSize(7)
+      .fillColor("#888888")
+      .text(
+        "Calle 8 A No. 23-22 B. Alameda - Cali, Colombia | PBX: +57 524 5813 +57 488 5251",
+        40, footerY, { width: doc.page.width - 80, align: "center" }
+      );
+  }
+
   doc.end();
   return bufferReady;
 }
@@ -504,7 +490,21 @@ export async function buildOrderPdf(order: ServiceOrder, event: MagikEvent): Pro
   doc.font("Roboto").fontSize(9).fillColor("#888888")
     .text("FIRMA PROVEEDOR", 300, gy + 72, { width: 160 });
 
-  drawFooter(doc);
+  const orderFooterY = doc.page.height - 60;
+  if (doc.y < orderFooterY - 20) {
+    doc.font("Roboto-Bold")
+      .fontSize(12)
+      .fillColor(CRIMSON)
+      .text("WWW.MAGIKENTER.COM", 40, orderFooterY - 20, { width: doc.page.width - 80, align: "center" });
+    doc.font("Roboto")
+      .fontSize(7)
+      .fillColor("#888888")
+      .text(
+        "Calle 8 A No. 23-22 B. Alameda - Cali, Colombia | PBX: +57 524 5813 +57 488 5251",
+        40, orderFooterY, { width: doc.page.width - 80, align: "center" }
+      );
+  }
+
   doc.end();
   return bufferReady;
 }
