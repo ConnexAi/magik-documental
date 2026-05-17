@@ -25,7 +25,7 @@ async function svgToPng(svgBase64: string, width: number): Promise<Buffer> {
 function makePrinter(): any {
   return new PDFDocument({
     size: "A4",
-    margins: { top: 40, bottom: 70, left: 40, right: 40 },
+    margins: { top: 40, bottom: 100, left: 40, right: 40 },
     bufferPages: true,
   });
 }
@@ -291,6 +291,10 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
     .text("NIT: 901.768.072", 40, doc.y, { width: 300 })
     .text("M: +57 317 595 8405", 40, doc.y, { width: 300 })
     .text("E: gerencia@magikenter.com", 40, doc.y, { width: 300 });
+
+  console.log("doc.y antes del footer:", doc.y);
+  console.log("doc.page.height:", doc.page.height);
+  console.log("paginas totales:", doc.bufferedPageRange().count);
 
   drawFooter(doc);
   doc.end();
