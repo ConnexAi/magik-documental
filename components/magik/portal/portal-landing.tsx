@@ -170,7 +170,7 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
             {/* 1. Logo */}
             <div className={hel} style={{ ...hc(0) }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/logo_magik.svg" alt="MAGIK" style={{ height: "36px", width: "auto", display: "block", marginBottom: "24px" }} />
+              <img src="/assets/logo_magik.svg" alt="MAGIK" style={{ height: "42px", width: "auto", display: "block", marginBottom: "24px" }} />
             </div>
 
             {/* 2. Label pill */}
