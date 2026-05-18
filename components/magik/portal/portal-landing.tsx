@@ -3,12 +3,12 @@
 import { useState, useEffect, useRef, Fragment, type CSSProperties } from "react";
 import {
   ChevronDown,
-  Volume2,
+  Zap,
   Lightbulb,
   Monitor,
   Video,
-  Layers,
-  Zap,
+  Music,
+  Star,
   Phone,
   Mail,
   Globe,
@@ -63,11 +63,11 @@ function StatCounter({ value, label }: { value: string; label: string }) {
   const suffix = match ? match[2] : "";
   const count = useCounter(target, inView);
   return (
-    <div ref={ref} style={{ textAlign: "center", padding: "0 48px" }}>
-      <p style={{ fontSize: 48, fontWeight: 700, color: "#D4004E", margin: "0 0 8px", letterSpacing: "-0.02em", lineHeight: 1 }}>
+    <div ref={ref} style={{ textAlign: "center", padding: "0 56px" }}>
+      <p style={{ fontSize: 56, fontWeight: 800, color: "#D4004E", margin: "0 0 6px", letterSpacing: "-0.03em", lineHeight: 1 }}>
         {count}{suffix}
       </p>
-      <p style={{ fontSize: 13, color: "#6B6875", margin: 0 }}>{label}</p>
+      <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", margin: 0 }}>{label}</p>
     </div>
   );
 }
@@ -75,18 +75,18 @@ function StatCounter({ value, label }: { value: string; label: string }) {
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const SERVICES = [
-  { Icon: Volume2,  title: "Audio" },
-  { Icon: Lightbulb, title: "Iluminación" },
-  { Icon: Monitor,  title: "Pantallas LED" },
-  { Icon: Video,    title: "Video" },
-  { Icon: Layers,   title: "Tarimas" },
-  { Icon: Zap,      title: "Producción Integral" },
+  { Icon: Zap,       title: "Audio Profesional",    desc: "Sistemas d&b, Midas y Shure para cualquier escala." },
+  { Icon: Lightbulb, title: "Iluminacion",          desc: "Moving Heads, LED y control DMX de ultima generacion." },
+  { Icon: Monitor,   title: "Pantallas LED",         desc: "Modulos de interior y exterior para cualquier formato." },
+  { Icon: Video,     title: "Video y Medios",        desc: "Servidores Resolume, procesadores RGB Link y retornos." },
+  { Icon: Music,     title: "Tarimas y Estructuras", desc: "Modulares, truss y sistemas de rigging profesional." },
+  { Icon: Star,      title: "Produccion Integral",   desc: "Coordinacion tecnica completa de montaje a desmontaje." },
 ];
 
 const STATS = [
   { value: "10+",  label: "Años de experiencia" },
   { value: "500+", label: "Eventos realizados" },
-  { value: "2",    label: "Líneas de servicio" },
+  { value: "2",    label: "Lineas de servicio" },
 ];
 
 // ─── CSS ──────────────────────────────────────────────────────────────────────
@@ -101,25 +101,29 @@ const CSS = `
   .aos{opacity:0;transform:translateY(20px);transition:opacity 500ms ease,transform 500ms ease;}
   .aos.vis{opacity:1;transform:translateY(0);}
   .portal-wrap{max-width:1200px;margin:0 auto;padding:0 80px;}
+  .label-pill{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#D4004E;border:1px solid rgba(212,0,78,0.35);border-radius:9999px;padding:5px 14px;display:inline-block;}
   .hero-btn{padding:14px 28px;border-radius:9999px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;letter-spacing:0.01em;text-decoration:none;display:inline-flex;align-items:center;transition:opacity 200ms,background 200ms,border-color 200ms;}
   .hero-btn-primary{background:#F0EFF2;color:#0A0A0B;border:none;}
   .hero-btn-primary:hover{opacity:0.88;}
   .hero-btn-ghost{background:transparent;color:#F0EFF2;border:1px solid rgba(255,255,255,0.45);}
   .hero-btn-ghost:hover{border-color:rgba(255,255,255,0.9);background:rgba(255,255,255,0.05);}
-  .svc-row{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;}
-  .svc-row::-webkit-scrollbar{display:none;}
-  .svc-item{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;min-width:140px;padding:32px 16px;}
-  .svc-div{width:1px;background:rgba(255,255,255,0.1);align-self:center;height:20px;flex-shrink:0;}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .svc-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;transition:border-color 200ms ease,background 200ms ease;}
+  .svc-card:hover{border-color:rgba(212,0,78,0.3);background:rgba(212,0,78,0.04);}
   .stats-row{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;}
-  .stat-div{width:1px;height:60px;background:rgba(255,255,255,0.08);}
-  .contact-link{display:flex;align-items:center;gap:16px;padding:20px 0;text-decoration:none;color:#F0EFF2;font-size:14px;transition:color 150ms;}
+  .stat-div{width:1px;height:48px;background:rgba(255,255,255,0.08);}
+  .contact-link{display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 0;text-decoration:none;color:#F0EFF2;font-size:15px;transition:color 200ms;}
   .contact-link:hover{color:#D4004E;}
-  .contact-sep{height:1px;background:rgba(255,255,255,0.06);}
+  .contact-sep{height:1px;background:rgba(255,255,255,0.08);}
+  .cta-pill{color:#F0EFF2;border:none;padding:12px 32px;border-radius:9999px;background:#D4004E;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;transition:opacity 200ms;text-decoration:none;display:inline-block;letter-spacing:0.01em;}
+  .cta-pill:hover{opacity:0.88;}
   .chevron-bounce{position:absolute;bottom:36px;left:50%;animation:bounceScroll 1.8s ease-in-out infinite;color:rgba(255,255,255,0.22);}
+  @media(max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:768px){
     .portal-wrap{padding:0 24px;}
+    .svc-grid{grid-template-columns:1fr;}
     .stat-div{display:none;}
-    .stats-row{gap:32px;}
+    .stats-row{gap:40px;}
   }
 `;
 
@@ -127,9 +131,9 @@ const CSS = `
 
 export function PortalLanding({ items }: { items: PortfolioItem[] }) {
   const [heroVis, setHeroVis] = useState(false);
-  const [svcRef, svcInView]       = useInView();
-  const [statsRef, statsInView]   = useInView();
-  const [ctaRef, ctaInView]       = useInView();
+  const [svcRef,   svcInView]   = useInView();
+  const [statsRef, statsInView] = useInView();
+  const [ctaRef,   ctaInView]   = useInView();
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setHeroVis(true));
@@ -163,25 +167,19 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
         <div className="portal-wrap" style={{ width: "100%" }}>
           <div style={{ maxWidth: 520 }}>
 
-            {/* Label pill */}
+            {/* 1. Logo */}
             <div className={hel} style={{ ...hc(0), marginBottom: 32 }}>
-              <span style={{
-                fontSize: 10,
-                fontWeight: 500,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "#D4004E",
-                border: "1px solid rgba(212,0,78,0.35)",
-                borderRadius: 9999,
-                padding: "5px 14px",
-                display: "inline-block",
-              }}>
-                Produccion Tecnica de Eventos
-              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/assets/logo_magik.svg" alt="MAGIK" height={48} style={{ display: "block", width: "auto" }} />
             </div>
 
-            {/* Title */}
-            <h1 className={hel} style={{ ...hc(80), margin: "0 0 24px", lineHeight: 1.08, letterSpacing: "-0.02em" }}>
+            {/* 2. Label pill */}
+            <div className={hel} style={{ ...hc(80), marginBottom: 32 }}>
+              <span className="label-pill">Produccion Tecnica de Eventos</span>
+            </div>
+
+            {/* 3. Titulo */}
+            <h1 className={hel} style={{ ...hc(160), margin: "0 0 24px", lineHeight: 1.08, letterSpacing: "-0.02em" }}>
               <span style={{ display: "block", fontSize: "clamp(36px,5.5vw,64px)", fontWeight: 800, color: "#F0EFF2" }}>
                 Tu Sueñas,
               </span>
@@ -190,14 +188,14 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
               </span>
             </h1>
 
-            {/* Description */}
-            <p className={hel} style={{ ...hc(160), fontSize: 15, color: "#6B6875", margin: "0 0 40px", maxWidth: 380, lineHeight: 1.65 }}>
+            {/* 4. Descripcion */}
+            <p className={hel} style={{ ...hc(240), fontSize: 15, color: "#6B6875", margin: "0 0 40px", maxWidth: 380, lineHeight: 1.65 }}>
               Produccion tecnica de alta calidad para eventos corporativos,
               conciertos y producciones especiales en Colombia.
             </p>
 
-            {/* Buttons */}
-            <div className={hel} style={{ ...hc(240), display: "flex", gap: 12, flexWrap: "wrap" }}>
+            {/* 5. Botones */}
+            <div className={hel} style={{ ...hc(320), display: "flex", gap: 12, flexWrap: "wrap" }}>
               <button
                 className="hero-btn hero-btn-primary"
                 onClick={() => document.getElementById("portafolio")?.scrollIntoView({ behavior: "smooth" })}
@@ -225,30 +223,49 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
       </section>
 
       {/* ── SERVICIOS ─────────────────────────────────────────────────────── */}
-      <section style={{ background: "#111113", borderTop: "0.5px solid rgba(255,255,255,0.06)", borderBottom: "0.5px solid rgba(255,255,255,0.06)" }}>
-        <div ref={svcRef} className="portal-wrap">
-          <div className={`svc-row ${aos(svcInView)}`}>
-            {SERVICES.map((svc, i) => {
-              const { Icon } = svc;
-              return (
-                <Fragment key={svc.title}>
-                  {i > 0 && <div className="svc-div" />}
-                  <div className="svc-item">
-                    <Icon size={20} color="#D4004E" />
-                    <span style={{ fontSize: 13, fontWeight: 500, color: "#F0EFF2", textAlign: "center", whiteSpace: "nowrap" }}>
-                      {svc.title}
-                    </span>
-                  </div>
-                </Fragment>
-              );
-            })}
+      <section style={{ background: "#111113", padding: "100px 0" }}>
+        <div ref={svcRef} style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+
+          <div className={aos(svcInView)} style={{ textAlign: "center", marginBottom: 56 }}>
+            <span className="label-pill" style={{ marginBottom: 20, display: "inline-block" }}>
+              Lo que hacemos
+            </span>
+            <h2 style={{ fontSize: 36, fontWeight: 700, color: "#F0EFF2", margin: "0 0 12px", letterSpacing: "-0.02em" }}>
+              Produccion tecnica de alto nivel
+            </h2>
+            <p style={{ fontSize: 15, color: "rgba(255,255,255,0.4)", margin: "0 auto", maxWidth: 500, lineHeight: 1.65 }}>
+              Cada evento es unico. Trabajamos con los mejores equipos para garantizar resultados impecables.
+            </p>
           </div>
+
+          <div className={`svc-grid ${aos(svcInView)}`} style={{ transitionDelay: "100ms" }}>
+            {SERVICES.map(({ Icon, title, desc }) => (
+              <div key={title} className="svc-card">
+                <div style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: "50%",
+                  background: "rgba(212,0,78,0.1)",
+                  border: "1px solid rgba(212,0,78,0.2)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}>
+                  <Icon size={18} color="#D4004E" />
+                </div>
+                <p style={{ fontSize: 15, fontWeight: 600, color: "#F0EFF2", margin: "16px 0 8px" }}>{title}</p>
+                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", margin: 0, lineHeight: 1.6 }}>{desc}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
       {/* ── STATS ─────────────────────────────────────────────────────────── */}
-      <section style={{ background: "#0A0A0B", padding: "60px 0" }}>
-        <div ref={statsRef} className="portal-wrap">
+      <section style={{ background: "#0A0A0B", padding: "80px 0" }}>
+        <div ref={statsRef} style={{ maxWidth: 800, margin: "0 auto", padding: "0 24px" }}>
           <div className={`stats-row ${aos(statsInView)}`}>
             {STATS.map((stat, i) => (
               <Fragment key={stat.label}>
@@ -261,32 +278,61 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
       </section>
 
       {/* ── CONTACTO ──────────────────────────────────────────────────────── */}
-      <section style={{ background: "#0A0A0B", padding: "60px 0", borderTop: "0.5px solid rgba(255,255,255,0.06)" }}>
+      <section style={{ background: "#111113", padding: "100px 0" }}>
         <div ref={ctaRef} className="portal-wrap">
-          <div className={aos(ctaInView)} style={{ maxWidth: 600, margin: "0 auto" }}>
-            <a href="tel:+573175958405" className="contact-link">
-              <Phone size={16} color="#D4004E" style={{ flexShrink: 0 }} />
-              +57 317 595 8405
-            </a>
-            <div className="contact-sep" />
-            <a href="mailto:gerencia@magikenter.com" className="contact-link">
-              <Mail size={16} color="#D4004E" style={{ flexShrink: 0 }} />
-              gerencia@magikenter.com
-            </a>
-            <div className="contact-sep" />
-            <a href="https://www.magikenter.com" target="_blank" rel="noopener noreferrer" className="contact-link">
-              <Globe size={16} color="#D4004E" style={{ flexShrink: 0 }} />
-              WWW.MAGIKENTER.COM
-            </a>
+          <div className={aos(ctaInView)} style={{ maxWidth: 600, margin: "0 auto", textAlign: "center" }}>
+
+            <h2 style={{ fontSize: 40, fontWeight: 700, color: "#F0EFF2", margin: "0 0 12px", letterSpacing: "-0.02em" }}>
+              Hablemos
+            </h2>
+            <p style={{ fontSize: 15, color: "rgba(255,255,255,0.4)", margin: "0 0 48px", lineHeight: 1.65 }}>
+              Cuentanos sobre tu proyecto y hagamos algo increible.
+            </p>
+
+            <div style={{ marginBottom: 56 }}>
+              <a href="tel:+573175958405" className="contact-link">
+                <Phone size={16} color="#D4004E" style={{ flexShrink: 0 }} />
+                +57 317 595 8405
+              </a>
+              <div className="contact-sep" />
+              <a href="mailto:gerencia@magikenter.com" className="contact-link">
+                <Mail size={16} color="#D4004E" style={{ flexShrink: 0 }} />
+                gerencia@magikenter.com
+              </a>
+              <div className="contact-sep" />
+              <a href="https://www.magikenter.com" target="_blank" rel="noopener noreferrer" className="contact-link">
+                <Globe size={16} color="#D4004E" style={{ flexShrink: 0 }} />
+                WWW.MAGIKENTER.COM
+              </a>
+            </div>
+
+            <div style={{
+              background: "rgba(212,0,78,0.06)",
+              border: "1px solid rgba(212,0,78,0.15)",
+              borderRadius: 16,
+              padding: 40,
+            }}>
+              <p style={{ fontSize: 18, fontWeight: 600, color: "#F0EFF2", margin: "0 0 8px" }}>
+                Sistema de gestion interno
+              </p>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", margin: "0 0 24px" }}>
+                Acceso exclusivo para el equipo MAGIK
+              </p>
+              <a href="/login" className="cta-pill">
+                Iniciar sesion
+              </a>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* ── FOOTER ────────────────────────────────────────────────────────── */}
-      <footer style={{ borderTop: "0.5px solid rgba(255,255,255,0.06)", padding: "32px 24px", textAlign: "center" }}>
-        <p style={{ fontSize: 11, color: "#6B6875", letterSpacing: "0.06em", margin: 0 }}>
-          © 2026 MAGIK Producciones · Cali, Colombia
-        </p>
+      <footer style={{ background: "#0A0A0B", borderTop: "0.5px solid rgba(255,255,255,0.08)", padding: "32px 0" }}>
+        <div className="portal-wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ fontSize: 13, fontWeight: 500, color: "#F0EFF2" }}>MAGIK Producciones</span>
+          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.3)" }}>© 2026 · Cali, Colombia</span>
+        </div>
       </footer>
     </div>
   );
