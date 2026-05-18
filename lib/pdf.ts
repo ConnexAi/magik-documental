@@ -198,73 +198,80 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
   const iva = quote.hasIva ? Math.round(subtotalDesc * 0.19) : 0;
   const total = subtotalDesc + iva;
 
-  const labelX = 295;
-  const valueX = 430;
-  const rowH = 16;
-  let propY = doc.y + 8;
+  const afterTableY = doc.y + 16;
+  const colX = 310;
+  const valX = 455;
+  const colW = 100;
+  const valW = 80;
+  const rowH = 18;
+  let rowY = afterTableY;
 
-  doc.font("Roboto-Bold").fontSize(9).fillColor("#000000")
-    .text("Sub-Total", labelX, propY, { width: 130, lineBreak: false });
-  doc.font("Roboto-Bold").fontSize(9).fillColor("#000000")
-    .text(formatCOP(subtotal), valueX, propY, { width: 85, align: "right", lineBreak: false });
-  propY += rowH;
+  const drawRow = (
+    label: string,
+    value: string,
+    labelColor: string,
+    valueColor: string,
+    fontSize: number,
+    bold: boolean
+  ) => {
+    doc
+      .font(bold ? "Roboto-Bold" : "Roboto")
+      .fontSize(fontSize)
+      .fillColor(labelColor)
+      .text(label, colX, rowY, { width: colW, lineBreak: false });
+    doc
+      .font(bold ? "Roboto-Bold" : "Roboto")
+      .fontSize(fontSize)
+      .fillColor(valueColor)
+      .text(value, valX, rowY, { width: valW, align: "right", lineBreak: false });
+    rowY += rowH;
+  };
+
+  drawRow("Sub-Total", formatCOP(subtotal), "#000000", "#000000", 9, true);
 
   if (descuento > 0) {
-    doc.font("Roboto").fontSize(9).fillColor(CRIMSON)
-      .text("Descuento Comercial", labelX, propY, { width: 130, lineBreak: false });
-    doc.font("Roboto").fontSize(9).fillColor(CRIMSON)
-      .text(`- ${formatCOP(descuento)}`, valueX, propY, { width: 85, align: "right", lineBreak: false });
-    propY += rowH;
-    doc.font("Roboto-Bold").fontSize(9).fillColor("#000000")
-      .text("Sub-Total c/Descuento", labelX, propY, { width: 130, lineBreak: false });
-    doc.font("Roboto-Bold").fontSize(9).fillColor("#000000")
-      .text(formatCOP(subtotalDesc), valueX, propY, { width: 85, align: "right", lineBreak: false });
-    propY += rowH;
+    drawRow("Descuento Comercial", `- ${formatCOP(descuento)}`, CRIMSON, CRIMSON, 9, false);
+    drawRow("Sub-Total c/Descuento", formatCOP(subtotalDesc), "#000000", "#000000", 9, true);
   }
 
   if (quote.hasIva) {
-    doc.font("Roboto").fontSize(9).fillColor(CRIMSON)
-      .text("IVA (19%)", labelX, propY, { width: 130, lineBreak: false });
-    doc.font("Roboto").fontSize(9).fillColor(CRIMSON)
-      .text(formatCOP(iva), valueX, propY, { width: 85, align: "right", lineBreak: false });
-    propY += rowH;
+    drawRow("IVA | 19%", formatCOP(iva), CRIMSON, CRIMSON, 9, false);
   }
 
-  doc.moveTo(labelX, propY).lineTo(labelX + 220, propY).stroke("#cccccc");
-  propY += 4;
-  doc.font("Roboto-Bold").fontSize(12).fillColor(CRIMSON)
-    .text("TOTAL", labelX, propY, { width: 130, lineBreak: false });
-  doc.font("Roboto-Bold").fontSize(12).fillColor(CRIMSON)
-    .text(formatCOP(total), valueX, propY, { width: 85, align: "right", lineBreak: false });
-  propY += rowH + 8;
+  doc.font("Roboto-Bold").fontSize(13).fillColor(CRIMSON)
+    .text("TOTAL", colX, rowY, { width: colW, lineBreak: false });
+  doc.font("Roboto-Bold").fontSize(13).fillColor(CRIMSON)
+    .text(formatCOP(total), valX, rowY, { width: valW, align: "right", lineBreak: false });
+  rowY += 24;
 
-  // Indicaciones (alineadas a la derecha, X=labelX)
-  let indY = propY + 4;
   if (quote.paymentTerms) {
     doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON)
-      .text("i. FORMA DE PAGO", labelX, indY, { width: 215, lineBreak: false });
-    indY += 14;
+      .text("i. FORMA DE PAGO", colX, rowY, { width: 220, lineBreak: false });
+    rowY += 14;
     doc.font("Roboto").fontSize(9).fillColor("#000000")
-      .text(`- ${quote.paymentTerms}`, labelX, indY, { width: 215, lineBreak: false });
-    indY += 14;
+      .text(`- ${quote.paymentTerms}`, colX, rowY, { width: 220 });
+    rowY = doc.y + 6;
   }
+
   if (quote.additionalNotes) {
     doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON)
-      .text("ii. NOTAS ADICIONALES", labelX, indY, { width: 215, lineBreak: false });
-    indY += 14;
+      .text("ii. NOTAS ADICIONALES", colX, rowY, { width: 220, lineBreak: false });
+    rowY += 14;
     doc.font("Roboto").fontSize(9).fillColor("#000000")
-      .text(`- ${quote.additionalNotes}`, labelX, indY, { width: 215, lineBreak: false });
-    indY += 14;
+      .text(`- ${quote.additionalNotes}`, colX, rowY, { width: 220 });
+    rowY = doc.y + 6;
   }
+
   if (quote.observations) {
     doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON)
-      .text("iii. OBSERVACIONES", labelX, indY, { width: 215, lineBreak: false });
-    indY += 14;
+      .text("iii. OBSERVACIONES", colX, rowY, { width: 220, lineBreak: false });
+    rowY += 14;
     doc.font("Roboto").fontSize(9).fillColor("#000000")
-      .text(`- ${quote.observations}`, labelX, indY, { width: 215, lineBreak: false });
-    indY += 14;
+      .text(`- ${quote.observations}`, colX, rowY, { width: 220 });
+    rowY = doc.y + 6;
   }
-  doc.y = indY + 8;
+
+  doc.y = Math.max(rowY, doc.y) + 16;
 
   // ── 6. CIERRE ─────────────────────────────────────────────────────────────
   doc.moveDown(1);
