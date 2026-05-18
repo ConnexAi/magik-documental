@@ -204,54 +204,64 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
   let propY = doc.y + 8;
 
   doc.font("Roboto-Bold").fontSize(9).fillColor("#000000")
-    .text("Sub-Total", labelX, propY, { width: 130 });
-  doc.text(formatCOP(subtotal), valueX, propY, { width: 85, align: "right" });
+    .text("Sub-Total", labelX, propY, { width: 130, lineBreak: false });
+  doc.font("Roboto-Bold").fontSize(9).fillColor("#000000")
+    .text(formatCOP(subtotal), valueX, propY, { width: 85, align: "right", lineBreak: false });
   propY += rowH;
 
   if (descuento > 0) {
-    doc.font("Roboto").fillColor(CRIMSON)
-      .text("Descuento Comercial", labelX, propY, { width: 130 });
-    doc.text(`- ${formatCOP(descuento)}`, valueX, propY, { width: 85, align: "right" });
+    doc.font("Roboto").fontSize(9).fillColor(CRIMSON)
+      .text("Descuento Comercial", labelX, propY, { width: 130, lineBreak: false });
+    doc.font("Roboto").fontSize(9).fillColor(CRIMSON)
+      .text(`- ${formatCOP(descuento)}`, valueX, propY, { width: 85, align: "right", lineBreak: false });
     propY += rowH;
-    doc.font("Roboto-Bold").fillColor("#000000")
-      .text("Sub-Total c/Descuento", labelX, propY, { width: 130 });
-    doc.text(formatCOP(subtotalDesc), valueX, propY, { width: 85, align: "right" });
+    doc.font("Roboto-Bold").fontSize(9).fillColor("#000000")
+      .text("Sub-Total c/Descuento", labelX, propY, { width: 130, lineBreak: false });
+    doc.font("Roboto-Bold").fontSize(9).fillColor("#000000")
+      .text(formatCOP(subtotalDesc), valueX, propY, { width: 85, align: "right", lineBreak: false });
     propY += rowH;
   }
 
   if (quote.hasIva) {
-    doc.font("Roboto").fillColor(CRIMSON)
-      .text("IVA (19%)", labelX, propY, { width: 130 });
-    doc.text(formatCOP(iva), valueX, propY, { width: 85, align: "right" });
+    doc.font("Roboto").fontSize(9).fillColor(CRIMSON)
+      .text("IVA (19%)", labelX, propY, { width: 130, lineBreak: false });
+    doc.font("Roboto").fontSize(9).fillColor(CRIMSON)
+      .text(formatCOP(iva), valueX, propY, { width: 85, align: "right", lineBreak: false });
     propY += rowH;
   }
 
   doc.moveTo(labelX, propY).lineTo(labelX + 220, propY).stroke("#cccccc");
   propY += 4;
   doc.font("Roboto-Bold").fontSize(12).fillColor(CRIMSON)
-    .text("TOTAL", labelX, propY, { width: 130 });
-  doc.text(formatCOP(total), valueX, propY, { width: 85, align: "right" });
+    .text("TOTAL", labelX, propY, { width: 130, lineBreak: false });
+  doc.font("Roboto-Bold").fontSize(12).fillColor(CRIMSON)
+    .text(formatCOP(total), valueX, propY, { width: 85, align: "right", lineBreak: false });
   propY += rowH + 8;
-  doc.y = propY;
 
   // Indicaciones (alineadas a la derecha, X=labelX)
-  let indY = doc.y + 4;
+  let indY = propY + 4;
   if (quote.paymentTerms) {
-    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("i. FORMA DE PAGO", labelX, indY, { width: 215 });
+    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON)
+      .text("i. FORMA DE PAGO", labelX, indY, { width: 215, lineBreak: false });
     indY += 14;
-    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.paymentTerms}`, labelX, indY, { width: 215 });
+    doc.font("Roboto").fontSize(9).fillColor("#000000")
+      .text(`- ${quote.paymentTerms}`, labelX, indY, { width: 215, lineBreak: false });
     indY += 14;
   }
   if (quote.additionalNotes) {
-    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("ii. NOTAS ADICIONALES", labelX, indY, { width: 215 });
+    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON)
+      .text("ii. NOTAS ADICIONALES", labelX, indY, { width: 215, lineBreak: false });
     indY += 14;
-    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.additionalNotes}`, labelX, indY, { width: 215 });
+    doc.font("Roboto").fontSize(9).fillColor("#000000")
+      .text(`- ${quote.additionalNotes}`, labelX, indY, { width: 215, lineBreak: false });
     indY += 14;
   }
   if (quote.observations) {
-    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON).text("iii. OBSERVACIONES", labelX, indY, { width: 215 });
+    doc.font("Roboto-Bold").fontSize(9).fillColor(CRIMSON)
+      .text("iii. OBSERVACIONES", labelX, indY, { width: 215, lineBreak: false });
     indY += 14;
-    doc.font("Roboto").fillColor("#000000").fontSize(9).text(`- ${quote.observations}`, labelX, indY, { width: 215 });
+    doc.font("Roboto").fontSize(9).fillColor("#000000")
+      .text(`- ${quote.observations}`, labelX, indY, { width: 215, lineBreak: false });
     indY += 14;
   }
   doc.y = indY + 8;
