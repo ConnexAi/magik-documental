@@ -75,6 +75,7 @@ export interface Quote {
   version: number;
   status: QuoteStatus;
   // Destinatario
+  clientCompany?: string;
   attention: string;
   attentionRole: string;
   subject: string;

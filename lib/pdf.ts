@@ -82,6 +82,7 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
   doc.text("Señores");
   doc.font("Roboto-Bold").text(event.clientName);
   doc.font("Roboto");
+  if (quote.clientCompany) doc.text(quote.clientCompany);
   if (quote.attention) doc.text(`Atn. ${quote.attention}`);
   if (quote.attentionRole) doc.text(quote.attentionRole);
   doc.text("L.C");

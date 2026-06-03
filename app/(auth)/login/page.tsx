@@ -69,15 +69,12 @@ export default function LoginPage() {
     >
       {/* Logo */}
       <div className="mb-8 text-center">
-        <span
-          className="text-3xl font-semibold tracking-tight"
-          style={{ color: "var(--color-crimson)" }}
-        >
-          MAGIK
-        </span>
-        <p className="mt-1 text-xs" style={{ color: "var(--color-text-muted)" }}>
-          Producciones — Sistema de gestión
-        </p>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/assets/logoBlanco.png"
+          alt="MAGIK Producciones"
+          style={{ height: 48, width: "auto", display: "block", margin: "0 auto 8px" }}
+        />
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">

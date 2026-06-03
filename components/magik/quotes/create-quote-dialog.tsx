@@ -23,6 +23,7 @@ import type { Quote, DocumentItem, CatalogRubro } from "@/lib/types";
 
 const schema = z.object({
   title: z.string().min(1, "El título es requerido"),
+  clientCompany: z.string().optional(),
   attention: z.string().min(1, "Requerido"),
   attentionRole: z.string().min(1, "Requerido"),
   subject: z.string().min(1, "Requerido"),
@@ -294,6 +295,7 @@ export function CreateQuoteDialog({ eventId, open, onOpenChange, onCreated }: Pr
     setServerError(null);
     const payload = {
       title: data.title,
+      clientCompany: data.clientCompany || undefined,
       attention: data.attention,
       attentionRole: data.attentionRole,
       subject: data.subject,
@@ -354,6 +356,16 @@ export function CreateQuoteDialog({ eventId, open, onOpenChange, onCreated }: Pr
 
             {/* Destinatario */}
             <FormSection title="Destinatario">
+              <div className="space-y-1.5">
+                <Label htmlFor="q-clientCompany">Empresa del cliente</Label>
+                <Controller
+                  name="clientCompany"
+                  control={control}
+                  render={({ field }) => (
+                    <Input id="q-clientCompany" placeholder="Nombre de la empresa (opcional)" {...field} />
+                  )}
+                />
+              </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <Label htmlFor="q-attention">Atención</Label>

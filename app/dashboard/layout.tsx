@@ -38,6 +38,19 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Usuarios", href: "/dashboard/admin/users", icon: <UserCog size={16} />, adminOnly: true },
 ];
 
+function SidebarLogo() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const src = mounted && resolvedTheme !== "dark"
+    ? "/assets/logoNegro.png"
+    : "/assets/logoBlanco.png";
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt="MAGIK Producciones" style={{ height: 36, width: "auto", objectFit: "contain" }} />
+  );
+}
+
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -93,12 +106,7 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
           style={{ borderColor: "var(--sidebar-border)" }}
         >
           <Link href="/dashboard/events">
-            <img
-              src="/assets/logo_magik.svg"
-              alt="MAGIK"
-              height={40}
-              style={{ objectFit: "contain", cursor: "pointer" }}
-            />
+            <SidebarLogo />
           </Link>
           <div className="flex items-center gap-1">
             <ThemeToggle />
@@ -181,12 +189,7 @@ export default function DashboardLayout({
             <Menu size={20} style={{ color: "var(--color-text-secondary)" }} />
           </button>
           <Link href="/dashboard/events">
-            <img
-              src="/assets/logo_magik.svg"
-              alt="MAGIK"
-              height={40}
-              style={{ objectFit: "contain", cursor: "pointer" }}
-            />
+            <SidebarLogo />
           </Link>
         </div>
 

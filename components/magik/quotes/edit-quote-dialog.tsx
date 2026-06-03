@@ -29,6 +29,7 @@ import type { Quote, DocumentItem, CatalogRubro } from "@/lib/types";
 const schema = z.object({
   title: z.string().min(1, "El título es requerido"),
   status: z.enum(["draft", "published"]),
+  clientCompany: z.string().optional(),
   notes: z.string().optional(),
 });
 type FormData = z.infer<typeof schema>;
@@ -61,11 +62,11 @@ export function EditQuoteDialog({ eventId, quote, open, onOpenChange, onUpdated 
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { title: quote.title, status: quote.status, notes: quote.notes ?? "" },
+    defaultValues: { title: quote.title, status: quote.status, clientCompany: quote.clientCompany ?? "", notes: quote.notes ?? "" },
   });
 
   useEffect(() => {
-    reset({ title: quote.title, status: quote.status, notes: quote.notes ?? "" });
+    reset({ title: quote.title, status: quote.status, clientCompany: quote.clientCompany ?? "", notes: quote.notes ?? "" });
     setItems(quote.items);
   }, [quote, reset]);
 
@@ -130,6 +131,7 @@ export function EditQuoteDialog({ eventId, quote, open, onOpenChange, onUpdated 
       body: JSON.stringify({
         title: data.title,
         status: data.status,
+        clientCompany: data.clientCompany || undefined,
         items,
         subtotal,
         total: subtotal,
@@ -250,6 +252,17 @@ export function EditQuoteDialog({ eventId, quote, open, onOpenChange, onUpdated 
                 </div>
               </div>
             )}
+          </div>
+
+          <div className="space-y-1.5">
+            <Label htmlFor="eq-clientCompany">Empresa del cliente</Label>
+            <Controller
+              name="clientCompany"
+              control={control}
+              render={({ field }) => (
+                <Input id="eq-clientCompany" placeholder="Nombre de la empresa (opcional)" {...field} />
+              )}
+            />
           </div>
 
           <div className="space-y-1.5">
