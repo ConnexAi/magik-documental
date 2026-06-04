@@ -9,8 +9,8 @@ export interface FlatPhoto {
 }
 
 const GALLERY_CSS = `
-  .g-cell{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;}
-  .g-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 300ms ease;}
+  .g-cell{position:relative;border-radius:8px;overflow:hidden;cursor:pointer;break-inside:avoid;margin-bottom:8px;}
+  .g-cell img{width:100%;height:auto;display:block;object-fit:cover;transition:transform 300ms ease;}
   .g-cell:hover img{transform:scale(1.03);}
   .g-name-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;pointer-events:none;transition:background 200ms ease;}
   .g-cell:hover .g-name-overlay{background:rgba(0,0,0,0.6);}
@@ -191,22 +191,28 @@ export function PortalGallery({ photos }: { photos: FlatPhoto[] }) {
     <>
       <style>{GALLERY_CSS}</style>
       <div style={{ opacity: fading ? 0 : 1, transition: "opacity 400ms ease" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, alignItems: "start" }}>
+        <div
+          style={{
+            columns: pagePhotos.length <= 2 ? 1 : pagePhotos.length <= 4 ? 2 : 3,
+            columnGap: "8px",
+            width: "100%",
+          }}
+        >
           {pagePhotos.map((photo, i) => (
             <div
               key={`${page}-${i}`}
               className="g-cell"
               onClick={() => setLightboxIndex(page * PAGE_SIZE + i)}
-              style={{ height: photoHeight(i) }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={photo.url} alt={photo.eventName} />
+              <img src={photo.url} alt={photo.eventName} style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }} />
               <div className="g-name-overlay">
                 <span className="g-name-text">{photo.eventName}</span>
               </div>
             </div>
           ))}
         </div>
+
 
         {totalPages > 1 && (
           <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 28 }}>

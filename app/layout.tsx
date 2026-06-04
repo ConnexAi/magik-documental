@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Bebas_Neue, Playfair_Display } from "next/font/google";
+import { Inter, Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -8,16 +8,18 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const bebasNeue = Bebas_Neue({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-bebas",
+  weight: ["700"],
+  variable: "--font-display",
+  display: "swap",
 });
 
-const playfair = Playfair_Display({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["700", "800", "900"],
-  variable: "--font-playfair",
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +33,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${inter.variable} ${bebasNeue.variable} ${playfair.variable}`} suppressHydrationWarning>
+    <html
+      lang="es"
+      className={`${inter.variable} ${cormorant.variable} ${dmSans.variable}`}
+      suppressHydrationWarning
+    >
       <body className="font-sans antialiased">
         <Providers>{children}</Providers>
       </body>

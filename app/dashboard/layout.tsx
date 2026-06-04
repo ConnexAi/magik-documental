@@ -38,16 +38,20 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Usuarios", href: "/dashboard/admin/users", icon: <UserCog size={16} />, adminOnly: true },
 ];
 
-function SidebarLogo() {
+function SidebarLogo({ mobile = false }: { mobile?: boolean }) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  const src = mounted && resolvedTheme !== "dark"
-    ? "/assets/logoNegro.png"
-    : "/assets/logoBlanco.png";
+  const src = !mounted || resolvedTheme === "dark"
+    ? "/assets/logoBlanco.png"
+    : "/assets/logoNegro.png";
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={src} alt="MAGIK Producciones" style={{ height: 44, width: "auto", objectFit: "contain" }} />
+    <img
+      src={src}
+      alt="MAGIK"
+      style={{ height: "52px", width: "auto", maxWidth: "180px", display: "block", objectFit: "contain" }}
+    />
   );
 }
 
@@ -189,7 +193,7 @@ export default function DashboardLayout({
             <Menu size={20} style={{ color: "var(--color-text-secondary)" }} />
           </button>
           <Link href="/dashboard/events">
-            <SidebarLogo />
+            <SidebarLogo mobile />
           </Link>
         </div>
 
