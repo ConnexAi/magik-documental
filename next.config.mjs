@@ -1,10 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: ["sharp", "exceljs", "pdfkit"],
+  experimental: {
+    serverComponentsExternalPackages: [
+      "pdfkit",
+      "sharp",
+      "exceljs",
+    ],
+  },
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.externals = [
-        ...(Array.isArray(config.externals) ? config.externals : []),
+        ...(Array.isArray(config.externals)
+          ? config.externals
+          : []),
         "pdfkit",
         "sharp",
         "exceljs",

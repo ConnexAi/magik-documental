@@ -20,9 +20,6 @@ const GALLERY_CSS = `
 
 const PAGE_SIZE = 9;
 
-function photoHeight(i: number): number {
-  return (Math.floor(i / 3) + (i % 3)) % 2 === 0 ? 400 : 280;
-}
 
 function useColumns(): number {
   const [cols, setCols] = useState(3);
