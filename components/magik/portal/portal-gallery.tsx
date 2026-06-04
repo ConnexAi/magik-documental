@@ -11,9 +11,11 @@ export interface FlatPhoto {
 const GALLERY_CSS = `
   .g-cell{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;}
   .g-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 300ms ease;}
-  .g-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);transition:background 300ms ease;pointer-events:none;}
   .g-cell:hover img{transform:scale(1.03);}
-  .g-cell:hover .g-overlay{background:rgba(0,0,0,0.28);}
+  .g-name-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;pointer-events:none;transition:background 200ms ease;}
+  .g-cell:hover .g-name-overlay{background:rgba(0,0,0,0.6);}
+  .g-name-text{font-size:14px;font-weight:600;color:#fff;opacity:0;transition:opacity 200ms ease;text-align:center;padding:0 16px;line-height:1.4;}
+  .g-cell:hover .g-name-text{opacity:1;}
 `;
 
 const PAGE_SIZE = 9;
@@ -172,21 +174,6 @@ export function PortalGallery({ photos }: { photos: FlatPhoto[] }) {
   }
 
   useEffect(() => {
-    if (photos.length <= PAGE_SIZE) return;
-    const id = setInterval(() => {
-      if (fadingRef.current) return;
-      fadingRef.current = true;
-      setFading(true);
-      timeoutRef.current = setTimeout(() => {
-        setPage((cur) => (cur + 1) % totalPages);
-        setFading(false);
-        fadingRef.current = false;
-      }, 400);
-    }, 5000);
-    return () => clearInterval(id);
-  }, [photos.length, totalPages]);
-
-  useEffect(() => {
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
@@ -214,7 +201,9 @@ export function PortalGallery({ photos }: { photos: FlatPhoto[] }) {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={photo.url} alt={photo.eventName} />
-              <div className="g-overlay" />
+              <div className="g-name-overlay">
+                <span className="g-name-text">{photo.eventName}</span>
+              </div>
             </div>
           ))}
         </div>

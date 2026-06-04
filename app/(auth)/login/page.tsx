@@ -68,13 +68,16 @@ export default function LoginPage() {
       }}
     >
       {/* Logo */}
-      <div className="mb-8 text-center">
+      <div className="mb-10 text-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/assets/logoBlanco.png"
           alt="MAGIK Producciones"
-          style={{ height: 48, width: "auto", display: "block", margin: "0 auto 8px" }}
+          style={{ height: 64, width: "auto", display: "block", margin: "0 auto 16px" }}
         />
+        <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em", textTransform: "uppercase", textAlign: "center", margin: 0 }}>
+          Sistema de gestion interno
+        </p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">

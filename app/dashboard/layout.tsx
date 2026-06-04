@@ -47,7 +47,7 @@ function SidebarLogo() {
     : "/assets/logoBlanco.png";
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={src} alt="MAGIK Producciones" style={{ height: 36, width: "auto", objectFit: "contain" }} />
+    <img src={src} alt="MAGIK Producciones" style={{ height: 44, width: "auto", objectFit: "contain" }} />
   );
 }
 
