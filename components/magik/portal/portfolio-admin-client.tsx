@@ -64,15 +64,18 @@ export function PortfolioAdminClient({ initialItems }: Props) {
   const nextOrder = items.length > 0 ? Math.max(...items.map((i) => i.order)) + 1 : 0;
 
   async function toggleVisible(item: PortfolioItem) {
-    const optimistic = items.map((i) =>
-      i.id === item.id ? { ...i, visible: !i.visible } : i
-    );
-    setItems(optimistic);
-    await fetchWithAuth(`/api/portfolio/${item.id}`, {
+    const res = await fetchWithAuth(`/api/portfolio/${item.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ visible: !item.visible }),
     });
+    if (res.ok) {
+      setItems((prev) =>
+        prev.map((i) => (i.id === item.id ? { ...i, visible: !item.visible } : i))
+      );
+    } else {
+      console.error("toggleVisible failed", res.status);
+    }
   }
 
   async function updateOrder(item: PortfolioItem, raw: string) {
@@ -90,9 +93,14 @@ export function PortfolioAdminClient({ initialItems }: Props) {
 
   async function confirmDelete() {
     if (!deleteTarget) return;
-    setItems((prev) => prev.filter((i) => i.id !== deleteTarget.id));
-    await fetchWithAuth(`/api/portfolio/${deleteTarget.id}`, { method: "DELETE" });
-    setDeleteTarget(null);
+    const res = await fetchWithAuth(`/api/portfolio/${deleteTarget.id}`, { method: "DELETE" });
+    if (res.ok) {
+      setItems((prev) => prev.filter((i) => i.id !== deleteTarget.id));
+      setDeleteTarget(null);
+    } else {
+      console.error("confirmDelete failed", res.status);
+      setDeleteTarget(null);
+    }
   }
 
   const sorted = [...items].sort((a, b) => a.order - b.order);
