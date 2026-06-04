@@ -38,7 +38,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Usuarios", href: "/dashboard/admin/users", icon: <UserCog size={16} />, adminOnly: true },
 ];
 
-function SidebarLogo({ mobile = false }: { mobile?: boolean }) {
+function SidebarLogo() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -50,7 +50,9 @@ function SidebarLogo({ mobile = false }: { mobile?: boolean }) {
     <img
       src={src}
       alt="MAGIK"
-      style={{ height: "52px", width: "auto", maxWidth: "180px", display: "block", objectFit: "contain" }}
+      width="160"
+      height="44"
+      style={{ display: "block", height: "120px", width: "auto", marginTop: "-24px", marginBottom: "-24px" }}
     />
   );
 }
@@ -193,7 +195,7 @@ export default function DashboardLayout({
             <Menu size={20} style={{ color: "var(--color-text-secondary)" }} />
           </button>
           <Link href="/dashboard/events">
-            <SidebarLogo mobile />
+            <SidebarLogo />
           </Link>
         </div>
 

@@ -24,6 +24,22 @@ function photoHeight(i: number): number {
   return (Math.floor(i / 3) + (i % 3)) % 2 === 0 ? 400 : 280;
 }
 
+function useColumns(): number {
+  const [cols, setCols] = useState(3);
+  useEffect(() => {
+    const check = () => {
+      const w = window.innerWidth;
+      if (w < 768) setCols(1);
+      else if (w < 1024) setCols(2);
+      else setCols(3);
+    };
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return cols;
+}
+
 // ─── Lightbox ─────────────────────────────────────────────────────────────────
 
 function Lightbox({
@@ -158,6 +174,7 @@ export function PortalGallery({ photos }: { photos: FlatPhoto[] }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const fadingRef = useRef(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const breakpointCols = useColumns();
 
   const totalPages = Math.max(1, Math.ceil(photos.length / PAGE_SIZE));
   const pagePhotos = photos.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
@@ -193,7 +210,7 @@ export function PortalGallery({ photos }: { photos: FlatPhoto[] }) {
       <div style={{ opacity: fading ? 0 : 1, transition: "opacity 400ms ease" }}>
         <div
           style={{
-            columns: pagePhotos.length <= 2 ? 1 : pagePhotos.length <= 4 ? 2 : 3,
+            columns: breakpointCols === 1 ? 1 : breakpointCols === 2 ? 2 : pagePhotos.length <= 2 ? 1 : pagePhotos.length <= 4 ? 2 : 3,
             columnGap: "8px",
             width: "100%",
           }}

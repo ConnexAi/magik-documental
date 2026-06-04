@@ -61,21 +61,24 @@ export default function LoginPage() {
 
   return (
     <div
-      className="w-full max-w-sm rounded-lg border p-8 shadow-lg"
+      className="w-full max-w-md rounded-lg border shadow-lg"
       style={{
         background: "var(--card)",
         borderColor: "var(--border)",
+        padding: "32px 32px",
       }}
     >
       {/* Logo */}
-      <div className="mb-8 text-center" style={{ textAlign: "center", width: "100%" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "32px" }}>
         <img
           src="/assets/logoBlanco.png"
           alt="MAGIK"
-          style={{ height: "88px", width: "auto", maxWidth: "280px", display: "block", margin: "0 auto 8px" }}
+          width="240"
+          height="80"
+          style={{ display: "block", margin: "0 auto 8px", height: "220px", width: "auto" }}
         />
-        <span style={{ display: "block", textAlign: "center", fontSize: "11px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "40px", fontFamily: "var(--font-body)" }}>
+        <span style={{ display: "block", marginTop: "10px", fontSize: "11px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.12em", textTransform: "uppercase", fontFamily: "var(--font-body)" }}>
           Sistema de gestion interno
         </span>
       </div>

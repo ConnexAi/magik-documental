@@ -52,6 +52,17 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
 
 // ─── Hooks ────────────────────────────────────────────────────────────────────
 
+function useMobile(): boolean {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isMobile;
+}
+
 function useInView(threshold = 0.15): [React.RefObject<HTMLDivElement>, boolean] {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
@@ -87,19 +98,48 @@ function useCounter(target: number, inView: boolean, duration = 1200): number {
 
 // ─── StatCounter ──────────────────────────────────────────────────────────────
 
-function StatCounter({ value, label }: { value: string; label: string }) {
+function StatCounter({ value, label, isMobile = false }: { value: string; label: string; isMobile?: boolean }) {
   const [ref, inView] = useInView(0.4);
   const match = value.match(/^(\d+)(\+?)$/);
   const target = match ? parseInt(match[1], 10) : 0;
   const suffix = match ? match[2] : "";
   const count = useCounter(target, inView);
   return (
-    <div ref={ref} style={{ textAlign: "center", padding: "0 56px" }}>
-      <p style={{ fontFamily: "var(--font-body)", fontSize: 56, fontWeight: 700, color: "#D4004E", margin: "0 0 4px", letterSpacing: "-0.03em", lineHeight: 1 }}>
+    <div ref={ref} style={{ textAlign: "center", padding: isMobile ? "0 24px" : "0 56px" }}>
+      <p style={{ fontFamily: "var(--font-body)", fontSize: isMobile ? 48 : 56, fontWeight: 700, color: "#D4004E", margin: "0 0 4px", letterSpacing: "-0.03em", lineHeight: 1 }}>
         {count}{suffix}
       </p>
       <p style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "rgba(255,255,255,0.4)", margin: 0 }}>{label}</p>
     </div>
+  );
+}
+
+// ─── Mobile Header ────────────────────────────────────────────────────────────
+
+function MobileHeader() {
+  return (
+    <header style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 1000,
+      height: 56,
+      background: "rgba(10,10,11,0.92)",
+      backdropFilter: "blur(12px)",
+      WebkitBackdropFilter: "blur(12px)",
+      borderBottom: "1px solid rgba(255,255,255,0.06)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      padding: "0 20px",
+    }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/assets/logoBlanco.png" alt="MAGIK" style={{ height: 32, width: "auto", display: "block" }} />
+      <a href="/login" style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", fontFamily: "var(--font-body)", fontWeight: 500, textDecoration: "none" }}>
+        Acceso
+      </a>
+    </header>
   );
 }
 
@@ -140,22 +180,7 @@ function RightSidebar() {
   });
 
   return (
-    <nav
-      className="right-sb"
-      style={{
-        position: "fixed",
-        right: 0,
-        top: 0,
-        height: "100vh",
-        width: 40,
-        zIndex: 1000,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 40,
-      }}
-    >
+    <nav className="right-sb" style={{ position: "fixed", right: 0, top: 0, height: "100vh", width: 40, zIndex: 1000, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 40 }}>
       <div style={{ position: "absolute", left: 0, top: "15%", height: "70%", width: "0.5px", background: "rgba(255,255,255,0.08)" }} />
       {SIDEBAR_ITEMS.map((item) => {
         const isActive = "id" in item && item.id === active;
@@ -163,11 +188,7 @@ function RightSidebar() {
           return <a key={item.label} href={item.href} style={itemStyle(false)}>{item.label}</a>;
         }
         return (
-          <button
-            key={item.label}
-            style={itemStyle(isActive)}
-            onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" })}
-          >
+          <button key={item.label} style={itemStyle(isActive)} onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" })}>
             {item.label}
           </button>
         );
@@ -178,11 +199,10 @@ function RightSidebar() {
 
 // ─── Circle Section ───────────────────────────────────────────────────────────
 
-function CircleSection() {
+function CircleSection({ isMobile }: { isMobile: boolean }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [hasReached, setHasReached] = useState(false);
 
-  // Detectar cuando la seccion entra en viewport
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setHasReached(true); },
@@ -193,7 +213,6 @@ function CircleSection() {
     return () => obs.disconnect();
   }, []);
 
-  // Scroll para cambiar slides
   useEffect(() => {
     function handleScroll() {
       const section = document.getElementById("portafolio");
@@ -211,10 +230,24 @@ function CircleSection() {
   }, []);
 
   const slide = SLIDES[currentSlide];
-  const xNum = parseInt(slide.x);
-  const gap = slide.size / 2 + 28;
+  const circleSize = isMobile ? Math.round(slide.size * 0.65) : slide.size;
+  const circleX = isMobile ? `${Math.max(20, Math.min(80, parseInt(slide.x)))}%` : slide.x;
+  const circleY = isMobile ? "50%" : slide.y;
 
-  const infoStyle: React.CSSProperties = {
+  const xNum = isMobile ? Math.max(20, Math.min(80, parseInt(slide.x))) : parseInt(slide.x);
+  const gap = circleSize / 2 + 28;
+
+  const infoStyle: React.CSSProperties = isMobile ? {
+    position: "absolute",
+    bottom: 80,
+    left: "50%",
+    transform: "translateX(-50%)",
+    textAlign: "center",
+    width: "80%",
+    opacity: hasReached ? 1 : 0,
+    transition: "opacity 400ms ease",
+    pointerEvents: "none",
+  } : {
     position: "absolute",
     top: slide.y,
     transform: "translateY(-50%)",
@@ -222,65 +255,36 @@ function CircleSection() {
     opacity: hasReached ? 1 : 0,
     transition: "opacity 400ms ease, top 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
     pointerEvents: "none",
+    ...(xNum < 50
+      ? { left: `calc(${circleX} + ${gap}px)` }
+      : { right: `calc(100% - ${circleX} + ${gap}px)` }),
   };
-  if (xNum < 50) {
-    infoStyle.left = `calc(${slide.x} + ${gap}px)`;
-  } else {
-    infoStyle.right = `calc(100% - ${slide.x} + ${gap}px)`;
-  }
 
   return (
-    <div id="portafolio" style={{ height: "400vh", position: "relative", background: "#0A0A0B" }}>
-      <div
-        style={{
-          position: "sticky",
-          top: 0,
-          height: "100vh",
+    <div id="portafolio" style={{ height: isMobile ? "300vh" : "400vh", position: "relative", background: "#0A0A0B" }}>
+      <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", background: "#0A0A0B", display: "flex", alignItems: "center", justifyContent: "center" }}>
+
+        <div style={{
+          position: "absolute",
+          left: circleX,
+          top: circleY,
+          transform: "translate(-50%, -50%)",
+          width: circleSize,
+          height: circleSize,
+          borderRadius: "50%",
           overflow: "hidden",
-          background: "#0A0A0B",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {/* Circle — visible como forma vacia antes de llegar, con foto al llegar */}
-        <div
-          style={{
-            position: "absolute",
-            left: slide.x,
-            top: slide.y,
-            transform: "translate(-50%, -50%)",
-            width: slide.size,
-            height: slide.size,
-            borderRadius: "50%",
-            overflow: "hidden",
-            transition: "all 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-            border: `2px solid ${hasReached ? "transparent" : "rgba(255,255,255,0.15)"}`,
-            background: hasReached ? "transparent" : "rgba(255,255,255,0.03)",
-          }}
-        >
+          transition: "all 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          border: `2px solid ${hasReached ? "transparent" : "rgba(255,255,255,0.15)"}`,
+          background: hasReached ? "transparent" : "rgba(255,255,255,0.03)",
+        }}>
           {SLIDES.map((s, i) => (
             // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={i}
-              src={s.photo}
-              alt={s.name}
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                opacity: hasReached && i === currentSlide ? 1 : 0,
-                transition: "opacity 600ms ease",
-              }}
-            />
+            <img key={i} src={s.photo} alt={s.name} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: hasReached && i === currentSlide ? 1 : 0, transition: "opacity 600ms ease" }} />
           ))}
         </div>
 
-        {/* Event info */}
         <div style={infoStyle}>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: 18, fontWeight: 700, color: "white", margin: "0 0 6px", lineHeight: 1.2 }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: isMobile ? 15 : 18, fontWeight: 700, color: "white", margin: "0 0 6px", lineHeight: 1.2 }}>
             {slide.name}
           </p>
           <p style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "rgba(255,255,255,0.45)", margin: 0 }}>
@@ -288,16 +292,9 @@ function CircleSection() {
           </p>
         </div>
 
-        {/* Dots */}
         <div style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 8, zIndex: 2 }}>
           {SLIDES.map((_, i) => (
-            <div key={i} style={{
-              width: i === currentSlide ? 16 : 6,
-              height: 6,
-              borderRadius: 3,
-              background: i === currentSlide ? "#D4004E" : "rgba(255,255,255,0.2)",
-              transition: "width 200ms ease, background 200ms ease",
-            }} />
+            <div key={i} style={{ width: i === currentSlide ? 16 : 6, height: 6, borderRadius: 3, background: i === currentSlide ? "#D4004E" : "rgba(255,255,255,0.2)", transition: "width 200ms ease, background 200ms ease" }} />
           ))}
         </div>
       </div>
@@ -330,9 +327,9 @@ const CSS = `
   .ct-link { display:flex; align-items:center; gap:12px; padding:20px 0; text-decoration:none; color:white; font-family:var(--font-body); font-size:15px; transition:color 200ms; }
   .ct-link:hover { color:#D4004E; }
   .ct-sep { border-bottom:1px solid rgba(255,255,255,0.07); }
-  .hero-btn-w { background:#ffffff; color:#0A0A0B; border:none; padding:14px 32px; border-radius:999px; font-family:var(--font-body); font-size:14px; font-weight:600; cursor:pointer; transition:opacity 200ms; }
+  .hero-btn-w { background:#ffffff; color:#0A0A0B; border:none; padding:14px 32px; border-radius:999px; font-family:var(--font-body); font-size:14px; font-weight:600; cursor:pointer; transition:opacity 200ms; width:100%; }
   .hero-btn-w:hover { opacity:0.85; }
-  .hero-btn-g { background:transparent; color:white; border:1.5px solid rgba(255,255,255,0.35); padding:14px 32px; border-radius:999px; font-family:var(--font-body); font-size:14px; font-weight:600; cursor:pointer; transition:border-color 200ms; text-decoration:none; display:inline-flex; align-items:center; }
+  .hero-btn-g { background:transparent; color:white; border:1.5px solid rgba(255,255,255,0.35); padding:14px 32px; border-radius:999px; font-family:var(--font-body); font-size:14px; font-weight:600; cursor:pointer; transition:border-color 200ms; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; width:100%; }
   .hero-btn-g:hover { border-color:white; }
   .cta-btn { background:#D4004E; color:white; padding:12px 32px; border-radius:999px; font-family:var(--font-body); font-size:14px; font-weight:600; display:inline-block; text-decoration:none; transition:opacity 200ms; }
   .cta-btn:hover { opacity:0.85; }
@@ -340,9 +337,8 @@ const CSS = `
   @media(max-width:768px){
     .pw { padding:0 24px; }
     .about-grid { grid-template-columns:1fr; gap:32px; }
-    .svc-grid { grid-template-columns:1fr; }
+    .svc-grid { grid-template-columns:repeat(2,1fr); }
     .stat-div { display:none; }
-    .stats-row { gap:40px; }
     .right-sb { display:none; }
   }
 `;
@@ -350,6 +346,7 @@ const CSS = `
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export function PortalLanding({ items }: { items: PortfolioItem[] }) {
+  const isMobile = useMobile();
   const [aboutRef, aboutInView] = useInView();
   const [svcRef,   svcInView]   = useInView();
   const [statsRef, statsInView] = useInView();
@@ -364,6 +361,10 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
   return (
     <div style={{ background: "#0A0A0B", minHeight: "100vh", color: "white", fontFamily: "var(--font-body)" }}>
       <style>{CSS}</style>
+
+      {/* Mobile header fijo — solo en mobile */}
+      {isMobile && <MobileHeader />}
+
       <RightSidebar />
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
@@ -377,15 +378,18 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
           justifyContent: "center",
           position: "relative",
           textAlign: "center",
-          padding: "0 24px",
+          padding: isMobile ? "0 24px" : "0 24px",
+          paddingTop: isMobile ? 56 : 0,
         }}
       >
-        <div className="hero-item" style={{ animationDelay: "0ms" }}>
+        <div className="hero-item" style={{ animationDelay: "0ms", width: "100%", display: "flex", justifyContent: "center", marginBottom: "28px" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/logoBlanco.png"
             alt="MAGIK Producciones"
-            style={{ height: "96px", width: "auto", maxWidth: "320px", display: "block", margin: "0 auto 32px" }}
+            width="280"
+            height="88"
+            style={{ display: "block", height: isMobile ? "400px" : "600px", width: "auto", marginTop: isMobile ? "-100px" : "-160px", marginBottom: isMobile ? "-100px" : "-160px" }}
           />
         </div>
 
@@ -394,7 +398,7 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
           style={{
             animationDelay: "120ms",
             fontFamily: "var(--font-body)",
-            fontSize: "clamp(20px, 3vw, 36px)",
+            fontSize: isMobile ? 20 : "clamp(20px, 3vw, 36px)",
             fontWeight: 600,
             color: "rgba(255,255,255,0.85)",
             letterSpacing: "-0.01em",
@@ -405,11 +409,19 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
           Produccion y logistica, al mas alto nivel.
         </p>
 
-        <div className="hero-item" style={{ animationDelay: "240ms", display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
-          <button
-            className="hero-btn-w"
-            onClick={() => document.getElementById("portafolio")?.scrollIntoView({ behavior: "smooth" })}
-          >
+        <div
+          className="hero-item"
+          style={{
+            animationDelay: "240ms",
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            gap: 16,
+            width: isMobile ? "100%" : "auto",
+            maxWidth: isMobile ? 280 : "none",
+            margin: isMobile ? "0 auto" : 0,
+          }}
+        >
+          <button className="hero-btn-w" onClick={() => document.getElementById("portafolio")?.scrollIntoView({ behavior: "smooth" })}>
             Ver portafolio
           </button>
           <a href="/login" className="hero-btn-g">Acceso</a>
@@ -421,30 +433,27 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
       </section>
 
       {/* ── CIRCLE SECTION ────────────────────────────────────────────────── */}
-      <CircleSection />
+      <CircleSection isMobile={isMobile} />
 
       {/* ── GALERÍA PÚBLICA ───────────────────────────────────────────────── */}
-      <section style={{ padding: "80px 0" }}>
+      <section style={{ padding: isMobile ? "48px 0" : "80px 0" }}>
         <div className="pw" style={{ maxWidth: 1200 }}>
           <PortalGallery photos={photos} />
         </div>
       </section>
 
       {/* ── TEXTO ─────────────────────────────────────────────────────────── */}
-      <section style={{ background: "#0f0f11", padding: "100px 0" }}>
+      <section style={{ background: "#0f0f11", padding: isMobile ? "60px 0" : "100px 0" }}>
         <div ref={aboutRef} className={`pw ${aos(aboutInView)}`} style={{ maxWidth: 1100 }}>
           <div className="about-grid">
-            {/* Columna izquierda */}
             <div>
               <p style={{ fontFamily: "var(--font-body)", fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", color: "#D4004E", textTransform: "uppercase", margin: "0 0 16px" }}>
                 Quienes somos
               </p>
-              <h2 style={{ fontFamily: "var(--font-body)", fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 700, color: "white", lineHeight: 1.2, margin: 0 }}>
+              <h2 style={{ fontFamily: "var(--font-body)", fontSize: isMobile ? 28 : "clamp(24px, 3vw, 36px)", fontWeight: 700, color: "white", lineHeight: 1.2, margin: 0 }}>
                 Mas de 17 anos creando experiencias.
               </h2>
             </div>
-
-            {/* Columna derecha */}
             <div>
               <p style={{ fontFamily: "var(--font-body)", fontSize: 15, lineHeight: 1.7, color: "rgba(255,255,255,0.55)", margin: 0 }}>
                 TTS GROUP S.A.S., bajo la marca{" "}
@@ -464,19 +473,19 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
       </section>
 
       {/* ── SERVICIOS ─────────────────────────────────────────────────────── */}
-      <section id="servicios" style={{ background: "#111113", padding: "100px 0" }}>
+      <section id="servicios" style={{ background: "#111113", padding: isMobile ? "60px 0" : "100px 0" }}>
         <div ref={svcRef} className="pw" style={{ maxWidth: 1100 }}>
           <div className={aos(svcInView)} style={{ textAlign: "center", marginBottom: 60 }}>
             <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 600, letterSpacing: "0.2em", color: "#D4004E", textTransform: "uppercase", margin: "0 0 16px" }}>
               Lo que hacemos
             </p>
-            <h2 style={{ fontFamily: "var(--font-body)", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 600, color: "white", margin: 0, letterSpacing: "-0.02em" }}>
+            <h2 style={{ fontFamily: "var(--font-body)", fontSize: isMobile ? 32 : "clamp(32px, 5vw, 56px)", fontWeight: 600, color: "white", margin: 0, letterSpacing: "-0.02em" }}>
               Produccion tecnica de alto nivel
             </h2>
           </div>
           <div className={`svc-grid ${aos(svcInView)}`} style={{ transitionDelay: "100ms" }}>
             {SERVICES.map(({ Icon, title, desc }) => (
-              <div key={title} className="svc-card">
+              <div key={title} className="svc-card" style={isMobile ? { padding: 20 } : {}}>
                 <div style={{ width: 44, height: 44, borderRadius: "50%", background: "rgba(212,0,78,0.08)", border: "1px solid rgba(212,0,78,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Icon size={18} color="#D4004E" />
                 </div>
@@ -489,13 +498,20 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
       </section>
 
       {/* ── STATS ─────────────────────────────────────────────────────────── */}
-      <section style={{ background: "#0A0A0B", padding: "80px 0" }}>
+      <section style={{ background: "#0A0A0B", padding: isMobile ? "60px 0" : "80px 0" }}>
         <div ref={statsRef} className="pw" style={{ maxWidth: 800 }}>
-          <div className={`stats-row ${aos(statsInView)}`}>
+          <div
+            className={`stats-row ${aos(statsInView)}`}
+            style={isMobile ? { flexDirection: "column", gap: 0, alignItems: "stretch" } : {}}
+          >
             {STATS.map((stat, i) => (
               <Fragment key={stat.label}>
-                {i > 0 && <div className="stat-div" />}
-                <StatCounter value={stat.value} label={stat.label} />
+                {i > 0 && (
+                  isMobile
+                    ? <div style={{ width: "100%", height: 1, background: "rgba(255,255,255,0.08)", margin: "24px 0" }} />
+                    : <div className="stat-div" />
+                )}
+                <StatCounter value={stat.value} label={stat.label} isMobile={isMobile} />
               </Fragment>
             ))}
           </div>
@@ -503,10 +519,10 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
       </section>
 
       {/* ── CONTACTO ──────────────────────────────────────────────────────── */}
-      <section id="contacto" style={{ background: "#111113", padding: "100px 0" }}>
+      <section id="contacto" style={{ background: "#111113", padding: isMobile ? "60px 0" : "100px 0" }}>
         <div ref={ctaRef} className="pw" style={{ maxWidth: 560 }}>
           <div className={aos(ctaInView)} style={{ textAlign: "center" }}>
-            <h2 style={{ fontFamily: "var(--font-body)", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 600, color: "white", margin: "0 0 12px", letterSpacing: "-0.02em" }}>
+            <h2 style={{ fontFamily: "var(--font-body)", fontSize: isMobile ? 32 : "clamp(32px, 5vw, 56px)", fontWeight: 600, color: "white", margin: "0 0 12px", letterSpacing: "-0.02em" }}>
               Hablemos
             </h2>
             <p style={{ fontFamily: "var(--font-body)", fontSize: 15, color: "rgba(255,255,255,0.4)", margin: "0 0 48px" }}>
@@ -528,7 +544,7 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
                 WWW.MAGIKENTER.COM
               </a>
             </div>
-            <div style={{ background: "rgba(212,0,78,0.05)", border: "1px solid rgba(212,0,78,0.12)", borderRadius: 16, padding: "40px 32px", marginTop: 48 }}>
+            <div style={{ background: "rgba(212,0,78,0.05)", border: "1px solid rgba(212,0,78,0.12)", borderRadius: 16, padding: isMobile ? "28px 20px" : "40px 32px", marginTop: 48 }}>
               <p style={{ fontFamily: "var(--font-body)", fontSize: 20, fontWeight: 600, color: "white", margin: "0 0 8px" }}>
                 Sistema de gestion MAGIK
               </p>
@@ -543,9 +559,20 @@ export function PortalLanding({ items }: { items: PortfolioItem[] }) {
 
       {/* ── FOOTER ────────────────────────────────────────────────────────── */}
       <footer style={{ background: "#0A0A0B", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "32px 0" }}>
-        <div className="pw" style={{ maxWidth: 1100, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div
+          className="pw"
+          style={{
+            maxWidth: 1100,
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: isMobile ? 12 : 0,
+            textAlign: isMobile ? "center" : "left",
+          }}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/logoBlanco.png" alt="MAGIK" style={{ height: 32, width: "auto", display: "block" }} />
+          <img src="/assets/logoBlanco.png" alt="MAGIK" style={{ display: "block", height: isMobile ? "80px" : "100px", width: "auto", marginTop: "-16px", marginBottom: "-16px" }} />
           <span style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "rgba(255,255,255,0.25)" }}>
             © 2026 MAGIK Producciones · Cali, Colombia
           </span>
