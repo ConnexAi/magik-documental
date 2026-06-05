@@ -183,7 +183,7 @@ export function AddPortfolioDialog({
                   onChange={(e) => {
                     field.onChange(e.target.value);
                     const ev = events.find((ev) => ev.id === e.target.value);
-                    if (ev) setValue("eventName", ev.clientName, { shouldDirty: true });
+                    if (ev) setValue("eventName", ev.eventName || ev.clientName, { shouldDirty: true });
                   }}
                   style={{
                     width: "100%",
