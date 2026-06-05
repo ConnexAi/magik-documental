@@ -65,7 +65,7 @@ export function EventDetailClient({ event: initialEvent, initialFiles }: Props) 
     setDeleteError(null);
     const res = await fetchWithAuth(`/api/events/${event.id}`, { method: "DELETE" });
     if (res.ok) {
-      router.push("/dashboard/events");
+      window.location.href = "/dashboard/events";
     } else {
       setDeleteError("No se pudo eliminar el evento. Intenta de nuevo.");
       setDeleting(false);
