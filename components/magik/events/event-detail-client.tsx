@@ -1,12 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { MapPin, Calendar } from "lucide-react";
+import { MapPin, Calendar, Trash2 } from "lucide-react";
 import { EditEventDialog } from "./edit-event-dialog";
 import { QuotesTab } from "@/components/magik/quotes/quotes-tab";
 import { OrdersTab } from "@/components/magik/orders/orders-tab";
 import { FilesTab } from "@/components/magik/files/files-tab";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { fetchWithAuth, getCurrentUserRole } from "@/lib/auth";
 import type { MagikEvent, EventFile } from "@/lib/types";
 
 const EVENT_TYPE_STYLES: Record<
@@ -41,8 +50,27 @@ export function EventDetailClient({ event: initialEvent, initialFiles }: Props) 
   const router = useRouter();
   const [event, setEvent] = useState<MagikEvent>(initialEvent);
   const [editOpen, setEditOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("quotes");
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const role = getCurrentUserRole();
+  const isAdmin = mounted && role === "admin";
   const typeStyle = EVENT_TYPE_STYLES[event.eventType];
+
+  async function handleDelete() {
+    setDeleting(true);
+    setDeleteError(null);
+    const res = await fetchWithAuth(`/api/events/${event.id}`, { method: "DELETE" });
+    if (res.ok) {
+      router.push("/dashboard/events");
+    } else {
+      setDeleteError("No se pudo eliminar el evento. Intenta de nuevo.");
+      setDeleting(false);
+    }
+  }
 
   return (
     <div>
@@ -110,17 +138,33 @@ export function EventDetailClient({ event: initialEvent, initialFiles }: Props) 
             )}
           </div>
 
-          <button
-            onClick={() => setEditOpen(true)}
-            className="shrink-0 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors"
-            style={{
-              borderColor: "var(--border)",
-              color: "var(--color-text-secondary)",
-              background: "var(--background)",
-            }}
-          >
-            Editar
-          </button>
+          <div className="flex shrink-0 items-center gap-2">
+            {isAdmin && (
+              <button
+                onClick={() => setDeleteOpen(true)}
+                className="flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors"
+                style={{
+                  borderColor: "rgba(229,57,53,0.35)",
+                  color: "#E53935",
+                  background: "rgba(229,57,53,0.06)",
+                }}
+              >
+                <Trash2 size={13} />
+                Eliminar
+              </button>
+            )}
+            <button
+              onClick={() => setEditOpen(true)}
+              className="rounded-md border px-3 py-1.5 text-xs font-medium transition-colors"
+              style={{
+                borderColor: "var(--border)",
+                color: "var(--color-text-secondary)",
+                background: "var(--background)",
+              }}
+            >
+              Editar
+            </button>
+          </div>
         </div>
       </div>
 
@@ -172,6 +216,41 @@ export function EventDetailClient({ event: initialEvent, initialFiles }: Props) 
         onOpenChange={setEditOpen}
         onUpdated={(updated) => setEvent(updated)}
       />
+
+      <Dialog open={deleteOpen} onOpenChange={(v) => { if (!v && !deleting) { setDeleteOpen(false); setDeleteError(null); } }}>
+        <DialogContent className="sm:max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Eliminar evento</DialogTitle>
+          </DialogHeader>
+          <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
+            Esta acción no se puede deshacer. Se eliminará el evento{" "}
+            <strong style={{ color: "var(--color-text-primary)" }}>
+              {event.consecutive}
+            </strong>{" "}
+            y todos sus documentos asociados.
+          </p>
+          {deleteError && (
+            <p className="rounded-md border px-3 py-2 text-xs"
+              style={{ background: "rgba(229,57,53,0.08)", borderColor: "rgba(229,57,53,0.3)", color: "#E53935" }}>
+              {deleteError}
+            </p>
+          )}
+          <DialogFooter>
+            <Button variant="outline" type="button" disabled={deleting} onClick={() => { setDeleteOpen(false); setDeleteError(null); }}>
+              Cancelar
+            </Button>
+            <Button
+              type="button"
+              disabled={deleting}
+              onClick={handleDelete}
+              className="text-white"
+              style={{ background: "#E53935" }}
+            >
+              {deleting ? "Eliminando..." : "Eliminar"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
