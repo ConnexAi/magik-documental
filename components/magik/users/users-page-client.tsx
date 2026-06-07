@@ -170,8 +170,8 @@ export function UsersPageClient({ initialUsers }: Props) {
     return unsubscribe;
   }, []);
 
-  function handleUserCreated(newUser: MagikUser) {
-    setUsers((prev) => [newUser, ...prev]);
+  function handleUserCreated(_newUser: MagikUser) {
+    window.location.href = "/dashboard/admin/users";
   }
 
   function handleRoleChange(uid: string, newRole: UserRole) {

@@ -49,6 +49,10 @@ export function TemplateVersionsDialog({ template, open, onOpenChange, onVersion
   }, [open, template.id]);
 
   async function onPublish(values: PublishFormValues) {
+    if (!values.storageUrl.startsWith("http://") && !values.storageUrl.startsWith("https://")) {
+      setError("La URL debe comenzar con http:// o https://");
+      return;
+    }
     setPublishing(true);
     setError("");
     const nextVersion = template.activeVersion + 1;
@@ -162,7 +166,7 @@ export function TemplateVersionsDialog({ template, open, onOpenChange, onVersion
                 name="storageUrl"
                 control={control}
                 render={({ field }) => (
-                  <Input {...field} placeholder="https://storage.googleapis.com/..." />
+                  <Input {...field} placeholder="Pega el enlace del archivo (Google Drive, Dropbox, OneDrive...)" />
                 )}
               />
             </div>

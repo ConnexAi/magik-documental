@@ -21,7 +21,7 @@ export interface SessionUser {
 
 // ─── Events ──────────────────────────────────────────────────────────────────
 
-export type EventType = "corporativo" | "entretenimiento" | "especial";
+export type EventType = string;
 
 export interface MagikEvent {
   id: string;

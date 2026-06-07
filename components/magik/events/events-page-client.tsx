@@ -9,10 +9,7 @@ import type { MagikEvent } from "@/lib/types";
 
 const PAGE_SIZE = 20;
 
-const EVENT_TYPE_STYLES: Record<
-  MagikEvent["eventType"],
-  { bg: string; color: string; label: string }
-> = {
+const EVENT_TYPE_STYLES: { [key: string]: { bg: string; color: string; label: string } | undefined } = {
   corporativo: {
     bg: "rgba(0, 144, 217, 0.15)",
     color: "#0090D9",
@@ -31,7 +28,7 @@ const EVENT_TYPE_STYLES: Record<
 };
 
 function EventTypeBadge({ type }: { type: MagikEvent["eventType"] }) {
-  const s = EVENT_TYPE_STYLES[type];
+  const s = EVENT_TYPE_STYLES[type] ?? { bg: "rgba(90,88,96,0.2)", color: "var(--color-text-secondary)", label: type };
   return (
     <span
       className="inline-flex items-center rounded-sm px-2 py-0.5 text-xs font-medium"

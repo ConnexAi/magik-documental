@@ -18,10 +18,7 @@ import { Button } from "@/components/ui/button";
 import { fetchWithAuth, getCurrentUserRole } from "@/lib/auth";
 import type { MagikEvent, EventFile } from "@/lib/types";
 
-const EVENT_TYPE_STYLES: Record<
-  MagikEvent["eventType"],
-  { bg: string; color: string; label: string }
-> = {
+const EVENT_TYPE_STYLES: { [key: string]: { bg: string; color: string; label: string } | undefined } = {
   corporativo: { bg: "rgba(0, 144, 217, 0.15)", color: "#0090D9", label: "Corporativo" },
   entretenimiento: { bg: "rgba(106, 166, 19, 0.15)", color: "#6AA613", label: "Entretenimiento" },
   especial: { bg: "rgba(201, 122, 26, 0.15)", color: "#C97A1A", label: "Especial" },
@@ -58,7 +55,7 @@ export function EventDetailClient({ event: initialEvent, initialFiles }: Props) 
   useEffect(() => setMounted(true), []);
   const role = getCurrentUserRole();
   const isAdmin = mounted && role === "admin";
-  const typeStyle = EVENT_TYPE_STYLES[event.eventType];
+  const typeStyle = EVENT_TYPE_STYLES[event.eventType] ?? { bg: "rgba(90,88,96,0.2)", color: "var(--color-text-secondary)", label: event.eventType };
 
   async function handleDelete() {
     setDeleting(true);

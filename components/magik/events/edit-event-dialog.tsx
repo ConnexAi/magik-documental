@@ -27,7 +27,7 @@ import type { MagikEvent } from "@/lib/types";
 const schema = z.object({
   eventName: z.string().optional(),
   clientName: z.string().min(1, "El cliente es requerido"),
-  eventType: z.enum(["corporativo", "entretenimiento", "especial"]),
+  eventType: z.string().min(1, "El tipo de evento es requerido"),
   place: z.string().min(1, "El lugar es requerido"),
   date: z.string().min(1, "La fecha es requerida"),
   description: z.string().optional(),
@@ -35,10 +35,13 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-const EVENT_TYPE_LABELS = {
+const KNOWN_TYPES = ["corporativo", "entretenimiento", "especial"];
+
+const EVENT_TYPE_LABELS: { [key: string]: string } = {
   corporativo: "Corporativo",
   entretenimiento: "Entretenimiento",
   especial: "Especial",
+  otro: "Otro",
 };
 
 interface Props {
@@ -50,6 +53,12 @@ interface Props {
 
 export function EditEventDialog({ event, open, onOpenChange, onUpdated }: Props) {
   const [serverError, setServerError] = useState<string | null>(null);
+  const [typeSelectValue, setTypeSelectValue] = useState<string>(
+    KNOWN_TYPES.includes(event.eventType) ? event.eventType : "otro"
+  );
+  const [customType, setCustomType] = useState<string>(
+    KNOWN_TYPES.includes(event.eventType) ? "" : event.eventType
+  );
 
   const {
     control,
@@ -70,6 +79,9 @@ export function EditEventDialog({ event, open, onOpenChange, onUpdated }: Props)
 
   // Re-populate when event changes
   useEffect(() => {
+    const isKnown = KNOWN_TYPES.includes(event.eventType);
+    setTypeSelectValue(isKnown ? event.eventType : "otro");
+    setCustomType(isKnown ? "" : event.eventType);
     reset({
       eventName: event.eventName ?? "",
       clientName: event.clientName,
@@ -136,16 +148,41 @@ export function EditEventDialog({ event, open, onOpenChange, onUpdated }: Props)
                 name="eventType"
                 control={control}
                 render={({ field }) => (
-                  <Select value={field.value} onValueChange={field.onChange}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue>{EVENT_TYPE_LABELS[field.value]}</SelectValue>
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="corporativo">Corporativo</SelectItem>
-                      <SelectItem value="entretenimiento">Entretenimiento</SelectItem>
-                      <SelectItem value="especial">Especial</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <div className="space-y-2">
+                    <Select
+                      value={typeSelectValue}
+                      onValueChange={(value) => {
+                        if (!value) return;
+                        setTypeSelectValue(value);
+                        if (value !== "otro") {
+                          field.onChange(value);
+                          setCustomType("");
+                        } else {
+                          field.onChange(customType);
+                        }
+                      }}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue>{EVENT_TYPE_LABELS[typeSelectValue] ?? typeSelectValue}</SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="corporativo">Corporativo</SelectItem>
+                        <SelectItem value="entretenimiento">Entretenimiento</SelectItem>
+                        <SelectItem value="especial">Especial</SelectItem>
+                        <SelectItem value="otro">Otro</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {typeSelectValue === "otro" && (
+                      <Input
+                        placeholder="Especifica el tipo de evento..."
+                        value={customType}
+                        onChange={(e) => {
+                          setCustomType(e.target.value);
+                          field.onChange(e.target.value);
+                        }}
+                      />
+                    )}
+                  </div>
                 )}
               />
             </div>
