@@ -35,8 +35,6 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-const KNOWN_TYPES = ["corporativo", "entretenimiento", "especial"];
-
 const EVENT_TYPE_LABELS: { [key: string]: string } = {
   corporativo: "Corporativo",
   entretenimiento: "Entretenimiento",

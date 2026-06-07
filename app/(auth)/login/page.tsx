@@ -69,8 +69,8 @@ export default function LoginPage() {
       }}
     >
       {/* Logo */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "32px" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/assets/logoBlanco.png"
           alt="MAGIK"
