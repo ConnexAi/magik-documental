@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ItemSelector } from "@/components/magik/documents/item-selector";
+import { computeQuoteTotals } from "@/lib/quote-totals";
 import type { Quote, DocumentItem, CatalogRubro } from "@/lib/types";
 
 const schema = z.object({
@@ -121,10 +122,7 @@ export function EditQuoteDialog({ eventId, quote, open, onOpenChange, onUpdated 
     setItems((prev) => prev.filter((_, i) => i !== idx));
   }
 
-  const subtotal = items.reduce((s, i) => s + i.total, 0);
-  // Mismo cálculo que create-quote-dialog y el PDF: descuento antes del IVA
-  const base = subtotal - (quote.discount ?? 0);
-  const total = base + (quote.hasIva ? base * 0.19 : 0);
+  const { subtotal, total } = computeQuoteTotals(items, quote.discount, quote.hasIva);
 
   async function onSubmit(data: FormData) {
     setServerError(null);

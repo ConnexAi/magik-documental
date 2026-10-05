@@ -2,6 +2,7 @@ import PDFDocument from "pdfkit";
 import sharp from "sharp";
 import { ROBOTO_FONTS, MAGIK_LOGO_SVG_BASE64, MAGIK_FIRMA_SVG_BASE64 } from "./pdf-fonts";
 import type { Quote, ServiceOrder, MagikEvent, DocumentItem } from "./types";
+import { computeQuoteTotals } from "./quote-totals";
 
 const CRIMSON = "#D4004E";
 const PAGE_WIDTH = 515; // A4 width minus 40px margins each side
@@ -193,11 +194,13 @@ export async function buildQuotePdf(quote: Quote, event: MagikEvent): Promise<Bu
   doc.y = tableY + 10;
 
   // ── 5. PROPUESTA ECONÓMICA ────────────────────────────────────────────────
-  const subtotal = quote.items.reduce((s, i) => s + i.total, 0);
-  const descuento = quote.discount ?? 0;
-  const subtotalDesc = subtotal - descuento;
-  const iva = quote.hasIva ? Math.round(subtotalDesc * 0.19) : 0;
-  const total = subtotalDesc + iva;
+  const {
+    subtotal,
+    discount: descuento,
+    subtotalWithDiscount: subtotalDesc,
+    iva,
+    total,
+  } = computeQuoteTotals(quote.items, quote.discount, quote.hasIva);
 
   const afterTableY = doc.y + 16;
   const colX = 310;

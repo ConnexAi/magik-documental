@@ -6,6 +6,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { logout } from "@/lib/auth";
 import { getCurrentUserRole } from "@/lib/auth";
+import { useSessionSync } from "@/hooks/use-session-sync";
 import {
   Calendar,
   FileText,
@@ -169,6 +170,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  useSessionSync();
 
   return (
     <div className="min-h-screen" style={{ background: "var(--background)" }}>

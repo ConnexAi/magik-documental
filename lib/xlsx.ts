@@ -1,5 +1,6 @@
 import ExcelJS from "exceljs";
 import type { Quote, ServiceOrder, MagikEvent, DocumentItem } from "@/lib/types";
+import { computeQuoteTotals } from "@/lib/quote-totals";
 
 const CR = "FFD4004E"; // CRIMSON ARGB
 const GH = "FFE8E8E8"; // GRAY_HDR
@@ -110,11 +111,13 @@ export async function buildQuoteXlsx(quote: Quote, event: MagikEvent): Promise<B
   ws.addRow([]); // spacer
 
   // ── 4. Financial summary ───────────────────────────────────────────────────────
-  const subtotal = quote.items.reduce((s, i) => s + i.total, 0);
-  const descuento = quote.discount ?? 0;
-  const subtotalConDescuento = subtotal - descuento;
-  const iva = quote.hasIva ? Math.round(subtotalConDescuento * 0.19) : 0;
-  const total = subtotalConDescuento + iva;
+  const {
+    subtotal,
+    discount: descuento,
+    subtotalWithDiscount: subtotalConDescuento,
+    iva,
+    total,
+  } = computeQuoteTotals(quote.items, quote.discount, quote.hasIva);
 
   function addFinRow(label: string, value: string, bold = false, isCrimson = false) {
     const row = ws.addRow(["", label, value]);

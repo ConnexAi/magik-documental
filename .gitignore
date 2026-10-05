@@ -38,3 +38,11 @@ node_modules
 *.tsbuildinfo
 next-env.d.ts
 .env*
+
+# testing (Playwright, emulator, test build)
+/.next-test/
+/test-results/
+/playwright-report/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log

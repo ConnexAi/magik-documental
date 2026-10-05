@@ -845,10 +845,9 @@ export async function getPortfolioItems(): Promise<FirestoreResult<PortfolioItem
     const items = snap.docs
       .map((d) => d.data() as PortfolioItem)
       .filter((item) => item.visible === true);
-    console.log("Portfolio items:", items.length, items);
     return { success: true, data: items };
   } catch (e) {
-    console.log("Portfolio error:", String(e));
+    console.error("getPortfolioItems:", String(e));
     return { success: true, data: [] };
   }
 }

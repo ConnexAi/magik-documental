@@ -28,6 +28,14 @@ export function middleware(request: NextRequest) {
 
   // ── /login ────────────────────────────────────────────────────────────────
   if (pathname === "/login") {
+    // Una página detectó el token vencido o inválido: limpiar cookies y mostrar
+    // el login (si no, se redirigiría de vuelta al dashboard en bucle).
+    if (request.nextUrl.searchParams.get("session") === "expired") {
+      const response = NextResponse.next();
+      response.cookies.delete(TOKEN_COOKIE);
+      response.cookies.delete(ROLE_COOKIE);
+      return response;
+    }
     if (hasSession && role) {
       return NextResponse.redirect(new URL(getHomeForRole(role), request.url));
     }

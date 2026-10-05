@@ -1,7 +1,9 @@
+import { requirePageSession } from "@/lib/session";
 import { getEvents } from "@/lib/firestore";
 import { EventsPageClient } from "@/components/magik/events/events-page-client";
 
 export default async function EventsPage() {
+  await requirePageSession();
   const result = await getEvents();
   const events = result.success ? result.data : [];
 

@@ -18,6 +18,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ItemSelector } from "@/components/magik/documents/item-selector";
 import { fetchWithAuth } from "@/lib/auth";
+import { providerToOrderFields } from "@/lib/order-provider";
 import type { ServiceOrder, DocumentItem, CatalogRubro, Provider } from "@/lib/types";
 
 // ─── Schema ───────────────────────────────────────────────────────────────────
@@ -144,7 +145,6 @@ export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Pr
     reset,
     watch,
     setValue,
-    getValues,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -185,24 +185,18 @@ export function CreateOrderDialog({ eventId, open, onOpenChange, onCreated }: Pr
     ? providers.filter((p) => p.name.toLowerCase().includes(providerSearch.trim().toLowerCase()))
     : providers;
 
-  // Provider type: { id, name, contact?, phone?, email?, categories, notes?, createdAt, updatedAt }
-  // nitProveedor y razonSocial NO existen en Provider — se usan "" y p.name respectivamente
   function handleSelectProvider(p: Provider) {
-    console.log("Provider seleccionado:", JSON.stringify(p, null, 2));
-    setValue("providerName", p.name, { shouldDirty: true });
-    setValue("nitProveedor", "", { shouldDirty: true });
-    setValue("razonSocial", p.name, { shouldDirty: true });
-    console.log("setValue contactoProveedor:", p.contact);
-    setValue("contactoProveedor", p.contact ?? "", { shouldDirty: true });
-    console.log("setValue emailProveedor:", p.email);
-    setValue("emailProveedor", p.email ?? "", { shouldDirty: true });
-    console.log("setValue celularProveedor:", p.phone);
-    setValue("celularProveedor", p.phone ?? "", { shouldDirty: true });
-    setSelectedProviderId(p.id);
+    const fields = providerToOrderFields(p);
+    setValue("providerName", fields.providerName, { shouldDirty: true });
+    setValue("nitProveedor", fields.nitProveedor, { shouldDirty: true });
+    setValue("razonSocial", fields.razonSocial, { shouldDirty: true });
+    setValue("contactoProveedor", fields.contactoProveedor, { shouldDirty: true });
+    setValue("emailProveedor", fields.emailProveedor, { shouldDirty: true });
+    setValue("celularProveedor", fields.celularProveedor, { shouldDirty: true });
+    setSelectedProviderId(fields.providerId);
     setProviderSearch(p.name);
     setShowSuggestions(false);
     mouseOverSuggestions.current = false;
-    console.log("form values after:", getValues());
   }
 
   useEffect(() => {

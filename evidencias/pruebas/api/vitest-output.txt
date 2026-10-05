@@ -1,0 +1,103 @@
+
+ RUN  v3.2.7 /Users/juanchog/Desktop/Pasantia/magik-documental
+
+  ▲ Next.js 14.2.35
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/25) ...
+   Generating static pages (6/25) 
+   Generating static pages (12/25) 
+   Generating static pages (18/25) 
+ ✓ Generating static pages (25/25)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                             Size     First Load JS
+┌ ○ /                                                   5.34 kB        92.7 kB
+├ ○ /_not-found                                         873 B          88.2 kB
+├ ƒ /api/admin/users                                    0 B                0 B
+├ ƒ /api/admin/users/[uid]                              0 B                0 B
+├ ƒ /api/auth/logout                                    0 B                0 B
+├ ƒ /api/auth/session                                   0 B                0 B
+├ ƒ /api/auth/set-role                                  0 B                0 B
+├ ƒ /api/catalog                                        0 B                0 B
+├ ƒ /api/catalog/rubros                                 0 B                0 B
+├ ƒ /api/catalog/rubros/[rubroId]                       0 B                0 B
+├ ƒ /api/catalog/rubros/[rubroId]/products              0 B                0 B
+├ ƒ /api/catalog/rubros/[rubroId]/products/[productId]  0 B                0 B
+├ ƒ /api/clients                                        0 B                0 B
+├ ƒ /api/clients/[id]                                   0 B                0 B
+├ ƒ /api/events                                         0 B                0 B
+├ ƒ /api/events/[id]                                    0 B                0 B
+├ ƒ /api/events/[id]/files                              0 B                0 B
+├ ƒ /api/events/[id]/files/[fileId]                     0 B                0 B
+├ ƒ /api/events/[id]/orders                             0 B                0 B
+├ ƒ /api/events/[id]/orders/[orderId]                   0 B                0 B
+├ ƒ /api/events/[id]/orders/[orderId]/pdf               0 B                0 B
+├ ƒ /api/events/[id]/orders/[orderId]/xlsx              0 B                0 B
+├ ƒ /api/events/[id]/quotes                             0 B                0 B
+├ ƒ /api/events/[id]/quotes/[quoteId]                   0 B                0 B
+├ ƒ /api/events/[id]/quotes/[quoteId]/duplicate         0 B                0 B
+├ ƒ /api/events/[id]/quotes/[quoteId]/pdf               0 B                0 B
+├ ƒ /api/events/[id]/quotes/[quoteId]/xlsx              0 B                0 B
+├ ƒ /api/portfolio                                      0 B                0 B
+├ ƒ /api/portfolio/[id]                                 0 B                0 B
+├ ƒ /api/providers                                      0 B                0 B
+├ ƒ /api/providers/[id]                                 0 B                0 B
+├ ƒ /api/templates                                      0 B                0 B
+├ ƒ /api/templates/[id]                                 0 B                0 B
+├ ƒ /api/templates/[id]/versions                        0 B                0 B
+├ ƒ /dashboard/admin/clients                            6.08 kB         213 kB
+├ ƒ /dashboard/admin/portfolio                          6.61 kB         213 kB
+├ ƒ /dashboard/admin/users                              5.96 kB         238 kB
+├ ƒ /dashboard/catalog                                  6.04 kB         197 kB
+├ ƒ /dashboard/events                                   6.69 kB         198 kB
+├ ƒ /dashboard/events/[id]                              26.5 kB         259 kB
+├ ƒ /dashboard/providers                                5.58 kB         181 kB
+├ ƒ /dashboard/templates                                8.08 kB         184 kB
+├ ○ /login                                              2.01 kB         172 kB
+└ ƒ /portal                                             8.72 kB        96.1 kB
++ First Load JS shared by all                           87.3 kB
+  ├ chunks/117-34552b37c8527ac6.js                      31.7 kB
+  ├ chunks/fd9d1056-24bf4651d56e98f4.js                 53.6 kB
+  └ other shared chunks (total)                         1.96 kB
+
+
+ƒ Middleware                                            25.1 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3100
+
+ ✓ Starting...
+ ✓ Ready in 115ms
+ ✓ tests/api/security.test.ts (239 tests) 935ms
+ ✓ tests/api/events.test.ts (13 tests) 3512ms
+   ✓ Eventos (HU-01, HU-02, HU-10) > API-EVT-03 · Creaciones simultáneas reciben consecutivos únicos  3384ms
+stderr | tests/rules/rules.test.ts > Reglas de Firestore y Storage (RNF-02) > RUL-02 · Ni un admin puede escribir Firestore desde el navegador
+[2026-10-05T18:11:12.446Z]  @firebase/firestore: Firestore (12.12.0): GrpcConnection RPC 'Write' stream 0x184290db error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L9, false for 'update' @ L9
+
+ ✓ tests/rules/rules.test.ts (4 tests) 110ms
+ ✓ tests/documents/pdf.test.ts (6 tests) 154ms
+ ✓ tests/api/quotes.test.ts (7 tests) 89ms
+ ✓ tests/api/catalog.test.ts (8 tests) 73ms
+ ✓ tests/api/portfolio.test.ts (8 tests) 51ms
+ ✓ tests/api/templates.test.ts (6 tests) 46ms
+ ✓ tests/documents/xlsx.test.ts (3 tests) 47ms
+ ✓ tests/api/clients.test.ts (3 tests) 46ms
+ ✓ tests/api/files.test.ts (5 tests) 37ms
+ ✓ tests/api/orders.test.ts (4 tests) 36ms
+
+ Test Files  12 passed (12)
+      Tests  306 passed (306)
+   Start at  13:10:58
+   Duration  16.67s (transform 69ms, setup 0ms, collect 1.33s, tests 5.13s, environment 1ms, prepare 210ms)
+
+JSON report written to /Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/api/vitest-results.json
+JUNIT report written to /Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/api/vitest-junit.xml

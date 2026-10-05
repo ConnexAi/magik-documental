@@ -1,0 +1,834 @@
+{
+  "config": {
+    "argv": [
+      "/Users/juanchog/.nvm/versions/node/v24.18.0/bin/node",
+      "/Users/juanchog/Desktop/Pasantia/magik-documental/node_modules/.bin/playwright",
+      "test"
+    ],
+    "configFile": "/Users/juanchog/Desktop/Pasantia/magik-documental/playwright.config.ts",
+    "rootDir": "/Users/juanchog/Desktop/Pasantia/magik-documental/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/Users/juanchog/Desktop/Pasantia/magik-documental/tests/e2e/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/juanchog/Desktop/Pasantia/magik-documental/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "evidencias/pruebas/reporte-e2e",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "evidencias/pruebas/e2e/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npx tsx tests/support/serve.ts",
+      "url": "http://localhost:3100/api/portfolio",
+      "reuseExistingServer": false,
+      "timeout": 300000,
+      "stdout": "ignore",
+      "stderr": "pipe"
+    }
+  },
+  "suites": [
+    {
+      "title": "auth.spec.ts",
+      "file": "auth.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Autenticación y acceso por rol (HU-09, RNF-02)",
+          "file": "auth.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "E2E-AUTH-01 · Login como admin redirige a /dashboard/events",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 446,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:28.109Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-AUTH-01-1-login",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/auth-Autenticación-y-acces-eb15f-redirige-a-dashboard-events-chromium/attachments/E2E-AUTH-01-1-login-1997cc24f47c324a964ee717364af243ccdf2351.png"
+                        },
+                        {
+                          "name": "E2E-AUTH-01-2-panel-admin",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/auth-Autenticación-y-acces-eb15f-redirige-a-dashboard-events-chromium/attachments/E2E-AUTH-01-2-panel-admin-48fbce7eb4f755e163897bdad2f8671e7401a20c.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/auth-Autenticación-y-acces-eb15f-redirige-a-dashboard-events-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-e6e3ce01d1c5cf6c81be",
+              "file": "auth.spec.ts",
+              "line": 6,
+              "column": 7
+            },
+            {
+              "title": "E2E-AUTH-02 · Login como colaborador redirige a /dashboard/events sin módulo de usuarios",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 259,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:28.739Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-AUTH-02-1-panel-colaborador",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/auth-Autenticación-y-acces-253ab-ents-sin-módulo-de-usuarios-chromium/attachments/E2E-AUTH-02-1-panel-colaborador-c3f74a3fea7e6bac3bdde43208cf57253f55a8f3.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/auth-Autenticación-y-acces-253ab-ents-sin-módulo-de-usuarios-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-57c0993ab7f6c840393e",
+              "file": "auth.spec.ts",
+              "line": 14,
+              "column": 7
+            },
+            {
+              "title": "E2E-AUTH-03 · Sin sesión, /dashboard redirige a /login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 124,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:29.001Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-AUTH-03-1-redirigido-login",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/auth-Autenticación-y-acces-72ff4--dashboard-redirige-a-login-chromium/attachments/E2E-AUTH-03-1-redirigido-login-1518c2651ce71e802b89b85770fffe2807fb7fdc.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/auth-Autenticación-y-acces-72ff4--dashboard-redirige-a-login-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-6b13f7593549c2f5a7e0",
+              "file": "auth.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "E2E-AUTH-04 · Colaborador intentando /dashboard/admin es redirigido",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 331,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:29.128Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-AUTH-04-1-redirigido-eventos",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/auth-Autenticación-y-acces-17f73-shboard-admin-es-redirigido-chromium/attachments/E2E-AUTH-04-1-redirigido-eventos-83e0f0f9666f9094d164aec6cfe0ad176067732e.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/auth-Autenticación-y-acces-17f73-shboard-admin-es-redirigido-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-fb8052c31bd0e33f7944",
+              "file": "auth.spec.ts",
+              "line": 27,
+              "column": 7
+            },
+            {
+              "title": "E2E-AUTH-05 · Cookies falsificadas no dan acceso a datos de admin",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 139,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:29.462Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-AUTH-05-1-cookies-falsas-login",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/auth-Autenticación-y-acces-a6fd5-dan-acceso-a-datos-de-admin-chromium/attachments/E2E-AUTH-05-1-cookies-falsas-login-808b88bbb4481e03cca347594332cb13490aec82.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/auth-Autenticación-y-acces-a6fd5-dan-acceso-a-datos-de-admin-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d748ac400d08b85935ef-6b0db4898dbcfb714373",
+              "file": "auth.spec.ts",
+              "line": 34,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "events.spec.ts",
+      "file": "events.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Eventos desde el panel (HU-01, HU-02, RNF-01)",
+          "file": "events.spec.ts",
+          "line": 20,
+          "column": 6,
+          "specs": [
+            {
+              "title": "E2E-EVT-01 · Crear evento en máximo 3 clics y verlo en el listado",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "clics",
+                      "description": "2"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 427,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:29.605Z",
+                      "annotations": [
+                        {
+                          "type": "clics",
+                          "description": "2"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "E2E-EVT-01-1-listado-inicial",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/events-Eventos-desde-el-pa-248a6-clics-y-verlo-en-el-listado-chromium/attachments/E2E-EVT-01-1-listado-inicial-c4f314bbc5e719623b7a8b5842c81d6086eb1627.png"
+                        },
+                        {
+                          "name": "E2E-EVT-01-2-formulario",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/events-Eventos-desde-el-pa-248a6-clics-y-verlo-en-el-listado-chromium/attachments/E2E-EVT-01-2-formulario-e564748f67e75bb8cfee0daebba405c7dc83b1d6.png"
+                        },
+                        {
+                          "name": "E2E-EVT-01-3-evento-en-listado",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/events-Eventos-desde-el-pa-248a6-clics-y-verlo-en-el-listado-chromium/attachments/E2E-EVT-01-3-evento-en-listado-818b7b8cb5349e8f5883df9bb2b9509b4e705ee8.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/events-Eventos-desde-el-pa-248a6-clics-y-verlo-en-el-listado-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "42b677eba564a90dbb18-412e2e64c65880ae6d9f",
+              "file": "events.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "E2E-EVT-02 · El evento sigue en el listado al recargar (datos vivos, no del build)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 314,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:30.035Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-EVT-02-1-listado-recargado",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/events-Eventos-desde-el-pa-631eb-r-datos-vivos-no-del-build--chromium/attachments/E2E-EVT-02-1-listado-recargado-5586301c1bd3f7ca879893b9d22a0ded6137369d.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/events-Eventos-desde-el-pa-631eb-r-datos-vivos-no-del-build--chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "42b677eba564a90dbb18-fc401154ce2e11647590",
+              "file": "events.spec.ts",
+              "line": 45,
+              "column": 7
+            },
+            {
+              "title": "E2E-EVT-03 · Detalle con pestañas en máximo 3 clics desde el panel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 375,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:30.353Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-EVT-03-1-detalle-pestanas",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/events-Eventos-desde-el-pa-eeac1-ximo-3-clics-desde-el-panel-chromium/attachments/E2E-EVT-03-1-detalle-pestanas-83fb61d509d4c13f3fd90e0c28cd96541be27a13.png"
+                        },
+                        {
+                          "name": "E2E-EVT-03-2-pestana-archivos",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/events-Eventos-desde-el-pa-eeac1-ximo-3-clics-desde-el-panel-chromium/attachments/E2E-EVT-03-2-pestana-archivos-7b5f9e2a10b8afb671179d914a853d21508ec7a3.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/events-Eventos-desde-el-pa-eeac1-ximo-3-clics-desde-el-panel-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "42b677eba564a90dbb18-0e9253a27823fc9328cd",
+              "file": "events.spec.ts",
+              "line": 52,
+              "column": 7
+            },
+            {
+              "title": "E2E-EVT-04 · Búsqueda por cliente filtra el listado",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1931,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:30.730Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-EVT-04-1-busqueda-cliente",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/events-Eventos-desde-el-pa-03fc6-r-cliente-filtra-el-listado-chromium/attachments/E2E-EVT-04-1-busqueda-cliente-74737fafe84a4b259eab5fe4429c8ffba70d10c8.png"
+                        },
+                        {
+                          "name": "E2E-EVT-04-2-filtro-limpio",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/events-Eventos-desde-el-pa-03fc6-r-cliente-filtra-el-listado-chromium/attachments/E2E-EVT-04-2-filtro-limpio-7ca1f7dde7e7fcf85b7abd98794dca16e2c9da95.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/events-Eventos-desde-el-pa-03fc6-r-cliente-filtra-el-listado-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "42b677eba564a90dbb18-1202eb96dcf307cbd6e5",
+              "file": "events.spec.ts",
+              "line": 63,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "portal.spec.ts",
+      "file": "portal.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Portal público (HU-15)",
+          "file": "portal.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "E2E-POR-01 · /portal carga sin login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 245,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:32.665Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-POR-01-1-portal",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/portal-Portal-público-HU-1-9363f-01-·-portal-carga-sin-login-chromium/attachments/E2E-POR-01-1-portal-4fe7cdb0d0a16dfa72e60502c72782f1d8dc7f0f.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/portal-Portal-público-HU-1-9363f-01-·-portal-carga-sin-login-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "291f6c0e7fe47579f0c2-1046ca788693419e9f68",
+              "file": "portal.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "E2E-POR-02 · La galería muestra los eventos visibles y no los ocultos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 249,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:32.913Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-POR-02-1-galeria",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/portal-Portal-público-HU-1-0ced4-s-visibles-y-no-los-ocultos-chromium/attachments/E2E-POR-02-1-galeria-2d314f8f770243687c9031731b6445662af97780.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/portal-Portal-público-HU-1-0ced4-s-visibles-y-no-los-ocultos-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "291f6c0e7fe47579f0c2-0c319bf60fd8fdee3d07",
+              "file": "portal.spec.ts",
+              "line": 14,
+              "column": 7
+            },
+            {
+              "title": "E2E-POR-03 · No hay enlaces a documentos internos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 220,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:33.164Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-POR-03-1-enlaces-revisados",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/portal-Portal-público-HU-1-0a757-laces-a-documentos-internos-chromium/attachments/E2E-POR-03-1-enlaces-revisados-06773afeda5f290f8ec8e00a5cc0d264be3fc29f.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/portal-Portal-público-HU-1-0a757-laces-a-documentos-internos-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "291f6c0e7fe47579f0c2-d6ec5291a57da4e7a2a3",
+              "file": "portal.spec.ts",
+              "line": 22,
+              "column": 7
+            },
+            {
+              "title": "E2E-POR-04 · Portal en celular (390×844) sin desborde horizontal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 250,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:33.388Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-POR-04-1-portal-movil",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/portal-Portal-público-HU-1-f69cd-844-sin-desborde-horizontal-chromium/attachments/E2E-POR-04-1-portal-movil-a3b5cedd584387f3b79bc6e9bd027ec9ebb80f0d.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/portal-Portal-público-HU-1-f69cd-844-sin-desborde-horizontal-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "291f6c0e7fe47579f0c2-e0936a17fb5a9e4a8afc",
+              "file": "portal.spec.ts",
+              "line": 33,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "quotes.spec.ts",
+      "file": "quotes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Cotizaciones desde la UI (HU-03)",
+          "file": "quotes.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "E2E-COT-01 · Crear cotización en un evento y descargar su PDF",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5707,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T18:11:33.641Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-COT-01-1-detalle-evento",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/quotes-Cotizaciones-desde--046a7-n-evento-y-descargar-su-PDF-chromium/attachments/E2E-COT-01-1-detalle-evento-06a9e3eb4018f10101cca7e9f97dfba820fb5e3a.png"
+                        },
+                        {
+                          "name": "E2E-COT-01-2-formulario-con-item",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/quotes-Cotizaciones-desde--046a7-n-evento-y-descargar-su-PDF-chromium/attachments/E2E-COT-01-2-formulario-con-item-865f3e52133d6d9e6e666817add986f7906f5dfa.png"
+                        },
+                        {
+                          "name": "E2E-COT-01-3-cotizacion-creada",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/quotes-Cotizaciones-desde--046a7-n-evento-y-descargar-su-PDF-chromium/attachments/E2E-COT-01-3-cotizacion-creada-90006d01f719a417a3178088161bc2919677ed80.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/quotes-Cotizaciones-desde--046a7-n-evento-y-descargar-su-PDF-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c771cb32dcc0e8b24d4c-52db8f6dbf948a5b5993",
+              "file": "quotes.spec.ts",
+              "line": 6,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-05T18:11:18.765Z",
+    "duration": 20636.252,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

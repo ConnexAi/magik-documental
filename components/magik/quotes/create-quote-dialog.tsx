@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ItemSelector } from "@/components/magik/documents/item-selector";
+import { computeQuoteTotals } from "@/lib/quote-totals";
 import type { Quote, DocumentItem, CatalogRubro } from "@/lib/types";
 
 // ─── Schema ───────────────────────────────────────────────────────────────────
@@ -212,7 +213,13 @@ export function CreateQuoteDialog({ eventId, open, onOpenChange, onCreated }: Pr
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
+    // Campos obligatorios en "" para que zod muestre "Requerido" y no su
+    // mensaje técnico por defecto cuando quedan sin tocar
     defaultValues: {
+      title: "",
+      attention: "",
+      attentionRole: "",
+      subject: "",
       paymentTerms: "100% - A Convenir",
       hasIva: false,
       hasAddition: false,
@@ -232,7 +239,7 @@ export function CreateQuoteDialog({ eventId, open, onOpenChange, onCreated }: Pr
   }, [open]);
 
   function handleClose() {
-    reset({ paymentTerms: "100% - A Convenir", hasIva: false, hasAddition: false });
+    reset({ title: "", attention: "", attentionRole: "", subject: "", paymentTerms: "100% - A Convenir", hasIva: false, hasAddition: false });
     setItems([]);
     setAdditionItems([]);
     setServerError(null);
@@ -285,11 +292,12 @@ export function CreateQuoteDialog({ eventId, open, onOpenChange, onCreated }: Pr
     return (idx: number) => setter((prev) => prev.filter((_, i) => i !== idx));
   }
 
-  const subtotal = items.reduce((s, i) => s + i.total, 0);
-  const discountAmount = Number(watchDiscount || 0);
-  const base = subtotal - discountAmount;
-  const ivaAmount = watchHasIva ? base * 0.19 : 0;
-  const total = base + ivaAmount;
+  const {
+    subtotal,
+    discount: discountAmount,
+    iva: ivaAmount,
+    total,
+  } = computeQuoteTotals(items, Number(watchDiscount || 0), watchHasIva);
 
   async function onSubmit(data: FormData) {
     setServerError(null);

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { auth } from "@/lib/firebase";
 import type { UserRole } from "@/lib/types";
@@ -24,6 +24,27 @@ export default function LoginPage() {
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  // Volvió aquí porque el token del servidor venció: si Firebase conserva la
+  // sesión en el navegador, se pide un token nuevo y se regresa al panel.
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("session") !== "expired") return;
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      unsubscribe();
+      if (!user) return;
+      const idToken = await user.getIdToken(true);
+      const res = await fetch("/api/auth/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken }),
+      });
+      if (res.ok) {
+        const { role } = (await res.json()) as { role: UserRole };
+        router.replace(getHomeForRole(role));
+      }
+    });
+    return unsubscribe;
+  }, [router]);
 
   const {
     register,

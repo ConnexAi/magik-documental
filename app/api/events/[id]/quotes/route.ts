@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireSession } from "@/lib/session";
 import { getQuotes, createQuote } from "@/lib/firestore";
+import { computeQuoteTotals } from "@/lib/quote-totals";
 import type { Quote } from "@/lib/types";
 
 export async function GET(
@@ -24,8 +25,15 @@ export async function POST(
   if (auth instanceof NextResponse) return auth;
   const body = (await request.json()) as Omit<Quote, "id" | "consecutive" | "eventId" | "version" | "status" | "createdBy" | "createdAt" | "updatedAt">;
 
+  // Los totales se recalculan en el servidor; no se confía en los del cliente
+  const items = (body.items ?? []).map((i) => ({ ...i, total: i.quantity * i.unitPrice }));
+  const { subtotal, total } = computeQuoteTotals(items, body.discount, body.hasIva);
+
   const result = await createQuote(params.id, {
     ...body,
+    items,
+    subtotal,
+    total,
     eventId: params.id,
     version: 1,
     status: "draft",

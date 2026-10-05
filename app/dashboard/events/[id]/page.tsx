@@ -1,3 +1,4 @@
+import { requirePageSession } from "@/lib/session";
 import { notFound } from "next/navigation";
 import { getEvent, getEventFiles } from "@/lib/firestore";
 import { EventDetailClient } from "@/components/magik/events/event-detail-client";
@@ -7,6 +8,7 @@ export default async function EventDetailPage({
 }: {
   params: { id: string };
 }) {
+  await requirePageSession();
   const [eventResult, filesResult] = await Promise.all([
     getEvent(params.id),
     getEventFiles(params.id),

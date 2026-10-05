@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-05T18:12:40.581Z",
+  "connections": 10,
+  "durationS": 30,
+  "events": 503,
+  "results": [
+    {
+      "endpoint": "GET /api/events",
+      "requests": 7473,
+      "rps": 249,
+      "errors": 0,
+      "non2xx": 0,
+      "latency": {
+        "p50": 39,
+        "p90": 42,
+        "p99": 49,
+        "max": 109,
+        "mean": 40
+      },
+      "ok": true
+    },
+    {
+      "endpoint": "GET /api/events?clientName=bancolombia&year=2025&place=cali",
+      "requests": 7896,
+      "rps": 263,
+      "errors": 0,
+      "non2xx": 0,
+      "latency": {
+        "p50": 37,
+        "p90": 40,
+        "p99": 45,
+        "max": 68,
+        "mean": 37
+      },
+      "ok": true
+    }
+  ]
+}
