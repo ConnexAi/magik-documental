@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { fetchWithAuth } from "@/lib/auth";
+import { useIsAdmin } from "@/hooks/use-is-admin";
 import { UploadFileDialog } from "./upload-file-dialog";
 import { RenameFileDialog } from "./rename-file-dialog";
 import type { EventFile, FileCategory } from "@/lib/types";
@@ -23,6 +24,10 @@ const CATEGORIES: FileCategory[] = [
   "Orden de Servicio",
   "Otro",
 ];
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("es-CO", { day: "2-digit", month: "short", year: "numeric" });
+}
 
 function formatBytes(bytes: number) {
   if (bytes < 1024) return `${bytes} B`;
@@ -65,6 +70,7 @@ interface Props {
 }
 
 export function FilesTab({ eventId, initialFiles }: Props) {
+  const isAdmin = useIsAdmin();
   const [files, setFiles] = useState<EventFile[]>(initialFiles);
   const [activeCategory, setActiveCategory] = useState<FileCategory | "Todos">("Todos");
   const [uploadOpen, setUploadOpen] = useState(false);
@@ -80,6 +86,9 @@ export function FilesTab({ eventId, initialFiles }: Props) {
       })
       .catch(() => {});
   }, [eventId]);
+
+  // Categorías predefinidas + las personalizadas que existan en los archivos
+  const categories = Array.from(new Set([...CATEGORIES, ...files.map((f) => f.category)]));
 
   const displayed =
     activeCategory === "Todos"
@@ -104,7 +113,7 @@ export function FilesTab({ eventId, initialFiles }: Props) {
     <div>
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2 flex-wrap">
-          {(["Todos", ...CATEGORIES] as const).map((cat) => (
+          {["Todos", ...categories].map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
@@ -143,7 +152,7 @@ export function FilesTab({ eventId, initialFiles }: Props) {
           <table className="w-full text-sm">
             <thead>
               <tr style={{ borderBottom: "1px solid var(--border)" }}>
-                {["Nombre", "Categoría", "Tamaño", ""].map((h) => (
+                {["Nombre", "Categoría", "Fecha", "Autor", "Tamaño", ""].map((h) => (
                   <th key={h} className="px-4 py-3 text-left" style={{ color: "var(--color-text-muted)" }}>
                     <span className="section-label">{h}</span>
                   </th>
@@ -158,6 +167,12 @@ export function FilesTab({ eventId, initialFiles }: Props) {
                   </td>
                   <td className="px-4 py-3">
                     <span className="text-xs" style={{ color: "var(--color-text-muted)" }}>{f.category}</span>
+                  </td>
+                  <td className="px-4 py-3">
+                    <span className="text-xs" style={{ color: "var(--color-text-muted)" }}>{formatDate(f.createdAt)}</span>
+                  </td>
+                  <td className="px-4 py-3">
+                    <span className="text-xs" style={{ color: "var(--color-text-muted)" }}>{f.uploadedByName ?? "—"}</span>
                   </td>
                   <td className="px-4 py-3">
                     <span className="font-mono text-xs" style={{ color: "var(--color-text-muted)" }}>
@@ -184,14 +199,16 @@ export function FilesTab({ eventId, initialFiles }: Props) {
                       >
                         <Pencil size={14} />
                       </button>
-                      <button
-                        onClick={() => setDeleteTarget(f)}
-                        title="Eliminar"
-                        className="rounded p-1 transition-colors"
-                        style={{ color: "var(--color-text-muted)" }}
-                      >
-                        <Trash2 size={14} />
-                      </button>
+                      {isAdmin && (
+                        <button
+                          onClick={() => setDeleteTarget(f)}
+                          title="Eliminar"
+                          className="rounded p-1 transition-colors"
+                          style={{ color: "var(--color-text-muted)" }}
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

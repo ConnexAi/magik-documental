@@ -2,20 +2,15 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 import { NextRequest, NextResponse } from "next/server";
+import { requireSession } from "@/lib/session";
 import { getServiceOrder, getEvent } from "@/lib/firestore";
-
-function getRole(r: NextRequest) {
-  return r.cookies.get("magik_role")?.value;
-}
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string; orderId: string } }
 ) {
-  const role = getRole(request);
-  if (role !== "admin" && role !== "collaborator") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const auth = await requireSession(request);
+  if (auth instanceof NextResponse) return auth;
 
   const [eventResult, orderResult] = await Promise.all([
     getEvent(params.id),

@@ -95,7 +95,7 @@ export function CatalogPageClient({ initialRubros }: Props) {
             {rubros.length} {rubros.length === 1 ? "rubro" : "rubros"}
           </p>
         </div>
-        {isAdmin && <CreateRubroDialog onCreated={handleRubroCreated} />}
+        <CreateRubroDialog onCreated={handleRubroCreated} />
       </div>
 
       {/* Rubros list */}
@@ -107,14 +107,12 @@ export function CatalogPageClient({ initialRubros }: Props) {
           <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
             No hay rubros en el catálogo
           </p>
-          {isAdmin && (
-            <p
-              className="mt-1 text-xs"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              Usa el botón Nuevo rubro para comenzar
-            </p>
-          )}
+          <p
+            className="mt-1 text-xs"
+            style={{ color: "var(--color-text-muted)" }}
+          >
+            Usa el botón Nuevo rubro para comenzar
+          </p>
         </div>
       )}
 

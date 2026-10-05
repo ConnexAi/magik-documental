@@ -9,6 +9,11 @@ function getHomeForRole(_role: UserRole): string {
   return "/dashboard/events";
 }
 
+// Este middleware SOLO redirige la navegación del cliente (login, dashboard,
+// portal) a partir de las cookies presentes. No es una barrera de seguridad:
+// magik_role puede editarse desde DevTools. La autorización real ocurre en
+// cada API Route, que verifica magik_token con firebase-admin mediante
+// requireSession / requireAdmin de lib/session.ts.
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 

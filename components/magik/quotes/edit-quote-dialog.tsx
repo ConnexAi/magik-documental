@@ -122,6 +122,9 @@ export function EditQuoteDialog({ eventId, quote, open, onOpenChange, onUpdated 
   }
 
   const subtotal = items.reduce((s, i) => s + i.total, 0);
+  // Mismo cálculo que create-quote-dialog y el PDF: descuento antes del IVA
+  const base = subtotal - (quote.discount ?? 0);
+  const total = base + (quote.hasIva ? base * 0.19 : 0);
 
   async function onSubmit(data: FormData) {
     setServerError(null);
@@ -134,7 +137,7 @@ export function EditQuoteDialog({ eventId, quote, open, onOpenChange, onUpdated 
         clientCompany: data.clientCompany || undefined,
         items,
         subtotal,
-        total: subtotal,
+        total,
         notes: data.notes || undefined,
       }),
     });
@@ -248,7 +251,7 @@ export function EditQuoteDialog({ eventId, quote, open, onOpenChange, onUpdated 
                 </table>
                 <div className="flex items-center justify-between px-3 py-2" style={{ borderTop: "1px solid var(--border)", background: "var(--muted)" }}>
                   <span className="text-xs font-medium" style={{ color: "var(--color-text-secondary)" }}>Total</span>
-                  <span className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>{money(subtotal)}</span>
+                  <span className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>{money(total)}</span>
                 </div>
               </div>
             )}

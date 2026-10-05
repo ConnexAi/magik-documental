@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/session";
 import { adminAuth } from "@/lib/firebase-admin";
 import { setUserRole } from "@/lib/firebase-admin";
 import { createUser, getUsers } from "@/lib/firestore";
 import type { UserRole } from "@/lib/types";
 
 export async function GET(request: NextRequest) {
-  const callerRole = request.cookies.get("magik_role")?.value;
-  if (callerRole !== "admin") {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
+  const auth = await requireAdmin(request);
+  if (auth instanceof NextResponse) return auth;
 
   const result = await getUsers();
   if (!result.success) {
@@ -18,10 +17,8 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const callerRole = request.cookies.get("magik_role")?.value;
-  if (callerRole !== "admin") {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
+  const auth = await requireAdmin(request);
+  if (auth instanceof NextResponse) return auth;
 
   const { email, password, displayName, role } = (await request.json()) as {
     email: string;

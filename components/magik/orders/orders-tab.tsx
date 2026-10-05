@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { fetchWithAuth } from "@/lib/auth";
+import { useIsAdmin } from "@/hooks/use-is-admin";
 import { CreateOrderDialog } from "./create-order-dialog";
 import { EditOrderDialog } from "./edit-order-dialog";
 import type { ServiceOrder } from "@/lib/types";
@@ -58,6 +59,7 @@ interface Props {
 }
 
 export function OrdersTab({ eventId, eventConsecutive }: Props) {
+  const isAdmin = useIsAdmin();
   const [orders, setOrders] = useState<ServiceOrder[]>([]);
   const [loading, setLoading] = useState(true);
   const [createOpen, setCreateOpen] = useState(false);
@@ -158,14 +160,16 @@ export function OrdersTab({ eventId, eventConsecutive }: Props) {
                       >
                         <Pencil size={14} />
                       </button>
-                      <button
-                        onClick={() => setDeleteTarget(o)}
-                        title="Eliminar"
-                        className="rounded p-1 transition-colors"
-                        style={{ color: "var(--color-text-muted)" }}
-                      >
-                        <Trash2 size={14} />
-                      </button>
+                      {isAdmin && (
+                        <button
+                          onClick={() => setDeleteTarget(o)}
+                          title="Eliminar"
+                          className="rounded p-1 transition-colors"
+                          style={{ color: "var(--color-text-muted)" }}
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

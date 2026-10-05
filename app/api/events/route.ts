@@ -1,18 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyTokenSafe } from "@/lib/firebase-admin";
+import { requireSession } from "@/lib/session";
 import { getEvents, createEvent, addEventToClient } from "@/lib/firestore";
 import type { EventFilters } from "@/lib/firestore";
 import type { MagikEvent } from "@/lib/types";
 
-function requireSession(request: NextRequest): boolean {
-  const role = request.cookies.get("magik_role")?.value;
-  return role === "admin" || role === "collaborator";
-}
-
 export async function GET(request: NextRequest) {
-  if (!requireSession(request)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const auth = await requireSession(request);
+  if (auth instanceof NextResponse) return auth;
 
   const { searchParams } = request.nextUrl;
   const filters: EventFilters = {};
@@ -34,29 +28,24 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  if (!requireSession(request)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  const token = request.cookies.get("magik_token")?.value;
-  if (!token) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  const tokenResult = await verifyTokenSafe(token);
-  if (!tokenResult.ok) {
-    return NextResponse.json(
-      { error: tokenResult.expired ? "session_expired" : "Unauthorized" },
-      { status: 401 }
-    );
-  }
+  const auth = await requireSession(request);
+  if (auth instanceof NextResponse) return auth;
   const body = (await request.json()) as Omit<
     MagikEvent,
     "id" | "consecutive" | "createdBy" | "createdAt" | "updatedAt"
   > & { clientId?: string };
 
   const { clientId, ...eventData } = body;
-  const result = await createEvent({ ...eventData, createdBy: tokenResult.decoded.uid });
+  const missing = (["clientName", "eventType", "place", "date"] as const).filter(
+    (k) => typeof eventData[k] !== "string" || eventData[k].trim() === ""
+  );
+  if (missing.length > 0) {
+    return NextResponse.json(
+      { error: `Campos obligatorios: ${missing.join(", ")}` },
+      { status: 400 }
+    );
+  }
+  const result = await createEvent({ ...eventData, createdBy: auth.uid });
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 500 });
   }

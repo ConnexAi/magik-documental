@@ -1,26 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyTokenSafe } from "@/lib/firebase-admin";
+import { requireAdmin } from "@/lib/session";
 import { updatePortfolioItem, deletePortfolioItem } from "@/lib/firestore";
 import type { PortfolioItem } from "@/lib/types";
 
-async function requireAdmin(request: NextRequest): Promise<{ ok: true } | NextResponse> {
-  const role = request.cookies.get("magik_role")?.value;
-  if (role !== "admin") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-  const token = request.cookies.get("magik_token")?.value;
-  if (!token) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-  const tokenResult = await verifyTokenSafe(token);
-  if (!tokenResult.ok) {
-    return NextResponse.json(
-      { error: tokenResult.expired ? "session_expired" : "Unauthorized" },
-      { status: 401 }
-    );
-  }
-  return { ok: true };
-}
+const MAX_PHOTOS = 5;
 
 export async function PATCH(
   request: NextRequest,
@@ -30,6 +13,9 @@ export async function PATCH(
   if (auth instanceof NextResponse) return auth;
 
   const body = (await request.json()) as Partial<Omit<PortfolioItem, "id" | "publishedAt">>;
+  if (body.imageUrls && body.imageUrls.length > MAX_PHOTOS) {
+    return NextResponse.json({ error: `Máximo ${MAX_PHOTOS} fotos por evento` }, { status: 400 });
+  }
   const result = await updatePortfolioItem(params.id, body);
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 500 });

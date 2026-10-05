@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { fetchWithAuth } from "@/lib/auth";
+import { useIsAdmin } from "@/hooks/use-is-admin";
 import { CreateQuoteDialog } from "./create-quote-dialog";
 import { EditQuoteDialog } from "./edit-quote-dialog";
 import type { Quote } from "@/lib/types";
@@ -79,6 +80,7 @@ interface Props {
 }
 
 export function QuotesTab({ eventId, eventConsecutive }: Props) {
+  const isAdmin = useIsAdmin();
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [loading, setLoading] = useState(true);
   const [createOpen, setCreateOpen] = useState(false);
@@ -221,14 +223,16 @@ export function QuotesTab({ eventId, eventConsecutive }: Props) {
                       >
                         <Pencil size={14} />
                       </button>
-                      <button
-                        onClick={() => setDeleteTarget(q)}
-                        title="Eliminar"
-                        className="rounded p-1 transition-colors"
-                        style={{ color: "var(--color-text-muted)" }}
-                      >
-                        <Trash2 size={14} />
-                      </button>
+                      {isAdmin && (
+                        <button
+                          onClick={() => setDeleteTarget(q)}
+                          title="Eliminar"
+                          className="rounded p-1 transition-colors"
+                          style={{ color: "var(--color-text-muted)" }}
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

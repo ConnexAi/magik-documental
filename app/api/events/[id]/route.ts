@@ -1,23 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdmin, requireSession } from "@/lib/session";
 import { getEvent, updateEvent, deleteEvent } from "@/lib/firestore";
 import type { MagikEvent } from "@/lib/types";
-
-function getRole(request: NextRequest) {
-  return request.cookies.get("magik_role")?.value;
-}
-
-function requireSession(request: NextRequest): boolean {
-  const role = getRole(request);
-  return role === "admin" || role === "collaborator";
-}
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  if (!requireSession(request)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const auth = await requireSession(request);
+  if (auth instanceof NextResponse) return auth;
   const result = await getEvent(params.id);
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 500 });
@@ -32,9 +23,8 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  if (!requireSession(request)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const auth = await requireSession(request);
+  if (auth instanceof NextResponse) return auth;
   const body = (await request.json()) as Partial<MagikEvent>;
   const result = await updateEvent(params.id, body);
   if (!result.success) {
@@ -47,9 +37,8 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  if (getRole(request) !== "admin") {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
+  const auth = await requireAdmin(request);
+  if (auth instanceof NextResponse) return auth;
   const result = await deleteEvent(params.id);
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 500 });

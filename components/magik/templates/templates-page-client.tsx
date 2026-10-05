@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, History, Trash2, ExternalLink } from "lucide-react";
+import { Plus, History, Trash2, Download } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { fetchWithAuth } from "@/lib/auth";
+import { useIsAdmin } from "@/hooks/use-is-admin";
 import { UploadTemplateDialog } from "./upload-template-dialog";
 import { TemplateVersionsDialog } from "./template-versions-dialog";
 import type { Template } from "@/lib/types";
@@ -65,6 +66,9 @@ interface Props {
 }
 
 export function TemplatesPageClient({ initialTemplates }: Props) {
+  // Solo el admin crea, publica versiones, ve el historial y elimina.
+  // El colaborador solo ve la versión activa y su descarga.
+  const isAdmin = useIsAdmin();
   const [templates, setTemplates] = useState<Template[]>(initialTemplates);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [preloadedFile, setPreloadedFile] = useState<File | null>(null);
@@ -96,7 +100,7 @@ export function TemplatesPageClient({ initialTemplates }: Props) {
 
   return (
     <div
-      onDragOver={(e) => { e.preventDefault(); setPageDragging(true); }}
+      onDragOver={(e) => { e.preventDefault(); if (isAdmin) setPageDragging(true); }}
       onDragLeave={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
           setPageDragging(false);
@@ -106,7 +110,7 @@ export function TemplatesPageClient({ initialTemplates }: Props) {
         e.preventDefault();
         setPageDragging(false);
         const dropped = e.dataTransfer.files[0];
-        if (dropped) openDialog(dropped);
+        if (dropped && isAdmin) openDialog(dropped);
       }}
     >
       {pageDragging && (
@@ -138,14 +142,16 @@ export function TemplatesPageClient({ initialTemplates }: Props) {
             Plantillas de documentos corporativos para cotizaciones y órdenes de servicio
           </p>
         </div>
-        <Button
-          onClick={() => openDialog()}
-          className="text-white"
-          style={{ background: "var(--color-crimson)" }}
-        >
-          <Plus size={14} className="mr-1.5" />
-          Nueva plantilla
-        </Button>
+        {isAdmin && (
+          <Button
+            onClick={() => openDialog()}
+            className="text-white"
+            style={{ background: "var(--color-crimson)" }}
+          >
+            <Plus size={14} className="mr-1.5" />
+            Nueva plantilla
+          </Button>
+        )}
       </div>
 
       <div
@@ -190,29 +196,33 @@ export function TemplatesPageClient({ initialTemplates }: Props) {
                           href={t.storageUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          title="Ver archivo"
+                          title="Descargar versión activa"
                           className="rounded p-1 transition-colors"
                           style={{ color: "var(--color-text-muted)" }}
                         >
-                          <ExternalLink size={14} />
+                          <Download size={14} />
                         </a>
                       )}
-                      <button
-                        onClick={() => setVersionsTarget(t)}
-                        title="Historial de versiones"
-                        className="rounded p-1 transition-colors"
-                        style={{ color: "var(--color-text-muted)" }}
-                      >
-                        <History size={14} />
-                      </button>
-                      <button
-                        onClick={() => setDeleteTarget(t)}
-                        title="Eliminar"
-                        className="rounded p-1 transition-colors"
-                        style={{ color: "var(--color-text-muted)" }}
-                      >
-                        <Trash2 size={14} />
-                      </button>
+                      {isAdmin && (
+                        <>
+                          <button
+                            onClick={() => setVersionsTarget(t)}
+                            title="Historial de versiones"
+                            className="rounded p-1 transition-colors"
+                            style={{ color: "var(--color-text-muted)" }}
+                          >
+                            <History size={14} />
+                          </button>
+                          <button
+                            onClick={() => setDeleteTarget(t)}
+                            title="Eliminar"
+                            className="rounded p-1 transition-colors"
+                            style={{ color: "var(--color-text-muted)" }}
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </>
+                      )}
                     </div>
                   </td>
                 </tr>

@@ -1,18 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdmin, requireSession } from "@/lib/session";
 import { updateEventFile, deleteEventFile } from "@/lib/firestore";
-
-function getRole(r: NextRequest) {
-  return r.cookies.get("magik_role")?.value;
-}
 
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string; fileId: string } }
 ) {
-  const role = getRole(request);
-  if (role !== "admin" && role !== "collaborator") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const auth = await requireSession(request);
+  if (auth instanceof NextResponse) return auth;
   const body = (await request.json()) as { name?: string; category?: string };
   const result = await updateEventFile(params.id, params.fileId, body);
   if (!result.success) {
@@ -25,10 +20,8 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string; fileId: string } }
 ) {
-  const role = getRole(request);
-  if (role !== "admin" && role !== "collaborator") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const auth = await requireAdmin(request);
+  if (auth instanceof NextResponse) return auth;
   const result = await deleteEventFile(params.id, params.fileId);
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 500 });

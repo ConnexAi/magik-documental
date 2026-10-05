@@ -164,6 +164,7 @@ export function TemplateVersionsDialog({ template, open, onOpenChange, onVersion
                   <th className="py-2 text-left px-2" style={{ color: "var(--color-text-muted)" }}>Ver.</th>
                   <th className="py-2 text-left px-2" style={{ color: "var(--color-text-muted)" }}>Changelog</th>
                   <th className="py-2 text-left px-2" style={{ color: "var(--color-text-muted)" }}>Fecha</th>
+                  <th className="py-2 text-left px-2" style={{ color: "var(--color-text-muted)" }}>Autor</th>
                   <th className="py-2 px-2" />
                 </tr>
               </thead>
@@ -188,6 +189,9 @@ export function TemplateVersionsDialog({ template, open, onOpenChange, onVersion
                     </td>
                     <td className="px-2 py-2" style={{ color: "var(--color-text-muted)" }}>
                       {formatDate(v.publishedAt)}
+                    </td>
+                    <td className="px-2 py-2" style={{ color: "var(--color-text-muted)" }}>
+                      {v.publishedByName ?? "—"}
                     </td>
                     <td className="px-2 py-2 text-right">
                       {v.storageUrl && (

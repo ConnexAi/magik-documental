@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyTokenSafe } from "@/lib/firebase-admin";
+import { requireAdmin, requireSession } from "@/lib/session";
 import {
   getPortfolioItems,
   getAllPortfolioItems,
@@ -7,16 +7,15 @@ import {
 } from "@/lib/firestore";
 import type { PortfolioItem } from "@/lib/types";
 
-function getRole(r: NextRequest) {
-  return r.cookies.get("magik_role")?.value;
-}
+const MAX_PHOTOS = 5;
 
+// GET es público: sin sesión válida solo devuelve los items visibles.
+// Con un token verificado devuelve todos (panel admin del portafolio).
 export async function GET(request: NextRequest) {
-  const role = getRole(request);
-  const result =
-    role === "admin" || role === "collaborator"
-      ? await getAllPortfolioItems()
-      : await getPortfolioItems();
+  const hasSession = request.cookies.has("magik_token")
+    ? !((await requireSession(request)) instanceof NextResponse)
+    : false;
+  const result = hasSession ? await getAllPortfolioItems() : await getPortfolioItems();
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 500 });
   }
@@ -24,22 +23,12 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const role = getRole(request);
-  if (role !== "admin") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-  const token = request.cookies.get("magik_token")?.value;
-  if (!token) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-  const tokenResult = await verifyTokenSafe(token);
-  if (!tokenResult.ok) {
-    return NextResponse.json(
-      { error: tokenResult.expired ? "session_expired" : "Unauthorized" },
-      { status: 401 }
-    );
-  }
-
+  const auth = await requireAdmin(request);
+  if (auth instanceof NextResponse) return auth;
   const body = (await request.json()) as Omit<PortfolioItem, "id" | "publishedAt">;
+  if (body.imageUrls && body.imageUrls.length > MAX_PHOTOS) {
+    return NextResponse.json({ error: `Máximo ${MAX_PHOTOS} fotos por evento` }, { status: 400 });
+  }
   const result = await createPortfolioItem(body);
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 500 });

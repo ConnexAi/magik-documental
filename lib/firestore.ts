@@ -125,31 +125,39 @@ export async function createEvent(
   data: Omit<MagikEvent, "id" | "consecutive" | "createdAt" | "updatedAt">
 ): Promise<FirestoreResult<MagikEvent>> {
   try {
-    // Determine next consecutive number
-    const lastSnap = await adminDb
-      .collection("events")
-      .orderBy("consecutive", "desc")
-      .limit(1)
-      .get();
-
-    let nextNum = 1;
-    if (!lastSnap.empty) {
-      const last = lastSnap.docs[0].data() as MagikEvent;
-      const match = last.consecutive.match(/(\d+)$/);
-      if (match) nextNum = parseInt(match[1]) + 1;
-    }
-    const consecutive = `EVT-${String(nextNum).padStart(4, "0")}`;
-
+    // Consecutive via counter doc inside a transaction so two concurrent
+    // creations never get the same EVT number. The counter is seeded from the
+    // last stored consecutive the first time.
+    const counterRef = adminDb.collection("counters").doc("events");
     const ref = adminDb.collection("events").doc();
-    const now = new Date().toISOString();
-    const event: MagikEvent = {
-      ...data,
-      id: ref.id,
-      consecutive,
-      createdAt: now,
-      updatedAt: now,
-    };
-    await ref.set(event);
+    const event = await adminDb.runTransaction(async (tx) => {
+      const counterSnap = await tx.get(counterRef);
+      let lastNum = 0;
+      if (counterSnap.exists) {
+        lastNum = (counterSnap.data() as { count: number }).count;
+      } else {
+        const lastSnap = await tx.get(
+          adminDb.collection("events").orderBy("consecutive", "desc").limit(1)
+        );
+        if (!lastSnap.empty) {
+          const last = lastSnap.docs[0].data() as MagikEvent;
+          const match = last.consecutive.match(/(\d+)$/);
+          if (match) lastNum = parseInt(match[1]);
+        }
+      }
+      const nextNum = lastNum + 1;
+      const now = new Date().toISOString();
+      const created: MagikEvent = {
+        ...data,
+        id: ref.id,
+        consecutive: `EVT-${String(nextNum).padStart(4, "0")}`,
+        createdAt: now,
+        updatedAt: now,
+      };
+      tx.set(counterRef, { count: nextNum });
+      tx.set(ref, created);
+      return created;
+    });
     return { success: true, data: event };
   } catch (e) {
     return { success: false, error: String(e) };
@@ -211,11 +219,18 @@ export async function getQuote(
   }
 }
 
+async function nextCounter(name: string): Promise<number> {
+  const counterRef = adminDb.collection("counters").doc(name);
+  return adminDb.runTransaction(async (tx) => {
+    const snap = await tx.get(counterRef);
+    const next = snap.exists ? ((snap.data() as { count: number }).count) + 1 : 1;
+    tx.set(counterRef, { count: next });
+    return next;
+  });
+}
+
 async function generateQuoteConsecutive(): Promise<string> {
-  const counterRef = adminDb.collection("counters").doc("quotes");
-  const snap = await counterRef.get();
-  const next = snap.exists ? ((snap.data() as { count: number }).count) + 1 : 1;
-  await counterRef.set({ count: next });
+  const next = await nextCounter("quotes");
   const year = new Date().getFullYear();
   return `COT-${String(next).padStart(3, "0")}-${year}`;
 }
@@ -273,11 +288,13 @@ export async function duplicateQuote(
       return { success: false, error: "Cotización no encontrada" };
     }
     const { pdfUrl: _pdfUrl, ...rest } = result.data;
+    const consecutive = await generateQuoteConsecutive();
     const ref = quotesCol(eventId).doc();
     const now = new Date().toISOString();
     const copy: Quote = {
       ...rest,
       id: ref.id,
+      consecutive,
       title: `${rest.title} (copia)`,
       version: 1,
       status: "draft",
@@ -321,11 +338,9 @@ export async function getServiceOrder(
 }
 
 async function generateOrderConsecutive(): Promise<string> {
-  const counterRef = adminDb.collection("counters").doc("serviceOrders");
-  const snap = await counterRef.get();
-  const next = snap.exists ? ((snap.data() as { count: number }).count) + 1 : 1;
-  await counterRef.set({ count: next });
-  return `OS-${String(next).padStart(4, "0")}`;
+  const next = await nextCounter("serviceOrders");
+  const year = new Date().getFullYear();
+  return `OS-${String(next).padStart(3, "0")}-${year}`;
 }
 
 export async function createServiceOrder(

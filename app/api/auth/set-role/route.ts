@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/session";
 import { adminDb } from "@/lib/firebase-admin";
 import { setUserRole } from "@/lib/firebase-admin";
 import type { UserRole } from "@/lib/types";
 
 export async function POST(request: NextRequest) {
-  const callerRole = request.cookies.get("magik_role")?.value;
-  if (callerRole !== "admin") {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
+  const auth = await requireAdmin(request);
+  if (auth instanceof NextResponse) return auth;
 
   const { uid, role } = (await request.json()) as { uid: string; role: UserRole };
 

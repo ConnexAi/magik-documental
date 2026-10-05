@@ -169,6 +169,7 @@ export interface EventFile {
   mimeType: string;
   sizeBytes: number;
   uploadedBy: string;
+  uploadedByName?: string;
   createdAt: string;
 }
 
@@ -193,6 +194,7 @@ export interface TemplateVersion {
   storageUrl: string;
   changelog?: string;
   publishedBy: string;
+  publishedByName?: string;
   publishedAt: string;
 }
 

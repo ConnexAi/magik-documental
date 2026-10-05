@@ -42,6 +42,17 @@ export async function setUserRole(uid: string, role: UserRole): Promise<void> {
   await adminAuth.setCustomUserClaims(uid, { role });
 }
 
+// Nombre visible del usuario para guardarlo junto a sus registros (autor de
+// archivos, versiones de plantilla). Si no se puede leer, devuelve el email o "".
+export async function getUserDisplayName(uid: string): Promise<string> {
+  try {
+    const user = await adminAuth.getUser(uid);
+    return user.displayName ?? user.email ?? "";
+  } catch {
+    return "";
+  }
+}
+
 export async function getUserRole(uid: string): Promise<UserRole | null> {
   const user = await adminAuth.getUser(uid);
   return (user.customClaims?.role as UserRole) ?? null;

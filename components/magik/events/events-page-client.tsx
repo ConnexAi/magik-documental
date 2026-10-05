@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -96,18 +96,17 @@ export function EventsPageClient({ initialEvents }: Props) {
     }
   }, []);
 
-  // Fetch when debounced search changes (skip initial mount)
-  const isFirstSearch =
-    !debouncedSearch.clientName &&
-    !debouncedSearch.year &&
-    !debouncedSearch.eventType &&
-    !debouncedSearch.place;
+  // Fetch when debounced search changes (skip initial mount, initialEvents
+  // already holds the full list). Clearing every filter refetches everything.
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (!isFirstSearch) {
-      fetchEvents(debouncedSearch);
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
     }
-  }, [debouncedSearch, fetchEvents, isFirstSearch]);
+    fetchEvents(debouncedSearch);
+  }, [debouncedSearch, fetchEvents]);
 
   function handleEventCreated(event: MagikEvent) {
     setEvents((prev) => [event, ...prev]);

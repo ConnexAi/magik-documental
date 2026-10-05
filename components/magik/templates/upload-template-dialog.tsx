@@ -88,15 +88,15 @@ export function UploadTemplateDialog({ open, onOpenChange, onCreated, initialFil
         await uploadBytes(storageRef, file);
         const storageUrl = await getDownloadURL(storageRef);
 
-        // 3. PATCH template with the download URL
-        const patchRes = await fetchWithAuth(`/api/templates/${template.id}`, {
-          method: "PATCH",
+        // 3. Register v1 in the version history; this also sets the
+        //    template's activeVersion and storageUrl
+        const versionRes = await fetchWithAuth(`/api/templates/${template.id}/versions`, {
+          method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ storageUrl }),
+          body: JSON.stringify({ version: 1, storageUrl, changelog: "Versión inicial" }),
         });
-        if (patchRes.ok) {
-          const patched = (await patchRes.json()) as { template: Template };
-          finalTemplate = patched.template;
+        if (versionRes.ok) {
+          finalTemplate = { ...template, activeVersion: 1, storageUrl };
         }
       }
 
