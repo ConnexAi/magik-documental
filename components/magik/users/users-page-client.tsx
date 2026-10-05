@@ -234,7 +234,7 @@ export function UsersPageClient({ initialUsers }: Props) {
 
       {/* Table */}
       <div
-        className="overflow-hidden rounded-lg border"
+        className="overflow-x-auto rounded-lg border"
         style={{ background: "var(--card)", borderColor: "var(--border)" }}
       >
         <table className="w-full text-sm">

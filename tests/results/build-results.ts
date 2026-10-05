@@ -50,7 +50,11 @@ const pw = readJson<PwJson>("evidencias/pruebas/e2e/playwright-results.json");
 function walk(suite: PwSuite, date: string): void {
   for (const spec of suite.specs ?? []) {
     const id = ID_RE.exec(spec.title)?.[1];
-    const result = spec.tests[0]?.results.at(-1);
+    // Un spec corre en varios proyectos (escritorio, Android, iPhone): usar el
+    // resultado del proyecto donde realmente se ejecutó
+    const result = spec.tests
+      .map((t) => t.results.at(-1))
+      .find((r) => r !== undefined && r.status !== "skipped");
     if (!id || !result) continue;
     if (result.status === "passed") {
       outcomes.set(id, { estado: "Aprobado", obtenido: "Igual al esperado", fecha: date });
@@ -140,7 +144,7 @@ const md: string[] = [
   "## Cobertura",
   "",
   ...(REQUISITOS_PROVISIONALES
-    ? ["> **Requisitos provisionales.** El repositorio no tiene el listado oficial de RF/RNF; los enunciados de `tests/results/requisitos.ts` se derivaron de las HU y de CLAUDE.md. Reemplázalos por los del documento de tesis y vuelve a ejecutar `npm run test:results`.", ""]
+    ? ["> **Requisitos provisionales.** Los enunciados de `tests/results/requisitos.ts` no son los oficiales.", ""]
     : []),
   "Una HU o requisito está cubierto si tiene al menos un caso automatizado o manual. Cubierto no significa que el criterio se cumpla por completo: ver «Brechas conocidas».",
   "",
@@ -152,22 +156,31 @@ const md: string[] = [
   "",
   "### Por requisito funcional",
   "",
-  "| RF | Descripción | Casos auto | Aprobados | Casos manuales |",
-  "|---|---|---|---|---|",
-  ...covRF.map((c) => `| ${c.id} | ${RF[c.id]} | ${c.auto} | ${c.ok} | ${c.manual} |`),
+  "| RF | Nombre | Prioridad | Roles | Casos auto | Aprobados | Casos manuales |",
+  "|---|---|---|---|---|---|---|",
+  ...covRF.map((c) => `| ${c.id} | ${RF[c.id].nombre} | ${RF[c.id].prioridad} | ${RF[c.id].roles} | ${c.auto} | ${c.ok} | ${c.manual} |`),
   "",
   "### Por requisito no funcional",
   "",
-  "| RNF | Descripción | Casos auto | Aprobados | Casos manuales |",
+  "| RNF | Nombre | Casos auto | Aprobados | Casos manuales |",
   "|---|---|---|---|---|",
-  ...covRNF.map((c) => `| ${c.id} | ${RNF[c.id]} | ${c.auto} | ${c.ok} | ${c.manual} |`),
+  ...covRNF.map((c) => `| ${c.id} | ${RNF[c.id].nombre} | ${c.auto} | ${c.ok} | ${c.manual} |`),
+  "",
+  "### Enunciados oficiales",
+  "",
+  "| ID | Nombre | Descripción | Prioridad | Roles |",
+  "|---|---|---|---|---|",
+  ...Object.entries(RF).map(([id, r]) => `| ${id} | ${r.nombre} | ${cell(r.descripcion)} | ${r.prioridad} | ${r.roles} |`),
+  ...Object.entries(RNF).map(([id, r]) => `| ${id} | ${r.nombre} | ${cell(r.descripcion)} | — | — |`),
   "",
   "## Brechas conocidas",
   "",
-  "Criterios que no tienen una prueba automatizada aprobada porque la funcionalidad no existe todavía (ver `docs/CRITERIOS_VERIFICACION.md`):",
+  "Partes de los requisitos oficiales que no tienen una prueba aprobada porque la funcionalidad no existe o el alcance de la prueba es parcial:",
   "",
-  "- **HU-07**: no hay pantalla para editar productos. La API sí funciona (API-CAT-04). Caso manual MAN-19.",
-  "- **HU-17**: la ficha del cliente lista eventos pero no cotizaciones, y muestra como máximo 10 eventos. Caso manual MAN-18.",
+  "- **RNF-04**: los archivos tienen fecha visible (API-FIL-01), pero no un metadato de **versión**. `EventFile` no tiene ese campo; el control de versiones solo existe para plantillas.",
+  "- **RF-11**: «reutilizar cotizaciones anteriores como base para nuevos clientes» no está implementado. Duplicar (API-COT-05) copia la cotización dentro del mismo evento; no hay opción para copiarla a otro evento o cliente.",
+  "- **RNF-02**: se probó Chromium de escritorio, Chromium en Android y WebKit en iPhone. Firefox y Edge no se ejecutan en la suite.",
+  "- **RNF-03**: el contenido de los PDF se verifica automáticamente (DOC-PDF-01 a 06); la fidelidad visual frente a la plantilla aprobada es manual (MAN-01, MAN-02).",
   "",
   "## Detalle de casos",
   "",

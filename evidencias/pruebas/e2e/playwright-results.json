@@ -31,9 +31,43 @@
         "id": "chromium",
         "name": "chromium",
         "testDir": "/Users/juanchog/Desktop/Pasantia/magik-documental/tests/e2e",
-        "testIgnore": [],
+        "testIgnore": [
+          "/mobile\\.spec\\.ts/"
+        ],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "android-chromium",
+        "name": "android-chromium",
+        "testDir": "/Users/juanchog/Desktop/Pasantia/magik-documental/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/mobile\\.spec\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "iphone-webkit",
+        "name": "iphone-webkit",
+        "testDir": "/Users/juanchog/Desktop/Pasantia/magik-documental/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/mobile\\.spec\\.ts/"
         ],
         "timeout": 60000
       }
@@ -107,12 +141,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 446,
+                      "duration": 430,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:28.109Z",
+                      "startTime": "2026-10-05T19:52:08.510Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -157,12 +191,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 259,
+                      "duration": 261,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:28.739Z",
+                      "startTime": "2026-10-05T19:52:09.081Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -202,12 +236,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 124,
+                      "duration": 123,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:29.001Z",
+                      "startTime": "2026-10-05T19:52:09.345Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -247,12 +281,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 331,
+                      "duration": 336,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:29.128Z",
+                      "startTime": "2026-10-05T19:52:09.471Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -292,12 +326,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 139,
+                      "duration": 135,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:29.462Z",
+                      "startTime": "2026-10-05T19:52:09.810Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -319,6 +353,185 @@
               "id": "d748ac400d08b85935ef-6b0db4898dbcfb714373",
               "file": "auth.spec.ts",
               "line": 34,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "catalog.spec.ts",
+      "file": "catalog.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Catálogo: editar productos (HU-07)",
+          "file": "catalog.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "E2E-CAT-01 · Admin edita nombre, unidad y precio de un producto sin recargar",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 533,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T19:52:09.949Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-CAT-01-1-catalogo",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/catalog-Catálogo-editar-pr-7590a-de-un-producto-sin-recargar-chromium/attachments/E2E-CAT-01-1-catalogo-71fa8fde2d1aa0a5cbe008d2136e9065280d83a7.png"
+                        },
+                        {
+                          "name": "E2E-CAT-01-2-dialogo-edicion",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/catalog-Catálogo-editar-pr-7590a-de-un-producto-sin-recargar-chromium/attachments/E2E-CAT-01-2-dialogo-edicion-3008a69f637d41995b7cc58da1963cc98b465908.png"
+                        },
+                        {
+                          "name": "E2E-CAT-01-3-producto-actualizado",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/catalog-Catálogo-editar-pr-7590a-de-un-producto-sin-recargar-chromium/attachments/E2E-CAT-01-3-producto-actualizado-8b9a90144d7c8cf7f6d501f6f4d702581809ca8d.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/catalog-Catálogo-editar-pr-7590a-de-un-producto-sin-recargar-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "30aa42b97d8966d0c2dc-7b42433d0ba69610e2f1",
+              "file": "catalog.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "E2E-CAT-02 · Colaborador no ve el botón de editar productos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 361,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T19:52:10.485Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-CAT-02-1-catalogo-colaborador",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/catalog-Catálogo-editar-pr-ef028-l-botón-de-editar-productos-chromium/attachments/E2E-CAT-02-1-catalogo-colaborador-01d9f1c83beb8f511e806904163ebab6050135e7.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/catalog-Catálogo-editar-pr-ef028-l-botón-de-editar-productos-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "30aa42b97d8966d0c2dc-c6e0c538add04203b9d5",
+              "file": "catalog.spec.ts",
+              "line": 31,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "clients.spec.ts",
+      "file": "clients.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Ficha del cliente (HU-17)",
+          "file": "clients.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "E2E-CLI-01 · La ficha del cliente lista sus eventos y cotizaciones",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 418,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T19:52:10.850Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "E2E-CLI-01-1-ficha-cliente",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/clients-Ficha-del-cliente--45bf7--sus-eventos-y-cotizaciones-chromium/attachments/E2E-CLI-01-1-ficha-cliente-7e3e7deda252460fb6795ef1c3b38e3f8de04f2d.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/clients-Ficha-del-cliente--45bf7--sus-eventos-y-cotizaciones-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d7c1ae482dfaaa9065fe-940574e61ff85c6afc5a",
+              "file": "clients.spec.ts",
+              "line": 5,
               "column": 7
             }
           ]
@@ -359,12 +572,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 427,
+                      "duration": 425,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:29.605Z",
+                      "startTime": "2026-10-05T19:52:11.272Z",
                       "annotations": [
                         {
                           "type": "clics",
@@ -419,12 +632,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 314,
+                      "duration": 315,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:30.035Z",
+                      "startTime": "2026-10-05T19:52:11.700Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -464,12 +677,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 375,
+                      "duration": 358,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:30.353Z",
+                      "startTime": "2026-10-05T19:52:12.018Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -514,12 +727,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1931,
+                      "duration": 1915,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:30.730Z",
+                      "startTime": "2026-10-05T19:52:12.379Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -581,12 +794,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 245,
+                      "duration": 229,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:32.665Z",
+                      "startTime": "2026-10-05T19:52:14.298Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -626,12 +839,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 249,
+                      "duration": 251,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:32.913Z",
+                      "startTime": "2026-10-05T19:52:14.529Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -671,12 +884,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 220,
+                      "duration": 226,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:33.164Z",
+                      "startTime": "2026-10-05T19:52:14.783Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -716,12 +929,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 250,
+                      "duration": 232,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:33.388Z",
+                      "startTime": "2026-10-05T19:52:15.012Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -778,12 +991,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5707,
+                      "duration": 5692,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T18:11:33.641Z",
+                      "startTime": "2026-10-05T19:52:15.248Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -820,14 +1033,272 @@
           ]
         }
       ]
+    },
+    {
+      "title": "mobile.spec.ts",
+      "file": "mobile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "E2E-MOV-01 · Panel y portal usables en Android (Chromium)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "android-chromium",
+              "projectName": "android-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1322,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T19:52:21.132Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "E2E-MOV-01-1-portal",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-01-·-Panel--a82aa-sables-en-Android-Chromium--android-chromium/attachments/E2E-MOV-01-1-portal-c11dc60529c1946ee3f8d934c0ae0c8ac461a5df.png"
+                    },
+                    {
+                      "name": "E2E-MOV-01-2-eventos",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-01-·-Panel--a82aa-sables-en-Android-Chromium--android-chromium/attachments/E2E-MOV-01-2-eventos-78e5aaf92401d371b763396c215f61be97891cc1.png"
+                    },
+                    {
+                      "name": "E2E-MOV-01-2b-tabla-desplazada",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-01-·-Panel--a82aa-sables-en-Android-Chromium--android-chromium/attachments/E2E-MOV-01-2b-tabla-desplazada-bf6a82f116a862dd82ebb2a177c90c1337551d9b.png"
+                    },
+                    {
+                      "name": "E2E-MOV-01-3-menu",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-01-·-Panel--a82aa-sables-en-Android-Chromium--android-chromium/attachments/E2E-MOV-01-3-menu-a8e7d0d41d32bcb0adb41013b4caebad7ba7f0e4.png"
+                    },
+                    {
+                      "name": "E2E-MOV-01-4-plantillas",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-01-·-Panel--a82aa-sables-en-Android-Chromium--android-chromium/attachments/E2E-MOV-01-4-plantillas-390c247ae15e75d86bbe979901163991707cacf8.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-01-·-Panel--a82aa-sables-en-Android-Chromium--android-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e79c838550b25e92508e-c885e44cd1dbf772cdbe",
+          "file": "mobile.spec.ts",
+          "line": 16,
+          "column": 7
+        },
+        {
+          "title": "E2E-MOV-02 · Panel y portal usables en iPhone (Safari/WebKit)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Solo en iphone-webkit",
+                  "location": {
+                    "file": "/Users/juanchog/Desktop/Pasantia/magik-documental/tests/e2e/mobile.spec.ts",
+                    "line": 17,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "android-chromium",
+              "projectName": "android-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 73,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T19:52:22.519Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Solo en iphone-webkit",
+                      "location": {
+                        "file": "/Users/juanchog/Desktop/Pasantia/magik-documental/tests/e2e/mobile.spec.ts",
+                        "line": 17,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-02-·-Panel--c72ea-es-en-iPhone-Safari-WebKit--android-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "e79c838550b25e92508e-d4c3b5e00533cf4722f8",
+          "file": "mobile.spec.ts",
+          "line": 16,
+          "column": 7
+        },
+        {
+          "title": "E2E-MOV-01 · Panel y portal usables en Android (Chromium)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Solo en android-chromium",
+                  "location": {
+                    "file": "/Users/juanchog/Desktop/Pasantia/magik-documental/tests/e2e/mobile.spec.ts",
+                    "line": 17,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "iphone-webkit",
+              "projectName": "iphone-webkit",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 341,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T19:52:22.751Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Solo en android-chromium",
+                      "location": {
+                        "file": "/Users/juanchog/Desktop/Pasantia/magik-documental/tests/e2e/mobile.spec.ts",
+                        "line": 17,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-01-·-Panel--a82aa-sables-en-Android-Chromium--iphone-webkit/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "e79c838550b25e92508e-7f8ccee77e85a07301cd",
+          "file": "mobile.spec.ts",
+          "line": 16,
+          "column": 7
+        },
+        {
+          "title": "E2E-MOV-02 · Panel y portal usables en iPhone (Safari/WebKit)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "iphone-webkit",
+              "projectName": "iphone-webkit",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1304,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T19:52:23.239Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "E2E-MOV-02-1-portal",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-02-·-Panel--c72ea-es-en-iPhone-Safari-WebKit--iphone-webkit/attachments/E2E-MOV-02-1-portal-814c7229f4f4302216a0f9a39c196b76f71fd0e3.png"
+                    },
+                    {
+                      "name": "E2E-MOV-02-2-eventos",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-02-·-Panel--c72ea-es-en-iPhone-Safari-WebKit--iphone-webkit/attachments/E2E-MOV-02-2-eventos-a0cb7401a9294783e04d3faf044a55cc2931694f.png"
+                    },
+                    {
+                      "name": "E2E-MOV-02-2b-tabla-desplazada",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-02-·-Panel--c72ea-es-en-iPhone-Safari-WebKit--iphone-webkit/attachments/E2E-MOV-02-2b-tabla-desplazada-79f8b3fc2da734899148bde79d5ae5d8a69bb9d6.png"
+                    },
+                    {
+                      "name": "E2E-MOV-02-3-menu",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-02-·-Panel--c72ea-es-en-iPhone-Safari-WebKit--iphone-webkit/attachments/E2E-MOV-02-3-menu-7c5f735ee8941e8a452ae7f63ec5c7b92c58242d.png"
+                    },
+                    {
+                      "name": "E2E-MOV-02-4-plantillas",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-02-·-Panel--c72ea-es-en-iPhone-Safari-WebKit--iphone-webkit/attachments/E2E-MOV-02-4-plantillas-cd6ba8b0911856939a50e764bcf08803d9c8d267.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/e2e/artefactos/mobile-E2E-MOV-02-·-Panel--c72ea-es-en-iPhone-Safari-WebKit--iphone-webkit/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e79c838550b25e92508e-2c2a862b1f22aca5d888",
+          "file": "mobile.spec.ts",
+          "line": 16,
+          "column": 7
+        }
+      ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-05T18:11:18.765Z",
-    "duration": 20636.252,
-    "expected": 14,
-    "skipped": 0,
+    "startTime": "2026-10-05T19:51:59.117Z",
+    "duration": 25455.71,
+    "expected": 19,
+    "skipped": 2,
     "unexpected": 0,
     "flaky": 0
   }

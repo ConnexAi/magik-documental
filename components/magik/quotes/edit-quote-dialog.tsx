@@ -196,7 +196,7 @@ export function EditQuoteDialog({ eventId, quote, open, onOpenChange, onUpdated 
             </div>
 
             {items.length > 0 && (
-              <div className="overflow-hidden rounded-lg border" style={{ borderColor: "var(--border)" }}>
+              <div className="overflow-x-auto rounded-lg border" style={{ borderColor: "var(--border)" }}>
                 <table className="w-full text-xs">
                   <thead>
                     <tr style={{ borderBottom: "1px solid var(--border)", background: "var(--muted)" }}>

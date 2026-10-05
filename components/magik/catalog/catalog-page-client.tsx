@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ChevronDown, ChevronRight, Pencil, Trash2 } from "lucide-react";
 import { CreateRubroDialog } from "./create-rubro-dialog";
 import { CreateProductDialog } from "./create-product-dialog";
+import { EditProductDialog } from "./edit-product-dialog";
 import type { CatalogRubro, CatalogProduct } from "@/lib/types";
 
 function formatPrice(n: number): string {
@@ -50,6 +51,16 @@ export function CatalogPageClient({ initialRubros }: Props) {
       )
     );
     setExpanded((prev) => new Set(prev).add(rubroId));
+  }
+
+  function handleProductUpdated(rubroId: string, product: CatalogProduct) {
+    setRubros((prev) =>
+      prev.map((r) =>
+        r.id === rubroId
+          ? { ...r, products: r.products.map((p) => (p.id === product.id ? product : p)) }
+          : r
+      )
+    );
   }
 
   async function handleDeleteRubro(rubroId: string) {
@@ -122,7 +133,7 @@ export function CatalogPageClient({ initialRubros }: Props) {
           return (
             <div
               key={rubro.id}
-              className="overflow-hidden rounded-lg border"
+              className="overflow-x-auto rounded-lg border"
               style={{ background: "var(--card)", borderColor: "var(--border)" }}
             >
               {/* Rubro header row */}
@@ -233,16 +244,25 @@ export function CatalogPageClient({ initialRubros }: Props) {
                             </td>
                             <td className="px-4 py-2.5 text-right">
                               {isAdmin && (
-                                <button
-                                  onClick={() =>
-                                    handleDeleteProduct(rubro.id, product.id)
-                                  }
-                                  className="rounded p-1 transition-colors"
-                                  style={{ color: "var(--color-text-muted)" }}
-                                  title="Eliminar producto"
-                                >
-                                  <Trash2 size={13} />
-                                </button>
+                                <div className="flex items-center justify-end gap-1">
+                                  <EditProductDialog
+                                    rubroId={rubro.id}
+                                    product={product}
+                                    onUpdated={(updated) =>
+                                      handleProductUpdated(rubro.id, updated)
+                                    }
+                                  />
+                                  <button
+                                    onClick={() =>
+                                      handleDeleteProduct(rubro.id, product.id)
+                                    }
+                                    className="rounded p-1 transition-colors"
+                                    style={{ color: "var(--color-text-muted)" }}
+                                    title="Eliminar producto"
+                                  >
+                                    <Trash2 size={13} />
+                                  </button>
+                                </div>
                               )}
                             </td>
                           </tr>

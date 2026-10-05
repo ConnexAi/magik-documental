@@ -8,30 +8,30 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 | ID | HU | RF/RNF | Caso | Captura | Resultado |
 |---|---|---|---|---|---|
-| MAN-01 | HU-03 | RF-05, RNF-06 | PDF de cotización frente al formato corporativo | MAN-01.png | ☐ Aprobado ☐ Fallido |
-| MAN-02 | HU-04 | RF-06, RNF-06 | PDF de orden de servicio frente al formato corporativo | MAN-02.png | ☐ Aprobado ☐ Fallido |
-| MAN-03 | HU-03 | RF-05 | XLSX de cotización en Excel | MAN-03.png | ☐ Aprobado ☐ Fallido |
+| MAN-01 | HU-03 | RF-06, RNF-03 | PDF de cotización frente al formato corporativo | MAN-01.png | ☐ Aprobado ☐ Fallido |
+| MAN-02 | HU-04 | RF-06, RNF-03 | PDF de orden de servicio frente al formato corporativo | MAN-02.png | ☐ Aprobado ☐ Fallido |
+| MAN-03 | HU-03 | RF-06 | XLSX de cotización en Excel | MAN-03.png | ☐ Aprobado ☐ Fallido |
 | MAN-04 | HU-12 | RF-08 | Arrastrar y soltar archivos | MAN-04.png | ☐ Aprobado ☐ Fallido |
 | MAN-05 | HU-12 | RF-08 | Categoría personalizada | MAN-05.png | ☐ Aprobado ☐ Fallido |
 | MAN-06 | HU-13 | RF-08 | Renombrar archivo y abrir el enlace | MAN-06.png | ☐ Aprobado ☐ Fallido |
-| MAN-07 | HU-16 | RF-06 | Autocompletado de proveedor en pantalla | MAN-07.png | ☐ Aprobado ☐ Fallido |
-| MAN-08 | HU-06 | RF-07 | Descarga de la plantilla activa como colaborador | MAN-08.png | ☐ Aprobado ☐ Fallido |
-| MAN-09 | HU-18, HU-05 | RF-07 | Historial de versiones visible para el admin | MAN-09.png | ☐ Aprobado ☐ Fallido |
-| MAN-10 | HU-05 | RF-07 | Publicar nueva versión arrastrando el archivo | MAN-10.png | ☐ Aprobado ☐ Fallido |
-| MAN-11 | HU-15 | RF-10, RNF-04 | Portal en celular real | MAN-11.png | ☐ Aprobado ☐ Fallido |
+| MAN-07 | HU-16 | RF-10 | Autocompletado de proveedor en pantalla | MAN-07.png | ☐ Aprobado ☐ Fallido |
+| MAN-08 | HU-06 | RF-03 | Descarga de la plantilla activa como colaborador | MAN-08.png | ☐ Aprobado ☐ Fallido |
+| MAN-09 | HU-18, HU-05 | RF-04, RNF-04 | Historial de versiones visible para el admin | MAN-09.png | ☐ Aprobado ☐ Fallido |
+| MAN-10 | HU-05 | RF-04 | Publicar nueva versión arrastrando el archivo | MAN-10.png | ☐ Aprobado ☐ Fallido |
+| MAN-11 | HU-15 | RF-09, RNF-02 | Portal en celular real | MAN-11.png | ☐ Aprobado ☐ Fallido |
 | MAN-12 | HU-14 | RF-09 | Seleccionar fotos del portafolio | MAN-12.png | ☐ Aprobado ☐ Fallido |
-| MAN-13 | HU-14, HU-15 | RF-09, RF-10 | Ocultar y reordenar en el portal | MAN-13.png | ☐ Aprobado ☐ Fallido |
-| MAN-14 | — | RNF-06 | Modo oscuro predeterminado y modo claro | MAN-14.png | ☐ Aprobado ☐ Fallido |
-| MAN-15 | HU-09 | RF-01 | Doble confirmación al eliminar usuario | MAN-15.png | ☐ Aprobado ☐ Fallido |
-| MAN-16 | HU-09 | RF-01, RNF-02 | Usuario desactivado no puede entrar | MAN-16.png | ☐ Aprobado ☐ Fallido |
+| MAN-13 | HU-14, HU-15 | RF-09 | Ocultar y reordenar en el portal | MAN-13.png | ☐ Aprobado ☐ Fallido |
+| MAN-14 | — |  | Modo oscuro predeterminado y modo claro | MAN-14.png | ☐ Aprobado ☐ Fallido |
+| MAN-15 | HU-09 | RF-07 | Doble confirmación al eliminar usuario | MAN-15.png | ☐ Aprobado ☐ Fallido |
+| MAN-16 | HU-09 | RF-07, RNF-06 | Usuario desactivado no puede entrar | MAN-16.png | ☐ Aprobado ☐ Fallido |
 | MAN-17 | HU-01, HU-03 | RNF-01 | Flujo completo cronometrado | MAN-17.png | ☐ Aprobado ☐ Fallido |
 | MAN-18 | HU-17 | RF-11 | Ficha del cliente con eventos y cotizaciones | MAN-18.png | ☐ Aprobado ☐ Fallido |
-| MAN-19 | HU-07 | RF-04 | Editar producto desde la pantalla de catálogo | MAN-19.png | ☐ Aprobado ☐ Fallido |
-| MAN-20 | HU-09 | RF-01, RNF-02 | Sesión abierta más de una hora | MAN-20.png | ☐ Aprobado ☐ Fallido |
+| MAN-19 | HU-07 | RF-05 | Editar producto desde la pantalla de catálogo | MAN-19.png | ☐ Aprobado ☐ Fallido |
+| MAN-20 | HU-09 | RF-07 | Sesión abierta más de una hora | MAN-20.png | ☐ Aprobado ☐ Fallido |
 
 ## MAN-01 · PDF de cotización frente al formato corporativo
 
-**HU:** HU-03 · **RF/RNF:** RF-05, RNF-06 · **Captura:** `evidencias/pruebas/manual/MAN-01.png`
+**HU:** HU-03 · **RF/RNF:** RF-06, RNF-03 · **Captura:** `evidencias/pruebas/manual/MAN-01.png`
 
 **Precondiciones:** Cotización con ítems de 2 rubros, descuento e IVA.
 
@@ -50,7 +50,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-02 · PDF de orden de servicio frente al formato corporativo
 
-**HU:** HU-04 · **RF/RNF:** RF-06, RNF-06 · **Captura:** `evidencias/pruebas/manual/MAN-02.png`
+**HU:** HU-04 · **RF/RNF:** RF-06, RNF-03 · **Captura:** `evidencias/pruebas/manual/MAN-02.png`
 
 **Precondiciones:** Orden con proveedor, fechas y anticipo.
 
@@ -69,7 +69,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-03 · XLSX de cotización en Excel
 
-**HU:** HU-03 · **RF/RNF:** RF-05 · **Captura:** `evidencias/pruebas/manual/MAN-03.png`
+**HU:** HU-03 · **RF/RNF:** RF-06 · **Captura:** `evidencias/pruebas/manual/MAN-03.png`
 
 **Precondiciones:** Cotización existente.
 
@@ -145,7 +145,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-07 · Autocompletado de proveedor en pantalla
 
-**HU:** HU-16 · **RF/RNF:** RF-06 · **Captura:** `evidencias/pruebas/manual/MAN-07.png`
+**HU:** HU-16 · **RF/RNF:** RF-10 · **Captura:** `evidencias/pruebas/manual/MAN-07.png`
 
 **Precondiciones:** Proveedor «Sonido Total SAS» en el directorio.
 
@@ -164,7 +164,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-08 · Descarga de la plantilla activa como colaborador
 
-**HU:** HU-06 · **RF/RNF:** RF-07 · **Captura:** `evidencias/pruebas/manual/MAN-08.png`
+**HU:** HU-06 · **RF/RNF:** RF-03 · **Captura:** `evidencias/pruebas/manual/MAN-08.png`
 
 **Precondiciones:** Plantilla con v2 activa; sesión de colaborador.
 
@@ -182,7 +182,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-09 · Historial de versiones visible para el admin
 
-**HU:** HU-18, HU-05 · **RF/RNF:** RF-07 · **Captura:** `evidencias/pruebas/manual/MAN-09.png`
+**HU:** HU-18, HU-05 · **RF/RNF:** RF-04, RNF-04 · **Captura:** `evidencias/pruebas/manual/MAN-09.png`
 
 **Precondiciones:** Plantilla con v1 y v2; sesión de admin.
 
@@ -200,7 +200,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-10 · Publicar nueva versión arrastrando el archivo
 
-**HU:** HU-05 · **RF/RNF:** RF-07 · **Captura:** `evidencias/pruebas/manual/MAN-10.png`
+**HU:** HU-05 · **RF/RNF:** RF-04 · **Captura:** `evidencias/pruebas/manual/MAN-10.png`
 
 **Precondiciones:** Sesión de admin.
 
@@ -219,7 +219,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-11 · Portal en celular real
 
-**HU:** HU-15 · **RF/RNF:** RF-10, RNF-04 · **Captura:** `evidencias/pruebas/manual/MAN-11.png`
+**HU:** HU-15 · **RF/RNF:** RF-09, RNF-02 · **Captura:** `evidencias/pruebas/manual/MAN-11.png`
 
 **Precondiciones:** Teléfono Android o iPhone.
 
@@ -257,7 +257,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-13 · Ocultar y reordenar en el portal
 
-**HU:** HU-14, HU-15 · **RF/RNF:** RF-09, RF-10 · **Captura:** `evidencias/pruebas/manual/MAN-13.png`
+**HU:** HU-14, HU-15 · **RF/RNF:** RF-09 · **Captura:** `evidencias/pruebas/manual/MAN-13.png`
 
 **Precondiciones:** Dos items visibles en el portafolio.
 
@@ -276,7 +276,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-14 · Modo oscuro predeterminado y modo claro
 
-**HU:** — · **RF/RNF:** RNF-06 · **Captura:** `evidencias/pruebas/manual/MAN-14.png`
+**HU:** — · **RF/RNF:**  · **Captura:** `evidencias/pruebas/manual/MAN-14.png`
 
 **Precondiciones:** Navegador sin preferencia guardada.
 
@@ -295,7 +295,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-15 · Doble confirmación al eliminar usuario
 
-**HU:** HU-09 · **RF/RNF:** RF-01 · **Captura:** `evidencias/pruebas/manual/MAN-15.png`
+**HU:** HU-09 · **RF/RNF:** RF-07 · **Captura:** `evidencias/pruebas/manual/MAN-15.png`
 
 **Precondiciones:** Sesión de admin y un usuario de prueba.
 
@@ -314,7 +314,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-16 · Usuario desactivado no puede entrar
 
-**HU:** HU-09 · **RF/RNF:** RF-01, RNF-02 · **Captura:** `evidencias/pruebas/manual/MAN-16.png`
+**HU:** HU-09 · **RF/RNF:** RF-07, RNF-06 · **Captura:** `evidencias/pruebas/manual/MAN-16.png`
 
 **Precondiciones:** Usuario colaborador activo.
 
@@ -361,7 +361,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 1. Clientes → abrir la ficha.
 2. Revisar eventos y cotizaciones listados.
 
-**Resultado esperado:** Lista sus eventos y cotizaciones. Brecha conocida: hoy solo lista eventos (ver docs/CRITERIOS_VERIFICACION.md).
+**Resultado esperado:** Lista sus eventos (todos, sin límite) y sus cotizaciones con consecutivo, estado y fecha.
 
 - [ ] Aprobado
 - [ ] Fallido
@@ -370,16 +370,17 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-19 · Editar producto desde la pantalla de catálogo
 
-**HU:** HU-07 · **RF/RNF:** RF-04 · **Captura:** `evidencias/pruebas/manual/MAN-19.png`
+**HU:** HU-07 · **RF/RNF:** RF-05 · **Captura:** `evidencias/pruebas/manual/MAN-19.png`
 
 **Precondiciones:** Sesión de admin.
 
 **Pasos:**
 
 1. Catálogo → expandir un rubro.
-2. Buscar la opción de editar un producto.
+2. Clic en el lápiz de un producto.
+3. Cambiar nombre, unidad y precio y guardar.
 
-**Resultado esperado:** Se puede cambiar nombre, unidad y precio. Brecha conocida: no existe la opción en la UI (la API sí).
+**Resultado esperado:** El diálogo abre con los datos actuales; al guardar, la tabla se actualiza sin recargar.
 
 - [ ] Aprobado
 - [ ] Fallido
@@ -388,7 +389,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 ## MAN-20 · Sesión abierta más de una hora
 
-**HU:** HU-09 · **RF/RNF:** RF-01, RNF-02 · **Captura:** `evidencias/pruebas/manual/MAN-20.png`
+**HU:** HU-09 · **RF/RNF:** RF-07 · **Captura:** `evidencias/pruebas/manual/MAN-20.png`
 
 **Precondiciones:** Sesión iniciada.
 

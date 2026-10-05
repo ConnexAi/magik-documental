@@ -47,6 +47,12 @@ describe("Plantillas (HU-05, HU-06, HU-18)", () => {
     expect(Object.keys(t)).not.toContain("versions");
   });
 
+  it("API-TPL-07 · Colaborador no obtiene el historial de versiones antiguas", async () => {
+    const res = await call("collaborator", "get", `${T}/versions`);
+    expect(res.status).toBe(403);
+    expect(res.text).not.toContain("cotizacion-v1.docx");
+  });
+
   it("API-TPL-06 · El listado de plantillas para colaborador no incluye versiones antiguas", async () => {
     const res = await call("collaborator", "get", "/api/templates");
     expect(res.status).toBe(200);

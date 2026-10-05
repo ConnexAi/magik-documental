@@ -39,6 +39,14 @@ describe("Archivos por evento (HU-12, HU-13)", () => {
     expect((res.body as { file: EventFile }).file.category).toBe("Planos");
   });
 
+  it("API-FIL-06 · Buscar dentro del evento por tipo de documento (categoría)", async () => {
+    const fotos = (await call("collaborator", "get", `${F}?category=Foto`)).body as { files: EventFile[] };
+    expect(fotos.files.length).toBeGreaterThan(0);
+    expect(fotos.files.every((f) => f.category === "Foto")).toBe(true);
+    const riders = (await call("collaborator", "get", `${F}?category=Rider`)).body as { files: EventFile[] };
+    expect(riders.files.map((f) => f.id)).toEqual([file.id]);
+  });
+
   it("API-FIL-03 · Renombrar no altera el archivo almacenado ni su enlace", async () => {
     const res = await call("collaborator", "patch", `${F}/${file.id}`, { name: "rider-v2.pdf" });
     expect(res.status).toBe(200);

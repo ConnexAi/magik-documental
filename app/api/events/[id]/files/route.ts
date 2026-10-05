@@ -10,7 +10,8 @@ export async function GET(
 ) {
   const auth = await requireSession(request);
   if (auth instanceof NextResponse) return auth;
-  const result = await getEventFiles(params.id);
+  const category = request.nextUrl.searchParams.get("category") ?? undefined;
+  const result = await getEventFiles(params.id, category);
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 500 });
   }

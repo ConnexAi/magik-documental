@@ -123,7 +123,7 @@ function ItemsTable({ items, rubros, onSelect, onUpdate, onRemove, label }: Item
 
       {items.length > 0 ? (
         <div
-          className="overflow-hidden rounded-lg border"
+          className="overflow-x-auto rounded-lg border"
           style={{ borderColor: "var(--border)" }}
         >
           <table className="w-full text-xs">

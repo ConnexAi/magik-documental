@@ -120,7 +120,7 @@ export function ClientsPageClient({ initialClients }: Props) {
       </div>
 
       <div
-        className="overflow-hidden rounded-lg border"
+        className="overflow-x-auto rounded-lg border"
         style={{ background: "var(--card)", borderColor: "var(--border)" }}
       >
         {filtered.length === 0 ? (

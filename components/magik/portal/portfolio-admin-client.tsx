@@ -136,7 +136,7 @@ export function PortfolioAdminClient({ initialItems }: Props) {
         </div>
       ) : (
         <div
-          className="overflow-hidden rounded-lg border"
+          className="overflow-x-auto rounded-lg border"
           style={{ borderColor: "var(--border)" }}
         >
           <table className="w-full text-sm">

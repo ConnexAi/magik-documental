@@ -71,7 +71,7 @@ Convenciones de la tabla:
 | /api/portfolio/[id] | PATCH | Cookie rol = admin + token | requireAdmin |
 | /api/portfolio/[id] | DELETE | Cookie rol = admin + token | requireAdmin |
 | /api/providers | GET | Cookie rol (any) | requireSession |
-| /api/providers | POST | Cookie rol = admin + token | requireSession |
+| /api/providers | POST | Cookie rol = admin + token | requireAdmin (RF-10) |
 | /api/providers/[id] | PATCH | Cookie rol = admin | requireAdmin |
 | /api/providers/[id] | DELETE | Cookie rol = admin | requireAdmin |
 | /api/templates | GET | Cookie rol (any) | requireSession |
@@ -79,16 +79,20 @@ Convenciones de la tabla:
 | /api/templates/[id] | GET | Cookie rol (any) | requireSession |
 | /api/templates/[id] | PATCH | Cookie rol = admin + token | requireAdmin |
 | /api/templates/[id] | DELETE | Cookie rol = admin | requireAdmin |
-| /api/templates/[id]/versions | GET | Cookie rol (any) | requireSession |
+| /api/templates/[id]/versions | GET | Cookie rol (any) | requireAdmin (RF-04, HU-06) |
 | /api/templates/[id]/versions | POST | Cookie rol = admin + token | requireAdmin |
 
 ## Cambios de permisos (no solo de mecanismo)
 
 - **Más restrictivos**: DELETE de archivos, cotizaciones y órdenes de un evento
   pasa de cualquier rol a solo admin.
-- **Más abiertos**: POST `/api/clients` y POST `/api/providers` pasan de solo admin
-  a cualquier sesión válida, para que un colaborador pueda crear clientes y
-  proveedores.
+- **Más restrictivos (requisitos oficiales)**: POST `/api/providers` vuelve a ser
+  solo admin (RF-10: el administrador crea o elimina proveedores) y GET
+  `/api/templates/[id]/versions` pasa a solo admin (RF-04 y HU-06: el colaborador
+  solo accede a la versión activa; el historial es del administrador).
+- **Más abiertos**: POST `/api/clients` pasa de solo admin a cualquier sesión
+  válida, para que un colaborador pueda crear clientes. Nota: RF-11 lista solo
+  al rol Admin; revisar si debe volver a `requireAdmin`.
 
 ## Otros cambios
 

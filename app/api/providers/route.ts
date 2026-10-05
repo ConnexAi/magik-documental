@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireSession } from "@/lib/session";
+import { requireAdmin, requireSession } from "@/lib/session";
 import { getProviders, createProvider } from "@/lib/firestore";
 import type { Provider } from "@/lib/types";
 
@@ -13,8 +13,10 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ providers: result.data });
 }
 
+// RF-10: solo el administrador crea proveedores; el colaborador los consulta
+// (GET) para el autocompletado de órdenes de servicio.
 export async function POST(request: NextRequest) {
-  const auth = await requireSession(request);
+  const auth = await requireAdmin(request);
   if (auth instanceof NextResponse) return auth;
   const body = (await request.json()) as Omit<Provider, "id" | "createdAt" | "updatedAt">;
   const result = await createProvider(body);

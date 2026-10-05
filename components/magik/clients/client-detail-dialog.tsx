@@ -11,16 +11,20 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { fetchWithAuth } from "@/lib/auth";
-import type { Client, MagikEvent } from "@/lib/types";
-
-interface ClientHistory {
-  client: Client;
-  events: MagikEvent[];
-}
+import type { ClientHistory, QuoteStatus } from "@/lib/types";
 
 interface Props {
   clientId: string | null;
   onClose: () => void;
+}
+
+const QUOTE_STATUS: Record<QuoteStatus, { label: string; color: string; bg: string }> = {
+  draft: { label: "Borrador", color: "#C97A1A", bg: "rgba(201, 122, 26, 0.15)" },
+  published: { label: "Publicada", color: "#6AA613", bg: "rgba(106, 166, 19, 0.15)" },
+};
+
+function formatDate(iso: string): string {
+  return new Date(iso).toLocaleDateString("es-CO", { day: "2-digit", month: "short", year: "numeric" });
 }
 
 const EVENT_TYPE_LABELS: Record<string, string> = {
@@ -136,10 +140,51 @@ export function ClientDetailDialog({ clientId, onClose }: Props) {
                 </div>
               )}
 
-              {data.client.eventIds.length > data.events.length && (
-                <p className="mt-2 text-xs" style={{ color: "var(--color-text-muted)" }}>
-                  Mostrando {data.events.length} de {data.client.eventIds.length} eventos.
+            </div>
+
+            {/* Quotes */}
+            <div>
+              <p className="section-label mb-3">
+                Cotizaciones ({data.quotes.length})
+              </p>
+
+              {data.quotes.length === 0 ? (
+                <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
+                  Sin cotizaciones en sus eventos.
                 </p>
+              ) : (
+                <div className="space-y-2">
+                  {data.quotes.map((q) => {
+                    const status = QUOTE_STATUS[q.status];
+                    const event = data.events.find((ev) => ev.id === q.eventId);
+                    return (
+                      <div
+                        key={q.id}
+                        className="flex items-center justify-between rounded-md border px-3 py-2.5"
+                        style={{ borderColor: "var(--border)" }}
+                      >
+                        <div>
+                          <p
+                            className="font-mono text-sm"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
+                            {q.consecutive ?? "Sin consecutivo"}
+                          </p>
+                          <p className="text-xs mt-0.5" style={{ color: "var(--color-text-muted)" }}>
+                            {formatDate(q.createdAt)}
+                            {event ? ` · ${event.consecutive}` : ""} · {q.title}
+                          </p>
+                        </div>
+                        <span
+                          className="ml-3 shrink-0 rounded-sm px-2 py-0.5 text-xs font-medium"
+                          style={{ background: status.bg, color: status.color }}
+                        >
+                          {status.label}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
               )}
             </div>
           </div>

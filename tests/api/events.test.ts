@@ -76,6 +76,18 @@ describe("Eventos (HU-01, HU-02, HU-10)", () => {
     expect(events.map((e) => e.consecutive)).toEqual(["EVT-0001"]);
   });
 
+  it("API-EVT-14 · Buscar por consecutivo exacto devuelve solo ese evento", async () => {
+    const events = await search("consecutive=EVT-0002");
+    expect(events.map((e) => e.consecutive)).toEqual(["EVT-0002"]);
+  });
+
+  it("API-EVT-15 · Buscar por consecutivo parcial, sin distinguir mayúsculas", async () => {
+    const events = await search("consecutive=evt-0003");
+    expect(events.map((e) => e.consecutive)).toEqual(["EVT-0003"]);
+    const none = await search("consecutive=EVT-9999");
+    expect(none).toEqual([]);
+  });
+
   it("API-EVT-09 · La búsqueda responde en menos de 1 segundo", async () => {
     await search("clientName=a"); // calentamiento
     const start = performance.now();

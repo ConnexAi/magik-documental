@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { fetchWithAuth } from "@/lib/auth";
+import { useIsAdmin } from "@/hooks/use-is-admin";
 import { CreateProviderDialog } from "./create-provider-dialog";
 import { EditProviderDialog } from "./edit-provider-dialog";
 import type { Provider } from "@/lib/types";
@@ -50,6 +51,8 @@ interface Props {
 }
 
 export function ProvidersPageClient({ initialProviders }: Props) {
+  // Crear, editar y eliminar proveedores es solo del admin (RF-10)
+  const isAdmin = useIsAdmin();
   const [providers, setProviders] = useState<Provider[]>(initialProviders);
   const [search, setSearch] = useState("");
   const [createOpen, setCreateOpen] = useState(false);
@@ -83,14 +86,16 @@ export function ProvidersPageClient({ initialProviders }: Props) {
             Directorio de proveedores de servicios técnicos
           </p>
         </div>
-        <Button
-          onClick={() => setCreateOpen(true)}
-          className="text-white"
-          style={{ background: "var(--color-crimson)" }}
-        >
-          <Plus size={14} className="mr-1.5" />
-          Nuevo proveedor
-        </Button>
+        {isAdmin && (
+          <Button
+            onClick={() => setCreateOpen(true)}
+            className="text-white"
+            style={{ background: "var(--color-crimson)" }}
+          >
+            <Plus size={14} className="mr-1.5" />
+            Nuevo proveedor
+          </Button>
+        )}
       </div>
 
       <div className="mb-4">
@@ -103,7 +108,7 @@ export function ProvidersPageClient({ initialProviders }: Props) {
       </div>
 
       <div
-        className="overflow-hidden rounded-lg border"
+        className="overflow-x-auto rounded-lg border"
         style={{ background: "var(--card)", borderColor: "var(--border)" }}
       >
         {filtered.length === 0 && (
@@ -152,24 +157,26 @@ export function ProvidersPageClient({ initialProviders }: Props) {
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    <div className="flex items-center justify-end gap-1">
-                      <button
-                        onClick={() => setEditTarget(p)}
-                        title="Editar"
-                        className="rounded p-1 transition-colors"
-                        style={{ color: "var(--color-text-muted)" }}
-                      >
-                        <Pencil size={14} />
-                      </button>
-                      <button
-                        onClick={() => setDeleteTarget(p)}
-                        title="Eliminar"
-                        className="rounded p-1 transition-colors"
-                        style={{ color: "var(--color-text-muted)" }}
-                      >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
+                    {isAdmin && (
+                      <div className="flex items-center justify-end gap-1">
+                        <button
+                          onClick={() => setEditTarget(p)}
+                          title="Editar"
+                          className="rounded p-1 transition-colors"
+                          style={{ color: "var(--color-text-muted)" }}
+                        >
+                          <Pencil size={14} />
+                        </button>
+                        <button
+                          onClick={() => setDeleteTarget(p)}
+                          title="Eliminar"
+                          className="rounded p-1 transition-colors"
+                          style={{ color: "var(--color-text-muted)" }}
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))}

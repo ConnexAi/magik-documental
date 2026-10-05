@@ -1,4 +1,8 @@
 
+> magik-documental@0.1.0 test
+> vitest run
+
+
  RUN  v3.2.7 /Users/juanchog/Desktop/Pasantia/magik-documental
 
   ▲ Next.js 14.2.35
@@ -50,13 +54,13 @@ Route (app)                                             Size     First Load JS
 ├ ƒ /api/templates                                      0 B                0 B
 ├ ƒ /api/templates/[id]                                 0 B                0 B
 ├ ƒ /api/templates/[id]/versions                        0 B                0 B
-├ ƒ /dashboard/admin/clients                            6.08 kB         213 kB
+├ ƒ /dashboard/admin/clients                            6.35 kB         213 kB
 ├ ƒ /dashboard/admin/portfolio                          6.61 kB         213 kB
-├ ƒ /dashboard/admin/users                              5.96 kB         238 kB
-├ ƒ /dashboard/catalog                                  6.04 kB         197 kB
-├ ƒ /dashboard/events                                   6.69 kB         198 kB
+├ ƒ /dashboard/admin/users                              5.95 kB         238 kB
+├ ƒ /dashboard/catalog                                  6.9 kB          239 kB
+├ ƒ /dashboard/events                                   6.73 kB         198 kB
 ├ ƒ /dashboard/events/[id]                              26.5 kB         259 kB
-├ ƒ /dashboard/providers                                5.58 kB         181 kB
+├ ƒ /dashboard/providers                                5.67 kB         182 kB
 ├ ƒ /dashboard/templates                                8.08 kB         184 kB
 ├ ○ /login                                              2.01 kB         172 kB
 └ ƒ /portal                                             8.72 kB        96.1 kB
@@ -75,29 +79,30 @@ Route (app)                                             Size     First Load JS
   - Local:        http://localhost:3100
 
  ✓ Starting...
- ✓ Ready in 115ms
- ✓ tests/api/security.test.ts (239 tests) 935ms
- ✓ tests/api/events.test.ts (13 tests) 3512ms
-   ✓ Eventos (HU-01, HU-02, HU-10) > API-EVT-03 · Creaciones simultáneas reciben consecutivos únicos  3384ms
+ ✓ Ready in 110ms
+ ✓ tests/api/events.test.ts (15 tests) 3661ms
+   ✓ Eventos (HU-01, HU-02, HU-10) > API-EVT-03 · Creaciones simultáneas reciben consecutivos únicos  3493ms
+ ✓ tests/api/security.test.ts (239 tests) 911ms
+ ✓ tests/documents/pdf.test.ts (7 tests) 355ms
 stderr | tests/rules/rules.test.ts > Reglas de Firestore y Storage (RNF-02) > RUL-02 · Ni un admin puede escribir Firestore desde el navegador
-[2026-10-05T18:11:12.446Z]  @firebase/firestore: Firestore (12.12.0): GrpcConnection RPC 'Write' stream 0x184290db error. Code: 7 Message: 7 PERMISSION_DENIED: 
+[2026-10-05T19:51:56.634Z]  @firebase/firestore: Firestore (12.12.0): GrpcConnection RPC 'Write' stream 0x46cd4546 error. Code: 7 Message: 7 PERMISSION_DENIED: 
 false for 'create' @ L9, false for 'update' @ L9
 
- ✓ tests/rules/rules.test.ts (4 tests) 110ms
- ✓ tests/documents/pdf.test.ts (6 tests) 154ms
- ✓ tests/api/quotes.test.ts (7 tests) 89ms
- ✓ tests/api/catalog.test.ts (8 tests) 73ms
- ✓ tests/api/portfolio.test.ts (8 tests) 51ms
- ✓ tests/api/templates.test.ts (6 tests) 46ms
- ✓ tests/documents/xlsx.test.ts (3 tests) 47ms
- ✓ tests/api/clients.test.ts (3 tests) 46ms
- ✓ tests/api/files.test.ts (5 tests) 37ms
- ✓ tests/api/orders.test.ts (4 tests) 36ms
+ ✓ tests/rules/rules.test.ts (4 tests) 101ms
+ ✓ tests/api/clients.test.ts (5 tests) 162ms
+ ✓ tests/api/quotes.test.ts (7 tests) 90ms
+ ✓ tests/api/catalog.test.ts (8 tests) 72ms
+ ✓ tests/api/templates.test.ts (7 tests) 49ms
+ ✓ tests/api/portfolio.test.ts (8 tests) 54ms
+ ✓ tests/api/files.test.ts (6 tests) 46ms
+ ✓ tests/documents/xlsx.test.ts (3 tests) 52ms
+ ✓ tests/api/providers.test.ts (4 tests) 41ms
+ ✓ tests/api/orders.test.ts (4 tests) 37ms
 
- Test Files  12 passed (12)
-      Tests  306 passed (306)
-   Start at  13:10:58
-   Duration  16.67s (transform 69ms, setup 0ms, collect 1.33s, tests 5.13s, environment 1ms, prepare 210ms)
+ Test Files  13 passed (13)
+      Tests  317 passed (317)
+   Start at  14:51:41
+   Duration  17.55s (transform 73ms, setup 0ms, collect 1.30s, tests 5.63s, environment 1ms, prepare 223ms)
 
 JSON report written to /Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/api/vitest-results.json
 JUNIT report written to /Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/api/vitest-junit.xml

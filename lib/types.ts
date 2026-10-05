@@ -223,6 +223,13 @@ export interface Client {
   updatedAt: string;
 }
 
+// Ficha del cliente: sus eventos y las cotizaciones de esos eventos
+export interface ClientHistory {
+  client: Client;
+  events: MagikEvent[];
+  quotes: Quote[];
+}
+
 // ─── Portfolio ────────────────────────────────────────────────────────────────
 
 export interface PortfolioItem {

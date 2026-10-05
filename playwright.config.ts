@@ -26,7 +26,12 @@ export default defineConfig({
     locale: "es-CO",
     timezoneId: "America/Bogota",
   },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
+  projects: [
+    { name: "chromium", use: { ...devices["Desktop Chrome"] }, testIgnore: /mobile\.spec\.ts/ },
+    // RNF-02: navegadores móviles (Android con Chromium e iPhone con Safari/WebKit)
+    { name: "android-chromium", use: { ...devices["Pixel 7"] }, testMatch: /mobile\.spec\.ts/ },
+    { name: "iphone-webkit", use: { ...devices["iPhone 13"] }, testMatch: /mobile\.spec\.ts/ },
+  ],
   webServer: {
     command: "npx tsx tests/support/serve.ts",
     url: `${BASE_URL}/api/portfolio`,

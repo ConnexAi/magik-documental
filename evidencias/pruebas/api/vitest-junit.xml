@@ -1,644 +1,668 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="306" failures="0" errors="0" time="5.134563874">
-    <testsuite name="tests/api/catalog.test.ts" timestamp="2026-10-05T18:11:14.787Z" hostname="MacBook-Air-de-Juanjo.local" tests="8" failures="0" errors="0" skipped="0" time="0.072721958">
-        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-01 · Admin crea rubro → disponible en el autocompletado" time="0.025263667">
+<testsuites name="vitest tests" tests="317" failures="0" errors="0" time="5.632083292">
+    <testsuite name="tests/api/catalog.test.ts" timestamp="2026-10-05T19:51:58.751Z" hostname="MacBook-Air-de-Juanjo.local" tests="8" failures="0" errors="0" skipped="0" time="0.072251584">
+        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-01 · Admin crea rubro → disponible en el autocompletado" time="0.024280417">
         </testcase>
-        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-02 · Colaborador crea rubro → 201" time="0.005186875">
+        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-02 · Colaborador crea rubro → 201" time="0.005023584">
         </testcase>
-        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-03 · Colaborador crea producto → disponible para todos" time="0.008409625">
+        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-03 · Colaborador crea producto → disponible para todos" time="0.008290375">
         </testcase>
-        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-04 · Admin edita producto → cambio visible de inmediato" time="0.008439875">
+        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-04 · Admin edita producto → cambio visible de inmediato" time="0.008047083">
         </testcase>
-        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-05 · Admin edita nombre de rubro → cambio visible de inmediato" time="0.007728417">
+        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-05 · Admin edita nombre de rubro → cambio visible de inmediato" time="0.008287833">
         </testcase>
-        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-06 · Colaborador elimina rubro → 403 y el rubro sigue existiendo" time="0.00468175">
+        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-06 · Colaborador elimina rubro → 403 y el rubro sigue existiendo" time="0.004727791">
         </testcase>
-        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-07 · Colaborador elimina producto → 403" time="0.001410708">
+        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-07 · Colaborador elimina producto → 403" time="0.001493167">
         </testcase>
-        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-08 · Admin elimina producto y rubro → 200 y desaparecen" time="0.011179083">
-        </testcase>
-    </testsuite>
-    <testsuite name="tests/api/clients.test.ts" timestamp="2026-10-05T18:11:14.788Z" hostname="MacBook-Air-de-Juanjo.local" tests="3" failures="0" errors="0" skipped="0" time="0.045896458">
-        <testcase classname="tests/api/clients.test.ts" name="Directorio de clientes (HU-17) &gt; API-CLI-01 · Crear evento vinculado a un cliente actualiza eventIds del cliente" time="0.03072625">
-        </testcase>
-        <testcase classname="tests/api/clients.test.ts" name="Directorio de clientes (HU-17) &gt; API-CLI-02 · La ficha del cliente lista sus eventos" time="0.00771875">
-        </testcase>
-        <testcase classname="tests/api/clients.test.ts" name="Directorio de clientes (HU-17) &gt; API-CLI-03 · El cliente aparece en el directorio para el autocompletado" time="0.007013583">
+        <testcase classname="tests/api/catalog.test.ts" name="Catálogo (HU-07, HU-08) &gt; API-CAT-08 · Admin elimina producto y rubro → 200 y desaparecen" time="0.011685333">
         </testcase>
     </testsuite>
-    <testsuite name="tests/api/events.test.ts" timestamp="2026-10-05T18:11:14.788Z" hostname="MacBook-Air-de-Juanjo.local" tests="13" failures="0" errors="0" skipped="0" time="3.511802833">
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-01 · Crear evento asigna el consecutivo siguiente EVT-000X" time="0.051111834">
+    <testsuite name="tests/api/clients.test.ts" timestamp="2026-10-05T19:51:58.751Z" hostname="MacBook-Air-de-Juanjo.local" tests="5" failures="0" errors="0" skipped="0" time="0.161967084">
+        <testcase classname="tests/api/clients.test.ts" name="Directorio de clientes (HU-17) &gt; API-CLI-01 · Crear evento vinculado a un cliente actualiza eventIds del cliente" time="0.036974875">
         </testcase>
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-02 · El evento creado aparece en el listado" time="0.004573458">
+        <testcase classname="tests/api/clients.test.ts" name="Directorio de clientes (HU-17) &gt; API-CLI-02 · La ficha del cliente lista sus eventos" time="0.011595625">
         </testcase>
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-03 · Creaciones simultáneas reciben consecutivos únicos" time="3.383647333">
+        <testcase classname="tests/api/clients.test.ts" name="Directorio de clientes (HU-17) &gt; API-CLI-04 · La ficha incluye eventIds, eventos y las cotizaciones de esos eventos" time="0.008586458">
         </testcase>
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-04 · Buscar por cliente devuelve solo coincidencias" time="0.011187625">
+        <testcase classname="tests/api/clients.test.ts" name="Directorio de clientes (HU-17) &gt; API-CLI-05 · La ficha lista todos los eventos, sin el límite de 10" time="0.10031275">
         </testcase>
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-05 · Buscar por año devuelve solo eventos de ese año" time="0.007833667">
-        </testcase>
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-06 · Buscar por tipo devuelve solo ese tipo" time="0.007389">
-        </testcase>
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-07 · Buscar por lugar devuelve solo coincidencias" time="0.006725791">
-        </testcase>
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-08 · Filtros combinados (cliente + año + tipo + lugar)" time="0.007450542">
-        </testcase>
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-09 · La búsqueda responde en menos de 1 segundo" time="0.010444625">
-        </testcase>
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-10 · Crear evento sin campos obligatorios → 400" time="0.002499584">
-        </testcase>
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-11 · Consultar un ID inexistente → 404" time="0.004300333">
-        </testcase>
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-12 · Colaborador no puede eliminar eventos → 403" time="0.005465583">
-        </testcase>
-        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-13 · Admin elimina evento → 200 y deja de existir" time="0.008426667">
+        <testcase classname="tests/api/clients.test.ts" name="Directorio de clientes (HU-17) &gt; API-CLI-03 · El cliente aparece en el directorio para el autocompletado" time="0.004009166">
         </testcase>
     </testsuite>
-    <testsuite name="tests/api/files.test.ts" timestamp="2026-10-05T18:11:14.788Z" hostname="MacBook-Air-de-Juanjo.local" tests="5" failures="0" errors="0" skipped="0" time="0.036839583">
-        <testcase classname="tests/api/files.test.ts" name="Archivos por evento (HU-12, HU-13) &gt; API-FIL-01 · Subir archivo registra nombre, categoría, fecha y autor" time="0.018717209">
+    <testsuite name="tests/api/events.test.ts" timestamp="2026-10-05T19:51:58.751Z" hostname="MacBook-Air-de-Juanjo.local" tests="15" failures="0" errors="0" skipped="0" time="3.661477208">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-01 · Crear evento asigna el consecutivo siguiente EVT-000X" time="0.067268583">
         </testcase>
-        <testcase classname="tests/api/files.test.ts" name="Archivos por evento (HU-12, HU-13) &gt; API-FIL-02 · Se puede usar una categoría nueva (personalizada)" time="0.003003417">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-02 · El evento creado aparece en el listado" time="0.005978584">
         </testcase>
-        <testcase classname="tests/api/files.test.ts" name="Archivos por evento (HU-12, HU-13) &gt; API-FIL-03 · Renombrar no altera el archivo almacenado ni su enlace" time="0.004259625">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-03 · Creaciones simultáneas reciben consecutivos únicos" time="3.492631291">
         </testcase>
-        <testcase classname="tests/api/files.test.ts" name="Archivos por evento (HU-12, HU-13) &gt; API-FIL-04 · Colaborador elimina archivo → 403" time="0.001773375">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-04 · Buscar por cliente devuelve solo coincidencias" time="0.010851125">
         </testcase>
-        <testcase classname="tests/api/files.test.ts" name="Archivos por evento (HU-12, HU-13) &gt; API-FIL-05 · Admin elimina archivo → 200" time="0.008717083">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-05 · Buscar por año devuelve solo eventos de ese año" time="0.011333125">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/api/orders.test.ts" timestamp="2026-10-05T18:11:14.789Z" hostname="MacBook-Air-de-Juanjo.local" tests="4" failures="0" errors="0" skipped="0" time="0.036077292">
-        <testcase classname="tests/api/orders.test.ts" name="Órdenes de servicio (HU-04, HU-16) &gt; API-OS-01 · El autocompletado obtiene el proveedor con todos sus datos" time="0.017290792">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-06 · Buscar por tipo devuelve solo ese tipo" time="0.008513375">
         </testcase>
-        <testcase classname="tests/api/orders.test.ts" name="Órdenes de servicio (HU-04, HU-16) &gt; API-OS-02 · Crear orden asigna el consecutivo OS-000-AAAA y guarda proveedor, fechas y pago" time="0.010892292">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-07 · Buscar por lugar devuelve solo coincidencias" time="0.006326875">
         </testcase>
-        <testcase classname="tests/api/orders.test.ts" name="Órdenes de servicio (HU-04, HU-16) &gt; API-OS-03 · Colaborador intentando eliminar orden → 403" time="0.001493292">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-08 · Filtros combinados (cliente + año + tipo + lugar)" time="0.011649917">
         </testcase>
-        <testcase classname="tests/api/orders.test.ts" name="Órdenes de servicio (HU-04, HU-16) &gt; API-OS-04 · Admin elimina orden → 200" time="0.00600275">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-14 · Buscar por consecutivo exacto devuelve solo ese evento" time="0.0050955">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/api/portfolio.test.ts" timestamp="2026-10-05T18:11:14.789Z" hostname="MacBook-Air-de-Juanjo.local" tests="8" failures="0" errors="0" skipped="0" time="0.051179291">
-        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-01 · GET público devuelve solo items visibles" time="0.011934666">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-15 · Buscar por consecutivo parcial, sin distinguir mayúsculas" time="0.009592792">
         </testcase>
-        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-02 · GET público no expone datos internos" time="0.0037055">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-09 · La búsqueda responde en menos de 1 segundo" time="0.009235709">
         </testcase>
-        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-03 · POST sin sesión → 401" time="0.00149775">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-10 · Crear evento sin campos obligatorios → 400" time="0.002222917">
         </testcase>
-        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-04 · Admin agrega fotos: 6 fotos → 400 (máximo 5)" time="0.008621292">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-11 · Consultar un ID inexistente → 404" time="0.005149625">
         </testcase>
-        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-05 · Admin agrega fotos: 5 fotos → 201" time="0.002648917">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-12 · Colaborador no puede eliminar eventos → 403" time="0.005691708">
         </testcase>
-        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-06 · Editar con más de 5 fotos → 400" time="0.001604584">
-        </testcase>
-        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-07 · Admin oculta y reordena: el item sale del portal público" time="0.007223625">
-        </testcase>
-        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-08 · /portal carga sin sesión y no incluye eventos ocultos ni documentos" time="0.013510584">
+        <testcase classname="tests/api/events.test.ts" name="Eventos (HU-01, HU-02, HU-10) &gt; API-EVT-13 · Admin elimina evento → 200 y deja de existir" time="0.009251292">
         </testcase>
     </testsuite>
-    <testsuite name="tests/api/quotes.test.ts" timestamp="2026-10-05T18:11:14.789Z" hostname="MacBook-Air-de-Juanjo.local" tests="7" failures="0" errors="0" skipped="0" time="0.088549083">
-        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-01 · Crear cotización asigna el consecutivo siguiente COT-000-AAAA" time="0.054729084">
+    <testsuite name="tests/api/files.test.ts" timestamp="2026-10-05T19:51:58.752Z" hostname="MacBook-Air-de-Juanjo.local" tests="6" failures="0" errors="0" skipped="0" time="0.045711625">
+        <testcase classname="tests/api/files.test.ts" name="Archivos por evento (HU-12, HU-13) &gt; API-FIL-01 · Subir archivo registra nombre, categoría, fecha y autor" time="0.018249166">
         </testcase>
-        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-02 · Calcula subtotal, descuento, IVA 19% y total" time="0.000075584">
+        <testcase classname="tests/api/files.test.ts" name="Archivos por evento (HU-12, HU-13) &gt; API-FIL-02 · Se puede usar una categoría nueva (personalizada)" time="0.003388209">
         </testcase>
-        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-03 · El servidor recalcula y no acepta totales manipulados por el cliente" time="0.006632459">
+        <testcase classname="tests/api/files.test.ts" name="Archivos por evento (HU-12, HU-13) &gt; API-FIL-06 · Buscar dentro del evento por tipo de documento (categoría)" time="0.00817975">
         </testcase>
-        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-04 · Editar el descuento recalcula el total" time="0.006547208">
+        <testcase classname="tests/api/files.test.ts" name="Archivos por evento (HU-12, HU-13) &gt; API-FIL-03 · Renombrar no altera el archivo almacenado ni su enlace" time="0.004439417">
         </testcase>
-        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-05 · Duplicar conserva ítems y condiciones y recibe el siguiente consecutivo" time="0.014026916">
+        <testcase classname="tests/api/files.test.ts" name="Archivos por evento (HU-12, HU-13) &gt; API-FIL-04 · Colaborador elimina archivo → 403" time="0.001631458">
         </testcase>
-        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-06 · Colaborador intentando eliminar cotización → 403" time="0.001609416">
-        </testcase>
-        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-07 · Admin elimina cotización → 200" time="0.0045015">
+        <testcase classname="tests/api/files.test.ts" name="Archivos por evento (HU-12, HU-13) &gt; API-FIL-05 · Admin elimina archivo → 200" time="0.009445625">
         </testcase>
     </testsuite>
-    <testsuite name="tests/api/security.test.ts" timestamp="2026-10-05T18:11:14.790Z" hostname="MacBook-Air-de-Juanjo.local" tests="239" failures="0" errors="0" skipped="0" time="0.9345935">
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/session &gt; SEC-01-1 · sin sesión → 401" time="0.005856125">
+    <testsuite name="tests/api/orders.test.ts" timestamp="2026-10-05T19:51:58.752Z" hostname="MacBook-Air-de-Juanjo.local" tests="4" failures="0" errors="0" skipped="0" time="0.037173666">
+        <testcase classname="tests/api/orders.test.ts" name="Órdenes de servicio (HU-04, HU-16) &gt; API-OS-01 · El autocompletado obtiene el proveedor con todos sus datos" time="0.017725333">
         </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/session &gt; SEC-01-2 · cookie magik_role=admin falsa sin token → 401" time="0.00248875">
+        <testcase classname="tests/api/orders.test.ts" name="Órdenes de servicio (HU-04, HU-16) &gt; API-OS-02 · Crear orden asigna el consecutivo OS-000-AAAA y guarda proveedor, fechas y pago" time="0.012036167">
         </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/session &gt; SEC-01-4 · token de admin → 401" time="0.009075709">
+        <testcase classname="tests/api/orders.test.ts" name="Órdenes de servicio (HU-04, HU-16) &gt; API-OS-03 · Colaborador intentando eliminar orden → 403" time="0.001739792">
         </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/logout &gt; SEC-02-1 · sin sesión → 200" time="0.002389917">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/logout &gt; SEC-02-2 · cookie magik_role=admin falsa sin token → 200" time="0.001541542">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/logout &gt; SEC-02-4 · token de admin → 200" time="0.001675542">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/set-role &gt; SEC-03-1 · sin sesión → 401" time="0.001927541">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/set-role &gt; SEC-03-2 · cookie magik_role=admin falsa sin token → 401" time="0.001602875">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/set-role &gt; SEC-03-3 · token de colaborador en ruta de admin → 403" time="0.007141708">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/set-role &gt; SEC-03-4 · token de admin → 200" time="0.007730625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/admin/users &gt; SEC-04-1 · sin sesión → 401" time="0.001963667">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/admin/users &gt; SEC-04-2 · cookie magik_role=admin falsa sin token → 401" time="0.0012195">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/admin/users &gt; SEC-04-3 · token de colaborador en ruta de admin → 403" time="0.00209425">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/admin/users &gt; SEC-04-4 · token de admin → 200" time="0.004542417">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/admin/users &gt; SEC-05-1 · sin sesión → 401" time="0.001386292">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/admin/users &gt; SEC-05-2 · cookie magik_role=admin falsa sin token → 401" time="0.001365458">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/admin/users &gt; SEC-05-3 · token de colaborador en ruta de admin → 403" time="0.001837833">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/admin/users &gt; SEC-05-4 · token de admin → 201" time="0.004382333">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/admin/users/sec-user &gt; SEC-06-1 · sin sesión → 401" time="0.001868125">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/admin/users/sec-user &gt; SEC-06-2 · cookie magik_role=admin falsa sin token → 401" time="0.001179333">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/admin/users/sec-user &gt; SEC-06-3 · token de colaborador en ruta de admin → 403" time="0.001762833">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/admin/users/sec-user &gt; SEC-06-4 · token de admin → 200" time="0.003576292">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/admin/users/sec-user-del &gt; SEC-07-1 · sin sesión → 401" time="0.001127792">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/admin/users/sec-user-del &gt; SEC-07-2 · cookie magik_role=admin falsa sin token → 401" time="0.001162333">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/admin/users/sec-user-del &gt; SEC-07-3 · token de colaborador en ruta de admin → 403" time="0.001519667">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/admin/users/sec-user-del &gt; SEC-07-4 · token de admin → 200" time="0.002905458">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events &gt; SEC-08-1 · sin sesión → 401" time="0.001468041">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events &gt; SEC-08-2 · cookie magik_role=admin falsa sin token → 401" time="0.001007708">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events &gt; SEC-08-3 · token de colaborador en ruta de sesión → permitido" time="0.004121792">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events &gt; SEC-08-4 · token de admin → 200" time="0.00404025">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events &gt; SEC-09-1 · sin sesión → 401" time="0.001263083">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events &gt; SEC-09-2 · cookie magik_role=admin falsa sin token → 401" time="0.001012834">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events &gt; SEC-09-3 · token de colaborador en ruta de sesión → permitido" time="0.007601959">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events &gt; SEC-09-4 · token de admin → 201" time="0.005860959">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec &gt; SEC-10-1 · sin sesión → 401" time="0.001733167">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec &gt; SEC-10-2 · cookie magik_role=admin falsa sin token → 401" time="0.001056958">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec &gt; SEC-10-3 · token de colaborador en ruta de sesión → permitido" time="0.0039135">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec &gt; SEC-10-4 · token de admin → 200" time="0.004419417">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec &gt; SEC-11-1 · sin sesión → 401" time="0.001513917">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec &gt; SEC-11-2 · cookie magik_role=admin falsa sin token → 401" time="0.00112675">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec &gt; SEC-11-3 · token de colaborador en ruta de sesión → permitido" time="0.005106792">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec &gt; SEC-11-4 · token de admin → 200" time="0.005194625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec-del &gt; SEC-12-1 · sin sesión → 401" time="0.001461584">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec-del &gt; SEC-12-2 · cookie magik_role=admin falsa sin token → 401" time="0.001125958">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec-del &gt; SEC-12-3 · token de colaborador en ruta de admin → 403" time="0.001620583">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec-del &gt; SEC-12-4 · token de admin → 200" time="0.002318542">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes &gt; SEC-13-1 · sin sesión → 401" time="0.001633208">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes &gt; SEC-13-2 · cookie magik_role=admin falsa sin token → 401" time="0.000967583">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes &gt; SEC-13-3 · token de colaborador en ruta de sesión → permitido" time="0.004372916">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes &gt; SEC-13-4 · token de admin → 200" time="0.003819834">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes &gt; SEC-14-1 · sin sesión → 401" time="0.001400291">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes &gt; SEC-14-2 · cookie magik_role=admin falsa sin token → 401" time="0.001071208">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes &gt; SEC-14-3 · token de colaborador en ruta de sesión → permitido" time="0.007747208">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes &gt; SEC-14-4 · token de admin → 201" time="0.00691975">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec &gt; SEC-15-1 · sin sesión → 401" time="0.001798416">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec &gt; SEC-15-2 · cookie magik_role=admin falsa sin token → 401" time="0.00103575">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec &gt; SEC-15-3 · token de colaborador en ruta de sesión → permitido" time="0.003632667">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec &gt; SEC-15-4 · token de admin → 200" time="0.0034">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/quotes/quote-sec &gt; SEC-16-1 · sin sesión → 401" time="0.001088583">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/quotes/quote-sec &gt; SEC-16-2 · cookie magik_role=admin falsa sin token → 401" time="0.000880917">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/quotes/quote-sec &gt; SEC-16-3 · token de colaborador en ruta de sesión → permitido" time="0.004283417">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/quotes/quote-sec &gt; SEC-16-4 · token de admin → 200" time="0.004171334">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/quotes/quote-sec-del &gt; SEC-17-1 · sin sesión → 401" time="0.001012834">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/quotes/quote-sec-del &gt; SEC-17-2 · cookie magik_role=admin falsa sin token → 401" time="0.00100325">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/quotes/quote-sec-del &gt; SEC-17-3 · token de colaborador en ruta de admin → 403" time="0.001535625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/quotes/quote-sec-del &gt; SEC-17-4 · token de admin → 200" time="0.002127625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes/quote-sec/duplicate &gt; SEC-18-1 · sin sesión → 401" time="0.001436833">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes/quote-sec/duplicate &gt; SEC-18-2 · cookie magik_role=admin falsa sin token → 401" time="0.001079292">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes/quote-sec/duplicate &gt; SEC-18-3 · token de colaborador en ruta de sesión → permitido" time="0.007783041">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes/quote-sec/duplicate &gt; SEC-18-4 · token de admin → 201" time="0.007840208">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/pdf &gt; SEC-19-1 · sin sesión → 401" time="0.001550208">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/pdf &gt; SEC-19-2 · cookie magik_role=admin falsa sin token → 401" time="0.001113625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/pdf &gt; SEC-19-3 · token de colaborador en ruta de sesión → permitido" time="0.108247208">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/pdf &gt; SEC-19-4 · token de admin → 200" time="0.033942042">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/xlsx &gt; SEC-20-1 · sin sesión → 401" time="0.044599375">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/xlsx &gt; SEC-20-2 · cookie magik_role=admin falsa sin token → 401" time="0.001384459">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/xlsx &gt; SEC-20-3 · token de colaborador en ruta de sesión → permitido" time="0.016636875">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/xlsx &gt; SEC-20-4 · token de admin → 200" time="0.007409416">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders &gt; SEC-21-1 · sin sesión → 401" time="0.001769042">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders &gt; SEC-21-2 · cookie magik_role=admin falsa sin token → 401" time="0.001111167">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders &gt; SEC-21-3 · token de colaborador en ruta de sesión → permitido" time="0.004328917">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders &gt; SEC-21-4 · token de admin → 200" time="0.003879625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/orders &gt; SEC-22-1 · sin sesión → 401" time="0.001166708">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/orders &gt; SEC-22-2 · cookie magik_role=admin falsa sin token → 401" time="0.001134042">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/orders &gt; SEC-22-3 · token de colaborador en ruta de sesión → permitido" time="0.006156125">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/orders &gt; SEC-22-4 · token de admin → 201" time="0.005843333">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec &gt; SEC-23-1 · sin sesión → 401" time="0.001432">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec &gt; SEC-23-2 · cookie magik_role=admin falsa sin token → 401" time="0.000888167">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec &gt; SEC-23-3 · token de colaborador en ruta de sesión → permitido" time="0.003400875">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec &gt; SEC-23-4 · token de admin → 200" time="0.003163">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/orders/order-sec &gt; SEC-24-1 · sin sesión → 401" time="0.001118667">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/orders/order-sec &gt; SEC-24-2 · cookie magik_role=admin falsa sin token → 401" time="0.000929292">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/orders/order-sec &gt; SEC-24-3 · token de colaborador en ruta de sesión → permitido" time="0.0039395">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/orders/order-sec &gt; SEC-24-4 · token de admin → 200" time="0.003914792">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/orders/order-sec-del &gt; SEC-25-1 · sin sesión → 401" time="0.001055875">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/orders/order-sec-del &gt; SEC-25-2 · cookie magik_role=admin falsa sin token → 401" time="0.000967125">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/orders/order-sec-del &gt; SEC-25-3 · token de colaborador en ruta de admin → 403" time="0.001438791">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/orders/order-sec-del &gt; SEC-25-4 · token de admin → 200" time="0.002065334">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/pdf &gt; SEC-26-1 · sin sesión → 401" time="0.001390166">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/pdf &gt; SEC-26-2 · cookie magik_role=admin falsa sin token → 401" time="0.000915375">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/pdf &gt; SEC-26-3 · token de colaborador en ruta de sesión → permitido" time="0.031973167">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/pdf &gt; SEC-26-4 · token de admin → 200" time="0.034180291">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/xlsx &gt; SEC-27-1 · sin sesión → 401" time="0.001686209">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/xlsx &gt; SEC-27-2 · cookie magik_role=admin falsa sin token → 401" time="0.001083208">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/xlsx &gt; SEC-27-3 · token de colaborador en ruta de sesión → permitido" time="0.0072275">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/xlsx &gt; SEC-27-4 · token de admin → 200" time="0.006436291">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/files &gt; SEC-28-1 · sin sesión → 401" time="0.001335834">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/files &gt; SEC-28-2 · cookie magik_role=admin falsa sin token → 401" time="0.001004292">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/files &gt; SEC-28-3 · token de colaborador en ruta de sesión → permitido" time="0.003657292">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/files &gt; SEC-28-4 · token de admin → 200" time="0.003424959">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/files &gt; SEC-29-1 · sin sesión → 401" time="0.001103875">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/files &gt; SEC-29-2 · cookie magik_role=admin falsa sin token → 401" time="0.001142959">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/files &gt; SEC-29-3 · token de colaborador en ruta de sesión → permitido" time="0.0028705">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/files &gt; SEC-29-4 · token de admin → 201" time="0.002481">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/files/file-sec &gt; SEC-30-1 · sin sesión → 401" time="0.00143775">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/files/file-sec &gt; SEC-30-2 · cookie magik_role=admin falsa sin token → 401" time="0.000940833">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/files/file-sec &gt; SEC-30-3 · token de colaborador en ruta de sesión → permitido" time="0.004219333">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/files/file-sec &gt; SEC-30-4 · token de admin → 200" time="0.004006917">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/files/file-sec-del &gt; SEC-31-1 · sin sesión → 401" time="0.001053083">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/files/file-sec-del &gt; SEC-31-2 · cookie magik_role=admin falsa sin token → 401" time="0.000911625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/files/file-sec-del &gt; SEC-31-3 · token de colaborador en ruta de admin → 403" time="0.001362625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/files/file-sec-del &gt; SEC-31-4 · token de admin → 200" time="0.001991">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/catalog &gt; SEC-32-1 · sin sesión → 401" time="0.001292042">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/catalog &gt; SEC-32-2 · cookie magik_role=admin falsa sin token → 401" time="0.000985125">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/catalog &gt; SEC-32-3 · token de colaborador en ruta de sesión → permitido" time="0.003428417">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/catalog &gt; SEC-32-4 · token de admin → 200" time="0.003122792">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PUT /api/catalog &gt; SEC-33-1 · sin sesión → 401" time="0.006953292">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PUT /api/catalog &gt; SEC-33-2 · cookie magik_role=admin falsa sin token → 401" time="0.003523291">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PUT /api/catalog &gt; SEC-33-3 · token de colaborador en ruta de admin → 403" time="0.004052708">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PUT /api/catalog &gt; SEC-33-4 · token de admin → 200" time="0.004909709">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros &gt; SEC-34-1 · sin sesión → 401" time="0.001556709">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros &gt; SEC-34-2 · cookie magik_role=admin falsa sin token → 401" time="0.00098925">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros &gt; SEC-34-3 · token de colaborador en ruta de sesión → permitido" time="0.004434083">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros &gt; SEC-34-4 · token de admin → 201" time="0.004121917">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec &gt; SEC-35-1 · sin sesión → 401" time="0.001429583">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec &gt; SEC-35-2 · cookie magik_role=admin falsa sin token → 401" time="0.001012208">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec &gt; SEC-35-3 · token de colaborador en ruta de admin → 403" time="0.001450792">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec &gt; SEC-35-4 · token de admin → 200" time="0.004093">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec-del &gt; SEC-36-1 · sin sesión → 401" time="0.0009965">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec-del &gt; SEC-36-2 · cookie magik_role=admin falsa sin token → 401" time="0.00091275">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec-del &gt; SEC-36-3 · token de colaborador en ruta de admin → 403" time="0.001356125">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec-del &gt; SEC-36-4 · token de admin → 200" time="0.003964125">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros/rubro-sec/products &gt; SEC-37-1 · sin sesión → 401" time="0.0014575">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros/rubro-sec/products &gt; SEC-37-2 · cookie magik_role=admin falsa sin token → 401" time="0.000988375">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros/rubro-sec/products &gt; SEC-37-3 · token de colaborador en ruta de sesión → permitido" time="0.004041625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros/rubro-sec/products &gt; SEC-37-4 · token de admin → 201" time="0.003979833">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-38-1 · sin sesión → 401" time="0.001259166">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-38-2 · cookie magik_role=admin falsa sin token → 401" time="0.001042583">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-38-3 · token de colaborador en ruta de admin → 403" time="0.001504667">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-38-4 · token de admin → 200" time="0.00424525">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-39-1 · sin sesión → 401" time="0.000996166">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-39-2 · cookie magik_role=admin falsa sin token → 401" time="0.00102225">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-39-3 · token de colaborador en ruta de admin → 403" time="0.001335583">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-39-4 · token de admin → 200" time="0.004142542">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/providers &gt; SEC-40-1 · sin sesión → 401" time="0.001359291">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/providers &gt; SEC-40-2 · cookie magik_role=admin falsa sin token → 401" time="0.000938917">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/providers &gt; SEC-40-3 · token de colaborador en ruta de sesión → permitido" time="0.003568875">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/providers &gt; SEC-40-4 · token de admin → 200" time="0.003374875">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/providers &gt; SEC-41-1 · sin sesión → 401" time="0.001006875">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/providers &gt; SEC-41-2 · cookie magik_role=admin falsa sin token → 401" time="0.000933667">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/providers &gt; SEC-41-3 · token de colaborador en ruta de sesión → permitido" time="0.002337542">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/providers &gt; SEC-41-4 · token de admin → 201" time="0.002212375">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/providers/prov-sec &gt; SEC-42-1 · sin sesión → 401" time="0.001469041">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/providers/prov-sec &gt; SEC-42-2 · cookie magik_role=admin falsa sin token → 401" time="0.001009208">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/providers/prov-sec &gt; SEC-42-3 · token de colaborador en ruta de admin → 403" time="0.00133075">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/providers/prov-sec &gt; SEC-42-4 · token de admin → 200" time="0.004336">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/providers/prov-sec-del &gt; SEC-43-1 · sin sesión → 401" time="0.001049917">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/providers/prov-sec-del &gt; SEC-43-2 · cookie magik_role=admin falsa sin token → 401" time="0.001041458">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/providers/prov-sec-del &gt; SEC-43-3 · token de colaborador en ruta de admin → 403" time="0.001634292">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/providers/prov-sec-del &gt; SEC-43-4 · token de admin → 200" time="0.002304791">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients &gt; SEC-44-1 · sin sesión → 401" time="0.001320541">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients &gt; SEC-44-2 · cookie magik_role=admin falsa sin token → 401" time="0.000928334">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients &gt; SEC-44-3 · token de colaborador en ruta de sesión → permitido" time="0.0036095">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients &gt; SEC-44-4 · token de admin → 200" time="0.00347325">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/clients &gt; SEC-45-1 · sin sesión → 401" time="0.001015084">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/clients &gt; SEC-45-2 · cookie magik_role=admin falsa sin token → 401" time="0.000959167">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/clients &gt; SEC-45-3 · token de colaborador en ruta de sesión → permitido" time="0.002779542">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/clients &gt; SEC-45-4 · token de admin → 201" time="0.003221041">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients/cli-sec &gt; SEC-46-1 · sin sesión → 401" time="0.001484333">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients/cli-sec &gt; SEC-46-2 · cookie magik_role=admin falsa sin token → 401" time="0.000953334">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients/cli-sec &gt; SEC-46-3 · token de colaborador en ruta de sesión → permitido" time="0.006674625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients/cli-sec &gt; SEC-46-4 · token de admin → 200" time="0.006057417">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/clients/cli-sec &gt; SEC-47-1 · sin sesión → 401" time="0.001581916">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/clients/cli-sec &gt; SEC-47-2 · cookie magik_role=admin falsa sin token → 401" time="0.001180041">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/clients/cli-sec &gt; SEC-47-3 · token de colaborador en ruta de admin → 403" time="0.001624291">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/clients/cli-sec &gt; SEC-47-4 · token de admin → 200" time="0.005127625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/clients/cli-sec-del &gt; SEC-48-1 · sin sesión → 401" time="0.001093709">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/clients/cli-sec-del &gt; SEC-48-2 · cookie magik_role=admin falsa sin token → 401" time="0.000815375">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/clients/cli-sec-del &gt; SEC-48-3 · token de colaborador en ruta de admin → 403" time="0.001254083">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/clients/cli-sec-del &gt; SEC-48-4 · token de admin → 200" time="0.001864041">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates &gt; SEC-49-1 · sin sesión → 401" time="0.00115825">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates &gt; SEC-49-2 · cookie magik_role=admin falsa sin token → 401" time="0.00083225">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates &gt; SEC-49-3 · token de colaborador en ruta de sesión → permitido" time="0.005319">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates &gt; SEC-49-4 · token de admin → 200" time="0.006107125">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates &gt; SEC-50-1 · sin sesión → 401" time="0.0009455">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates &gt; SEC-50-2 · cookie magik_role=admin falsa sin token → 401" time="0.000793583">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates &gt; SEC-50-3 · token de colaborador en ruta de admin → 403" time="0.001366541">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates &gt; SEC-50-4 · token de admin → 201" time="0.002074625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec &gt; SEC-51-1 · sin sesión → 401" time="0.001316833">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec &gt; SEC-51-2 · cookie magik_role=admin falsa sin token → 401" time="0.000750833">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec &gt; SEC-51-3 · token de colaborador en ruta de sesión → permitido" time="0.003196166">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec &gt; SEC-51-4 · token de admin → 200" time="0.002903917">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/templates/tpl-sec &gt; SEC-52-1 · sin sesión → 401" time="0.000846625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/templates/tpl-sec &gt; SEC-52-2 · cookie magik_role=admin falsa sin token → 401" time="0.000822">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/templates/tpl-sec &gt; SEC-52-3 · token de colaborador en ruta de admin → 403" time="0.001443625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/templates/tpl-sec &gt; SEC-52-4 · token de admin → 200" time="0.004018125">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/templates/tpl-sec-del &gt; SEC-53-1 · sin sesión → 401" time="0.000880625">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/templates/tpl-sec-del &gt; SEC-53-2 · cookie magik_role=admin falsa sin token → 401" time="0.000825542">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/templates/tpl-sec-del &gt; SEC-53-3 · token de colaborador en ruta de admin → 403" time="0.001278083">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/templates/tpl-sec-del &gt; SEC-53-4 · token de admin → 200" time="0.001787958">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec/versions &gt; SEC-54-1 · sin sesión → 401" time="0.001167375">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec/versions &gt; SEC-54-2 · cookie magik_role=admin falsa sin token → 401" time="0.000816458">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec/versions &gt; SEC-54-3 · token de colaborador en ruta de sesión → permitido" time="0.003353875">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec/versions &gt; SEC-54-4 · token de admin → 200" time="0.013665166">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates/tpl-sec/versions &gt; SEC-55-1 · sin sesión → 401" time="0.001017166">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates/tpl-sec/versions &gt; SEC-55-2 · cookie magik_role=admin falsa sin token → 401" time="0.000876917">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates/tpl-sec/versions &gt; SEC-55-3 · token de colaborador en ruta de admin → 403" time="0.001233416">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates/tpl-sec/versions &gt; SEC-55-4 · token de admin → 201" time="0.0033855">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/portfolio &gt; SEC-56-1 · sin sesión → 200" time="0.002749292">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/portfolio &gt; SEC-56-2 · cookie magik_role=admin falsa sin token → 200" time="0.002852958">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/portfolio &gt; SEC-56-4 · token de admin → 200" time="0.003452584">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/portfolio &gt; SEC-57-1 · sin sesión → 401" time="0.001097875">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/portfolio &gt; SEC-57-2 · cookie magik_role=admin falsa sin token → 401" time="0.000958">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/portfolio &gt; SEC-57-3 · token de colaborador en ruta de admin → 403" time="0.0013755">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/portfolio &gt; SEC-57-4 · token de admin → 201" time="0.002123084">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/portfolio/pf-sec &gt; SEC-58-1 · sin sesión → 401" time="0.001330291">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/portfolio/pf-sec &gt; SEC-58-2 · cookie magik_role=admin falsa sin token → 401" time="0.001081291">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/portfolio/pf-sec &gt; SEC-58-3 · token de colaborador en ruta de admin → 403" time="0.00132425">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/portfolio/pf-sec &gt; SEC-58-4 · token de admin → 200" time="0.004035333">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/portfolio/pf-sec-del &gt; SEC-59-1 · sin sesión → 401" time="0.000966083">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/portfolio/pf-sec-del &gt; SEC-59-2 · cookie magik_role=admin falsa sin token → 401" time="0.000850792">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/portfolio/pf-sec-del &gt; SEC-59-3 · token de colaborador en ruta de admin → 403" time="0.001274958">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/portfolio/pf-sec-del &gt; SEC-59-4 · token de admin → 200" time="0.001889459">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Casos críticos explícitos &gt; SEC-X1 · POST /api/auth/set-role con cookie magik_role=admin falsa → 401" time="0.001893833">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Casos críticos explícitos &gt; SEC-X2 · POST /api/auth/set-role con token inventado y rol admin → 401" time="0.001027375">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Casos críticos explícitos &gt; SEC-X3 · DELETE /api/events/[id] sin sesión → 401" time="0.000890833">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Casos críticos explícitos &gt; SEC-X4 · DELETE /api/catalog/rubros/[id] con token de colaborador → 403" time="0.001430833">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Casos críticos explícitos &gt; SEC-X5 · GET /api/portfolio sin sesión → 200 (público)" time="0.003264208">
-        </testcase>
-        <testcase classname="tests/api/security.test.ts" name="Casos críticos explícitos &gt; SEC-X6 · Página /dashboard/admin/users con cookies falsas no expone datos (redirige a /login)" time="0.034517667">
+        <testcase classname="tests/api/orders.test.ts" name="Órdenes de servicio (HU-04, HU-16) &gt; API-OS-04 · Admin elimina orden → 200" time="0.005272125">
         </testcase>
     </testsuite>
-    <testsuite name="tests/api/templates.test.ts" timestamp="2026-10-05T18:11:14.798Z" hostname="MacBook-Air-de-Juanjo.local" tests="6" failures="0" errors="0" skipped="0" time="0.045880917">
-        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-01 · Colaborador publica versión → 403 y la versión activa no cambia" time="0.020415209">
+    <testsuite name="tests/api/portfolio.test.ts" timestamp="2026-10-05T19:51:58.753Z" hostname="MacBook-Air-de-Juanjo.local" tests="8" failures="0" errors="0" skipped="0" time="0.05357975">
+        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-01 · GET público devuelve solo items visibles" time="0.010305583">
         </testcase>
-        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-02 · Admin publica versión → la nueva queda activa" time="0.009952791">
+        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-02 · GET público no expone datos internos" time="0.003883959">
         </testcase>
-        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-03 · La versión anterior pasa al historial" time="0.00391475">
+        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-03 · POST sin sesión → 401" time="0.001405834">
         </testcase>
-        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-04 · El historial tiene número, fecha, autor y nota de cambios" time="0.00370175">
+        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-04 · Admin agrega fotos: 6 fotos → 400 (máximo 5)" time="0.008767916">
         </testcase>
-        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-05 · GET de plantilla para colaborador expone solo la versión activa" time="0.00378175">
+        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-05 · Admin agrega fotos: 5 fotos → 201" time="0.002934125">
         </testcase>
-        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-06 · El listado de plantillas para colaborador no incluye versiones antiguas" time="0.003684667">
+        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-06 · Editar con más de 5 fotos → 400" time="0.001591875">
         </testcase>
-    </testsuite>
-    <testsuite name="tests/documents/pdf.test.ts" timestamp="2026-10-05T18:11:14.798Z" hostname="MacBook-Air-de-Juanjo.local" tests="6" failures="0" errors="0" skipped="0" time="0.153975042">
-        <testcase classname="tests/documents/pdf.test.ts" name="PDF de cotización (HU-03) &gt; DOC-PDF-01 · El endpoint devuelve un PDF no vacío" time="0.000451042">
+        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-07 · Admin oculta y reordena: el item sale del portal público" time="0.008008708">
         </testcase>
-        <testcase classname="tests/documents/pdf.test.ts" name="PDF de cotización (HU-03) &gt; DOC-PDF-02 · Contiene el consecutivo COT-001-2026" time="0.000047708">
-        </testcase>
-        <testcase classname="tests/documents/pdf.test.ts" name="PDF de cotización (HU-03) &gt; DOC-PDF-03 · Contiene los totales calculados" time="0.000093625">
-        </testcase>
-        <testcase classname="tests/documents/pdf.test.ts" name="PDF de cotización (HU-03) &gt; DOC-PDF-04 · Contiene una sección por rubro con sus productos" time="0.000074542">
-        </testcase>
-        <testcase classname="tests/documents/pdf.test.ts" name="PDF de cotización (HU-03) &gt; DOC-PDF-05 · Contiene datos del cliente y del evento" time="0.000035708">
-        </testcase>
-        <testcase classname="tests/documents/pdf.test.ts" name="PDF de orden de servicio (HU-04) &gt; DOC-PDF-06 · Incluye consecutivo, proveedor, fechas y condiciones de pago" time="0.040760083">
+        <testcase classname="tests/api/portfolio.test.ts" name="Portafolio y portal (HU-14, HU-15) &gt; API-POR-08 · /portal carga sin sesión y no incluye eventos ocultos ni documentos" time="0.01627175">
         </testcase>
     </testsuite>
-    <testsuite name="tests/documents/xlsx.test.ts" timestamp="2026-10-05T18:11:14.799Z" hostname="MacBook-Air-de-Juanjo.local" tests="3" failures="0" errors="0" skipped="0" time="0.046644292">
-        <testcase classname="tests/documents/xlsx.test.ts" name="XLSX de cotización (HU-03) &gt; DOC-XLS-01 · El endpoint devuelve un Excel válido" time="0.026997">
+    <testsuite name="tests/api/providers.test.ts" timestamp="2026-10-05T19:51:58.753Z" hostname="MacBook-Air-de-Juanjo.local" tests="4" failures="0" errors="0" skipped="0" time="0.041370042">
+        <testcase classname="tests/api/providers.test.ts" name="Directorio de proveedores (RF-10, HU-16) &gt; API-PRV-01 · Colaborador intenta crear proveedor → 403" time="0.016474542">
         </testcase>
-        <testcase classname="tests/documents/xlsx.test.ts" name="XLSX de cotización (HU-03) &gt; DOC-XLS-02 · Tiene encabezado, filas por rubro y totales esperados" time="0.009593083">
+        <testcase classname="tests/api/providers.test.ts" name="Directorio de proveedores (RF-10, HU-16) &gt; API-PRV-02 · Admin crea proveedor → disponible para el autocompletado del colaborador" time="0.011276667">
         </testcase>
-        <testcase classname="tests/documents/xlsx.test.ts" name="XLSX de orden de servicio (HU-04) &gt; DOC-XLS-03 · Tiene consecutivo, rubro, ítems y total de servicios" time="0.009676291">
+        <testcase classname="tests/api/providers.test.ts" name="Directorio de proveedores (RF-10, HU-16) &gt; API-PRV-03 · Colaborador intenta eliminar proveedor → 403 y el proveedor sigue" time="0.006249667">
+        </testcase>
+        <testcase classname="tests/api/providers.test.ts" name="Directorio de proveedores (RF-10, HU-16) &gt; API-PRV-04 · Admin elimina proveedor → 200" time="0.007007125">
         </testcase>
     </testsuite>
-    <testsuite name="tests/rules/rules.test.ts" timestamp="2026-10-05T18:11:14.799Z" hostname="MacBook-Air-de-Juanjo.local" tests="4" failures="0" errors="0" skipped="0" time="0.110403625">
-        <testcase classname="tests/rules/rules.test.ts" name="Reglas de Firestore y Storage (RNF-02) &gt; RUL-01 · Un cliente autenticado no puede leer Firestore directamente" time="0.048876459">
+    <testsuite name="tests/api/quotes.test.ts" timestamp="2026-10-05T19:51:58.753Z" hostname="MacBook-Air-de-Juanjo.local" tests="7" failures="0" errors="0" skipped="0" time="0.090047708">
+        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-01 · Crear cotización asigna el consecutivo siguiente COT-000-AAAA" time="0.054639666">
         </testcase>
-        <testcase classname="tests/rules/rules.test.ts" name="Reglas de Firestore y Storage (RNF-02) &gt; RUL-02 · Ni un admin puede escribir Firestore desde el navegador" time="0.014443583">
+        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-02 · Calcula subtotal, descuento, IVA 19% y total" time="0.000076959">
+        </testcase>
+        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-03 · El servidor recalcula y no acepta totales manipulados por el cliente" time="0.007031333">
+        </testcase>
+        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-04 · Editar el descuento recalcula el total" time="0.006451417">
+        </testcase>
+        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-05 · Duplicar conserva ítems y condiciones y recibe el siguiente consecutivo" time="0.015170333">
+        </testcase>
+        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-06 · Colaborador intentando eliminar cotización → 403" time="0.001653458">
+        </testcase>
+        <testcase classname="tests/api/quotes.test.ts" name="Cotizaciones (HU-03, HU-11) &gt; API-COT-07 · Admin elimina cotización → 200" time="0.004608375">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/api/security.test.ts" timestamp="2026-10-05T19:51:58.754Z" hostname="MacBook-Air-de-Juanjo.local" tests="239" failures="0" errors="0" skipped="0" time="0.911017917">
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/session &gt; SEC-01-1 · sin sesión → 401" time="0.004152042">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/session &gt; SEC-01-2 · cookie magik_role=admin falsa sin token → 401" time="0.001628084">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/session &gt; SEC-01-4 · token de admin → 401" time="0.007909583">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/logout &gt; SEC-02-1 · sin sesión → 200" time="0.001829833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/logout &gt; SEC-02-2 · cookie magik_role=admin falsa sin token → 200" time="0.001277875">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/logout &gt; SEC-02-4 · token de admin → 200" time="0.001202584">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/set-role &gt; SEC-03-1 · sin sesión → 401" time="0.001704375">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/set-role &gt; SEC-03-2 · cookie magik_role=admin falsa sin token → 401" time="0.001111333">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/set-role &gt; SEC-03-3 · token de colaborador en ruta de admin → 403" time="0.004909041">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/auth/set-role &gt; SEC-03-4 · token de admin → 200" time="0.004991">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/admin/users &gt; SEC-04-1 · sin sesión → 401" time="0.001814584">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/admin/users &gt; SEC-04-2 · cookie magik_role=admin falsa sin token → 401" time="0.001196458">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/admin/users &gt; SEC-04-3 · token de colaborador en ruta de admin → 403" time="0.001624">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/admin/users &gt; SEC-04-4 · token de admin → 200" time="0.004321333">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/admin/users &gt; SEC-05-1 · sin sesión → 401" time="0.001379708">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/admin/users &gt; SEC-05-2 · cookie magik_role=admin falsa sin token → 401" time="0.0010235">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/admin/users &gt; SEC-05-3 · token de colaborador en ruta de admin → 403" time="0.0018425">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/admin/users &gt; SEC-05-4 · token de admin → 201" time="0.004656958">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/admin/users/sec-user &gt; SEC-06-1 · sin sesión → 401" time="0.001694">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/admin/users/sec-user &gt; SEC-06-2 · cookie magik_role=admin falsa sin token → 401" time="0.001157041">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/admin/users/sec-user &gt; SEC-06-3 · token de colaborador en ruta de admin → 403" time="0.001662167">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/admin/users/sec-user &gt; SEC-06-4 · token de admin → 200" time="0.003521833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/admin/users/sec-user-del &gt; SEC-07-1 · sin sesión → 401" time="0.001013792">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/admin/users/sec-user-del &gt; SEC-07-2 · cookie magik_role=admin falsa sin token → 401" time="0.000996125">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/admin/users/sec-user-del &gt; SEC-07-3 · token de colaborador en ruta de admin → 403" time="0.001449916">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/admin/users/sec-user-del &gt; SEC-07-4 · token de admin → 200" time="0.00256025">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events &gt; SEC-08-1 · sin sesión → 401" time="0.001072542">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events &gt; SEC-08-2 · cookie magik_role=admin falsa sin token → 401" time="0.000937042">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events &gt; SEC-08-3 · token de colaborador en ruta de sesión → permitido" time="0.004110625">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events &gt; SEC-08-4 · token de admin → 200" time="0.003944958">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events &gt; SEC-09-1 · sin sesión → 401" time="0.00096825">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events &gt; SEC-09-2 · cookie magik_role=admin falsa sin token → 401" time="0.000970958">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events &gt; SEC-09-3 · token de colaborador en ruta de sesión → permitido" time="0.005742875">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events &gt; SEC-09-4 · token de admin → 201" time="0.00579025">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec &gt; SEC-10-1 · sin sesión → 401" time="0.000960958">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec &gt; SEC-10-2 · cookie magik_role=admin falsa sin token → 401" time="0.000953625">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec &gt; SEC-10-3 · token de colaborador en ruta de sesión → permitido" time="0.003575875">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec &gt; SEC-10-4 · token de admin → 200" time="0.003499458">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec &gt; SEC-11-1 · sin sesión → 401" time="0.001103333">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec &gt; SEC-11-2 · cookie magik_role=admin falsa sin token → 401" time="0.001074625">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec &gt; SEC-11-3 · token de colaborador en ruta de sesión → permitido" time="0.004662084">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec &gt; SEC-11-4 · token de admin → 200" time="0.004420792">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec-del &gt; SEC-12-1 · sin sesión → 401" time="0.001019541">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec-del &gt; SEC-12-2 · cookie magik_role=admin falsa sin token → 401" time="0.000743167">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec-del &gt; SEC-12-3 · token de colaborador en ruta de admin → 403" time="0.001597125">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec-del &gt; SEC-12-4 · token de admin → 200" time="0.002164916">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes &gt; SEC-13-1 · sin sesión → 401" time="0.00149075">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes &gt; SEC-13-2 · cookie magik_role=admin falsa sin token → 401" time="0.000903542">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes &gt; SEC-13-3 · token de colaborador en ruta de sesión → permitido" time="0.00263525">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes &gt; SEC-13-4 · token de admin → 200" time="0.003951084">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes &gt; SEC-14-1 · sin sesión → 401" time="0.001199209">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes &gt; SEC-14-2 · cookie magik_role=admin falsa sin token → 401" time="0.000915709">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes &gt; SEC-14-3 · token de colaborador en ruta de sesión → permitido" time="0.006738583">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes &gt; SEC-14-4 · token de admin → 201" time="0.006829375">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec &gt; SEC-15-1 · sin sesión → 401" time="0.001521333">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec &gt; SEC-15-2 · cookie magik_role=admin falsa sin token → 401" time="0.000959583">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec &gt; SEC-15-3 · token de colaborador en ruta de sesión → permitido" time="0.003510833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec &gt; SEC-15-4 · token de admin → 200" time="0.003691542">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/quotes/quote-sec &gt; SEC-16-1 · sin sesión → 401" time="0.001293625">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/quotes/quote-sec &gt; SEC-16-2 · cookie magik_role=admin falsa sin token → 401" time="0.001066667">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/quotes/quote-sec &gt; SEC-16-3 · token de colaborador en ruta de sesión → permitido" time="0.005063208">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/quotes/quote-sec &gt; SEC-16-4 · token de admin → 200" time="0.00443075">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/quotes/quote-sec-del &gt; SEC-17-1 · sin sesión → 401" time="0.001179833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/quotes/quote-sec-del &gt; SEC-17-2 · cookie magik_role=admin falsa sin token → 401" time="0.001009875">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/quotes/quote-sec-del &gt; SEC-17-3 · token de colaborador en ruta de admin → 403" time="0.002279167">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/quotes/quote-sec-del &gt; SEC-17-4 · token de admin → 200" time="0.003166">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes/quote-sec/duplicate &gt; SEC-18-1 · sin sesión → 401" time="0.001751083">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes/quote-sec/duplicate &gt; SEC-18-2 · cookie magik_role=admin falsa sin token → 401" time="0.002258958">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes/quote-sec/duplicate &gt; SEC-18-3 · token de colaborador en ruta de sesión → permitido" time="0.009098875">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/quotes/quote-sec/duplicate &gt; SEC-18-4 · token de admin → 201" time="0.008536542">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/pdf &gt; SEC-19-1 · sin sesión → 401" time="0.001694875">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/pdf &gt; SEC-19-2 · cookie magik_role=admin falsa sin token → 401" time="0.000925417">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/pdf &gt; SEC-19-3 · token de colaborador en ruta de sesión → permitido" time="0.102836">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/pdf &gt; SEC-19-4 · token de admin → 200" time="0.034360917">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/xlsx &gt; SEC-20-1 · sin sesión → 401" time="0.0473085">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/xlsx &gt; SEC-20-2 · cookie magik_role=admin falsa sin token → 401" time="0.004070542">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/xlsx &gt; SEC-20-3 · token de colaborador en ruta de sesión → permitido" time="0.01476225">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/quotes/quote-sec/xlsx &gt; SEC-20-4 · token de admin → 200" time="0.007117084">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders &gt; SEC-21-1 · sin sesión → 401" time="0.001604833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders &gt; SEC-21-2 · cookie magik_role=admin falsa sin token → 401" time="0.000974792">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders &gt; SEC-21-3 · token de colaborador en ruta de sesión → permitido" time="0.004149667">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders &gt; SEC-21-4 · token de admin → 200" time="0.003904041">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/orders &gt; SEC-22-1 · sin sesión → 401" time="0.001242875">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/orders &gt; SEC-22-2 · cookie magik_role=admin falsa sin token → 401" time="0.001013416">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/orders &gt; SEC-22-3 · token de colaborador en ruta de sesión → permitido" time="0.006754833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/orders &gt; SEC-22-4 · token de admin → 201" time="0.00627775">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec &gt; SEC-23-1 · sin sesión → 401" time="0.001473792">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec &gt; SEC-23-2 · cookie magik_role=admin falsa sin token → 401" time="0.000929958">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec &gt; SEC-23-3 · token de colaborador en ruta de sesión → permitido" time="0.003456417">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec &gt; SEC-23-4 · token de admin → 200" time="0.003243833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/orders/order-sec &gt; SEC-24-1 · sin sesión → 401" time="0.000990208">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/orders/order-sec &gt; SEC-24-2 · cookie magik_role=admin falsa sin token → 401" time="0.000900209">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/orders/order-sec &gt; SEC-24-3 · token de colaborador en ruta de sesión → permitido" time="0.004396291">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/orders/order-sec &gt; SEC-24-4 · token de admin → 200" time="0.004252292">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/orders/order-sec-del &gt; SEC-25-1 · sin sesión → 401" time="0.001036416">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/orders/order-sec-del &gt; SEC-25-2 · cookie magik_role=admin falsa sin token → 401" time="0.000848125">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/orders/order-sec-del &gt; SEC-25-3 · token de colaborador en ruta de admin → 403" time="0.001299959">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/orders/order-sec-del &gt; SEC-25-4 · token de admin → 200" time="0.002140916">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/pdf &gt; SEC-26-1 · sin sesión → 401" time="0.001333541">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/pdf &gt; SEC-26-2 · cookie magik_role=admin falsa sin token → 401" time="0.000876084">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/pdf &gt; SEC-26-3 · token de colaborador en ruta de sesión → permitido" time="0.031262667">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/pdf &gt; SEC-26-4 · token de admin → 200" time="0.033049542">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/xlsx &gt; SEC-27-1 · sin sesión → 401" time="0.001682125">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/xlsx &gt; SEC-27-2 · cookie magik_role=admin falsa sin token → 401" time="0.000997042">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/xlsx &gt; SEC-27-3 · token de colaborador en ruta de sesión → permitido" time="0.007021417">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/orders/order-sec/xlsx &gt; SEC-27-4 · token de admin → 200" time="0.00645">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/files &gt; SEC-28-1 · sin sesión → 401" time="0.001447541">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/files &gt; SEC-28-2 · cookie magik_role=admin falsa sin token → 401" time="0.001022542">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/files &gt; SEC-28-3 · token de colaborador en ruta de sesión → permitido" time="0.003845584">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/events/evt-sec/files &gt; SEC-28-4 · token de admin → 200" time="0.003463333">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/files &gt; SEC-29-1 · sin sesión → 401" time="0.001067666">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/files &gt; SEC-29-2 · cookie magik_role=admin falsa sin token → 401" time="0.000897334">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/files &gt; SEC-29-3 · token de colaborador en ruta de sesión → permitido" time="0.002570417">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/events/evt-sec/files &gt; SEC-29-4 · token de admin → 201" time="0.002456208">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/files/file-sec &gt; SEC-30-1 · sin sesión → 401" time="0.001458333">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/files/file-sec &gt; SEC-30-2 · cookie magik_role=admin falsa sin token → 401" time="0.001013375">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/files/file-sec &gt; SEC-30-3 · token de colaborador en ruta de sesión → permitido" time="0.004235291">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/events/evt-sec/files/file-sec &gt; SEC-30-4 · token de admin → 200" time="0.004105792">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/files/file-sec-del &gt; SEC-31-1 · sin sesión → 401" time="0.001053917">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/files/file-sec-del &gt; SEC-31-2 · cookie magik_role=admin falsa sin token → 401" time="0.001018">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/files/file-sec-del &gt; SEC-31-3 · token de colaborador en ruta de admin → 403" time="0.001424916">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/events/evt-sec/files/file-sec-del &gt; SEC-31-4 · token de admin → 200" time="0.002131208">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/catalog &gt; SEC-32-1 · sin sesión → 401" time="0.002472541">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/catalog &gt; SEC-32-2 · cookie magik_role=admin falsa sin token → 401" time="0.001259042">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/catalog &gt; SEC-32-3 · token de colaborador en ruta de sesión → permitido" time="0.005695625">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/catalog &gt; SEC-32-4 · token de admin → 200" time="0.005401042">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PUT /api/catalog &gt; SEC-33-1 · sin sesión → 401" time="0.007950375">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PUT /api/catalog &gt; SEC-33-2 · cookie magik_role=admin falsa sin token → 401" time="0.003756125">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PUT /api/catalog &gt; SEC-33-3 · token de colaborador en ruta de admin → 403" time="0.004190041">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PUT /api/catalog &gt; SEC-33-4 · token de admin → 200" time="0.005363125">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros &gt; SEC-34-1 · sin sesión → 401" time="0.001481209">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros &gt; SEC-34-2 · cookie magik_role=admin falsa sin token → 401" time="0.000891458">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros &gt; SEC-34-3 · token de colaborador en ruta de sesión → permitido" time="0.004734416">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros &gt; SEC-34-4 · token de admin → 201" time="0.004372667">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec &gt; SEC-35-1 · sin sesión → 401" time="0.001588375">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec &gt; SEC-35-2 · cookie magik_role=admin falsa sin token → 401" time="0.000964792">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec &gt; SEC-35-3 · token de colaborador en ruta de admin → 403" time="0.001355541">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec &gt; SEC-35-4 · token de admin → 200" time="0.004540125">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec-del &gt; SEC-36-1 · sin sesión → 401" time="0.001007375">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec-del &gt; SEC-36-2 · cookie magik_role=admin falsa sin token → 401" time="0.000855541">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec-del &gt; SEC-36-3 · token de colaborador en ruta de admin → 403" time="0.00128525">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec-del &gt; SEC-36-4 · token de admin → 200" time="0.003273">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros/rubro-sec/products &gt; SEC-37-1 · sin sesión → 401" time="0.001441875">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros/rubro-sec/products &gt; SEC-37-2 · cookie magik_role=admin falsa sin token → 401" time="0.001036333">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros/rubro-sec/products &gt; SEC-37-3 · token de colaborador en ruta de sesión → permitido" time="0.00450125">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/catalog/rubros/rubro-sec/products &gt; SEC-37-4 · token de admin → 201" time="0.004520333">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-38-1 · sin sesión → 401" time="0.001668584">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-38-2 · cookie magik_role=admin falsa sin token → 401" time="0.000977958">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-38-3 · token de colaborador en ruta de admin → 403" time="0.001475917">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-38-4 · token de admin → 200" time="0.004761416">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-39-1 · sin sesión → 401" time="0.001111542">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-39-2 · cookie magik_role=admin falsa sin token → 401" time="0.000963917">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-39-3 · token de colaborador en ruta de admin → 403" time="0.001322708">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/catalog/rubros/rubro-sec/products/prod-sec &gt; SEC-39-4 · token de admin → 200" time="0.004429916">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/providers &gt; SEC-40-1 · sin sesión → 401" time="0.001387208">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/providers &gt; SEC-40-2 · cookie magik_role=admin falsa sin token → 401" time="0.000917458">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/providers &gt; SEC-40-3 · token de colaborador en ruta de sesión → permitido" time="0.003703666">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/providers &gt; SEC-40-4 · token de admin → 200" time="0.003539959">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/providers &gt; SEC-41-1 · sin sesión → 401" time="0.001174083">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/providers &gt; SEC-41-2 · cookie magik_role=admin falsa sin token → 401" time="0.000936958">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/providers &gt; SEC-41-3 · token de colaborador en ruta de admin → 403" time="0.00133775">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/providers &gt; SEC-41-4 · token de admin → 201" time="0.002327333">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/providers/prov-sec &gt; SEC-42-1 · sin sesión → 401" time="0.001462334">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/providers/prov-sec &gt; SEC-42-2 · cookie magik_role=admin falsa sin token → 401" time="0.000997333">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/providers/prov-sec &gt; SEC-42-3 · token de colaborador en ruta de admin → 403" time="0.001506708">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/providers/prov-sec &gt; SEC-42-4 · token de admin → 200" time="0.0044175">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/providers/prov-sec-del &gt; SEC-43-1 · sin sesión → 401" time="0.0010195">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/providers/prov-sec-del &gt; SEC-43-2 · cookie magik_role=admin falsa sin token → 401" time="0.000965083">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/providers/prov-sec-del &gt; SEC-43-3 · token de colaborador en ruta de admin → 403" time="0.001388083">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/providers/prov-sec-del &gt; SEC-43-4 · token de admin → 200" time="0.002031209">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients &gt; SEC-44-1 · sin sesión → 401" time="0.001251875">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients &gt; SEC-44-2 · cookie magik_role=admin falsa sin token → 401" time="0.000836834">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients &gt; SEC-44-3 · token de colaborador en ruta de sesión → permitido" time="0.003545833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients &gt; SEC-44-4 · token de admin → 200" time="0.003550041">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/clients &gt; SEC-45-1 · sin sesión → 401" time="0.00097675">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/clients &gt; SEC-45-2 · cookie magik_role=admin falsa sin token → 401" time="0.000870334">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/clients &gt; SEC-45-3 · token de colaborador en ruta de sesión → permitido" time="0.00227825">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/clients &gt; SEC-45-4 · token de admin → 201" time="0.0020845">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients/cli-sec &gt; SEC-46-1 · sin sesión → 401" time="0.00128525">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients/cli-sec &gt; SEC-46-2 · cookie magik_role=admin falsa sin token → 401" time="0.00085">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients/cli-sec &gt; SEC-46-3 · token de colaborador en ruta de sesión → permitido" time="0.00809375">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/clients/cli-sec &gt; SEC-46-4 · token de admin → 200" time="0.007859125">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/clients/cli-sec &gt; SEC-47-1 · sin sesión → 401" time="0.001012958">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/clients/cli-sec &gt; SEC-47-2 · cookie magik_role=admin falsa sin token → 401" time="0.000911083">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/clients/cli-sec &gt; SEC-47-3 · token de colaborador en ruta de admin → 403" time="0.001321125">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/clients/cli-sec &gt; SEC-47-4 · token de admin → 200" time="0.004435709">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/clients/cli-sec-del &gt; SEC-48-1 · sin sesión → 401" time="0.001073625">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/clients/cli-sec-del &gt; SEC-48-2 · cookie magik_role=admin falsa sin token → 401" time="0.001022833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/clients/cli-sec-del &gt; SEC-48-3 · token de colaborador en ruta de admin → 403" time="0.001373458">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/clients/cli-sec-del &gt; SEC-48-4 · token de admin → 200" time="0.002035">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates &gt; SEC-49-1 · sin sesión → 401" time="0.001279042">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates &gt; SEC-49-2 · cookie magik_role=admin falsa sin token → 401" time="0.002614958">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates &gt; SEC-49-3 · token de colaborador en ruta de sesión → permitido" time="0.004087625">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates &gt; SEC-49-4 · token de admin → 200" time="0.003692833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates &gt; SEC-50-1 · sin sesión → 401" time="0.00107875">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates &gt; SEC-50-2 · cookie magik_role=admin falsa sin token → 401" time="0.000904458">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates &gt; SEC-50-3 · token de colaborador en ruta de admin → 403" time="0.001391667">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates &gt; SEC-50-4 · token de admin → 201" time="0.002384208">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec &gt; SEC-51-1 · sin sesión → 401" time="0.001236709">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec &gt; SEC-51-2 · cookie magik_role=admin falsa sin token → 401" time="0.000950208">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec &gt; SEC-51-3 · token de colaborador en ruta de sesión → permitido" time="0.003354583">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec &gt; SEC-51-4 · token de admin → 200" time="0.003317125">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/templates/tpl-sec &gt; SEC-52-1 · sin sesión → 401" time="0.001088833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/templates/tpl-sec &gt; SEC-52-2 · cookie magik_role=admin falsa sin token → 401" time="0.000959166">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/templates/tpl-sec &gt; SEC-52-3 · token de colaborador en ruta de admin → 403" time="0.001280208">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/templates/tpl-sec &gt; SEC-52-4 · token de admin → 200" time="0.004469625">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/templates/tpl-sec-del &gt; SEC-53-1 · sin sesión → 401" time="0.00105725">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/templates/tpl-sec-del &gt; SEC-53-2 · cookie magik_role=admin falsa sin token → 401" time="0.00103">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/templates/tpl-sec-del &gt; SEC-53-3 · token de colaborador en ruta de admin → 403" time="0.001408041">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/templates/tpl-sec-del &gt; SEC-53-4 · token de admin → 200" time="0.002116375">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec/versions &gt; SEC-54-1 · sin sesión → 401" time="0.001389542">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec/versions &gt; SEC-54-2 · cookie magik_role=admin falsa sin token → 401" time="0.000893458">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec/versions &gt; SEC-54-3 · token de colaborador en ruta de admin → 403" time="0.001218125">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/templates/tpl-sec/versions &gt; SEC-54-4 · token de admin → 200" time="0.002331625">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates/tpl-sec/versions &gt; SEC-55-1 · sin sesión → 401" time="0.001066292">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates/tpl-sec/versions &gt; SEC-55-2 · cookie magik_role=admin falsa sin token → 401" time="0.000879542">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates/tpl-sec/versions &gt; SEC-55-3 · token de colaborador en ruta de admin → 403" time="0.001446625">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/templates/tpl-sec/versions &gt; SEC-55-4 · token de admin → 201" time="0.004065708">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/portfolio &gt; SEC-56-1 · sin sesión → 200" time="0.003495625">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/portfolio &gt; SEC-56-2 · cookie magik_role=admin falsa sin token → 200" time="0.003112583">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; GET /api/portfolio &gt; SEC-56-4 · token de admin → 200" time="0.004359208">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/portfolio &gt; SEC-57-1 · sin sesión → 401" time="0.001084">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/portfolio &gt; SEC-57-2 · cookie magik_role=admin falsa sin token → 401" time="0.000920917">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/portfolio &gt; SEC-57-3 · token de colaborador en ruta de admin → 403" time="0.001365667">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; POST /api/portfolio &gt; SEC-57-4 · token de admin → 201" time="0.002266959">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/portfolio/pf-sec &gt; SEC-58-1 · sin sesión → 401" time="0.001395833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/portfolio/pf-sec &gt; SEC-58-2 · cookie magik_role=admin falsa sin token → 401" time="0.000893">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/portfolio/pf-sec &gt; SEC-58-3 · token de colaborador en ruta de admin → 403" time="0.00128675">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; PATCH /api/portfolio/pf-sec &gt; SEC-58-4 · token de admin → 200" time="0.00411475">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/portfolio/pf-sec-del &gt; SEC-59-1 · sin sesión → 401" time="0.001015291">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/portfolio/pf-sec-del &gt; SEC-59-2 · cookie magik_role=admin falsa sin token → 401" time="0.000915292">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/portfolio/pf-sec-del &gt; SEC-59-3 · token de colaborador en ruta de admin → 403" time="0.001668834">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Matriz de seguridad (RNF-02) &gt; DELETE /api/portfolio/pf-sec-del &gt; SEC-59-4 · token de admin → 200" time="0.003115916">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Casos críticos explícitos &gt; SEC-X1 · POST /api/auth/set-role con cookie magik_role=admin falsa → 401" time="0.001109917">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Casos críticos explícitos &gt; SEC-X2 · POST /api/auth/set-role con token inventado y rol admin → 401" time="0.000949167">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Casos críticos explícitos &gt; SEC-X3 · DELETE /api/events/[id] sin sesión → 401" time="0.001056833">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Casos críticos explícitos &gt; SEC-X4 · DELETE /api/catalog/rubros/[id] con token de colaborador → 403" time="0.001393667">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Casos críticos explícitos &gt; SEC-X5 · GET /api/portfolio sin sesión → 200 (público)" time="0.001978583">
+        </testcase>
+        <testcase classname="tests/api/security.test.ts" name="Casos críticos explícitos &gt; SEC-X6 · Página /dashboard/admin/users con cookies falsas no expone datos (redirige a /login)" time="0.036696209">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/api/templates.test.ts" timestamp="2026-10-05T19:51:58.762Z" hostname="MacBook-Air-de-Juanjo.local" tests="7" failures="0" errors="0" skipped="0" time="0.049177167">
+        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-01 · Colaborador publica versión → 403 y la versión activa no cambia" time="0.018955667">
+        </testcase>
+        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-02 · Admin publica versión → la nueva queda activa" time="0.010788584">
+        </testcase>
+        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-03 · La versión anterior pasa al historial" time="0.004412458">
+        </testcase>
+        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-04 · El historial tiene número, fecha, autor y nota de cambios" time="0.004145167">
+        </testcase>
+        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-05 · GET de plantilla para colaborador expone solo la versión activa" time="0.003825541">
+        </testcase>
+        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-07 · Colaborador no obtiene el historial de versiones antiguas" time="0.002614209">
+        </testcase>
+        <testcase classname="tests/api/templates.test.ts" name="Plantillas (HU-05, HU-06, HU-18) &gt; API-TPL-06 · El listado de plantillas para colaborador no incluye versiones antiguas" time="0.004017792">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/documents/pdf.test.ts" timestamp="2026-10-05T19:51:58.762Z" hostname="MacBook-Air-de-Juanjo.local" tests="7" failures="0" errors="0" skipped="0" time="0.354929958">
+        <testcase classname="tests/documents/pdf.test.ts" name="PDF de cotización (HU-03) &gt; DOC-PDF-01 · El endpoint devuelve un PDF no vacío" time="0.000440667">
+        </testcase>
+        <testcase classname="tests/documents/pdf.test.ts" name="PDF de cotización (HU-03) &gt; DOC-PDF-02 · Contiene el consecutivo COT-001-2026" time="0.000050709">
+        </testcase>
+        <testcase classname="tests/documents/pdf.test.ts" name="PDF de cotización (HU-03) &gt; DOC-PDF-03 · Contiene los totales calculados" time="0.000088041">
+        </testcase>
+        <testcase classname="tests/documents/pdf.test.ts" name="PDF de cotización (HU-03) &gt; DOC-PDF-04 · Contiene una sección por rubro con sus productos" time="0.000075">
+        </testcase>
+        <testcase classname="tests/documents/pdf.test.ts" name="PDF de cotización (HU-03) &gt; DOC-PDF-05 · Contiene datos del cliente y del evento" time="0.000045083">
+        </testcase>
+        <testcase classname="tests/documents/pdf.test.ts" name="PDF de orden de servicio (HU-04) &gt; DOC-PDF-06 · Incluye consecutivo, proveedor, fechas y condiciones de pago" time="0.039698625">
+        </testcase>
+        <testcase classname="tests/documents/pdf.test.ts" name="Plantilla base protegida (RF-06) &gt; DOC-PDF-07 · Generar PDF y XLSX como admin y colaborador no modifica la plantilla base" time="0.206967416">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/documents/xlsx.test.ts" timestamp="2026-10-05T19:51:58.763Z" hostname="MacBook-Air-de-Juanjo.local" tests="3" failures="0" errors="0" skipped="0" time="0.051963666">
+        <testcase classname="tests/documents/xlsx.test.ts" name="XLSX de cotización (HU-03) &gt; DOC-XLS-01 · El endpoint devuelve un Excel válido" time="0.030849959">
+        </testcase>
+        <testcase classname="tests/documents/xlsx.test.ts" name="XLSX de cotización (HU-03) &gt; DOC-XLS-02 · Tiene encabezado, filas por rubro y totales esperados" time="0.011776459">
+        </testcase>
+        <testcase classname="tests/documents/xlsx.test.ts" name="XLSX de orden de servicio (HU-04) &gt; DOC-XLS-03 · Tiene consecutivo, rubro, ítems y total de servicios" time="0.008958">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/rules/rules.test.ts" timestamp="2026-10-05T19:51:58.763Z" hostname="MacBook-Air-de-Juanjo.local" tests="4" failures="0" errors="0" skipped="0" time="0.101415917">
+        <testcase classname="tests/rules/rules.test.ts" name="Reglas de Firestore y Storage (RNF-02) &gt; RUL-01 · Un cliente autenticado no puede leer Firestore directamente" time="0.044592459">
+        </testcase>
+        <testcase classname="tests/rules/rules.test.ts" name="Reglas de Firestore y Storage (RNF-02) &gt; RUL-02 · Ni un admin puede escribir Firestore desde el navegador" time="0.0145075">
             <system-err>
-[2026-10-05T18:11:12.446Z]  @firebase/firestore: Firestore (12.12.0): GrpcConnection RPC &apos;Write&apos; stream 0x184290db error. Code: 7 Message: 7 PERMISSION_DENIED: 
+[2026-10-05T19:51:56.634Z]  @firebase/firestore: Firestore (12.12.0): GrpcConnection RPC &apos;Write&apos; stream 0x46cd4546 error. Code: 7 Message: 7 PERMISSION_DENIED: 
 false for &apos;create&apos; @ L9, false for &apos;update&apos; @ L9
 
             </system-err>
         </testcase>
-        <testcase classname="tests/rules/rules.test.ts" name="Reglas de Firestore y Storage (RNF-02) &gt; RUL-03 · Storage rechaza subidas sin sesión" time="0.009647125">
+        <testcase classname="tests/rules/rules.test.ts" name="Reglas de Firestore y Storage (RNF-02) &gt; RUL-03 · Storage rechaza subidas sin sesión" time="0.008462875">
         </testcase>
-        <testcase classname="tests/rules/rules.test.ts" name="Reglas de Firestore y Storage (RNF-02) &gt; RUL-04 · Storage permite subidas a usuarios autenticados" time="0.014926625">
+        <testcase classname="tests/rules/rules.test.ts" name="Reglas de Firestore y Storage (RNF-02) &gt; RUL-04 · Storage permite subidas a usuarios autenticados" time="0.015430375">
         </testcase>
     </testsuite>
 </testsuites>

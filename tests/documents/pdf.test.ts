@@ -3,6 +3,9 @@ import { beforeAll, describe, expect, it } from "vitest";
 import { PDFParse } from "pdf-parse";
 import { download } from "../support/download";
 import { SEED } from "../emulator/seed";
+import { testDb } from "../support/admin";
+import { sessionCookie } from "../support/auth";
+import { BASE_URL } from "../support/env";
 
 const E = `/api/events/${SEED.events[0]}`;
 const EVIDENCE = "evidencias/pruebas/api";
@@ -77,5 +80,34 @@ describe("PDF de orden de servicio (HU-04)", () => {
     ]) {
       expect(text).toContain(expected);
     }
+  });
+});
+
+describe("Plantilla base protegida (RF-06)", () => {
+  async function templatesSnapshot(): Promise<string> {
+    const db = testDb();
+    const templates = await db.collection("templates").orderBy("id").get();
+    const out: unknown[] = [];
+    for (const t of templates.docs) {
+      const versions = await t.ref.collection("versions").orderBy("version").get();
+      out.push({ template: t.data(), versions: versions.docs.map((v) => v.data()) });
+    }
+    return JSON.stringify(out);
+  }
+
+  it("DOC-PDF-07 · Generar PDF y XLSX como admin y colaborador no modifica la plantilla base", async () => {
+    const before = await templatesSnapshot();
+    for (const who of ["admin", "collaborator"] as const) {
+      const cookie = await sessionCookie(who);
+      for (const path of [
+        `${E}/quotes/${SEED.quoteId}/pdf`, `${E}/quotes/${SEED.quoteId}/xlsx`,
+        `${E}/orders/${SEED.orderId}/pdf`, `${E}/orders/${SEED.orderId}/xlsx`,
+      ]) {
+        const res = await fetch(`${BASE_URL}${path}`, { headers: { cookie } });
+        expect(res.status).toBe(200);
+        await res.arrayBuffer();
+      }
+    }
+    expect(await templatesSnapshot()).toBe(before);
   });
 });

@@ -13,6 +13,7 @@ import type {
   Client,
   PortfolioItem,
   FirestoreResult,
+  ClientHistory,
 } from "@/lib/types";
 
 // ─── Users ────────────────────────────────────────────────────────────────────
@@ -68,6 +69,7 @@ export async function deleteUser(uid: string): Promise<FirestoreResult<void>> {
 // ─── Events ──────────────────────────────────────────────────────────────────
 
 export interface EventFilters {
+  consecutive?: string;
   clientName?: string;
   year?: number;
   eventType?: MagikEvent["eventType"];
@@ -91,6 +93,10 @@ export async function getEvents(
       data.sort((a, b) => b.date.localeCompare(a.date));
     }
 
+    if (filters?.consecutive) {
+      const q = filters.consecutive.toLowerCase();
+      data = data.filter((e) => e.consecutive.toLowerCase().includes(q));
+    }
     if (filters?.clientName) {
       const q = filters.clientName.toLowerCase();
       data = data.filter((e) => e.clientName.toLowerCase().includes(q));
@@ -628,11 +634,15 @@ function filesCol(eventId: string) {
 }
 
 export async function getEventFiles(
-  eventId: string
+  eventId: string,
+  category?: string
 ): Promise<FirestoreResult<EventFile[]>> {
   try {
     const snap = await filesCol(eventId).orderBy("createdAt", "desc").get();
-    return { success: true, data: snap.docs.map((d) => d.data() as EventFile) };
+    let data = snap.docs.map((d) => d.data() as EventFile);
+    // Filtro en memoria: where(category) + orderBy(createdAt) pediría índice compuesto
+    if (category) data = data.filter((f) => f.category === category);
+    return { success: true, data };
   } catch (e) {
     return { success: false, error: String(e) };
   }
@@ -816,22 +826,34 @@ export async function addEventToClient(
   }
 }
 
+// Historial completo del cliente: todos sus eventos (sin el límite de 10 de
+// where("in")) y las cotizaciones de esos eventos, más recientes primero.
 export async function getClientWithHistory(
   id: string
-): Promise<FirestoreResult<{ client: Client; events: MagikEvent[] }>> {
+): Promise<FirestoreResult<ClientHistory>> {
   try {
     const doc = await adminDb.collection("clients").doc(id).get();
     if (!doc.exists) return { success: false, error: "Cliente no encontrado" };
     const client = doc.data() as Client;
-    const events: MagikEvent[] = [];
-    if (client.eventIds.length > 0) {
-      const snap = await adminDb
-        .collection("events")
-        .where("id", "in", client.eventIds.slice(0, 10))
-        .get();
-      events.push(...snap.docs.map((d) => d.data() as MagikEvent));
+    if (client.eventIds.length === 0) {
+      return { success: true, data: { client, events: [], quotes: [] } };
     }
-    return { success: true, data: { client, events } };
+
+    const refs = client.eventIds.map((eventId) => adminDb.collection("events").doc(eventId));
+    const eventSnaps = await adminDb.getAll(...refs);
+    const events = eventSnaps
+      .filter((snap) => snap.exists)
+      .map((snap) => snap.data() as MagikEvent)
+      .sort((a, b) => b.date.localeCompare(a.date));
+
+    // Subcolección por evento en paralelo: un collectionGroup("quotes") con
+    // where("eventId", "in") necesitaría un índice de grupo creado a mano.
+    const quoteSnaps = await Promise.all(events.map((e) => quotesCol(e.id).get()));
+    const quotes = quoteSnaps
+      .flatMap((snap) => snap.docs.map((d) => d.data() as Quote))
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+
+    return { success: true, data: { client, events, quotes } };
   } catch (e) {
     return { success: false, error: String(e) };
   }

@@ -100,8 +100,12 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
         />
       )}
 
+      {/* En móvil el menú se desliza fuera de la pantalla cuando está cerrado;
+          en escritorio (md+) siempre está visible */}
       <aside
-        className="fixed left-0 top-0 z-30 flex h-screen flex-col border-r"
+        className={`fixed left-0 top-0 z-30 flex h-screen flex-col border-r transition-transform duration-200 md:translate-x-0 ${
+          open ? "translate-x-0" : "-translate-x-full"
+        }`}
         style={{
           width: 220,
           background: "var(--sidebar)",
@@ -193,7 +197,7 @@ export default function DashboardLayout({
             borderColor: "var(--sidebar-border)",
           }}
         >
-          <button onClick={() => setSidebarOpen(true)}>
+          <button onClick={() => setSidebarOpen(true)} aria-label="Abrir menú">
             <Menu size={20} style={{ color: "var(--color-text-secondary)" }} />
           </button>
           <Link href="/dashboard/events">

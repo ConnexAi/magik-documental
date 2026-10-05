@@ -10,11 +10,13 @@ export async function GET(request: NextRequest) {
 
   const { searchParams } = request.nextUrl;
   const filters: EventFilters = {};
+  const consecutive = searchParams.get("consecutive");
   const clientName = searchParams.get("clientName");
   const year = searchParams.get("year");
   const eventType = searchParams.get("eventType") as MagikEvent["eventType"] | null;
   const place = searchParams.get("place");
 
+  if (consecutive) filters.consecutive = consecutive;
   if (clientName) filters.clientName = clientName;
   if (year) filters.year = parseInt(year);
   if (eventType) filters.eventType = eventType;

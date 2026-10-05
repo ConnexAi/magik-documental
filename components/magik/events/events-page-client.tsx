@@ -45,6 +45,7 @@ function formatDate(dateStr: string): string {
 }
 
 interface SearchState {
+  consecutive: string;
   clientName: string;
   year: string;
   eventType: string;
@@ -63,6 +64,7 @@ export function EventsPageClient({ initialEvents }: Props) {
   const [createOpen, setCreateOpen] = useState(false);
 
   const [search, setSearch] = useState<SearchState>({
+    consecutive: "",
     clientName: "",
     year: "",
     eventType: "",
@@ -78,6 +80,7 @@ export function EventsPageClient({ initialEvents }: Props) {
 
   const fetchEvents = useCallback(async (filters: SearchState) => {
     const params = new URLSearchParams();
+    if (filters.consecutive) params.set("consecutive", filters.consecutive);
     if (filters.clientName) params.set("clientName", filters.clientName);
     if (filters.year) params.set("year", filters.year);
     if (filters.eventType) params.set("eventType", filters.eventType);
@@ -144,9 +147,21 @@ export function EventsPageClient({ initialEvents }: Props) {
 
       {/* Search bar */}
       <div
-        className="mb-4 grid grid-cols-2 gap-2 rounded-lg border p-3 md:grid-cols-4"
+        className="mb-4 grid grid-cols-2 gap-2 rounded-lg border p-3 md:grid-cols-5"
         style={{ background: "var(--card)", borderColor: "var(--border)" }}
       >
+        <input
+          type="text"
+          placeholder="Consecutivo (EVT-0001)"
+          value={search.consecutive}
+          onChange={(e) => updateSearch("consecutive", e.target.value)}
+          className="rounded-md border px-2.5 py-1.5 text-xs outline-none transition-colors"
+          style={{
+            background: "var(--background)",
+            borderColor: "var(--border)",
+            color: "var(--color-text-primary)",
+          }}
+        />
         <input
           type="text"
           placeholder="Cliente..."
@@ -202,7 +217,7 @@ export function EventsPageClient({ initialEvents }: Props) {
 
       {/* Table */}
       <div
-        className="overflow-hidden rounded-lg border"
+        className="overflow-x-auto rounded-lg border"
         style={{ background: "var(--card)", borderColor: "var(--border)" }}
       >
         <table className="w-full text-sm">
