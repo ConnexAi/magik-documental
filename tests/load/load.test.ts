@@ -101,7 +101,9 @@ async function main(): Promise<void> {
       `Limitación: el emulador de Firestore corre en un solo proceso Java local y no replica la latencia de red ni el escalado de Firestore en producción. Los números sirven para comparar versiones del código y detectar cuellos de botella del servidor, no como medida absoluta del sistema desplegado en Vercel.`,
       ``,
     ].join("\n");
-    writeFileSync(`${OUT}/resumen-carga.md`, md);
+    // resumen-carga.md es el resumen redactado a mano para la tesis; el
+    // reporte generado va en un archivo aparte para no sobrescribirlo
+    writeFileSync(`${OUT}/reporte-autocannon.md`, md);
     writeFileSync(`${OUT}/resumen-carga.json`, JSON.stringify({ date, connections: CONNECTIONS, durationS: DURATION_S, events: EVENTS + 3, results }, null, 2));
     console.log(md);
     if (results.some((r) => !r.ok)) process.exitCode = 1;

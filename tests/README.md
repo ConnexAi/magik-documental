@@ -98,7 +98,8 @@ evidencias/pruebas/
   api/            salida de Vitest (txt, json, junit) y los PDF/XLSX verificados
   e2e/            capturas por paso (<ID>-<paso>.png), JSON y artefactos
   reporte-e2e/    reporte HTML de Playwright (abrir index.html)
-  load/           resultados de autocannon (json) y resumen-carga.md
+  load/           resultados de autocannon (json, reporte-autocannon.md generado)
+                  y resumen-carga.md (resumen para la tesis, se edita a mano)
   manual/         capturas de los casos manuales (MAN-xx.png)
 ```
 

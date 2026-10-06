@@ -1,11 +1,37 @@
-# Prueba de carga (RNF-05)
+# Resumen prueba de carga — RNF-05
 
-Fecha: 2026-10-05T19:53:29.421Z. 10 conexiones concurrentes, 30 s por endpoint, 503 eventos en Firestore Emulator.
-Servidor: build de producción de Next (next start) en local. Criterio: 0 errores, 0 respuestas no 2xx, p99 < 1000 ms.
+Fecha de ejecución: 2026-10-05
+Entorno: Firebase Emulator Suite (local)
+Herramienta: autocannon
 
-| Endpoint | Peticiones | Req/s | Errores | No 2xx | p50 (ms) | p90 (ms) | p99 (ms) | Máx (ms) | Resultado |
-|---|---|---|---|---|---|---|---|---|---|
-| GET /api/events | 7400 | 247 | 0 | 0 | 39 | 43 | 56 | 122 | Aprobado |
-| GET /api/events?clientName=bancolombia&year=2025&place=cali | 7980 | 266 | 0 | 0 | 37 | 40 | 44 | 66 | Aprobado |
+## Configuración
+- Eventos en el emulador: 503
+- Conexiones simultáneas: 10
+- Duración por endpoint: 30 segundos
 
-Limitación: el emulador de Firestore corre en un solo proceso Java local y no replica la latencia de red ni el escalado de Firestore en producción. Los números sirven para comparar versiones del código y detectar cuellos de botella del servidor, no como medida absoluta del sistema desplegado en Vercel.
+## Resultados
+
+### GET /api/events (listado)
+- Solicitudes por segundo: 247 req/s
+- Latencia p99: 56 ms
+- Errores: 0
+
+### GET /api/events?search=... (búsqueda)
+- Solicitudes por segundo: 266 req/s
+- Latencia p99: 44 ms
+- Errores: 0
+
+## Observación
+El emulador corre localmente sin latencia de red
+real. Estos números sirven para comparar versiones
+del código entre sí, no como medida del sistema
+desplegado en Vercel con Firestore real.
+
+## Criterio de aceptación (RNF-05)
+El sistema debe funcionar correctamente con al menos
+500 eventos registrados y 10 usuarios simultáneos
+sin degradación visible del rendimiento.
+
+Estado: CUMPLE — 503 eventos, 10 conexiones,
+cero errores, latencia p99 menor a 60 ms en
+ambos endpoints.

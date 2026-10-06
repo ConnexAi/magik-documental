@@ -79,30 +79,30 @@ Route (app)                                             Size     First Load JS
   - Local:        http://localhost:3100
 
  ✓ Starting...
- ✓ Ready in 110ms
- ✓ tests/api/events.test.ts (15 tests) 3661ms
-   ✓ Eventos (HU-01, HU-02, HU-10) > API-EVT-03 · Creaciones simultáneas reciben consecutivos únicos  3493ms
- ✓ tests/api/security.test.ts (239 tests) 911ms
- ✓ tests/documents/pdf.test.ts (7 tests) 355ms
+ ✓ Ready in 120ms
+ ✓ tests/api/events.test.ts (15 tests) 3601ms
+   ✓ Eventos (HU-01, HU-02, HU-10) > API-EVT-03 · Creaciones simultáneas reciben consecutivos únicos  3395ms
+ ✓ tests/api/security.test.ts (239 tests) 1003ms
+ ✓ tests/documents/pdf.test.ts (7 tests) 370ms
+ ✓ tests/api/clients.test.ts (5 tests) 171ms
 stderr | tests/rules/rules.test.ts > Reglas de Firestore y Storage (RNF-02) > RUL-02 · Ni un admin puede escribir Firestore desde el navegador
-[2026-10-05T19:51:56.634Z]  @firebase/firestore: Firestore (12.12.0): GrpcConnection RPC 'Write' stream 0x46cd4546 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+[2026-10-06T20:33:45.305Z]  @firebase/firestore: Firestore (12.12.0): GrpcConnection RPC 'Write' stream 0x259cd1b3 error. Code: 7 Message: 7 PERMISSION_DENIED: 
 false for 'create' @ L9, false for 'update' @ L9
 
- ✓ tests/rules/rules.test.ts (4 tests) 101ms
- ✓ tests/api/clients.test.ts (5 tests) 162ms
- ✓ tests/api/quotes.test.ts (7 tests) 90ms
- ✓ tests/api/catalog.test.ts (8 tests) 72ms
- ✓ tests/api/templates.test.ts (7 tests) 49ms
- ✓ tests/api/portfolio.test.ts (8 tests) 54ms
- ✓ tests/api/files.test.ts (6 tests) 46ms
- ✓ tests/documents/xlsx.test.ts (3 tests) 52ms
+ ✓ tests/rules/rules.test.ts (10 tests) 349ms
+ ✓ tests/api/quotes.test.ts (7 tests) 95ms
+ ✓ tests/api/catalog.test.ts (8 tests) 80ms
+ ✓ tests/api/portfolio.test.ts (8 tests) 55ms
+ ✓ tests/documents/xlsx.test.ts (3 tests) 46ms
+ ✓ tests/api/templates.test.ts (7 tests) 55ms
+ ✓ tests/api/files.test.ts (6 tests) 59ms
  ✓ tests/api/providers.test.ts (4 tests) 41ms
- ✓ tests/api/orders.test.ts (4 tests) 37ms
+ ✓ tests/api/orders.test.ts (4 tests) 44ms
 
  Test Files  13 passed (13)
-      Tests  317 passed (317)
-   Start at  14:51:41
-   Duration  17.55s (transform 73ms, setup 0ms, collect 1.30s, tests 5.63s, environment 1ms, prepare 223ms)
+      Tests  323 passed (323)
+   Start at  15:33:28
+   Duration  18.43s (transform 78ms, setup 0ms, collect 1.52s, tests 5.97s, environment 1ms, prepare 226ms)
 
 JSON report written to /Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/api/vitest-results.json
 JUNIT report written to /Users/juanchog/Desktop/Pasantia/magik-documental/evidencias/pruebas/api/vitest-junit.xml

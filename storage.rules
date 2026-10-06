@@ -1,10 +1,20 @@
 rules_version = '2';
 
-// Plantillas y archivos de eventos se suben desde el navegador con Firebase
-// Storage: solo usuarios autenticados pueden leer y escribir.
+// En Storage basta con que UNA regla que coincida permita el acceso. Por eso
+// no hay un comodín general /{allPaths=**}: permitiría a cualquier usuario
+// autenticado escribir también en templates/. Solo existen las dos rutas que
+// usa la app.
 service firebase.storage {
   match /b/{bucket}/o {
-    match /{allPaths=**} {
+    // Plantillas oficiales: las lee cualquier usuario autenticado; solo el
+    // admin (custom claim role) sube, reemplaza o borra.
+    match /templates/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.token.role == "admin";
+    }
+
+    // Archivos de eventos: cualquier usuario autenticado sube y descarga.
+    match /events/{allPaths=**} {
       allow read, write: if request.auth != null;
     }
   }
