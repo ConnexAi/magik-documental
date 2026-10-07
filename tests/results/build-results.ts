@@ -4,7 +4,7 @@
 //   evidencias/pruebas/e2e/playwright-results.json  (npm run test:e2e)
 //   evidencias/pruebas/load/resumen-carga.json      (npm run test:load)
 // Uso: npm run test:results
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { CASES, MANUAL, type CaseMeta } from "./catalog";
 import { HU, RF, RNF, REQUISITOS_PROVISIONALES } from "./requisitos";
 
@@ -203,7 +203,7 @@ const csv = [
       .map(csvCell).join(",")
   ),
   ...MANUAL.map((m) =>
-    [m.id, "Manual", m.hu.join(" "), m.titulo, m.req.join(" "), m.titulo, m.pasos.join(" / "), m.esperado, "", "Pendiente (manual)", `evidencias/pruebas/manual/${m.captura}`, ""]
+    [m.id, "Manual", m.hu.join(" "), m.titulo, m.req.join(" "), m.titulo, m.pasos.join(" / "), m.esperado, "", "Pendiente (manual)", `OneDrive: Pruebas manuales/${m.captura}`, ""]
       .map(csvCell).join(",")
   ),
 ];
@@ -211,13 +211,12 @@ const csv = [
 writeFileSync("tests/RESULTADOS.csv", "﻿" + csv.join("\r\n") + "\r\n");
 
 // ── Pruebas manuales ────────────────────────────────────────────────────────
-mkdirSync("evidencias/pruebas/manual", { recursive: true });
 const manual: string[] = [
   "# Pruebas manuales — MAGIK Producciones",
   "",
   "Casos que no tiene sentido automatizar: aspecto visual, interacción física (arrastrar, celular real) o tiempos de una persona. Ejecutarlos contra el entorno que se va a entregar (producción o una copia), no contra el emulador.",
   "",
-  "Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y guardar la captura con el nombre indicado en `evidencias/pruebas/manual/`.",
+  "Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y guardar la captura con el nombre indicado en `OneDrive: Pruebas manuales/`.",
   "",
   "**Ejecutado por:** ____________________ **Fecha:** ____________ **Entorno / URL:** ____________________",
   "",
@@ -228,7 +227,7 @@ const manual: string[] = [
   ...MANUAL.flatMap((m) => [
     `## ${m.id} · ${m.titulo}`,
     "",
-    `**HU:** ${m.hu.join(", ") || "—"} · **RF/RNF:** ${m.req.join(", ")} · **Captura:** \`evidencias/pruebas/manual/${m.captura}\``,
+    `**HU:** ${m.hu.join(", ") || "—"} · **RF/RNF:** ${m.req.join(", ")} · **Captura:** \`OneDrive: Pruebas manuales/${m.captura}\``,
     "",
     `**Precondiciones:** ${m.precondiciones}`,
     "",

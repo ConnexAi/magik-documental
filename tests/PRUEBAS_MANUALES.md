@@ -2,7 +2,7 @@
 
 Casos que no tiene sentido automatizar: aspecto visual, interacción física (arrastrar, celular real) o tiempos de una persona. Ejecutarlos contra el entorno que se va a entregar (producción o una copia), no contra el emulador.
 
-Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y guardar la captura con el nombre indicado en `evidencias/pruebas/manual/`.
+Para cada caso: seguir los pasos, marcar el resultado y anotar observaciones. Las capturas de cada caso están en la carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales.
 
 **Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
