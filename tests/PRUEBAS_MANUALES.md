@@ -4,34 +4,36 @@ Casos que no tiene sentido automatizar: aspecto visual, interacción física (ar
 
 Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y guardar la captura con el nombre indicado en `evidencias/pruebas/manual/`.
 
-**Ejecutado por:** ____________________ **Fecha:** ____________ **Entorno / URL:** ____________________
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 | ID | HU | RF/RNF | Caso | Captura | Resultado |
 |---|---|---|---|---|---|
-| MAN-01 | HU-03 | RF-06, RNF-03 | PDF de cotización frente al formato corporativo | MAN-01.png | ☐ Aprobado ☐ Fallido |
-| MAN-02 | HU-04 | RF-06, RNF-03 | PDF de orden de servicio frente al formato corporativo | MAN-02.png | ☐ Aprobado ☐ Fallido |
-| MAN-03 | HU-03 | RF-06 | XLSX de cotización en Excel | MAN-03.png | ☐ Aprobado ☐ Fallido |
-| MAN-04 | HU-12 | RF-08 | Arrastrar y soltar archivos | MAN-04.png | ☐ Aprobado ☐ Fallido |
-| MAN-05 | HU-12 | RF-08 | Categoría personalizada | MAN-05.png | ☐ Aprobado ☐ Fallido |
-| MAN-06 | HU-13 | RF-08 | Renombrar archivo y abrir el enlace | MAN-06.png | ☐ Aprobado ☐ Fallido |
-| MAN-07 | HU-16 | RF-10 | Autocompletado de proveedor en pantalla | MAN-07.png | ☐ Aprobado ☐ Fallido |
-| MAN-08 | HU-06 | RF-03 | Descarga de la plantilla activa como colaborador | MAN-08.png | ☐ Aprobado ☐ Fallido |
-| MAN-09 | HU-18, HU-05 | RF-04, RNF-04 | Historial de versiones visible para el admin | MAN-09.png | ☐ Aprobado ☐ Fallido |
-| MAN-10 | HU-05 | RF-04 | Publicar nueva versión arrastrando el archivo | MAN-10.png | ☐ Aprobado ☐ Fallido |
-| MAN-11 | HU-15 | RF-09, RNF-02 | Portal en celular real | MAN-11.png | ☐ Aprobado ☐ Fallido |
-| MAN-12 | HU-14 | RF-09 | Seleccionar fotos del portafolio | MAN-12.png | ☐ Aprobado ☐ Fallido |
-| MAN-13 | HU-14, HU-15 | RF-09 | Ocultar y reordenar en el portal | MAN-13.png | ☐ Aprobado ☐ Fallido |
-| MAN-14 | — |  | Modo oscuro predeterminado y modo claro | MAN-14.png | ☐ Aprobado ☐ Fallido |
-| MAN-15 | HU-09 | RF-07 | Doble confirmación al eliminar usuario | MAN-15.png | ☐ Aprobado ☐ Fallido |
-| MAN-16 | HU-09 | RF-07, RNF-06 | Usuario desactivado no puede entrar | MAN-16.png | ☐ Aprobado ☐ Fallido |
-| MAN-17 | HU-01, HU-03 | RNF-01 | Flujo completo cronometrado | MAN-17.png | ☐ Aprobado ☐ Fallido |
-| MAN-18 | HU-17 | RF-11 | Ficha del cliente con eventos y cotizaciones | MAN-18.png | ☐ Aprobado ☐ Fallido |
-| MAN-19 | HU-07 | RF-05 | Editar producto desde la pantalla de catálogo | MAN-19.png | ☐ Aprobado ☐ Fallido |
-| MAN-20 | HU-09 | RF-07 | Sesión abierta más de una hora | MAN-20.png | ☐ Aprobado ☐ Fallido |
+| MAN-01 | HU-03 | RF-06, RNF-03 | PDF de cotización frente al formato corporativo | MAN-01.png | ☑ Aprobado ☐ Fallido |
+| MAN-02 | HU-04 | RF-06, RNF-03 | PDF de orden de servicio frente al formato corporativo | MAN-02.png | ☑ Aprobado ☐ Fallido |
+| MAN-03 | HU-03 | RF-06 | XLSX de cotización en Excel | MAN-03.png | ☑ Aprobado ☐ Fallido |
+| MAN-04 | HU-12 | RF-08 | Arrastrar y soltar archivos | MAN-04.png | ☑ Aprobado ☐ Fallido |
+| MAN-05 | HU-12 | RF-08 | Categoría personalizada | MAN-05.png | ☑ Aprobado ☐ Fallido |
+| MAN-06 | HU-13 | RF-08 | Renombrar archivo y abrir el enlace | MAN-06.png | ☑ Aprobado ☐ Fallido |
+| MAN-07 | HU-16 | RF-10 | Autocompletado de proveedor en pantalla | MAN-07.png | ☑ Aprobado ☐ Fallido |
+| MAN-08 | HU-06 | RF-03 | Descarga de la plantilla activa como colaborador | MAN-08.png | ☑ Aprobado ☐ Fallido |
+| MAN-09 | HU-18, HU-05 | RF-04, RNF-04 | Historial de versiones visible para el admin | MAN-09.png | ☑ Aprobado ☐ Fallido |
+| MAN-10 | HU-05 | RF-04 | Publicar nueva versión arrastrando el archivo | MAN-10.png | ☑ Aprobado ☐ Fallido |
+| MAN-11 | HU-15 | RF-09, RNF-02 | Portal en celular real | MAN-11.png | ☑ Aprobado ☐ Fallido |
+| MAN-12 | HU-14 | RF-09 | Seleccionar fotos del portafolio | MAN-12.png | ☑ Aprobado ☐ Fallido |
+| MAN-13 | HU-14, HU-15 | RF-09 | Ocultar y reordenar en el portal | MAN-13.png | ☑ Aprobado ☐ Fallido |
+| MAN-14 | — |  | Modo oscuro predeterminado y modo claro | MAN-14.png | ☑ Aprobado ☐ Fallido |
+| MAN-15 | HU-09 | RF-07 | Doble confirmación al eliminar usuario | MAN-15.png | ☑ Aprobado ☐ Fallido |
+| MAN-16 | HU-09 | RF-07, RNF-06 | Usuario desactivado no puede entrar | MAN-16.png | ☑ Aprobado ☐ Fallido |
+| MAN-17 | HU-01, HU-03 | RNF-01 | Flujo completo cronometrado | MAN-17.png | ☑ Aprobado ☐ Fallido |
+| MAN-18 | HU-17 | RF-11 | Ficha del cliente con eventos y cotizaciones | MAN-18.png | ☑ Aprobado ☐ Fallido |
+| MAN-19 | HU-07 | RF-05 | Editar producto desde la pantalla de catálogo | MAN-19.png | ☑ Aprobado ☐ Fallido |
+| MAN-20 | HU-09 | RF-07 | Sesión abierta más de una hora | MAN-20.png | ☑ Aprobado ☐ Fallido |
 
 ## MAN-01 · PDF de cotización frente al formato corporativo
 
-**HU:** HU-03 · **RF/RNF:** RF-06, RNF-03 · **Captura:** `evidencias/pruebas/manual/MAN-01.png`
+**HU:** HU-03 · **RF/RNF:** RF-06, RNF-03 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-01.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Cotización con ítems de 2 rubros, descuento e IVA.
 
@@ -43,14 +45,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Logo, firma, tipografía, colores, márgenes, tabla agrupada por rubro y totales coinciden con el formato corporativo.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-02 · PDF de orden de servicio frente al formato corporativo
 
-**HU:** HU-04 · **RF/RNF:** RF-06, RNF-03 · **Captura:** `evidencias/pruebas/manual/MAN-02.png`
+**HU:** HU-04 · **RF/RNF:** RF-06, RNF-03 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-02.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Orden con proveedor, fechas y anticipo.
 
@@ -62,14 +66,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Encabezado, datos del proveedor, fechas, tabla por rubro y forma de pago con el formato corporativo.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-03 · XLSX de cotización en Excel
 
-**HU:** HU-03 · **RF/RNF:** RF-06 · **Captura:** `evidencias/pruebas/manual/MAN-03.png`
+**HU:** HU-03 · **RF/RNF:** RF-06 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-03.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Cotización existente.
 
@@ -81,14 +87,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Estilos y celdas combinadas correctos; la hoja está protegida.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-04 · Arrastrar y soltar archivos
 
-**HU:** HU-12 · **RF/RNF:** RF-08 · **Captura:** `evidencias/pruebas/manual/MAN-04.png`
+**HU:** HU-12 · **RF/RNF:** RF-08 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-04.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Sesión de colaborador; evento abierto en Archivos.
 
@@ -100,14 +108,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** La zona se resalta al arrastrar; el archivo aparece con nombre, categoría, fecha y autor.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-05 · Categoría personalizada
 
-**HU:** HU-12 · **RF/RNF:** RF-08 · **Captura:** `evidencias/pruebas/manual/MAN-05.png`
+**HU:** HU-12 · **RF/RNF:** RF-08 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-05.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Evento abierto en Archivos.
 
@@ -119,14 +129,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** El archivo queda en la categoría Planos y aparece un filtro «Planos».
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-06 · Renombrar archivo y abrir el enlace
 
-**HU:** HU-13 · **RF/RNF:** RF-08 · **Captura:** `evidencias/pruebas/manual/MAN-06.png`
+**HU:** HU-13 · **RF/RNF:** RF-08 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-06.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Archivo subido.
 
@@ -138,14 +150,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Cambia el nombre visible; la descarga abre el mismo archivo de antes.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-07 · Autocompletado de proveedor en pantalla
 
-**HU:** HU-16 · **RF/RNF:** RF-10 · **Captura:** `evidencias/pruebas/manual/MAN-07.png`
+**HU:** HU-16 · **RF/RNF:** RF-10 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-07.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Proveedor «Sonido Total SAS» en el directorio.
 
@@ -157,14 +171,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Se llenan razón social, contacto, correo y celular.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-08 · Descarga de la plantilla activa como colaborador
 
-**HU:** HU-06 · **RF/RNF:** RF-03 · **Captura:** `evidencias/pruebas/manual/MAN-08.png`
+**HU:** HU-06 · **RF/RNF:** RF-03 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-08.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Plantilla con v2 activa; sesión de colaborador.
 
@@ -175,14 +191,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Se descarga la v2; no hay botón de historial, publicar ni eliminar.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-09 · Historial de versiones visible para el admin
 
-**HU:** HU-18, HU-05 · **RF/RNF:** RF-04, RNF-04 · **Captura:** `evidencias/pruebas/manual/MAN-09.png`
+**HU:** HU-18, HU-05 · **RF/RNF:** RF-04, RNF-04 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-09.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Plantilla con v1 y v2; sesión de admin.
 
@@ -193,14 +211,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Tabla con Ver., Changelog, Fecha y Autor; v2 marcada como activa.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-10 · Publicar nueva versión arrastrando el archivo
 
-**HU:** HU-05 · **RF/RNF:** RF-04 · **Captura:** `evidencias/pruebas/manual/MAN-10.png`
+**HU:** HU-05 · **RF/RNF:** RF-04 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-10.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Sesión de admin.
 
@@ -212,14 +232,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** La nueva versión queda activa y la anterior sigue en el historial.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-11 · Portal en celular real
 
-**HU:** HU-15 · **RF/RNF:** RF-09, RNF-02 · **Captura:** `evidencias/pruebas/manual/MAN-11.png`
+**HU:** HU-15 · **RF/RNF:** RF-09, RNF-02 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-11.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Teléfono Android o iPhone.
 
@@ -231,14 +253,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Sin desborde horizontal; textos legibles; tel: y mailto: abren las apps.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-12 · Seleccionar fotos del portafolio
 
-**HU:** HU-14 · **RF/RNF:** RF-09 · **Captura:** `evidencias/pruebas/manual/MAN-12.png`
+**HU:** HU-14 · **RF/RNF:** RF-09 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-12.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Evento con más de 5 archivos de categoría Foto.
 
@@ -250,14 +274,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Solo se ofrecen fotos de categoría Foto; la sexta no se puede seleccionar.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-13 · Ocultar y reordenar en el portal
 
-**HU:** HU-14, HU-15 · **RF/RNF:** RF-09 · **Captura:** `evidencias/pruebas/manual/MAN-13.png`
+**HU:** HU-14, HU-15 · **RF/RNF:** RF-09 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-13.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Dos items visibles en el portafolio.
 
@@ -269,14 +295,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** El portal respeta el nuevo orden y no muestra el item oculto.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-14 · Modo oscuro predeterminado y modo claro
 
-**HU:** — · **RF/RNF:**  · **Captura:** `evidencias/pruebas/manual/MAN-14.png`
+**HU:** — · **RF/RNF:**  · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-14.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Navegador sin preferencia guardada.
 
@@ -288,14 +316,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Arranca en oscuro; en claro los textos, badges y selects nativos mantienen contraste legible.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-15 · Doble confirmación al eliminar usuario
 
-**HU:** HU-09 · **RF/RNF:** RF-07 · **Captura:** `evidencias/pruebas/manual/MAN-15.png`
+**HU:** HU-09 · **RF/RNF:** RF-07 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-15.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Sesión de admin y un usuario de prueba.
 
@@ -307,14 +337,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Se piden dos confirmaciones; no se puede eliminar la cuenta propia.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-16 · Usuario desactivado no puede entrar
 
-**HU:** HU-09 · **RF/RNF:** RF-07, RNF-06 · **Captura:** `evidencias/pruebas/manual/MAN-16.png`
+**HU:** HU-09 · **RF/RNF:** RF-07, RNF-06 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-16.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Usuario colaborador activo.
 
@@ -325,14 +357,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** El login falla; al reactivarlo vuelve a entrar.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-17 · Flujo completo cronometrado
 
-**HU:** HU-01, HU-03 · **RF/RNF:** RNF-01 · **Captura:** `evidencias/pruebas/manual/MAN-17.png`
+**HU:** HU-01, HU-03 · **RF/RNF:** RNF-01 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-17.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Sesión de colaborador; cronómetro.
 
@@ -345,14 +379,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Cada acción frecuente en máximo 3 clics; el flujo completo en el tiempo objetivo del documento de tesis.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-18 · Ficha del cliente con eventos y cotizaciones
 
-**HU:** HU-17 · **RF/RNF:** RF-11 · **Captura:** `evidencias/pruebas/manual/MAN-18.png`
+**HU:** HU-17 · **RF/RNF:** RF-11 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-18.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Cliente con 2 eventos y 1 cotización.
 
@@ -363,14 +399,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** Lista sus eventos (todos, sin límite) y sus cotizaciones con consecutivo, estado y fecha.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-19 · Editar producto desde la pantalla de catálogo
 
-**HU:** HU-07 · **RF/RNF:** RF-05 · **Captura:** `evidencias/pruebas/manual/MAN-19.png`
+**HU:** HU-07 · **RF/RNF:** RF-05 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-19.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Sesión de admin.
 
@@ -382,14 +420,16 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** El diálogo abre con los datos actuales; al guardar, la tabla se actualiza sin recargar.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________
 
 ## MAN-20 · Sesión abierta más de una hora
 
-**HU:** HU-09 · **RF/RNF:** RF-07 · **Captura:** `evidencias/pruebas/manual/MAN-20.png`
+**HU:** HU-09 · **RF/RNF:** RF-07 · **Captura:** Carpeta de evidencias de la pasantía (OneDrive), subcarpeta Pruebas manuales, archivo MAN-20.png
+
+**Ejecutado por:** Juan José Gómez Reyes · **Fecha:** 7 de octubre de 2026 · **Entorno / URL:** https://magik-documental.vercel.app (producción)
 
 **Precondiciones:** Sesión iniciada.
 
@@ -400,7 +440,7 @@ Para cada caso: seguir los pasos, marcar el resultado, anotar observaciones y gu
 
 **Resultado esperado:** La sesión se renueva sola; no se pide la contraseña de nuevo.
 
-- [ ] Aprobado
+- [x] Aprobado
 - [ ] Fallido
 
 **Observaciones:** ______________________________________________

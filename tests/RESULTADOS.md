@@ -11,7 +11,7 @@ Entorno: Firebase Emulator (proyecto `demo-magik`) y build de producción de Nex
 | Aprobados | 344 |
 | Fallidos | 0 |
 | No ejecutados | 0 |
-| Casos manuales (tests/PRUEBAS_MANUALES.md) | 20, pendientes de ejecutar |
+| Casos manuales (tests/PRUEBAS_MANUALES.md) | 20, aprobadas |
 | Cobertura por HU | 18/18 |
 | Cobertura por RF | 11/11 |
 | Cobertura por RNF | 6/6 |
